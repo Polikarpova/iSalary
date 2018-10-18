@@ -2,3 +2,9 @@ TZ
 iSalaryPrototype
 *.suo
 *.sdf
+Win32
+Debug
+*.vcxproj
+*.vcxproj.*
+GeneratedFiles
+*.opensdf
