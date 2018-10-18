@@ -14,6 +14,8 @@ public:
 
 private:
 	Ui::MainWindowClass ui;
+
+	void createHorizontalTabs();
 };
 
 #endif // MAINWINDOW_H
