@@ -11,9 +11,9 @@ ActiveSale::~ActiveSale(void)
 }
 
 void ActiveSale::confirm() {
-
+	isConfirm = true;
 }
 
 void ActiveSale::cancelConfirm() {
-
+	isConfirm = false;
 }
