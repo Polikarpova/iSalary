@@ -1,5 +1,6 @@
 #pragma once
 #include "sale.h"
+#include "product.h"
 class ActiveSale : public Sale {
 private:
 	Product product;
