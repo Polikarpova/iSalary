@@ -1,10 +1,10 @@
-TZ
-iSalaryPrototype
+/TZ
+/iSalaryPrototype
+ipch
 *.suo
 *.sdf
-Win32
-Debug
-*.vcxproj
-*.vcxproj.*
-GeneratedFiles
 *.opensdf
+/iSalary/Win32/*
+/Debug
+*.vcxproj.*
+/GeneratedFiles
