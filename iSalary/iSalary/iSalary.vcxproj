@@ -77,6 +77,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ActiveSale.cpp" />
     <ClCompile Include="AuthorizationModule.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_mainwindow.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -92,6 +93,9 @@
     </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainwindow.cpp" />
+    <ClCompile Include="Manager.cpp" />
+    <ClCompile Include="Product.cpp" />
+    <ClCompile Include="Sale.cpp" />
     <ClCompile Include="User.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -120,8 +124,12 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ActiveSale.h" />
     <ClInclude Include="AuthorizationModule.h" />
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h" />
+    <ClInclude Include="Manager.h" />
+    <ClInclude Include="Product.h" />
+    <ClInclude Include="Sale.h" />
     <ClInclude Include="User.h" />
   </ItemGroup>
   <ItemGroup>
