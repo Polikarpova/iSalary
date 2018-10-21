@@ -17,8 +17,8 @@
    <string notr="true">QMainWindow {background-color: white}</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QVBoxLayout" name="verticalLayout_3">
-    <item>
+   <layout class="QGridLayout" name="gridLayout_4">
+    <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget_4">
       <property name="currentIndex">
        <number>1</number>
@@ -178,7 +178,7 @@
                <enum>QTabWidget::Rounded</enum>
               </property>
               <property name="currentIndex">
-               <number>2</number>
+               <number>0</number>
               </property>
               <property name="elideMode">
                <enum>Qt::ElideMiddle</enum>
@@ -195,16 +195,16 @@
               <property name="movable">
                <bool>false</bool>
               </property>
-              <property name="tabBarAutoHide">
+              <property name="tabBarAutoHide" stdset="0">
                <bool>false</bool>
               </property>
               <widget class="QWidget" name="tabManagers">
                <attribute name="title">
                 <string>Сотрудники</string>
                </attribute>
-               <layout class="QHBoxLayout" name="horizontalLayout_20">
-                <item>
-                 <layout class="QVBoxLayout" name="verticalLayout_2">
+               <layout class="QGridLayout" name="gridLayout_8">
+                <item row="0" column="0">
+                 <layout class="QVBoxLayout" name="verticalLayout_3">
                   <item>
                    <widget class="QLabel" name="label">
                     <property name="styleSheet">
@@ -219,15 +219,54 @@
                    <widget class="QTableView" name="managersTable"/>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="newManagerButton">
-                    <property name="text">
-                     <string>Нанять менеджера</string>
+                   <widget class="QStackedWidget" name="addManagerButtons">
+                    <property name="currentIndex">
+                     <number>0</number>
                     </property>
+                    <widget class="QWidget" name="page_4">
+                     <layout class="QVBoxLayout" name="verticalLayout_2">
+                      <item>
+                       <widget class="QPushButton" name="newManagerButton">
+                        <property name="text">
+                         <string>Нанять менеджера</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                    <widget class="QWidget" name="page_5">
+                     <widget class="QPushButton" name="submitAddManager">
+                      <property name="geometry">
+                       <rect>
+                        <x>70</x>
+                        <y>70</y>
+                        <width>77</width>
+                        <height>23</height>
+                       </rect>
+                      </property>
+                      <property name="text">
+                       <string>Подтвердить</string>
+                      </property>
+                     </widget>
+                     <widget class="QPushButton" name="cancelAddManager">
+                      <property name="geometry">
+                       <rect>
+                        <x>220</x>
+                        <y>70</y>
+                        <width>75</width>
+                        <height>23</height>
+                       </rect>
+                      </property>
+                      <property name="text">
+                       <string>Отменить</string>
+                      </property>
+                     </widget>
+                    </widget>
                    </widget>
                   </item>
                  </layout>
                 </item>
-                <item>
+                <item row="0" column="1">
                  <layout class="QVBoxLayout" name="verticalLayout">
                   <item>
                    <widget class="QLabel" name="label_2">
@@ -268,7 +307,7 @@
                     <property name="tabsClosable">
                      <bool>false</bool>
                     </property>
-                    <property name="tabBarAutoHide">
+                    <property name="tabBarAutoHide" stdset="0">
                      <bool>false</bool>
                     </property>
                     <widget class="QWidget" name="tab">
@@ -296,8 +335,14 @@
                         <layout class="QHBoxLayout" name="horizontalLayout_2">
                          <item>
                           <widget class="QRadioButton" name="maleRButton">
+                           <property name="enabled">
+                            <bool>false</bool>
+                           </property>
                            <property name="text">
                             <string>мужской</string>
+                           </property>
+                           <property name="checked">
+                            <bool>true</bool>
                            </property>
                           </widget>
                          </item>
@@ -324,7 +369,7 @@
                          </widget>
                         </item>
                         <item>
-                         <widget class="QSpinBox" name="seria">
+                         <widget class="QSpinBox" name="serial">
                           <property name="enabled">
                            <bool>false</bool>
                           </property>
@@ -384,9 +429,6 @@
                           <property name="keyboardTracking">
                            <bool>true</bool>
                           </property>
-                          <property name="showGroupSeparator" stdset="0">
-                           <bool>false</bool>
-                          </property>
                           <property name="minimumDate">
                            <date>
                             <year>1900</year>
@@ -396,6 +438,9 @@
                           </property>
                           <property name="calendarPopup">
                            <bool>true</bool>
+                          </property>
+                          <property name="showGroupSeparator" stdset="0">
+                           <bool>false</bool>
                           </property>
                          </widget>
                         </item>
@@ -411,7 +456,7 @@
                          </widget>
                         </item>
                         <item>
-                         <widget class="QLineEdit" name="propiska">
+                         <widget class="QLineEdit" name="placeOfRegistration">
                           <property name="enabled">
                            <bool>false</bool>
                           </property>
@@ -429,7 +474,7 @@
                          </widget>
                         </item>
                         <item>
-                         <widget class="QLineEdit" name="pasport">
+                         <widget class="QLineEdit" name="passport">
                           <property name="enabled">
                            <bool>false</bool>
                           </property>
@@ -447,7 +492,7 @@
                          </widget>
                         </item>
                         <item>
-                         <widget class="QDateEdit" name="datePasport">
+                         <widget class="QDateEdit" name="datePassport">
                           <property name="enabled">
                            <bool>false</bool>
                           </property>
@@ -463,9 +508,6 @@
                           <property name="keyboardTracking">
                            <bool>true</bool>
                           </property>
-                          <property name="showGroupSeparator" stdset="0">
-                           <bool>false</bool>
-                          </property>
                           <property name="minimumDate">
                            <date>
                             <year>1900</year>
@@ -475,6 +517,9 @@
                           </property>
                           <property name="calendarPopup">
                            <bool>true</bool>
+                          </property>
+                          <property name="showGroupSeparator" stdset="0">
+                           <bool>false</bool>
                           </property>
                          </widget>
                         </item>
@@ -490,7 +535,7 @@
                          </widget>
                         </item>
                         <item>
-                         <widget class="QLineEdit" name="otchestvo">
+                         <widget class="QLineEdit" name="thirdName">
                           <property name="enabled">
                            <bool>false</bool>
                           </property>
@@ -508,7 +553,7 @@
                          </widget>
                         </item>
                         <item>
-                         <widget class="QLineEdit" name="familia">
+                         <widget class="QLineEdit" name="secondName">
                           <property name="enabled">
                            <bool>false</bool>
                           </property>
@@ -526,7 +571,7 @@
                          </widget>
                         </item>
                         <item>
-                         <widget class="QLineEdit" name="name">
+                         <widget class="QLineEdit" name="firstName">
                           <property name="enabled">
                            <bool>false</bool>
                           </property>
@@ -572,32 +617,8 @@
                        </spacer>
                       </item>
                      </layout>
-                     <zorder>label_3</zorder>
-                     <zorder>label_4</zorder>
-                     <zorder>label_5</zorder>
-                     <zorder>label_6</zorder>
-                     <zorder>label_7</zorder>
-                     <zorder>label_8</zorder>
-                     <zorder>label_9</zorder>
-                     <zorder>label_10</zorder>
-                     <zorder>label_11</zorder>
-                     <zorder>name</zorder>
-                     <zorder>familia</zorder>
-                     <zorder>otchestvo</zorder>
-                     <zorder>dateOfBirth</zorder>
-                     <zorder>label_6</zorder>
-                     <zorder>sexGroup</zorder>
                      <zorder></zorder>
                      <zorder>sexGroup</zorder>
-                     <zorder>sexGroup</zorder>
-                     <zorder>seria</zorder>
-                     <zorder>label_12</zorder>
-                     <zorder>number</zorder>
-                     <zorder>pasport</zorder>
-                     <zorder>datePasport</zorder>
-                     <zorder>propiska</zorder>
-                     <zorder>label_13</zorder>
-                     <zorder>INN</zorder>
                      <zorder>verticalSpacer_8</zorder>
                     </widget>
                     <widget class="QWidget" name="tab_1">
@@ -694,12 +715,6 @@
                  </layout>
                 </item>
                </layout>
-               <zorder>label</zorder>
-               <zorder>label_2</zorder>
-               <zorder>managersTable</zorder>
-               <zorder>managersDataTab</zorder>
-               <zorder>stackedWidget</zorder>
-               <zorder>stackedWidget</zorder>
               </widget>
               <widget class="QWidget" name="tab_4">
                <attribute name="title">
@@ -728,7 +743,7 @@
                       <property name="text">
                        <string/>
                       </property>
-                      <property name="clearButtonEnabled">
+                      <property name="clearButtonEnabled" stdset="0">
                        <bool>false</bool>
                       </property>
                      </widget>
@@ -782,7 +797,7 @@
                       <property name="text">
                        <string/>
                       </property>
-                      <property name="clearButtonEnabled">
+                      <property name="clearButtonEnabled" stdset="0">
                        <bool>false</bool>
                       </property>
                      </widget>
@@ -809,7 +824,7 @@
                       <property name="text">
                        <string/>
                       </property>
-                      <property name="clearButtonEnabled">
+                      <property name="clearButtonEnabled" stdset="0">
                        <bool>false</bool>
                       </property>
                      </widget>
@@ -950,18 +965,6 @@
                  </layout>
                 </item>
                </layout>
-               <zorder>label_15</zorder>
-               <zorder>label_16</zorder>
-               <zorder>productSearch</zorder>
-               <zorder>productTable</zorder>
-               <zorder>newProductButton</zorder>
-               <zorder>horizontalSpacer_2</zorder>
-               <zorder>stackedWidget_2</zorder>
-               <zorder>label_17</zorder>
-               <zorder>label_18</zorder>
-               <zorder>productName</zorder>
-               <zorder>productPercent</zorder>
-               <zorder>newProductButton</zorder>
               </widget>
               <widget class="QWidget" name="tab_3">
                <attribute name="title">
@@ -1186,9 +1189,6 @@
                           <property name="keyboardTracking">
                            <bool>true</bool>
                           </property>
-                          <property name="showGroupSeparator" stdset="0">
-                           <bool>false</bool>
-                          </property>
                           <property name="minimumDate">
                            <date>
                             <year>1900</year>
@@ -1198,6 +1198,9 @@
                           </property>
                           <property name="calendarPopup">
                            <bool>true</bool>
+                          </property>
+                          <property name="showGroupSeparator" stdset="0">
+                           <bool>false</bool>
                           </property>
                          </widget>
                         </item>
@@ -1246,7 +1249,7 @@
                        <x>0</x>
                        <y>0</y>
                        <width>410</width>
-                       <height>227</height>
+                       <height>213</height>
                       </rect>
                      </property>
                     </widget>
@@ -1336,7 +1339,7 @@
                   <property name="text">
                    <string/>
                   </property>
-                  <property name="clearButtonEnabled">
+                  <property name="clearButtonEnabled" stdset="0">
                    <bool>false</bool>
                   </property>
                  </widget>
@@ -1461,7 +1464,7 @@
                   <property name="text">
                    <string/>
                   </property>
-                  <property name="clearButtonEnabled">
+                  <property name="clearButtonEnabled" stdset="0">
                    <bool>false</bool>
                   </property>
                  </widget>
@@ -1511,7 +1514,7 @@
     <enum>TopToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
-    <bool>true</bool>
+    <bool>false</bool>
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
