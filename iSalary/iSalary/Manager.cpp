@@ -2,6 +2,7 @@
 
 
 Manager::Manager(void) {
+	dateOfEmployment = QDate::currentDate();
 }
 Manager::Manager(
 	QString _firstName,
