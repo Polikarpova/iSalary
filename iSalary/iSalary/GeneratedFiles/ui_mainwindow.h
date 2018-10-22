@@ -45,7 +45,7 @@ class Ui_MainWindowClass
 {
 public:
     QWidget *centralWidget;
-    QVBoxLayout *verticalLayout_3;
+    QHBoxLayout *horizontalLayout_17;
     QStackedWidget *stackedWidget_4;
     QWidget *enter;
     QVBoxLayout *verticalLayout_8;
@@ -202,57 +202,61 @@ public:
     QVBoxLayout *verticalLayout_15;
     QLabel *label_48;
     QLabel *label_47;
-    QTableView *unconfirmedSaleTable;
+    QTableView *unconfirmedSalesTable;
     QLabel *label_49;
-    QTableView *confirmedSaleTable;
+    QTableView *confirmedSalesTable;
     QWidget *tab_5;
     QHBoxLayout *horizontalLayout_37;
     QVBoxLayout *verticalLayout_16;
     QLabel *label_50;
     QHBoxLayout *horizontalLayout_36;
     QLabel *label_51;
-    QDateEdit *startPeriod;
+    QDateEdit *statisticStartPeriod;
+    QSpacerItem *verticalSpacer_5;
     QLabel *label_52;
-    QDateEdit *endPeriod;
+    QDateEdit *statisticEndPeriod;
     QTableView *statisticTable;
     QVBoxLayout *verticalLayout_17;
     QLabel *label_55;
     QLabel *label_53;
-    QTableView *salesTable;
+    QTableView *statisticSalesTable;
     QLabel *label_54;
-    QCalendarWidget *calendar;
+    QCalendarWidget *statisticCalendar;
     QWidget *tab_6;
-    QHBoxLayout *horizontalLayout_45;
+    QHBoxLayout *horizontalLayout_18;
     QVBoxLayout *verticalLayout_18;
     QLabel *label_57;
     QHBoxLayout *horizontalLayout_38;
     QLabel *label_56;
-    QDateEdit *monthSalaryInput;
+    QComboBox *salaryAccountingPeriod;
     QSpacerItem *horizontalSpacer_8;
     QTableView *salaryTable;
-    QTableView *totalSalaryTable;
-    QPushButton *pushButton;
-    QVBoxLayout *verticalLayout_19;
+    QTableView *salaryTotalTable;
+    QPushButton *closeAccountingPeriod;
+    QVBoxLayout *verticalLayout_26;
     QLabel *label_58;
+    QVBoxLayout *verticalLayout_13;
+    QHBoxLayout *horizontalLayout_10;
+    QLabel *label_65;
     QLabel *managerFIOLabel;
     QHBoxLayout *horizontalLayout_43;
     QLabel *label_62;
-    QSpinBox *seria_2;
+    QSpinBox *salaryPasportSeries;
     QLabel *label_63;
-    QSpinBox *number_2;
-    QHBoxLayout *horizontalLayout_42;
-    QLabel *label_61;
-    QLineEdit *pasport_2;
-    QHBoxLayout *horizontalLayout_40;
+    QSpinBox *salaryPasportNumber;
+    QFormLayout *formLayout_10;
+    QLineEdit *salaryPasportSourse;
     QLabel *label_60;
-    QDateEdit *datePasport_2;
-    QGroupBox *sexGroup_2;
+    QDateEdit *salaryDateOfReceipt;
+    QLabel *label_61;
+    QGroupBox *salarySexGroup;
     QHBoxLayout *horizontalLayout_41;
-    QRadioButton *maleRButton_2;
-    QRadioButton *femaleRButton_2;
-    QHBoxLayout *horizontalLayout_39;
+    QRadioButton *salaryMaleRButton;
+    QRadioButton *salaryFemaleRButton;
+    QFormLayout *formLayout_11;
+    QLineEdit *salaryINN;
     QLabel *label_59;
-    QLineEdit *INN_2;
+    QSpacerItem *verticalSpacer_7;
     QHBoxLayout *horizontalLayout_44;
     QPushButton *salesButton;
     QPushButton *dataButton;
@@ -293,14 +297,14 @@ public:
     {
         if (MainWindowClass->objectName().isEmpty())
             MainWindowClass->setObjectName(QStringLiteral("MainWindowClass"));
-        MainWindowClass->resize(1074, 705);
+        MainWindowClass->resize(1061, 641);
         MainWindowClass->setStyleSheet(QStringLiteral("QMainWindow {background-color: white}"));
         centralWidget = new QWidget(MainWindowClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        verticalLayout_3 = new QVBoxLayout(centralWidget);
-        verticalLayout_3->setSpacing(6);
-        verticalLayout_3->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        horizontalLayout_17 = new QHBoxLayout(centralWidget);
+        horizontalLayout_17->setSpacing(6);
+        horizontalLayout_17->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_17->setObjectName(QStringLiteral("horizontalLayout_17"));
         stackedWidget_4 = new QStackedWidget(centralWidget);
         stackedWidget_4->setObjectName(QStringLiteral("stackedWidget_4"));
         enter = new QWidget();
@@ -1077,7 +1081,7 @@ public:
         correctionHistoryList->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 481, 292));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 474, 228));
         correctionHistoryList->setWidget(scrollAreaWidgetContents);
 
         verticalLayout_12->addWidget(correctionHistoryList);
@@ -1156,10 +1160,10 @@ public:
 
         verticalLayout_15->addWidget(label_47);
 
-        unconfirmedSaleTable = new QTableView(tab_7);
-        unconfirmedSaleTable->setObjectName(QStringLiteral("unconfirmedSaleTable"));
+        unconfirmedSalesTable = new QTableView(tab_7);
+        unconfirmedSalesTable->setObjectName(QStringLiteral("unconfirmedSalesTable"));
 
-        verticalLayout_15->addWidget(unconfirmedSaleTable);
+        verticalLayout_15->addWidget(unconfirmedSalesTable);
 
         label_49 = new QLabel(tab_7);
         label_49->setObjectName(QStringLiteral("label_49"));
@@ -1167,10 +1171,10 @@ public:
 
         verticalLayout_15->addWidget(label_49);
 
-        confirmedSaleTable = new QTableView(tab_7);
-        confirmedSaleTable->setObjectName(QStringLiteral("confirmedSaleTable"));
+        confirmedSalesTable = new QTableView(tab_7);
+        confirmedSalesTable->setObjectName(QStringLiteral("confirmedSalesTable"));
 
-        verticalLayout_15->addWidget(confirmedSaleTable);
+        verticalLayout_15->addWidget(confirmedSalesTable);
 
 
         horizontalLayout_35->addLayout(verticalLayout_15);
@@ -1199,36 +1203,40 @@ public:
 
         horizontalLayout_36->addWidget(label_51);
 
-        startPeriod = new QDateEdit(tab_5);
-        startPeriod->setObjectName(QStringLiteral("startPeriod"));
-        startPeriod->setEnabled(true);
-        startPeriod->setWrapping(false);
-        startPeriod->setFrame(true);
-        startPeriod->setButtonSymbols(QAbstractSpinBox::UpDownArrows);
-        startPeriod->setKeyboardTracking(true);
-        startPeriod->setProperty("showGroupSeparator", QVariant(false));
-        startPeriod->setMinimumDate(QDate(1900, 9, 14));
-        startPeriod->setCalendarPopup(true);
+        statisticStartPeriod = new QDateEdit(tab_5);
+        statisticStartPeriod->setObjectName(QStringLiteral("statisticStartPeriod"));
+        statisticStartPeriod->setEnabled(true);
+        statisticStartPeriod->setWrapping(false);
+        statisticStartPeriod->setFrame(true);
+        statisticStartPeriod->setButtonSymbols(QAbstractSpinBox::UpDownArrows);
+        statisticStartPeriod->setKeyboardTracking(true);
+        statisticStartPeriod->setProperty("showGroupSeparator", QVariant(false));
+        statisticStartPeriod->setMinimumDate(QDate(1900, 9, 14));
+        statisticStartPeriod->setCalendarPopup(true);
 
-        horizontalLayout_36->addWidget(startPeriod);
+        horizontalLayout_36->addWidget(statisticStartPeriod);
+
+        verticalSpacer_5 = new QSpacerItem(20, 25, QSizePolicy::Minimum, QSizePolicy::Minimum);
+
+        horizontalLayout_36->addItem(verticalSpacer_5);
 
         label_52 = new QLabel(tab_5);
         label_52->setObjectName(QStringLiteral("label_52"));
 
         horizontalLayout_36->addWidget(label_52);
 
-        endPeriod = new QDateEdit(tab_5);
-        endPeriod->setObjectName(QStringLiteral("endPeriod"));
-        endPeriod->setEnabled(true);
-        endPeriod->setWrapping(false);
-        endPeriod->setFrame(true);
-        endPeriod->setButtonSymbols(QAbstractSpinBox::UpDownArrows);
-        endPeriod->setKeyboardTracking(true);
-        endPeriod->setProperty("showGroupSeparator", QVariant(false));
-        endPeriod->setMinimumDate(QDate(1900, 9, 14));
-        endPeriod->setCalendarPopup(true);
+        statisticEndPeriod = new QDateEdit(tab_5);
+        statisticEndPeriod->setObjectName(QStringLiteral("statisticEndPeriod"));
+        statisticEndPeriod->setEnabled(true);
+        statisticEndPeriod->setWrapping(false);
+        statisticEndPeriod->setFrame(true);
+        statisticEndPeriod->setButtonSymbols(QAbstractSpinBox::UpDownArrows);
+        statisticEndPeriod->setKeyboardTracking(true);
+        statisticEndPeriod->setProperty("showGroupSeparator", QVariant(false));
+        statisticEndPeriod->setMinimumDate(QDate(1900, 9, 14));
+        statisticEndPeriod->setCalendarPopup(true);
 
-        horizontalLayout_36->addWidget(endPeriod);
+        horizontalLayout_36->addWidget(statisticEndPeriod);
 
 
         verticalLayout_16->addLayout(horizontalLayout_36);
@@ -1256,10 +1264,10 @@ public:
 
         verticalLayout_17->addWidget(label_53);
 
-        salesTable = new QTableView(tab_5);
-        salesTable->setObjectName(QStringLiteral("salesTable"));
+        statisticSalesTable = new QTableView(tab_5);
+        statisticSalesTable->setObjectName(QStringLiteral("statisticSalesTable"));
 
-        verticalLayout_17->addWidget(salesTable);
+        verticalLayout_17->addWidget(statisticSalesTable);
 
         label_54 = new QLabel(tab_5);
         label_54->setObjectName(QStringLiteral("label_54"));
@@ -1267,16 +1275,16 @@ public:
 
         verticalLayout_17->addWidget(label_54);
 
-        calendar = new QCalendarWidget(tab_5);
-        calendar->setObjectName(QStringLiteral("calendar"));
-        calendar->setLayoutDirection(Qt::LeftToRight);
-        calendar->setAutoFillBackground(true);
-        calendar->setGridVisible(true);
-        calendar->setVerticalHeaderFormat(QCalendarWidget::ISOWeekNumbers);
-        calendar->setNavigationBarVisible(true);
-        calendar->setDateEditEnabled(true);
+        statisticCalendar = new QCalendarWidget(tab_5);
+        statisticCalendar->setObjectName(QStringLiteral("statisticCalendar"));
+        statisticCalendar->setLayoutDirection(Qt::LeftToRight);
+        statisticCalendar->setAutoFillBackground(true);
+        statisticCalendar->setGridVisible(true);
+        statisticCalendar->setVerticalHeaderFormat(QCalendarWidget::ISOWeekNumbers);
+        statisticCalendar->setNavigationBarVisible(true);
+        statisticCalendar->setDateEditEnabled(true);
 
-        verticalLayout_17->addWidget(calendar);
+        verticalLayout_17->addWidget(statisticCalendar);
 
 
         horizontalLayout_37->addLayout(verticalLayout_17);
@@ -1284,10 +1292,10 @@ public:
         tabWidget->addTab(tab_5, QString());
         tab_6 = new QWidget();
         tab_6->setObjectName(QStringLiteral("tab_6"));
-        horizontalLayout_45 = new QHBoxLayout(tab_6);
-        horizontalLayout_45->setSpacing(6);
-        horizontalLayout_45->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_45->setObjectName(QStringLiteral("horizontalLayout_45"));
+        horizontalLayout_18 = new QHBoxLayout(tab_6);
+        horizontalLayout_18->setSpacing(6);
+        horizontalLayout_18->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_18->setObjectName(QStringLiteral("horizontalLayout_18"));
         verticalLayout_18 = new QVBoxLayout();
         verticalLayout_18->setSpacing(6);
         verticalLayout_18->setObjectName(QStringLiteral("verticalLayout_18"));
@@ -1305,12 +1313,10 @@ public:
 
         horizontalLayout_38->addWidget(label_56);
 
-        monthSalaryInput = new QDateEdit(tab_6);
-        monthSalaryInput->setObjectName(QStringLiteral("monthSalaryInput"));
-        monthSalaryInput->setButtonSymbols(QAbstractSpinBox::UpDownArrows);
-        monthSalaryInput->setCalendarPopup(true);
+        salaryAccountingPeriod = new QComboBox(tab_6);
+        salaryAccountingPeriod->setObjectName(QStringLiteral("salaryAccountingPeriod"));
 
-        horizontalLayout_38->addWidget(monthSalaryInput);
+        horizontalLayout_38->addWidget(salaryAccountingPeriod);
 
         horizontalSpacer_8 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -1326,150 +1332,181 @@ public:
 
         verticalLayout_18->addWidget(salaryTable);
 
-        totalSalaryTable = new QTableView(tab_6);
-        totalSalaryTable->setObjectName(QStringLiteral("totalSalaryTable"));
-        totalSalaryTable->setMinimumSize(QSize(20, 20));
-        totalSalaryTable->setBaseSize(QSize(20, 20));
-        totalSalaryTable->setShowGrid(true);
-        totalSalaryTable->horizontalHeader()->setCascadingSectionResizes(false);
+        salaryTotalTable = new QTableView(tab_6);
+        salaryTotalTable->setObjectName(QStringLiteral("salaryTotalTable"));
+        salaryTotalTable->setMinimumSize(QSize(20, 20));
+        salaryTotalTable->setBaseSize(QSize(20, 20));
+        salaryTotalTable->setShowGrid(true);
+        salaryTotalTable->horizontalHeader()->setCascadingSectionResizes(false);
 
-        verticalLayout_18->addWidget(totalSalaryTable);
+        verticalLayout_18->addWidget(salaryTotalTable);
 
-        pushButton = new QPushButton(tab_6);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
+        closeAccountingPeriod = new QPushButton(tab_6);
+        closeAccountingPeriod->setObjectName(QStringLiteral("closeAccountingPeriod"));
 
-        verticalLayout_18->addWidget(pushButton);
+        verticalLayout_18->addWidget(closeAccountingPeriod);
 
 
-        horizontalLayout_45->addLayout(verticalLayout_18);
+        horizontalLayout_18->addLayout(verticalLayout_18);
 
-        verticalLayout_19 = new QVBoxLayout();
-        verticalLayout_19->setSpacing(6);
-        verticalLayout_19->setObjectName(QStringLiteral("verticalLayout_19"));
+        verticalLayout_26 = new QVBoxLayout();
+        verticalLayout_26->setSpacing(6);
+        verticalLayout_26->setObjectName(QStringLiteral("verticalLayout_26"));
         label_58 = new QLabel(tab_6);
         label_58->setObjectName(QStringLiteral("label_58"));
         label_58->setStyleSheet(QStringLiteral("QLabel { background-color: rgb(225, 225, 225) }"));
 
-        verticalLayout_19->addWidget(label_58);
+        verticalLayout_26->addWidget(label_58);
+
+        verticalLayout_13 = new QVBoxLayout();
+        verticalLayout_13->setSpacing(6);
+        verticalLayout_13->setObjectName(QStringLiteral("verticalLayout_13"));
+        horizontalLayout_10 = new QHBoxLayout();
+        horizontalLayout_10->setSpacing(6);
+        horizontalLayout_10->setObjectName(QStringLiteral("horizontalLayout_10"));
+        label_65 = new QLabel(tab_6);
+        label_65->setObjectName(QStringLiteral("label_65"));
+        QSizePolicy sizePolicy2(QSizePolicy::Fixed, QSizePolicy::Preferred);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(label_65->sizePolicy().hasHeightForWidth());
+        label_65->setSizePolicy(sizePolicy2);
+        label_65->setMinimumSize(QSize(102, 0));
+
+        horizontalLayout_10->addWidget(label_65);
 
         managerFIOLabel = new QLabel(tab_6);
         managerFIOLabel->setObjectName(QStringLiteral("managerFIOLabel"));
 
-        verticalLayout_19->addWidget(managerFIOLabel);
+        horizontalLayout_10->addWidget(managerFIOLabel);
+
+
+        verticalLayout_13->addLayout(horizontalLayout_10);
 
         horizontalLayout_43 = new QHBoxLayout();
         horizontalLayout_43->setSpacing(6);
         horizontalLayout_43->setObjectName(QStringLiteral("horizontalLayout_43"));
         label_62 = new QLabel(tab_6);
         label_62->setObjectName(QStringLiteral("label_62"));
+        sizePolicy2.setHeightForWidth(label_62->sizePolicy().hasHeightForWidth());
+        label_62->setSizePolicy(sizePolicy2);
+        label_62->setMinimumSize(QSize(100, 0));
 
         horizontalLayout_43->addWidget(label_62);
 
-        seria_2 = new QSpinBox(tab_6);
-        seria_2->setObjectName(QStringLiteral("seria_2"));
-        seria_2->setEnabled(false);
-        seria_2->setMinimum(1000);
-        seria_2->setMaximum(9999);
+        salaryPasportSeries = new QSpinBox(tab_6);
+        salaryPasportSeries->setObjectName(QStringLiteral("salaryPasportSeries"));
+        salaryPasportSeries->setEnabled(false);
+        salaryPasportSeries->setMinimum(1000);
+        salaryPasportSeries->setMaximum(9999);
 
-        horizontalLayout_43->addWidget(seria_2);
+        horizontalLayout_43->addWidget(salaryPasportSeries);
 
         label_63 = new QLabel(tab_6);
         label_63->setObjectName(QStringLiteral("label_63"));
 
         horizontalLayout_43->addWidget(label_63);
 
-        number_2 = new QSpinBox(tab_6);
-        number_2->setObjectName(QStringLiteral("number_2"));
-        number_2->setEnabled(false);
-        number_2->setMinimum(100000);
-        number_2->setMaximum(999999);
+        salaryPasportNumber = new QSpinBox(tab_6);
+        salaryPasportNumber->setObjectName(QStringLiteral("salaryPasportNumber"));
+        salaryPasportNumber->setEnabled(false);
+        salaryPasportNumber->setMinimum(100000);
+        salaryPasportNumber->setMaximum(999999);
 
-        horizontalLayout_43->addWidget(number_2);
-
-
-        verticalLayout_19->addLayout(horizontalLayout_43);
-
-        horizontalLayout_42 = new QHBoxLayout();
-        horizontalLayout_42->setSpacing(6);
-        horizontalLayout_42->setObjectName(QStringLiteral("horizontalLayout_42"));
-        label_61 = new QLabel(tab_6);
-        label_61->setObjectName(QStringLiteral("label_61"));
-
-        horizontalLayout_42->addWidget(label_61);
-
-        pasport_2 = new QLineEdit(tab_6);
-        pasport_2->setObjectName(QStringLiteral("pasport_2"));
-        pasport_2->setEnabled(false);
-
-        horizontalLayout_42->addWidget(pasport_2);
+        horizontalLayout_43->addWidget(salaryPasportNumber);
 
 
-        verticalLayout_19->addLayout(horizontalLayout_42);
+        verticalLayout_13->addLayout(horizontalLayout_43);
 
-        horizontalLayout_40 = new QHBoxLayout();
-        horizontalLayout_40->setSpacing(6);
-        horizontalLayout_40->setObjectName(QStringLiteral("horizontalLayout_40"));
+        formLayout_10 = new QFormLayout();
+        formLayout_10->setSpacing(6);
+        formLayout_10->setObjectName(QStringLiteral("formLayout_10"));
+        salaryPasportSourse = new QLineEdit(tab_6);
+        salaryPasportSourse->setObjectName(QStringLiteral("salaryPasportSourse"));
+        salaryPasportSourse->setEnabled(false);
+
+        formLayout_10->setWidget(0, QFormLayout::FieldRole, salaryPasportSourse);
+
         label_60 = new QLabel(tab_6);
         label_60->setObjectName(QStringLiteral("label_60"));
+        QSizePolicy sizePolicy3(QSizePolicy::Minimum, QSizePolicy::Preferred);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(label_60->sizePolicy().hasHeightForWidth());
+        label_60->setSizePolicy(sizePolicy3);
 
-        horizontalLayout_40->addWidget(label_60);
+        formLayout_10->setWidget(1, QFormLayout::LabelRole, label_60);
 
-        datePasport_2 = new QDateEdit(tab_6);
-        datePasport_2->setObjectName(QStringLiteral("datePasport_2"));
-        datePasport_2->setEnabled(false);
-        datePasport_2->setWrapping(false);
-        datePasport_2->setFrame(true);
-        datePasport_2->setButtonSymbols(QAbstractSpinBox::UpDownArrows);
-        datePasport_2->setKeyboardTracking(true);
-        datePasport_2->setProperty("showGroupSeparator", QVariant(false));
-        datePasport_2->setMinimumDate(QDate(1900, 9, 14));
-        datePasport_2->setCalendarPopup(true);
+        salaryDateOfReceipt = new QDateEdit(tab_6);
+        salaryDateOfReceipt->setObjectName(QStringLiteral("salaryDateOfReceipt"));
+        salaryDateOfReceipt->setEnabled(false);
+        salaryDateOfReceipt->setWrapping(false);
+        salaryDateOfReceipt->setFrame(true);
+        salaryDateOfReceipt->setButtonSymbols(QAbstractSpinBox::UpDownArrows);
+        salaryDateOfReceipt->setKeyboardTracking(true);
+        salaryDateOfReceipt->setProperty("showGroupSeparator", QVariant(false));
+        salaryDateOfReceipt->setMinimumDate(QDate(1900, 9, 14));
+        salaryDateOfReceipt->setCalendarPopup(true);
 
-        horizontalLayout_40->addWidget(datePasport_2);
+        formLayout_10->setWidget(1, QFormLayout::FieldRole, salaryDateOfReceipt);
+
+        label_61 = new QLabel(tab_6);
+        label_61->setObjectName(QStringLiteral("label_61"));
+        label_61->setMinimumSize(QSize(100, 0));
+
+        formLayout_10->setWidget(0, QFormLayout::LabelRole, label_61);
 
 
-        verticalLayout_19->addLayout(horizontalLayout_40);
+        verticalLayout_13->addLayout(formLayout_10);
 
-        sexGroup_2 = new QGroupBox(tab_6);
-        sexGroup_2->setObjectName(QStringLiteral("sexGroup_2"));
-        sexGroup_2->setEnabled(false);
-        sexGroup_2->setAutoFillBackground(false);
-        sexGroup_2->setFlat(false);
-        sexGroup_2->setCheckable(false);
-        horizontalLayout_41 = new QHBoxLayout(sexGroup_2);
+        salarySexGroup = new QGroupBox(tab_6);
+        salarySexGroup->setObjectName(QStringLiteral("salarySexGroup"));
+        salarySexGroup->setEnabled(false);
+        salarySexGroup->setAutoFillBackground(false);
+        salarySexGroup->setFlat(false);
+        salarySexGroup->setCheckable(false);
+        horizontalLayout_41 = new QHBoxLayout(salarySexGroup);
         horizontalLayout_41->setSpacing(6);
         horizontalLayout_41->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_41->setObjectName(QStringLiteral("horizontalLayout_41"));
-        maleRButton_2 = new QRadioButton(sexGroup_2);
-        maleRButton_2->setObjectName(QStringLiteral("maleRButton_2"));
+        salaryMaleRButton = new QRadioButton(salarySexGroup);
+        salaryMaleRButton->setObjectName(QStringLiteral("salaryMaleRButton"));
 
-        horizontalLayout_41->addWidget(maleRButton_2);
+        horizontalLayout_41->addWidget(salaryMaleRButton);
 
-        femaleRButton_2 = new QRadioButton(sexGroup_2);
-        femaleRButton_2->setObjectName(QStringLiteral("femaleRButton_2"));
-        femaleRButton_2->setEnabled(false);
+        salaryFemaleRButton = new QRadioButton(salarySexGroup);
+        salaryFemaleRButton->setObjectName(QStringLiteral("salaryFemaleRButton"));
+        salaryFemaleRButton->setEnabled(false);
 
-        horizontalLayout_41->addWidget(femaleRButton_2);
+        horizontalLayout_41->addWidget(salaryFemaleRButton);
 
 
-        verticalLayout_19->addWidget(sexGroup_2);
+        verticalLayout_13->addWidget(salarySexGroup);
 
-        horizontalLayout_39 = new QHBoxLayout();
-        horizontalLayout_39->setSpacing(6);
-        horizontalLayout_39->setObjectName(QStringLiteral("horizontalLayout_39"));
+        formLayout_11 = new QFormLayout();
+        formLayout_11->setSpacing(6);
+        formLayout_11->setObjectName(QStringLiteral("formLayout_11"));
+        salaryINN = new QLineEdit(tab_6);
+        salaryINN->setObjectName(QStringLiteral("salaryINN"));
+        salaryINN->setEnabled(false);
+
+        formLayout_11->setWidget(0, QFormLayout::FieldRole, salaryINN);
+
         label_59 = new QLabel(tab_6);
         label_59->setObjectName(QStringLiteral("label_59"));
+        label_59->setMinimumSize(QSize(100, 0));
 
-        horizontalLayout_39->addWidget(label_59);
-
-        INN_2 = new QLineEdit(tab_6);
-        INN_2->setObjectName(QStringLiteral("INN_2"));
-        INN_2->setEnabled(false);
-
-        horizontalLayout_39->addWidget(INN_2);
+        formLayout_11->setWidget(0, QFormLayout::LabelRole, label_59);
 
 
-        verticalLayout_19->addLayout(horizontalLayout_39);
+        verticalLayout_13->addLayout(formLayout_11);
+
+
+        verticalLayout_26->addLayout(verticalLayout_13);
+
+        verticalSpacer_7 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_26->addItem(verticalSpacer_7);
 
         horizontalLayout_44 = new QHBoxLayout();
         horizontalLayout_44->setSpacing(6);
@@ -1485,10 +1522,10 @@ public:
         horizontalLayout_44->addWidget(dataButton);
 
 
-        verticalLayout_19->addLayout(horizontalLayout_44);
+        verticalLayout_26->addLayout(horizontalLayout_44);
 
 
-        horizontalLayout_45->addLayout(verticalLayout_19);
+        horizontalLayout_18->addLayout(verticalLayout_26);
 
         tabWidget->addTab(tab_6, QString());
 
@@ -1659,12 +1696,12 @@ public:
 
         stackedWidget_4->addWidget(main);
 
-        verticalLayout_3->addWidget(stackedWidget_4);
+        horizontalLayout_17->addWidget(stackedWidget_4);
 
         MainWindowClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindowClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1074, 21));
+        menuBar->setGeometry(QRect(0, 0, 1061, 21));
         MainWindowClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindowClass);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -1677,7 +1714,7 @@ public:
 
         stackedWidget_4->setCurrentIndex(1);
         stackedWidget_3->setCurrentIndex(0);
-        tabWidget->setCurrentIndex(3);
+        tabWidget->setCurrentIndex(5);
         managersDataTab->setCurrentIndex(0);
         stackedWidget->setCurrentIndex(0);
         stackedWidget_2->setCurrentIndex(0);
@@ -1766,18 +1803,18 @@ public:
         label_54->setText(QApplication::translate("MainWindowClass", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt;\">\320\232\320\260\320\273\320\265\320\275\320\264\320\260\321\200\321\214 \320\270\320\275\321\202\320\265\320\275\321\201\320\270\320\262\320\275\320\276\321\201\321\202\320\270 \320\277\321\200\320\276\320\264\320\260\320\266</span></p></body></html>", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("MainWindowClass", "\320\241\321\202\320\260\321\202\320\270\321\201\321\202\320\270\320\272\320\260", 0));
         label_57->setText(QApplication::translate("MainWindowClass", "<html><head/><body><p align=\"center\"><span style=\" font-size:24pt;\">\320\227\320\260\321\200\320\277\320\273\320\260\321\202\320\260</span></p></body></html>", 0));
-        label_56->setText(QApplication::translate("MainWindowClass", "\320\234\320\265\321\201\321\217\321\206", 0));
-        monthSalaryInput->setDisplayFormat(QApplication::translate("MainWindowClass", "MMMM", 0));
-        pushButton->setText(QApplication::translate("MainWindowClass", "\320\227\320\260\320\272\321\200\321\213\321\202\321\214 \321\200\320\260\321\201\321\207\320\265\321\202\320\275\321\213\320\271 \320\277\320\265\321\200\320\270\320\276\320\264", 0));
+        label_56->setText(QApplication::translate("MainWindowClass", "\320\240\320\260\321\201\321\207\320\265\321\202\320\275\321\213\320\271 \320\277\320\265\321\200\320\270\320\276\320\264:", 0));
+        closeAccountingPeriod->setText(QApplication::translate("MainWindowClass", "\320\227\320\260\320\272\321\200\321\213\321\202\321\214 \321\200\320\260\321\201\321\207\320\265\321\202\320\275\321\213\320\271 \320\277\320\265\321\200\320\270\320\276\320\264", 0));
         label_58->setText(QApplication::translate("MainWindowClass", "<html><head/><body><p align=\"center\"><span style=\" font-size:24pt;\">\320\224\320\260\320\275\320\275\321\213\320\265</span></p></body></html>", 0));
-        managerFIOLabel->setText(QApplication::translate("MainWindowClass", "\320\237\320\276 \321\201\320\276\321\202\321\200\321\203\320\264\320\275\320\270\320\272\321\203:", 0));
+        label_65->setText(QApplication::translate("MainWindowClass", "\320\237\320\276 \321\201\320\276\321\202\321\200\321\203\320\264\320\275\320\270\320\272\321\203:", 0));
+        managerFIOLabel->setText(QApplication::translate("MainWindowClass", "TextLabel", 0));
         label_62->setText(QApplication::translate("MainWindowClass", "\320\241\320\265\321\200\320\270\321\217 \320\277\320\260\321\201\320\277\320\276\321\200\321\202\320\260", 0));
         label_63->setText(QApplication::translate("MainWindowClass", "\320\235\320\276\320\274\320\265\321\200 \320\277\320\260\321\201\320\277\320\276\321\200\321\202\320\260", 0));
-        label_61->setText(QApplication::translate("MainWindowClass", "\320\237\320\260\321\201\320\277\320\276\321\200\321\202 \320\262\321\213\320\264\320\260\320\275", 0));
         label_60->setText(QApplication::translate("MainWindowClass", "\320\224\320\260\321\202\320\260 \320\262\321\213\320\264\320\260\321\207\320\270", 0));
-        sexGroup_2->setTitle(QApplication::translate("MainWindowClass", "\320\237\320\276\320\273", 0));
-        maleRButton_2->setText(QApplication::translate("MainWindowClass", "\320\274\321\203\320\266\321\201\320\272\320\276\320\271", 0));
-        femaleRButton_2->setText(QApplication::translate("MainWindowClass", "\320\266\320\265\320\275\321\201\320\272\320\270\320\271", 0));
+        label_61->setText(QApplication::translate("MainWindowClass", "\320\237\320\260\321\201\320\277\320\276\321\200\321\202 \320\262\321\213\320\264\320\260\320\275", 0));
+        salarySexGroup->setTitle(QApplication::translate("MainWindowClass", "\320\237\320\276\320\273", 0));
+        salaryMaleRButton->setText(QApplication::translate("MainWindowClass", "\320\274\321\203\320\266\321\201\320\272\320\276\320\271", 0));
+        salaryFemaleRButton->setText(QApplication::translate("MainWindowClass", "\320\266\320\265\320\275\321\201\320\272\320\270\320\271", 0));
         label_59->setText(QApplication::translate("MainWindowClass", "\320\230\320\235\320\235", 0));
         salesButton->setText(QApplication::translate("MainWindowClass", "\320\237\321\200\320\276\320\264\320\260\320\266\320\270", 0));
         dataButton->setText(QApplication::translate("MainWindowClass", "\320\224\320\260\320\275\320\275\321\213\320\265", 0));
