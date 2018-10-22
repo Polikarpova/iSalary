@@ -178,7 +178,7 @@
                <enum>QTabWidget::Rounded</enum>
               </property>
               <property name="currentIndex">
-               <number>0</number>
+               <number>1</number>
               </property>
               <property name="elideMode">
                <enum>Qt::ElideMiddle</enum>
@@ -219,7 +219,7 @@
                    <widget class="QTableView" name="managersTable"/>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="newManagerButton">
+                   <widget class="QPushButton" name="addManagerButton">
                     <property name="text">
                      <string>Нанять менеджера</string>
                     </property>
@@ -287,7 +287,7 @@
                     <property name="tabBarAutoHide">
                      <bool>false</bool>
                     </property>
-                    <widget class="QWidget" name="tab">
+                    <widget class="QWidget" name="personalDataTab">
                      <attribute name="title">
                       <string>Личные</string>
                      </attribute>
@@ -323,7 +323,7 @@
                          </widget>
                         </item>
                         <item row="0" column="1">
-                         <widget class="QLineEdit" name="name">
+                         <widget class="QLineEdit" name="firstName">
                           <property name="enabled">
                            <bool>false</bool>
                           </property>
@@ -336,14 +336,14 @@
                          </widget>
                         </item>
                         <item row="1" column="1">
-                         <widget class="QLineEdit" name="familia">
+                         <widget class="QLineEdit" name="secondName">
                           <property name="enabled">
                            <bool>false</bool>
                           </property>
                          </widget>
                         </item>
                         <item row="2" column="1">
-                         <widget class="QLineEdit" name="otchestvo">
+                         <widget class="QLineEdit" name="thirdName">
                           <property name="enabled">
                            <bool>false</bool>
                           </property>
@@ -431,7 +431,7 @@
                          </widget>
                         </item>
                         <item>
-                         <widget class="QSpinBox" name="seria">
+                         <widget class="QSpinBox" name="pasportSeries">
                           <property name="enabled">
                            <bool>false</bool>
                           </property>
@@ -451,7 +451,7 @@
                          </widget>
                         </item>
                         <item>
-                         <widget class="QSpinBox" name="number">
+                         <widget class="QSpinBox" name="pasportNumber">
                           <property name="enabled">
                            <bool>false</bool>
                           </property>
@@ -475,7 +475,7 @@
                          </widget>
                         </item>
                         <item row="0" column="1">
-                         <widget class="QLineEdit" name="pasport">
+                         <widget class="QLineEdit" name="pasportSourse">
                           <property name="enabled">
                            <bool>false</bool>
                           </property>
@@ -489,7 +489,7 @@
                          </widget>
                         </item>
                         <item row="1" column="1">
-                         <widget class="QDateEdit" name="datePasport">
+                         <widget class="QDateEdit" name="dateOfReceipt">
                           <property name="enabled">
                            <bool>false</bool>
                           </property>
@@ -530,7 +530,7 @@
                         <item row="2" column="1">
                          <layout class="QHBoxLayout" name="horizontalLayout_9">
                           <item>
-                           <widget class="QLineEdit" name="propiska">
+                           <widget class="QLineEdit" name="registration">
                             <property name="enabled">
                              <bool>false</bool>
                             </property>
@@ -556,7 +556,7 @@
                       </item>
                      </layout>
                     </widget>
-                    <widget class="QWidget" name="tab_1">
+                    <widget class="QWidget" name="accountDataTab">
                      <attribute name="title">
                       <string>Профиль</string>
                      </attribute>
@@ -645,6 +645,9 @@
                     <property name="acceptDrops">
                      <bool>false</bool>
                     </property>
+                    <property name="styleSheet">
+                     <string notr="true"/>
+                    </property>
                     <property name="frameShape">
                      <enum>QFrame::NoFrame</enum>
                     </property>
@@ -660,17 +663,21 @@
                     <widget class="QWidget" name="page1">
                      <layout class="QVBoxLayout" name="verticalLayout_22">
                       <item>
-                       <widget class="QPushButton" name="changeManagerButton">
+                       <widget class="QPushButton" name="editManagerButton">
                         <property name="sizePolicy">
-                         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                         <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
                           <horstretch>0</horstretch>
                           <verstretch>0</verstretch>
                          </sizepolicy>
                         </property>
+                        <property name="minimumSize">
+                         <size>
+                          <width>0</width>
+                          <height>22</height>
+                         </size>
+                        </property>
                         <property name="styleSheet">
-                         <string notr="true">QPushButton {
-	padding: 5px;
-}</string>
+                         <string notr="true"/>
                         </property>
                         <property name="text">
                          <string>Изменить</string>
@@ -707,7 +714,7 @@
                <attribute name="title">
                 <string>Товары</string>
                </attribute>
-               <layout class="QHBoxLayout" name="horizontalLayout_19">
+               <layout class="QHBoxLayout" name="horizontalLayout_4">
                 <item>
                  <layout class="QVBoxLayout" name="verticalLayout_4">
                   <item>
@@ -730,8 +737,22 @@
                       <property name="text">
                        <string/>
                       </property>
+                      <property name="placeholderText">
+                       <string>поиск по названию</string>
+                      </property>
                       <property name="clearButtonEnabled">
                        <bool>false</bool>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="searchButton">
+                      <property name="text">
+                       <string/>
+                      </property>
+                      <property name="icon">
+                       <iconset resource="mainwindow.qrc">
+                        <normaloff>:/MainWindow/img/searchIcon.png</normaloff>:/MainWindow/img/searchIcon.png</iconset>
                       </property>
                      </widget>
                     </item>
@@ -754,26 +775,52 @@
                    <widget class="QTableView" name="productTable"/>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="newProductButton">
+                   <widget class="QPushButton" name="addProductButton">
                     <property name="text">
                      <string>Добавить</string>
                     </property>
                    </widget>
                   </item>
+                  <item>
+                   <spacer name="verticalSpacer_4">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeType">
+                     <enum>QSizePolicy::Minimum</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>20</width>
+                      <height>9</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
                  </layout>
                 </item>
                 <item>
-                 <layout class="QGridLayout" name="gridLayout_5">
-                  <item row="1" column="0">
-                   <layout class="QHBoxLayout" name="horizontalLayout_18">
-                    <item>
+                 <layout class="QVBoxLayout" name="verticalLayout_23">
+                  <item>
+                   <widget class="QLabel" name="label_16">
+                    <property name="styleSheet">
+                     <string notr="true">QLabel { background-color: rgb(225, 225, 225) }</string>
+                    </property>
+                    <property name="text">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:24pt;&quot;&gt;Данные&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <layout class="QFormLayout" name="formLayout_6">
+                    <item row="0" column="0">
                      <widget class="QLabel" name="label_17">
                       <property name="text">
                        <string>Название</string>
                       </property>
                      </widget>
                     </item>
-                    <item>
+                    <item row="0" column="1">
                      <widget class="QLineEdit" name="productName">
                       <property name="enabled">
                        <bool>false</bool>
@@ -789,18 +836,14 @@
                       </property>
                      </widget>
                     </item>
-                   </layout>
-                  </item>
-                  <item row="2" column="0">
-                   <layout class="QHBoxLayout" name="horizontalLayout_17">
-                    <item>
+                    <item row="1" column="0">
                      <widget class="QLabel" name="label_18">
                       <property name="text">
                        <string>Процент комиссии</string>
                       </property>
                      </widget>
                     </item>
-                    <item>
+                    <item row="1" column="1">
                      <widget class="QLineEdit" name="productPercent">
                       <property name="enabled">
                        <bool>false</bool>
@@ -818,17 +861,23 @@
                     </item>
                    </layout>
                   </item>
-                  <item row="0" column="0">
-                   <widget class="QLabel" name="label_16">
-                    <property name="styleSheet">
-                     <string notr="true">QLabel { background-color: rgb(225, 225, 225) }</string>
+                  <item>
+                   <spacer name="verticalSpacer_10">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
                     </property>
-                    <property name="text">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:24pt;&quot;&gt;Данные&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    <property name="sizeType">
+                     <enum>QSizePolicy::Maximum</enum>
                     </property>
-                   </widget>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>20</width>
+                      <height>1000</height>
+                     </size>
+                    </property>
+                   </spacer>
                   </item>
-                  <item row="9" column="0">
+                  <item>
                    <widget class="QStackedWidget" name="stackedWidget_2">
                     <property name="currentIndex">
                      <number>0</number>
@@ -843,7 +892,7 @@
                        </widget>
                       </item>
                       <item>
-                       <widget class="QPushButton" name="changeProductButton">
+                       <widget class="QPushButton" name="editProductButton">
                         <property name="text">
                          <string>Изменить</string>
                         </property>
@@ -870,84 +919,6 @@
                      </layout>
                     </widget>
                    </widget>
-                  </item>
-                  <item row="3" column="0">
-                   <spacer name="verticalSpacer_4">
-                    <property name="orientation">
-                     <enum>Qt::Vertical</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>20</width>
-                      <height>40</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                  <item row="5" column="0">
-                   <spacer name="verticalSpacer_6">
-                    <property name="orientation">
-                     <enum>Qt::Vertical</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>20</width>
-                      <height>40</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                  <item row="4" column="0">
-                   <spacer name="verticalSpacer_5">
-                    <property name="orientation">
-                     <enum>Qt::Vertical</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>20</width>
-                      <height>40</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                  <item row="8" column="0">
-                   <spacer name="verticalSpacer_10">
-                    <property name="orientation">
-                     <enum>Qt::Vertical</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>20</width>
-                      <height>40</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                  <item row="7" column="0">
-                   <spacer name="verticalSpacer_9">
-                    <property name="orientation">
-                     <enum>Qt::Vertical</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>20</width>
-                      <height>40</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                  <item row="6" column="0">
-                   <spacer name="verticalSpacer_7">
-                    <property name="orientation">
-                     <enum>Qt::Vertical</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>20</width>
-                      <height>40</height>
-                     </size>
-                    </property>
-                   </spacer>
                   </item>
                  </layout>
                 </item>

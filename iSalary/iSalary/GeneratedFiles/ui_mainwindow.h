@@ -80,16 +80,16 @@ public:
     QVBoxLayout *verticalLayout_21;
     QLabel *label_2;
     QTabWidget *managersDataTab;
-    QWidget *tab;
+    QWidget *personalDataTab;
     QVBoxLayout *verticalLayout_20;
     QFormLayout *formLayout_4;
     QLabel *label_3;
     QLabel *label_4;
     QLabel *label_5;
     QLabel *label_6;
-    QLineEdit *name;
-    QLineEdit *familia;
-    QLineEdit *otchestvo;
+    QLineEdit *firstName;
+    QLineEdit *secondName;
+    QLineEdit *thirdName;
     QDateEdit *dateOfBirth;
     QGroupBox *sexGroup;
     QHBoxLayout *horizontalLayout_2;
@@ -97,20 +97,20 @@ public:
     QRadioButton *femaleRButton;
     QHBoxLayout *horizontalLayout;
     QLabel *label_8;
-    QSpinBox *seria;
+    QSpinBox *pasportSeries;
     QLabel *label_12;
-    QSpinBox *number;
+    QSpinBox *pasportNumber;
     QFormLayout *formLayout_3;
     QLabel *label_11;
-    QLineEdit *pasport;
+    QLineEdit *pasportSourse;
     QLabel *label_9;
-    QDateEdit *datePasport;
+    QDateEdit *dateOfReceipt;
     QLabel *label_10;
     QHBoxLayout *horizontalLayout_9;
-    QLineEdit *propiska;
+    QLineEdit *registration;
     QLabel *label_13;
     QLineEdit *INN;
-    QWidget *tab_1;
+    QWidget *accountDataTab;
     QFormLayout *formLayout_5;
     QLabel *label_7;
     QLineEdit *login;
@@ -132,6 +132,7 @@ public:
     QLabel *label_15;
     QHBoxLayout *horizontalLayout_14;
     QLineEdit *productSearch;
+    QPushButton *searchButton;
     QSpacerItem *horizontalSpacer_2;
     QTableView *productTable;
     QPushButton *newProductButton;
@@ -468,56 +469,56 @@ public:
         managersDataTab->setDocumentMode(false);
         managersDataTab->setTabsClosable(false);
         managersDataTab->setTabBarAutoHide(false);
-        tab = new QWidget();
-        tab->setObjectName(QStringLiteral("tab"));
-        verticalLayout_20 = new QVBoxLayout(tab);
+        personalDataTab = new QWidget();
+        personalDataTab->setObjectName(QStringLiteral("personalDataTab"));
+        verticalLayout_20 = new QVBoxLayout(personalDataTab);
         verticalLayout_20->setSpacing(6);
         verticalLayout_20->setContentsMargins(11, 11, 11, 11);
         verticalLayout_20->setObjectName(QStringLiteral("verticalLayout_20"));
         formLayout_4 = new QFormLayout();
         formLayout_4->setSpacing(6);
         formLayout_4->setObjectName(QStringLiteral("formLayout_4"));
-        label_3 = new QLabel(tab);
+        label_3 = new QLabel(personalDataTab);
         label_3->setObjectName(QStringLiteral("label_3"));
 
         formLayout_4->setWidget(0, QFormLayout::LabelRole, label_3);
 
-        label_4 = new QLabel(tab);
+        label_4 = new QLabel(personalDataTab);
         label_4->setObjectName(QStringLiteral("label_4"));
 
         formLayout_4->setWidget(1, QFormLayout::LabelRole, label_4);
 
-        label_5 = new QLabel(tab);
+        label_5 = new QLabel(personalDataTab);
         label_5->setObjectName(QStringLiteral("label_5"));
 
         formLayout_4->setWidget(2, QFormLayout::LabelRole, label_5);
 
-        label_6 = new QLabel(tab);
+        label_6 = new QLabel(personalDataTab);
         label_6->setObjectName(QStringLiteral("label_6"));
 
         formLayout_4->setWidget(3, QFormLayout::LabelRole, label_6);
 
-        name = new QLineEdit(tab);
-        name->setObjectName(QStringLiteral("name"));
-        name->setEnabled(false);
-        name->setDragEnabled(false);
-        name->setReadOnly(false);
+        firstName = new QLineEdit(personalDataTab);
+        firstName->setObjectName(QStringLiteral("firstName"));
+        firstName->setEnabled(false);
+        firstName->setDragEnabled(false);
+        firstName->setReadOnly(false);
 
-        formLayout_4->setWidget(0, QFormLayout::FieldRole, name);
+        formLayout_4->setWidget(0, QFormLayout::FieldRole, firstName);
 
-        familia = new QLineEdit(tab);
-        familia->setObjectName(QStringLiteral("familia"));
-        familia->setEnabled(false);
+        secondName = new QLineEdit(personalDataTab);
+        secondName->setObjectName(QStringLiteral("secondName"));
+        secondName->setEnabled(false);
 
-        formLayout_4->setWidget(1, QFormLayout::FieldRole, familia);
+        formLayout_4->setWidget(1, QFormLayout::FieldRole, secondName);
 
-        otchestvo = new QLineEdit(tab);
-        otchestvo->setObjectName(QStringLiteral("otchestvo"));
-        otchestvo->setEnabled(false);
+        thirdName = new QLineEdit(personalDataTab);
+        thirdName->setObjectName(QStringLiteral("thirdName"));
+        thirdName->setEnabled(false);
 
-        formLayout_4->setWidget(2, QFormLayout::FieldRole, otchestvo);
+        formLayout_4->setWidget(2, QFormLayout::FieldRole, thirdName);
 
-        dateOfBirth = new QDateEdit(tab);
+        dateOfBirth = new QDateEdit(personalDataTab);
         dateOfBirth->setObjectName(QStringLiteral("dateOfBirth"));
         dateOfBirth->setEnabled(false);
         dateOfBirth->setWrapping(false);
@@ -533,7 +534,7 @@ public:
 
         verticalLayout_20->addLayout(formLayout_4);
 
-        sexGroup = new QGroupBox(tab);
+        sexGroup = new QGroupBox(personalDataTab);
         sexGroup->setObjectName(QStringLiteral("sexGroup"));
         sexGroup->setEnabled(false);
         sexGroup->setAutoFillBackground(false);
@@ -560,31 +561,31 @@ public:
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        label_8 = new QLabel(tab);
+        label_8 = new QLabel(personalDataTab);
         label_8->setObjectName(QStringLiteral("label_8"));
 
         horizontalLayout->addWidget(label_8);
 
-        seria = new QSpinBox(tab);
-        seria->setObjectName(QStringLiteral("seria"));
-        seria->setEnabled(false);
-        seria->setMinimum(1000);
-        seria->setMaximum(9999);
+        pasportSeries = new QSpinBox(personalDataTab);
+        pasportSeries->setObjectName(QStringLiteral("pasportSeries"));
+        pasportSeries->setEnabled(false);
+        pasportSeries->setMinimum(1000);
+        pasportSeries->setMaximum(9999);
 
-        horizontalLayout->addWidget(seria);
+        horizontalLayout->addWidget(pasportSeries);
 
-        label_12 = new QLabel(tab);
+        label_12 = new QLabel(personalDataTab);
         label_12->setObjectName(QStringLiteral("label_12"));
 
         horizontalLayout->addWidget(label_12);
 
-        number = new QSpinBox(tab);
-        number->setObjectName(QStringLiteral("number"));
-        number->setEnabled(false);
-        number->setMinimum(100000);
-        number->setMaximum(999999);
+        pasportNumber = new QSpinBox(personalDataTab);
+        pasportNumber->setObjectName(QStringLiteral("pasportNumber"));
+        pasportNumber->setEnabled(false);
+        pasportNumber->setMinimum(100000);
+        pasportNumber->setMaximum(999999);
 
-        horizontalLayout->addWidget(number);
+        horizontalLayout->addWidget(pasportNumber);
 
 
         verticalLayout_20->addLayout(horizontalLayout);
@@ -592,36 +593,36 @@ public:
         formLayout_3 = new QFormLayout();
         formLayout_3->setSpacing(6);
         formLayout_3->setObjectName(QStringLiteral("formLayout_3"));
-        label_11 = new QLabel(tab);
+        label_11 = new QLabel(personalDataTab);
         label_11->setObjectName(QStringLiteral("label_11"));
 
         formLayout_3->setWidget(0, QFormLayout::LabelRole, label_11);
 
-        pasport = new QLineEdit(tab);
-        pasport->setObjectName(QStringLiteral("pasport"));
-        pasport->setEnabled(false);
+        pasportSourse = new QLineEdit(personalDataTab);
+        pasportSourse->setObjectName(QStringLiteral("pasportSourse"));
+        pasportSourse->setEnabled(false);
 
-        formLayout_3->setWidget(0, QFormLayout::FieldRole, pasport);
+        formLayout_3->setWidget(0, QFormLayout::FieldRole, pasportSourse);
 
-        label_9 = new QLabel(tab);
+        label_9 = new QLabel(personalDataTab);
         label_9->setObjectName(QStringLiteral("label_9"));
 
         formLayout_3->setWidget(1, QFormLayout::LabelRole, label_9);
 
-        datePasport = new QDateEdit(tab);
-        datePasport->setObjectName(QStringLiteral("datePasport"));
-        datePasport->setEnabled(false);
-        datePasport->setWrapping(false);
-        datePasport->setFrame(true);
-        datePasport->setButtonSymbols(QAbstractSpinBox::UpDownArrows);
-        datePasport->setKeyboardTracking(true);
-        datePasport->setProperty("showGroupSeparator", QVariant(false));
-        datePasport->setMinimumDate(QDate(1900, 9, 14));
-        datePasport->setCalendarPopup(true);
+        dateOfReceipt = new QDateEdit(personalDataTab);
+        dateOfReceipt->setObjectName(QStringLiteral("dateOfReceipt"));
+        dateOfReceipt->setEnabled(false);
+        dateOfReceipt->setWrapping(false);
+        dateOfReceipt->setFrame(true);
+        dateOfReceipt->setButtonSymbols(QAbstractSpinBox::UpDownArrows);
+        dateOfReceipt->setKeyboardTracking(true);
+        dateOfReceipt->setProperty("showGroupSeparator", QVariant(false));
+        dateOfReceipt->setMinimumDate(QDate(1900, 9, 14));
+        dateOfReceipt->setCalendarPopup(true);
 
-        formLayout_3->setWidget(1, QFormLayout::FieldRole, datePasport);
+        formLayout_3->setWidget(1, QFormLayout::FieldRole, dateOfReceipt);
 
-        label_10 = new QLabel(tab);
+        label_10 = new QLabel(personalDataTab);
         label_10->setObjectName(QStringLiteral("label_10"));
 
         formLayout_3->setWidget(2, QFormLayout::LabelRole, label_10);
@@ -629,21 +630,21 @@ public:
         horizontalLayout_9 = new QHBoxLayout();
         horizontalLayout_9->setSpacing(6);
         horizontalLayout_9->setObjectName(QStringLiteral("horizontalLayout_9"));
-        propiska = new QLineEdit(tab);
-        propiska->setObjectName(QStringLiteral("propiska"));
-        propiska->setEnabled(false);
+        registration = new QLineEdit(personalDataTab);
+        registration->setObjectName(QStringLiteral("registration"));
+        registration->setEnabled(false);
 
-        horizontalLayout_9->addWidget(propiska);
+        horizontalLayout_9->addWidget(registration);
 
 
         formLayout_3->setLayout(2, QFormLayout::FieldRole, horizontalLayout_9);
 
-        label_13 = new QLabel(tab);
+        label_13 = new QLabel(personalDataTab);
         label_13->setObjectName(QStringLiteral("label_13"));
 
         formLayout_3->setWidget(3, QFormLayout::LabelRole, label_13);
 
-        INN = new QLineEdit(tab);
+        INN = new QLineEdit(personalDataTab);
         INN->setObjectName(QStringLiteral("INN"));
         INN->setEnabled(false);
 
@@ -652,36 +653,36 @@ public:
 
         verticalLayout_20->addLayout(formLayout_3);
 
-        managersDataTab->addTab(tab, QString());
-        tab_1 = new QWidget();
-        tab_1->setObjectName(QStringLiteral("tab_1"));
-        formLayout_5 = new QFormLayout(tab_1);
+        managersDataTab->addTab(personalDataTab, QString());
+        accountDataTab = new QWidget();
+        accountDataTab->setObjectName(QStringLiteral("accountDataTab"));
+        formLayout_5 = new QFormLayout(accountDataTab);
         formLayout_5->setSpacing(6);
         formLayout_5->setContentsMargins(11, 11, 11, 11);
         formLayout_5->setObjectName(QStringLiteral("formLayout_5"));
-        label_7 = new QLabel(tab_1);
+        label_7 = new QLabel(accountDataTab);
         label_7->setObjectName(QStringLiteral("label_7"));
 
         formLayout_5->setWidget(0, QFormLayout::LabelRole, label_7);
 
-        login = new QLineEdit(tab_1);
+        login = new QLineEdit(accountDataTab);
         login->setObjectName(QStringLiteral("login"));
         login->setEnabled(false);
 
         formLayout_5->setWidget(0, QFormLayout::FieldRole, login);
 
-        label_14 = new QLabel(tab_1);
+        label_14 = new QLabel(accountDataTab);
         label_14->setObjectName(QStringLiteral("label_14"));
 
         formLayout_5->setWidget(1, QFormLayout::LabelRole, label_14);
 
-        password = new QLineEdit(tab_1);
+        password = new QLineEdit(accountDataTab);
         password->setObjectName(QStringLiteral("password"));
         password->setEnabled(false);
 
         formLayout_5->setWidget(1, QFormLayout::FieldRole, password);
 
-        managersDataTab->addTab(tab_1, QString());
+        managersDataTab->addTab(accountDataTab, QString());
 
         verticalLayout_21->addWidget(managersDataTab);
 
@@ -703,6 +704,7 @@ public:
         stackedWidget->setSizePolicy(sizePolicy);
         stackedWidget->setMinimumSize(QSize(311, 41));
         stackedWidget->setAcceptDrops(false);
+        stackedWidget->setStyleSheet(QStringLiteral(""));
         stackedWidget->setFrameShape(QFrame::NoFrame);
         stackedWidget->setFrameShadow(QFrame::Raised);
         stackedWidget->setMidLineWidth(1);
@@ -714,6 +716,13 @@ public:
         verticalLayout_22->setObjectName(QStringLiteral("verticalLayout_22"));
         changeManagerButton = new QPushButton(page1);
         changeManagerButton->setObjectName(QStringLiteral("changeManagerButton"));
+        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Minimum);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(changeManagerButton->sizePolicy().hasHeightForWidth());
+        changeManagerButton->setSizePolicy(sizePolicy1);
+        changeManagerButton->setMinimumSize(QSize(0, 22));
+        changeManagerButton->setStyleSheet(QStringLiteral(""));
 
         verticalLayout_22->addWidget(changeManagerButton);
 
@@ -765,6 +774,14 @@ public:
         productSearch->setClearButtonEnabled(false);
 
         horizontalLayout_14->addWidget(productSearch);
+
+        searchButton = new QPushButton(tab_4);
+        searchButton->setObjectName(QStringLiteral("searchButton"));
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/MainWindow/img/searchIcon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        searchButton->setIcon(icon);
+
+        horizontalLayout_14->addWidget(searchButton);
 
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -1748,17 +1765,19 @@ public:
         label_9->setText(QApplication::translate("MainWindowClass", "\320\224\320\260\321\202\320\260 \320\262\321\213\320\264\320\260\321\207\320\270", 0));
         label_10->setText(QApplication::translate("MainWindowClass", "\320\237\321\200\320\276\320\277\320\270\321\201\320\272\320\260", 0));
         label_13->setText(QApplication::translate("MainWindowClass", "\320\230\320\235\320\235", 0));
-        managersDataTab->setTabText(managersDataTab->indexOf(tab), QApplication::translate("MainWindowClass", "\320\233\320\270\321\207\320\275\321\213\320\265", 0));
+        managersDataTab->setTabText(managersDataTab->indexOf(personalDataTab), QApplication::translate("MainWindowClass", "\320\233\320\270\321\207\320\275\321\213\320\265", 0));
         label_7->setText(QApplication::translate("MainWindowClass", "\320\233\320\276\320\263\320\270\320\275", 0));
         label_14->setText(QApplication::translate("MainWindowClass", "\320\237\320\260\321\200\320\276\320\273\321\214", 0));
-        managersDataTab->setTabText(managersDataTab->indexOf(tab_1), QApplication::translate("MainWindowClass", "\320\237\321\200\320\276\321\204\320\270\320\273\321\214", 0));
-        changeManagerButton->setText(QApplication::translate("MainWindowClass", "PushButton", 0));
+        managersDataTab->setTabText(managersDataTab->indexOf(accountDataTab), QApplication::translate("MainWindowClass", "\320\237\321\200\320\276\321\204\320\270\320\273\321\214", 0));
+        changeManagerButton->setText(QApplication::translate("MainWindowClass", "\320\230\320\267\320\274\320\265\320\275\320\270\321\202\321\214", 0));
         cancelManagerButton->setText(QApplication::translate("MainWindowClass", "\320\236\321\202\320\274\320\265\320\275\320\270\321\202\321\214", 0));
         saveManagerButton->setText(QApplication::translate("MainWindowClass", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214", 0));
         tabWidget->setTabText(tabWidget->indexOf(tabManagers), QApplication::translate("MainWindowClass", "\320\241\320\276\321\202\321\200\321\203\320\264\320\275\320\270\320\272\320\270", 0));
         label_15->setText(QApplication::translate("MainWindowClass", "<html><head/><body><p align=\"center\"><span style=\" font-size:24pt;\">\320\242\320\276\320\262\320\260\321\200\321\213</span></p></body></html>", 0));
         productSearch->setInputMask(QString());
         productSearch->setText(QString());
+        productSearch->setPlaceholderText(QApplication::translate("MainWindowClass", "\320\277\320\276\320\270\321\201\320\272 \320\277\320\276 \320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\216", 0));
+        searchButton->setText(QString());
         newProductButton->setText(QApplication::translate("MainWindowClass", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214", 0));
         label_17->setText(QApplication::translate("MainWindowClass", "\320\235\320\260\320\267\320\262\320\260\320\275\320\270\320\265", 0));
         productName->setInputMask(QString());
