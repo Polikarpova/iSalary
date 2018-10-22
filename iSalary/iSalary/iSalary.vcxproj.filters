@@ -62,12 +62,6 @@
     <ClCompile Include="GeneratedFiles\qrc_mainwindow.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="AuthorizationModule.cpp">
-      <Filter>Source Files\Model\AuthorizationModule</Filter>
-    </ClCompile>
-    <ClCompile Include="User.cpp">
-      <Filter>Source Files\Model\AuthorizationModule</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -83,12 +77,6 @@
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h">
       <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AuthorizationModule.h">
-      <Filter>Header Files\Model\AuthorizationModule</Filter>
-    </ClInclude>
-    <ClInclude Include="User.h">
-      <Filter>Header Files\Model\AuthorizationModule</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
