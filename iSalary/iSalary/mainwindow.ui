@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1061</width>
-    <height>641</height>
+    <width>1001</width>
+    <height>620</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -165,7 +165,7 @@
         <item>
          <widget class="QStackedWidget" name="stackedWidget_3">
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="owner">
            <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -710,7 +710,7 @@
                 </item>
                </layout>
               </widget>
-              <widget class="QWidget" name="tab_4">
+              <widget class="QWidget" name="tabProducts">
                <attribute name="title">
                 <string>Товары</string>
                </attribute>
@@ -844,18 +844,12 @@
                      </widget>
                     </item>
                     <item row="1" column="1">
-                     <widget class="QLineEdit" name="productPercent">
+                     <widget class="QDoubleSpinBox" name="productPercent">
                       <property name="enabled">
                        <bool>false</bool>
                       </property>
-                      <property name="inputMask">
-                       <string/>
-                      </property>
-                      <property name="text">
-                       <string/>
-                      </property>
-                      <property name="clearButtonEnabled">
-                       <bool>false</bool>
+                      <property name="maximum">
+                       <double>100.000000000000000</double>
                       </property>
                      </widget>
                     </item>
@@ -924,7 +918,7 @@
                 </item>
                </layout>
               </widget>
-              <widget class="QWidget" name="tab_3">
+              <widget class="QWidget" name="tabCorrection">
                <attribute name="title">
                 <string>Корректировки</string>
                </attribute>
@@ -1091,12 +1085,9 @@
                     <item row="4" column="1">
                      <layout class="QHBoxLayout" name="horizontalLayout_6">
                       <item>
-                       <widget class="QSpinBox" name="correctionPercent">
-                        <property name="minimum">
-                         <number>0</number>
-                        </property>
+                       <widget class="QDoubleSpinBox" name="correctionPercent">
                         <property name="maximum">
-                         <number>100</number>
+                         <double>100.000000000000000</double>
                         </property>
                        </widget>
                       </item>
@@ -1200,8 +1191,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>474</width>
-                       <height>228</height>
+                       <width>444</width>
+                       <height>207</height>
                       </rect>
                      </property>
                     </widget>
@@ -1211,7 +1202,7 @@
                 </item>
                </layout>
               </widget>
-              <widget class="QWidget" name="tab_7">
+              <widget class="QWidget" name="tabSales">
                <attribute name="title">
                 <string>Продажи</string>
                </attribute>
@@ -1347,7 +1338,7 @@
                 </item>
                </layout>
               </widget>
-              <widget class="QWidget" name="tab_5">
+              <widget class="QWidget" name="tabStatistic">
                <attribute name="title">
                 <string>Статистика</string>
                </attribute>
@@ -1528,7 +1519,7 @@
                 </item>
                </layout>
               </widget>
-              <widget class="QWidget" name="tab_6">
+              <widget class="QWidget" name="tabSalary">
                <attribute name="title">
                 <string>Зарплата</string>
                </attribute>
@@ -2202,7 +2193,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1061</width>
+     <width>1001</width>
      <height>21</height>
     </rect>
    </property>
