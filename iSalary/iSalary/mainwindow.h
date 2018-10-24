@@ -15,10 +15,8 @@ public:
 
 private:
 	Ui::MainWindowClass ui;
-	QTextCodec* c ;
-	
-private slots:
-	
+
+	void createHorizontalTabs();
 };
 
 #endif // MAINWINDOW_H
