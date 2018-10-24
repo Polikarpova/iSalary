@@ -4,7 +4,7 @@ iSalaryPrototype
 *.sdf
 Win32
 Debug
-*.vcxproj
-*.vcxproj.*
+iSalary*.vcxproj
+iSalary*.vcxproj.*
 GeneratedFiles
 *.opensdf

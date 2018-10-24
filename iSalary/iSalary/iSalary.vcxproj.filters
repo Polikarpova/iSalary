@@ -33,18 +33,6 @@
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
-    <Filter Include="Source Files\Model">
-      <UniqueIdentifier>{5a5ed542-c365-4f9d-a111-c43721e03029}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Model">
-      <UniqueIdentifier>{f71568b5-0e9b-4077-a381-45bb6c8cfd31}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Model\AuthorizationModule">
-      <UniqueIdentifier>{e9020f10-a5e1-451a-bb60-12bc60d5a030}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Model\AuthorizationModule">
-      <UniqueIdentifier>{68746f60-1883-42bf-86f0-4c09a55140f2}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -62,12 +50,6 @@
     <ClCompile Include="GeneratedFiles\qrc_mainwindow.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="AuthorizationModule.cpp">
-      <Filter>Source Files\Model\AuthorizationModule</Filter>
-    </ClCompile>
-    <ClCompile Include="User.cpp">
-      <Filter>Source Files\Model\AuthorizationModule</Filter>
-    </ClCompile>
     <ClCompile Include="Sale.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -78,6 +60,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProductWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ProductWindow.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ProductWindow.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Product_DB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -91,16 +85,13 @@
     <CustomBuild Include="mainwindow.qrc">
       <Filter>Resource Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="ProductWindow.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h">
       <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AuthorizationModule.h">
-      <Filter>Header Files\Model\AuthorizationModule</Filter>
-    </ClInclude>
-    <ClInclude Include="User.h">
-      <Filter>Header Files\Model\AuthorizationModule</Filter>
     </ClInclude>
     <ClInclude Include="Sale.h">
       <Filter>Header Files</Filter>
@@ -112,6 +103,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Product_DB.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
