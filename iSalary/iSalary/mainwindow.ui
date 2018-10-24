@@ -178,7 +178,7 @@
                <enum>QTabWidget::Rounded</enum>
               </property>
               <property name="currentIndex">
-               <number>1</number>
+               <number>0</number>
               </property>
               <property name="elideMode">
                <enum>Qt::ElideMiddle</enum>
@@ -626,7 +626,7 @@
                    </spacer>
                   </item>
                   <item>
-                   <widget class="QStackedWidget" name="stackedWidget">
+                   <widget class="QStackedWidget" name="managersButtonsStackedWidget">
                     <property name="enabled">
                      <bool>true</bool>
                     </property>
@@ -660,10 +660,10 @@
                     <property name="currentIndex">
                      <number>0</number>
                     </property>
-                    <widget class="QWidget" name="page1">
+                    <widget class="QWidget" name="editManagerTab">
                      <layout class="QVBoxLayout" name="verticalLayout_22">
                       <item>
-                       <widget class="QPushButton" name="editManagerButton">
+                       <widget class="QPushButton" name="managerEditButton">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
                           <horstretch>0</horstretch>
@@ -686,7 +686,7 @@
                       </item>
                      </layout>
                     </widget>
-                    <widget class="QWidget" name="page2">
+                    <widget class="QWidget" name="saveOrCancelTab">
                      <layout class="QHBoxLayout" name="horizontalLayout_12">
                       <item>
                        <widget class="QPushButton" name="cancelManagerButton">
@@ -699,6 +699,24 @@
                        <widget class="QPushButton" name="saveManagerButton">
                         <property name="text">
                          <string>Сохранить</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                    <widget class="QWidget" name="submitOrCancelAddingTab">
+                     <layout class="QHBoxLayout" name="horizontalLayout_11">
+                      <item>
+                       <widget class="QPushButton" name="managerCancelAddButton">
+                        <property name="text">
+                         <string>Отменить добавление</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="managerSubmitAddButton">
+                        <property name="text">
+                         <string>Подтвердить добавление</string>
                         </property>
                        </widget>
                       </item>
@@ -876,7 +894,7 @@
                     <property name="currentIndex">
                      <number>0</number>
                     </property>
-                    <widget class="QWidget" name="editCurrentProduct">
+                    <widget class="QWidget" name="editCurrentProductTab">
                      <layout class="QHBoxLayout" name="horizontalLayout_15">
                       <item>
                        <widget class="QPushButton" name="deleteProductButton">
@@ -894,7 +912,7 @@
                       </item>
                      </layout>
                     </widget>
-                    <widget class="QWidget" name="saveCurrentProduct">
+                    <widget class="QWidget" name="saveCurrentProductTab">
                      <layout class="QHBoxLayout" name="horizontalLayout_16">
                       <item>
                        <widget class="QPushButton" name="cancelProductButton">
@@ -912,7 +930,7 @@
                       </item>
                      </layout>
                     </widget>
-                    <widget class="QWidget" name="addNewProduxt">
+                    <widget class="QWidget" name="addNewProduxtTab">
                      <layout class="QHBoxLayout" name="horizontalLayout_8">
                       <item>
                        <widget class="QPushButton" name="productCancelAddButton">
