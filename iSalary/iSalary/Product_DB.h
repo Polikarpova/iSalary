@@ -12,9 +12,12 @@ public:
 	~Product_DB(void);
 	void init();
 	void create(Product product);
+	void fillProduct( Product & product, const QSqlQuery * sqlQuery );
 
 protected:
 	QString TABLE_NAME;
+	Product read(const QSqlQuery * sqlQuery);
+
 private:
 	QSqlDatabase _db;
 };

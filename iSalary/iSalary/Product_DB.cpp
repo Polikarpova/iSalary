@@ -30,3 +30,15 @@ void Product_DB::create( Product product ) {
         int stop = 2;
     }
 }
+
+Product Product_DB::read(const QSqlQuery * sqlQuery){
+    Product product;
+    fillProduct( product, sqlQuery );
+    return product;
+}
+
+void Product_DB::fillProduct( Product & product, const QSqlQuery * sqlQuery ) {
+	product.setId( sqlQuery->value( "id" ).value<int>() );
+	product.setName( sqlQuery->value( "name" ).value<QString>() );
+	product.setCommission( sqlQuery->value( "commission" ).value<double>() );
+}
