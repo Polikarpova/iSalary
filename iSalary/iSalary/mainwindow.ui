@@ -178,7 +178,7 @@
                <enum>QTabWidget::Rounded</enum>
               </property>
               <property name="currentIndex">
-               <number>2</number>
+               <number>1</number>
               </property>
               <property name="elideMode">
                <enum>Qt::ElideMiddle</enum>
@@ -872,11 +872,11 @@
                    </spacer>
                   </item>
                   <item>
-                   <widget class="QStackedWidget" name="stackedWidget_2">
+                   <widget class="QStackedWidget" name="productButtonsStackedWidget">
                     <property name="currentIndex">
                      <number>0</number>
                     </property>
-                    <widget class="QWidget" name="page_1">
+                    <widget class="QWidget" name="editCurrentProduct">
                      <layout class="QHBoxLayout" name="horizontalLayout_15">
                       <item>
                        <widget class="QPushButton" name="deleteProductButton">
@@ -894,7 +894,7 @@
                       </item>
                      </layout>
                     </widget>
-                    <widget class="QWidget" name="page_2">
+                    <widget class="QWidget" name="saveCurrentProduct">
                      <layout class="QHBoxLayout" name="horizontalLayout_16">
                       <item>
                        <widget class="QPushButton" name="cancelProductButton">
@@ -907,6 +907,24 @@
                        <widget class="QPushButton" name="saveProductButton">
                         <property name="text">
                          <string>Сохранить</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                    <widget class="QWidget" name="addNewProduxt">
+                     <layout class="QHBoxLayout" name="horizontalLayout_8">
+                      <item>
+                       <widget class="QPushButton" name="productCancelAddButton">
+                        <property name="text">
+                         <string>Отменить добавление</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="productSubmitAddButton">
+                        <property name="text">
+                         <string>Подтвердить добавление</string>
                         </property>
                        </widget>
                       </item>
