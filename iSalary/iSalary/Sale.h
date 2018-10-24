@@ -1,6 +1,6 @@
 #pragma once
 #include <QDate>
-
+#include "Manager.h"
 enum SaleStatus {
 	CREATED,
 	CONFIRMED,
@@ -12,7 +12,7 @@ private:
 	double cost;
 	QDate saleDate;
 	int count;
-	Saler saler;
+	Manager saler;
 	SaleStatus status;
 
 public:
