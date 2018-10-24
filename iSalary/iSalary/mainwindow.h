@@ -6,6 +6,8 @@
 #include "QTextCodec"
 #include "Product_DB.h"
 #include "Product.h"
+#include "QStandardItemModel"
+#include "QStandardItem"
 
 class MainWindow : public QMainWindow
 {
@@ -20,6 +22,12 @@ private:
 	QTextCodec* c ;
 	Product_DB * product_db;
     QSqlDatabase  _db;
+
+	QHash <int, Product> products;
+	QStandardItemModel *productsTableModel;
+
+	void initProductWindow();
+	void fillProducts();
 
 	void createHorizontalTabs();
 };

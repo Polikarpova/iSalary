@@ -15,7 +15,6 @@ MainWindow::MainWindow( QWidget *parent ) : QMainWindow(parent) {
     for ( auto it = drivers.begin(); it != drivers.end(); it++)
         mes += *it + "\n";
 
-
 	_db = QSqlDatabase::addDatabase( "QMYSQL" );
 	_db.setHostName( "127.0.0.1" );
     _db.setPort( 3306 );
@@ -26,6 +25,9 @@ MainWindow::MainWindow( QWidget *parent ) : QMainWindow(parent) {
 	QString s = _db.lastError().text();
 	product_db = new Product_DB( _db, "products" );
     product_db->init();
+
+	initProductWindow();
+	fillProducts();
 }
 
 MainWindow::~MainWindow() {
@@ -49,5 +51,31 @@ void MainWindow::createHorizontalTabs() {
 		QLabel *lbl = new QLabel();
 		lbl->setText(tabs_text[i]);
 		tabbar->setTabButton(i, QTabBar::LeftSide, lbl);
+	}
+}
+
+void MainWindow::initProductWindow() {
+	productsTableModel = new QStandardItemModel;
+	QStringList horizontalHeader;
+    horizontalHeader.append( c->toUnicode( "Название товара" ) );
+    horizontalHeader.append( c->toUnicode( "Процент комиссии" ) );
+	productsTableModel->setHorizontalHeaderLabels( horizontalHeader );
+	ui.productTable->setModel( productsTableModel );
+    ui.productTable->resizeColumnsToContents();
+}
+
+void MainWindow::fillProducts() {
+    auto _products = product_db -> getAll();
+    
+    for ( int idx = 0; idx < _products.size(); idx++) {
+		Product product = _products[idx];
+		products[ product.getId() ] = product;
+		QStandardItem *item;
+		item = new QStandardItem( product.getName() );
+		productsTableModel->setItem( idx, 0, item );
+		item = new QStandardItem( QString::number( product.getCommission() ) + "%" );
+		productsTableModel->setItem( idx, 1, item );
+		item = new QStandardItem( QString::number( product.getId() ) );
+		productsTableModel->setItem( idx, 2, item );
 	}
 }
