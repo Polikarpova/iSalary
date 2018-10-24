@@ -10,6 +10,8 @@ class Product_DB
 public:
 	Product_DB( QSqlDatabase &db, QString table_name );
 	~Product_DB(void);
+	void init();
+
 protected:
 	QString TABLE_NAME;
 private:
