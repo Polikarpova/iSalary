@@ -178,7 +178,7 @@
                <enum>QTabWidget::Rounded</enum>
               </property>
               <property name="currentIndex">
-               <number>0</number>
+               <number>1</number>
               </property>
               <property name="elideMode">
                <enum>Qt::ElideMiddle</enum>
@@ -736,6 +736,13 @@
                   <item>
                    <layout class="QHBoxLayout" name="horizontalLayout_14">
                     <item>
+                     <widget class="QLabel" name="label_45">
+                      <property name="text">
+                       <string>Поиск по названию</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
                      <widget class="QLineEdit" name="productSearch">
                       <property name="inputMask">
                        <string/>
@@ -749,17 +756,11 @@
                      </widget>
                     </item>
                     <item>
-                     <spacer name="horizontalSpacer_2">
-                      <property name="orientation">
-                       <enum>Qt::Horizontal</enum>
+                     <widget class="QPushButton" name="productSearchButton">
+                      <property name="text">
+                       <string>Поиск</string>
                       </property>
-                      <property name="sizeHint" stdset="0">
-                       <size>
-                        <width>40</width>
-                        <height>20</height>
-                       </size>
-                      </property>
-                     </spacer>
+                     </widget>
                     </item>
                    </layout>
                   </item>
@@ -767,10 +768,43 @@
                    <widget class="QTableView" name="productTable"/>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="newProductButton">
-                    <property name="text">
-                     <string>Добавить</string>
+                   <widget class="QStackedWidget" name="addProductButtons">
+                    <property name="currentIndex">
+                     <number>0</number>
                     </property>
+                    <widget class="QWidget" name="page_6">
+                     <layout class="QVBoxLayout" name="verticalLayout_14">
+                      <item>
+                       <widget class="QPushButton" name="newProductButton">
+                        <property name="text">
+                         <string>Добавить</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                    <widget class="QWidget" name="page_7">
+                     <layout class="QVBoxLayout" name="verticalLayout_15">
+                      <item>
+                       <layout class="QHBoxLayout" name="horizontalLayout_20">
+                        <item>
+                         <widget class="QPushButton" name="submitAddProduct">
+                          <property name="text">
+                           <string>Подтвердить</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QPushButton" name="cancelAddProduct">
+                          <property name="text">
+                           <string>Отменить</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </widget>
                    </widget>
                   </item>
                  </layout>
@@ -809,23 +843,26 @@
                     <item>
                      <widget class="QLabel" name="label_18">
                       <property name="text">
-                       <string>Процент комиссии</string>
+                       <string>Процент комиссии, %</string>
                       </property>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QLineEdit" name="productPercent">
+                     <widget class="QDoubleSpinBox" name="productPercent">
                       <property name="enabled">
                        <bool>false</bool>
                       </property>
-                      <property name="inputMask">
-                       <string/>
+                      <property name="minimum">
+                       <double>0.010000000000000</double>
                       </property>
-                      <property name="text">
-                       <string/>
+                      <property name="maximum">
+                       <double>100.000000000000000</double>
                       </property>
-                      <property name="clearButtonEnabled" stdset="0">
-                       <bool>false</bool>
+                      <property name="singleStep">
+                       <double>0.010000000000000</double>
+                      </property>
+                      <property name="value">
+                       <double>1.000000000000000</double>
                       </property>
                      </widget>
                     </item>
@@ -842,9 +879,9 @@
                    </widget>
                   </item>
                   <item row="9" column="0">
-                   <widget class="QStackedWidget" name="stackedWidget_2">
+                   <widget class="QStackedWidget" name="editProductButtons">
                     <property name="currentIndex">
-                     <number>0</number>
+                     <number>1</number>
                     </property>
                     <widget class="QWidget" name="page_1">
                      <layout class="QHBoxLayout" name="horizontalLayout_15">
