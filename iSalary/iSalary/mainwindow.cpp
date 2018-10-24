@@ -5,14 +5,17 @@
 
 MainWindow::MainWindow( QWidget *parent ) : QMainWindow(parent) {
 	ui.setupUi(this);
-	
+	c = QTextCodec::codecForLocale();
 	createHorizontalTabs();
+}
+
+MainWindow::~MainWindow() {
+
 }
 
 void MainWindow::createHorizontalTabs() {
 
 	QStringList tabs_text;
-	QTextCodec *c = QTextCodec::codecForLocale();
 	tabs_text << c->toUnicode("Сотрудники") << c->toUnicode("Товары") << c->toUnicode("Корректировки") << c->toUnicode("Продажи") <<
 				  c->toUnicode("Статистика")<< c->toUnicode("Зарплата");
 	QTabWidget *tabw = ui.tabWidget;
@@ -29,8 +32,3 @@ void MainWindow::createHorizontalTabs() {
 		tabbar->setTabButton(i, QTabBar::LeftSide, lbl);
 	}
 }
-
-MainWindow::~MainWindow() {
-
-}
-
