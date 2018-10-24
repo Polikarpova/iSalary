@@ -42,3 +42,13 @@ void Product_DB::fillProduct( Product & product, const QSqlQuery * sqlQuery ) {
 	product.setName( sqlQuery->value( "name" ).value<QString>() );
 	product.setCommission( sqlQuery->value( "commission" ).value<double>() );
 }
+
+QVector<Product> Product_DB::getAll() {
+    QSqlQuery query( QString( "SELECT * FROM " ) + TABLE_NAME, _db );
+    QVector<Product> products;
+    while ( query.next() ) {
+        Product product = read( &query );
+        products.append( product );
+    }
+    return products;
+}
