@@ -11,6 +11,7 @@ public:
 	Product_DB( QSqlDatabase &db, QString table_name );
 	~Product_DB(void);
 	void init();
+	void create(Product product);
 
 protected:
 	QString TABLE_NAME;
