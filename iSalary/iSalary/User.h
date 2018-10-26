@@ -1,5 +1,6 @@
 #pragma once
 
+
 #include <qstring.h>
 
 /** 
@@ -22,35 +23,35 @@ public:
     * @param password -пароль пользователя
     * @TODO Придумать, как органичить только для заполнения из БД
     */
-    User( int id, QString login, QString password);
+    User( int id, const QString& login, const QString& password);
 
     /**
     * Получить id
     * @return id пользователя
     */
-    int getId();
+    int getId() const;
 
     /**
     * Получить Логин
     * @return логин пользователя
     */
-    QString getLogin();
+    QString getLogin() const;
 
     /**
     * Установить Логин
     */
-    void setLogin( QString login);
+    void setLogin( const QString& login);
 
     /**
     * Получить пароль
     * @return пароль пользователя
     */
-    QString getPassword();
+    QString getPassword() const;
 
     /**
     * Установить новый пароль
     */
-    void setPassword( QString password);
+    void setPassword( const QString& password);
 
 	~User(void);
 
