@@ -25,7 +25,6 @@ private:
 
 	QHash <int, Product> products;
 	QStandardItemModel *productsTableModel;
-	int max_id_product;
 	// DEFAULT - начальное состояние, ADD_PRODUCT - добавление товара, UPDATE_PRODUCT - изменение товара
 	enum StatusType {DEFAULT, ADD_PRODUCT, UPDATE_PRODUCT};
 	StatusType status;  
@@ -35,6 +34,7 @@ private:
 	void clearInputsPageProducts();
 	void fillProduct( Product & product );
 	void fillProducts();
+	void clearTable();
 
 	void createHorizontalTabs();
 
@@ -44,6 +44,7 @@ private slots:
 	void directUpdateProduct();
 	void updateProduct();
 	void showProduct();
+	void removeProduct();
 };
 
 #endif // MAINWINDOW_H

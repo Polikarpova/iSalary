@@ -37,6 +37,8 @@ MainWindow::MainWindow( QWidget *parent ) : QMainWindow(parent) {
 	connect( ui.editProductButton, SIGNAL( clicked() ), this, SLOT( directUpdateProduct() ) );
 	connect( ui.cancelProductButton, SIGNAL( clicked() ), this, SLOT( directUpdateProduct() ) );
 	connect( ui.saveProductButton, SIGNAL( clicked() ), this, SLOT( updateProduct() ) );
+
+	connect( ui.deleteProductButton, SIGNAL( clicked() ), this, SLOT( removeProduct() ) );
 }
 
 MainWindow::~MainWindow() {
@@ -65,13 +67,6 @@ void MainWindow::createHorizontalTabs() {
 
 void MainWindow::initProductWindow() {
 	productsTableModel = new QStandardItemModel;
-	QStringList horizontalHeader;
-    horizontalHeader.append( c->toUnicode( "Название товара" ) );
-    horizontalHeader.append( c->toUnicode( "Процент комиссии" ) );
-	productsTableModel->setHorizontalHeaderLabels( horizontalHeader );
-	ui.productTable->setModel( productsTableModel );
-    ui.productTable->resizeColumnsToContents();
-	
 	fillProducts();
 	status = DEFAULT;
 }
@@ -134,6 +129,14 @@ void MainWindow::updateProduct() {
 	directUpdateProduct();
 }
 
+void MainWindow::removeProduct() {
+	int row = ui.productTable->currentIndex().row();
+	QString id = productsTableModel->data( productsTableModel->index( ui.productTable->currentIndex().row(), 2 ) ).toString();
+	product_db->remove( id.toInt() );
+	fillProducts();
+	clearInputsPageProducts();
+}
+
 void MainWindow::showProduct() {
 	QString id = productsTableModel->data( productsTableModel->index( ui.productTable->currentIndex().row(), 2 ) ).toString();
 	Product product = products[ id.toInt() ];
@@ -143,16 +146,25 @@ void MainWindow::showProduct() {
 
 void MainWindow::fillProduct( Product & product ) {
 	int id;
-	product.getId() == 0 ? id = ++max_id_product : id = product.getId();
-	product.setId(id);
 	product.setName(ui.productName->text());
 	product.setCommission(ui.productPercent->value());
-	products[product.getId()] = product;
+}
+
+void MainWindow::clearTable() {
+	productsTableModel->clear();
+	QStringList horizontalHeader;
+    horizontalHeader.append( c->toUnicode( "Название товара" ) );
+    horizontalHeader.append( c->toUnicode( "Процент комиссии" ) );
+	productsTableModel->setHorizontalHeaderLabels( horizontalHeader );
+	ui.productTable->setModel( productsTableModel );
+    ui.productTable->resizeColumnsToContents();
 }
 
 void MainWindow::fillProducts() {
-    auto _products = product_db -> getAll();
-    
+    clearTable();
+	
+	auto _products = product_db -> getAll();
+
     for ( int idx = 0; idx < _products.size(); idx++) {
 		Product product = _products[idx];
 		products[ product.getId() ] = product;
@@ -163,13 +175,6 @@ void MainWindow::fillProducts() {
 		productsTableModel->setItem( idx, 1, item );
 		item = new QStandardItem( QString::number( product.getId() ) );
 		productsTableModel->setItem( idx, 2, item );
-	}
-
-	max_id_product = 0;
-	for (auto it = products.begin(); it != products.end(); it++) {
-		if ( max_id_product < (*it).getId() ) {
-			max_id_product = (*it).getId();
-		}
 	}
 
 	ui.deleteProductButton->setEnabled( !products.empty() );
