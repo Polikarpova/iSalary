@@ -23,7 +23,7 @@ public:
 	 *
 	 */
 	SignInResult signIn( const QString& login, const QString& password);
-	SignUpResult signUp( const QString& login, const QString& password);
+	SignUpResult signUp( const QString& login, const QString& password, UserType userType);
 
 private:
     IUserRepository* userRepository;

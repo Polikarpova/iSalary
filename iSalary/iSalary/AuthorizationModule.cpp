@@ -32,7 +32,7 @@ SignInResult AuthorizationModule::signIn( const QString& login, const QString& p
     return result;
 }
 
-SignUpResult AuthorizationModule::signUp( const QString& login, const QString& password) {
+SignUpResult AuthorizationModule::signUp( const QString& login, const QString& password, UserType userType) {
     UserInfo user;
     bool isExist = true;
     try {
@@ -48,7 +48,7 @@ SignUpResult AuthorizationModule::signUp( const QString& login, const QString& p
         newUser.setLogin(login);
         newUser.setPassword(password);
 
-        result.user = userRepository->insert(newUser);
+        result.user = userRepository->insert( newUser, userType);
         result.type = MANAGER;
     } else {
         result.success = false;
