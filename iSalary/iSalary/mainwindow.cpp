@@ -27,10 +27,16 @@ MainWindow::MainWindow( QWidget *parent ) : QMainWindow(parent) {
     product_db->init();
 
 	initProductWindow();
-	fillProducts();
+
+	connect( ui.productTable->selectionModel(), SIGNAL( currentChanged ( const QModelIndex &, const QModelIndex & ) ), this, SLOT( showProduct() ) );
 
 	connect( ui.addProductButton, SIGNAL( clicked() ), this, SLOT( directAddProduct() ) );
+	connect( ui.productCancelAddButton, SIGNAL( clicked() ), this, SLOT( directAddProduct() ) );
 	connect( ui.productSubmitAddButton, SIGNAL( clicked() ), this, SLOT( addProduct() ) );
+
+	connect( ui.editProductButton, SIGNAL( clicked() ), this, SLOT( directUpdateProduct() ) );
+	connect( ui.cancelProductButton, SIGNAL( clicked() ), this, SLOT( directUpdateProduct() ) );
+	connect( ui.saveProductButton, SIGNAL( clicked() ), this, SLOT( updateProduct() ) );
 }
 
 MainWindow::~MainWindow() {
@@ -65,12 +71,9 @@ void MainWindow::initProductWindow() {
 	productsTableModel->setHorizontalHeaderLabels( horizontalHeader );
 	ui.productTable->setModel( productsTableModel );
     ui.productTable->resizeColumnsToContents();
-}
-
-void MainWindow::directAddProduct() {
-	ui.productButtonsStackedWidget->setCurrentIndex( 2 );
-	ui.addProductButton->setEnabled( false );
-	setInputsEnabledPageProducts( true );
+	
+	fillProducts();
+	status = DEFAULT;
 }
 
 void MainWindow::setInputsEnabledPageProducts( bool isEnabled ) {
@@ -78,20 +81,70 @@ void MainWindow::setInputsEnabledPageProducts( bool isEnabled ) {
 	ui.productPercent->setEnabled( isEnabled );
 }
 
+void MainWindow::clearInputsPageProducts() {
+	ui.productName->clear();
+	ui.productPercent->clear();
+}
+
+void MainWindow::directAddProduct() {
+	if ( status == DEFAULT ) {
+		ui.productButtonsStackedWidget->setCurrentIndex( 2 );
+		ui.addProductButton->setEnabled( false );
+		ui.productTable->setEnabled( false );
+		setInputsEnabledPageProducts( true );
+		clearInputsPageProducts();
+		status = ADD_PRODUCT;
+	} else {
+		ui.productButtonsStackedWidget->setCurrentIndex( 0 );
+		ui.addProductButton->setEnabled( true );
+		ui.productTable->setEnabled( true );
+		setInputsEnabledPageProducts( false );
+		status = DEFAULT;
+	}
+}
+
 void MainWindow::addProduct() {
-	int idx = products.size();
 	Product product;
 	fillProduct( product );
 	product_db->create( product );
 	fillProducts();
-	
-	ui.productButtonsStackedWidget->setCurrentIndex( 0 );
-	ui.addProductButton->setEnabled( true );
-	setInputsEnabledPageProducts( false );
+	directAddProduct();
+}
+
+void MainWindow::directUpdateProduct() {
+	if ( status == DEFAULT ) {
+		ui.productButtonsStackedWidget->setCurrentIndex( 1 );
+		ui.productTable->setEnabled( false );
+		setInputsEnabledPageProducts( true );
+		status = UPDATE_PRODUCT;
+	} else {
+		ui.productButtonsStackedWidget->setCurrentIndex( 0 );
+		ui.productTable->setEnabled( true );
+		setInputsEnabledPageProducts( false );
+		status = DEFAULT;
+	}
+}
+
+void MainWindow::updateProduct() {
+	QString id = productsTableModel->data( productsTableModel->index( ui.productTable->currentIndex().row(), 2 ) ).toString();
+	Product product = products[ id.toInt() ];
+	fillProduct( product );
+	product_db->update( product );
+	fillProducts();
+	directUpdateProduct();
+}
+
+void MainWindow::showProduct() {
+	QString id = productsTableModel->data( productsTableModel->index( ui.productTable->currentIndex().row(), 2 ) ).toString();
+	Product product = products[ id.toInt() ];
+	ui.productName->setText( product.getName() );
+	ui.productPercent->setValue( product.getCommission() );
 }
 
 void MainWindow::fillProduct( Product & product ) {
-	product.setId(++max_id_product);
+	int id;
+	product.getId() == 0 ? id = ++max_id_product : id = product.getId();
+	product.setId(id);
 	product.setName(ui.productName->text());
 	product.setCommission(ui.productPercent->value());
 	products[product.getId()] = product;
@@ -118,4 +171,6 @@ void MainWindow::fillProducts() {
 			max_id_product = (*it).getId();
 		}
 	}
+
+	ui.deleteProductButton->setEnabled( !products.empty() );
 }

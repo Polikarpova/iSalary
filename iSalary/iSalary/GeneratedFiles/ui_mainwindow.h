@@ -1126,7 +1126,7 @@ public:
         correctionHistoryList->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 444, 207));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 98, 28));
         correctionHistoryList->setWidget(scrollAreaWidgetContents);
 
         verticalLayout_12->addWidget(correctionHistoryList);
@@ -1791,7 +1791,7 @@ public:
 
         stackedWidget_4->setCurrentIndex(1);
         stackedWidget_3->setCurrentIndex(0);
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
         managersDataTab->setCurrentIndex(0);
         managersButtonsStackedWidget->setCurrentIndex(0);
         productButtonsStackedWidget->setCurrentIndex(0);
