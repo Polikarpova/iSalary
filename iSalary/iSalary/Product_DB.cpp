@@ -38,7 +38,7 @@ Product Product_DB::read(const QSqlQuery * sqlQuery){
 }
 
 void Product_DB::fillProduct( Product & product, const QSqlQuery * sqlQuery ) {
-	product.setId( sqlQuery->value( "id" ).value<int>() );
+	product.setId( sqlQuery->value( "idproducts" ).value<int>() );
 	product.setName( sqlQuery->value( "name" ).value<QString>() );
 	product.setCommission( sqlQuery->value( "commission" ).value<double>() );
 }
