@@ -28,6 +28,9 @@ MainWindow::MainWindow( QWidget *parent ) : QMainWindow(parent) {
 
 	initProductWindow();
 	fillProducts();
+
+	connect( ui.addProductButton, SIGNAL( clicked() ), this, SLOT( directAddProduct() ) );
+	connect( ui.productSubmitAddButton, SIGNAL( clicked() ), this, SLOT( addProduct() ) );
 }
 
 MainWindow::~MainWindow() {
@@ -64,6 +67,36 @@ void MainWindow::initProductWindow() {
     ui.productTable->resizeColumnsToContents();
 }
 
+void MainWindow::directAddProduct() {
+	ui.productButtonsStackedWidget->setCurrentIndex( 2 );
+	ui.addProductButton->setEnabled( false );
+	setInputsEnabledPageProducts( true );
+}
+
+void MainWindow::setInputsEnabledPageProducts( bool isEnabled ) {
+	ui.productName->setEnabled( isEnabled );
+	ui.productPercent->setEnabled( isEnabled );
+}
+
+void MainWindow::addProduct() {
+	int idx = products.size();
+	Product product;
+	fillProduct( product );
+	product_db->create( product );
+	fillProducts();
+	
+	ui.productButtonsStackedWidget->setCurrentIndex( 0 );
+	ui.addProductButton->setEnabled( true );
+	setInputsEnabledPageProducts( false );
+}
+
+void MainWindow::fillProduct( Product & product ) {
+	product.setId(++max_id_product);
+	product.setName(ui.productName->text());
+	product.setCommission(ui.productPercent->value());
+	products[product.getId()] = product;
+}
+
 void MainWindow::fillProducts() {
     auto _products = product_db -> getAll();
     
@@ -77,5 +110,12 @@ void MainWindow::fillProducts() {
 		productsTableModel->setItem( idx, 1, item );
 		item = new QStandardItem( QString::number( product.getId() ) );
 		productsTableModel->setItem( idx, 2, item );
+	}
+
+	max_id_product = 0;
+	for (auto it = products.begin(); it != products.end(); it++) {
+		if ( max_id_product < (*it).getId() ) {
+			max_id_product = (*it).getId();
+		}
 	}
 }

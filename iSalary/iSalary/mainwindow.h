@@ -25,11 +25,18 @@ private:
 
 	QHash <int, Product> products;
 	QStandardItemModel *productsTableModel;
+	int max_id_product;
 
 	void initProductWindow();
 	void fillProducts();
+	void setInputsEnabledPageProducts( bool isEnabled );
+	void fillProduct( Product & product );
 
 	void createHorizontalTabs();
+
+private slots:
+	void directAddProduct();
+	void addProduct();
 };
 
 #endif // MAINWINDOW_H
