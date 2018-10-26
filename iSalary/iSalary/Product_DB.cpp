@@ -12,8 +12,8 @@ Product_DB::~Product_DB(void) {
 }
 
 void Product_DB::init() {
-    QSqlQuery query(_db);
-    query.prepare("CREATE TABLE  IF NOT EXISTS `products` (`id` int NOT NULL PRIMARY KEY AUTO_INCREMENT, `name` NVARCHAR(45) NOT NULL,`commission` DOUBLE NOT NULL)");
+    QSqlQuery query( _db );
+    query.prepare( "CREATE TABLE  IF NOT EXISTS `products` (`id` int NOT NULL PRIMARY KEY AUTO_INCREMENT, `name` NVARCHAR(45) NOT NULL,`commission` DOUBLE NOT NULL)" );
     query.exec();
 }
 
@@ -31,14 +31,28 @@ void Product_DB::create( Product product ) {
     }
 }
 
-Product Product_DB::read(const QSqlQuery * sqlQuery){
+void Product_DB::update( Product product ) {
+
+    QSqlQuery query( _db );
+	query.prepare(QString( "UPDATE products SET `name` = :name, `commission` = :commission WHERE id = ") + QString::number( product.getId() ) );
+    query.bindValue( ":name", product.getName() );
+	query.bindValue( ":commission",  product.getCommission() );
+
+    bool isOk = query.exec();
+    if ( !isOk ) {
+		QString s = _db.lastError().text();
+        int stop = 2;
+    }
+}
+
+Product Product_DB::read( const QSqlQuery * sqlQuery ){
     Product product;
     fillProduct( product, sqlQuery );
     return product;
 }
 
 void Product_DB::fillProduct( Product & product, const QSqlQuery * sqlQuery ) {
-	product.setId( sqlQuery->value( "idproducts" ).value<int>() );
+	product.setId( sqlQuery->value( "id" ).value<int>() );
 	product.setName( sqlQuery->value( "name" ).value<QString>() );
 	product.setCommission( sqlQuery->value( "commission" ).value<double>() );
 }

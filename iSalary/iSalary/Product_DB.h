@@ -12,6 +12,7 @@ public:
 	~Product_DB(void);
 	void init();
 	void create(Product product);
+	void update(Product product);
 	void fillProduct( Product & product, const QSqlQuery * sqlQuery );
 	QVector<Product> getAll();
 
