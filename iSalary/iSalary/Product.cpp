@@ -3,6 +3,7 @@
 
 Product::Product(void)
 {
+	id = 0;
 }
 
 

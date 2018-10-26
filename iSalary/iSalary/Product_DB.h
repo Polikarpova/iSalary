@@ -13,6 +13,7 @@ public:
 	void init();
 	void create(Product product);
 	void update(Product product);
+	void remove(int id);
 	void fillProduct( Product & product, const QSqlQuery * sqlQuery );
 	QVector<Product> getAll();
 
