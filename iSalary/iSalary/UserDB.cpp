@@ -1,7 +1,7 @@
 #include "UserDB.h"
 
 
-UserDB::UserDB( QSqlDatabase database){
+UserDB::UserDB( QSqlDatabase* database){
     this->init();
     this->db = database;
 }
@@ -15,7 +15,7 @@ void UserDB::init(){
 }
 
 User UserDB::insert( const User& user, UserType type) {
-    QSqlQuery query( db);
+    QSqlQuery query( *db);
     QString sql = "INSERT INTO %0 (`%1`, `%2`, `%3`) VALUES(:%1, :%2, :%3)";
     sql = sql.arg(
       this->tableName, 
@@ -35,11 +35,11 @@ User UserDB::insert( const User& user, UserType type) {
 }
 
 void UserDB::update( const User& user) {
-    QSqlQuery query( db);
+    QSqlQuery query( *db);
 
     UserInfo existUser = this->getById( user.getId());
 
-    QString sql = "UPDATE %0 SET `%1` = :%1, `%2` = :%2 WHERE `%3` = `%3`";
+    QString sql = "UPDATE %0 SET `%1` = :%1, `%2` = :%2 WHERE `%3` = :`%3`";
     sql = sql.arg(
       this->tableName, 
       this->loginField,
@@ -48,7 +48,7 @@ void UserDB::update( const User& user) {
     );
     query.prepare(sql);
     
-    query.bindValue(":"+ this->loginField, user.getLogin());
+    query.bindValue(":" + this->loginField, user.getLogin());
     query.bindValue(":" + this->passwordField, user.getPassword());
     query.bindValue(":" + this->idField, user.getId());
 
@@ -57,19 +57,19 @@ void UserDB::update( const User& user) {
 }
 
 UserInfo UserDB::getById( int id) {
-    QSqlQuery query( db);
+    QSqlQuery query( *db);
 
-    QString sql = "SELECT `%1`,`%2`,`%3`,`%4` FROM %0 WHERE `%1` = %5";
-    sql.arg(
+    QString sql = "SELECT `%1`,`%2`,`%3`,`%4` FROM %0 WHERE `%1` = :%1";
+    sql = sql.arg(
         this->tableName,
         this->idField,
         this->loginField,
         this->passwordField,
-        this->userTypeField,
-        QString::number(id)
+        this->userTypeField
     );
 
     query.prepare(sql);
+    query.bindValue(":" + this->idField, id);
 
     this->execQuery( query);
     UserInfo userInfo;
@@ -83,46 +83,49 @@ UserInfo UserDB::getById( int id) {
 
 
 UserInfo UserDB::findByLoginPassword( const QString& login, const QString& password) {
-    QSqlQuery query( db);
+    QSqlQuery query( *db);
 
-    QString sql = "SELECT `%1`,`%2`,`%3`,`%4` FROM %0 WHERE `%2` = %5 AND `%3` = %6 ";
-    sql.arg(
+    QString sql = "SELECT `%1`,`%2`,`%3`,`%4` FROM %0 WHERE `%2` = :%2 AND `%3` = :%3 ";
+    sql = sql.arg(
         this->tableName,
         this->idField,
         this->loginField,
         this->passwordField,
-        this->userTypeField,
-        login,
-        password
+        this->userTypeField
     );
 
     query.prepare(sql);
+    
+    query.bindValue(":" + this->loginField, login);
+    query.bindValue(":" + this->passwordField, password);
+
+    auto h = query.boundValues();
 
     this->execQuery( query);
     UserInfo userInfo;
     if( query.next()) {
         userInfo = this->readOneRecord(query);
     } else { 
-        handleError("Запись не найдена");
+        handleError( "Запись не найдена");
     }
     return userInfo;
 }
 
 
 UserInfo UserDB::findByLogin( const QString& login) {
-    QSqlQuery query( db);
+    QSqlQuery query( *db);
 
-    QString sql = "SELECT `%1`,`%2`,`%3`,`%4` FROM %0 WHERE `%2` = %5 ";
-    sql.arg(
+    QString sql = "SELECT `%1`,`%2`,`%3`,`%4` FROM %0 WHERE `%2` = :%2 ";
+    sql = sql.arg(
         this->tableName,
         this->idField,
         this->loginField,
         this->passwordField,
-        this->userTypeField,
-        login
+        this->userTypeField
     );
 
     query.prepare(sql);
+    query.bindValue(":" + this->loginField, login);
 
     this->execQuery( query);
     UserInfo userInfo;
@@ -136,12 +139,14 @@ UserInfo UserDB::findByLogin( const QString& login) {
 
 
 void UserDB::handleError( const QString& error) const {
-    throw error;
+    throw error.toStdString().c_str();
 }
 
 void UserDB::execQuery( QSqlQuery& query) const {
-    if( !query.exec() ){
-        this->handleError( db.lastError().text());
+    bool isSuccess = query.exec();
+    if( !isSuccess ){
+        QSqlError::ErrorType errorType = query.lastError().type();
+        this->handleError( query.lastQuery() + " : " + QString::number( errorType) + query.lastError().text());
     }
 }
 

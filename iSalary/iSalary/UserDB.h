@@ -13,7 +13,7 @@
 * Класс доступа к БД для сущности User
 *
 */
-class UserDB : IUserRepository {
+class UserDB : public IUserRepository {
 
 public:
 
@@ -21,7 +21,7 @@ public:
     * Конструктор.
     * @param database - экземпляр уже настроенной QSqlDatabase
     */
-    UserDB( QSqlDatabase database);
+    UserDB( QSqlDatabase* database);
 
     /**
     * Добавление записи о пользователе в БД
@@ -73,7 +73,7 @@ protected:
     */
     void handleError( const QString& error) const;
     
-    QSqlDatabase db;       /**< экземпляр БД к которой будут применяться запросы */
+    QSqlDatabase* db;       /**< экземпляр БД к которой будут применяться запросы */
     QString loginField;    /**< Название поля с логином в БД */
     QString passwordField; /**< Название поля с паролем в БД */
     QString idField;       /**< Название поля с id в БД */
