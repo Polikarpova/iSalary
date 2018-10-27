@@ -138,15 +138,20 @@ UserInfo UserDB::findByLogin( const QString& login) {
 }
 
 
+void UserDB::handleError( const QSqlError& error) const {
+    QSqlError err = error;
+    throw err;
+}
+
 void UserDB::handleError( const QString& error) const {
-    throw error.toStdString().c_str();
+    QString err = error;
+    throw err;
 }
 
 void UserDB::execQuery( QSqlQuery& query) const {
     bool isSuccess = query.exec();
     if( !isSuccess ){
-        QSqlError::ErrorType errorType = query.lastError().type();
-        this->handleError( query.lastQuery() + " : " + QString::number( errorType) + query.lastError().text());
+        this->handleError( query.lastError());
     }
 }
 
