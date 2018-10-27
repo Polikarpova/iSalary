@@ -20,9 +20,11 @@ public:
 private:
 	Ui::MainWindowClass ui;
 	QTextCodec* c ;
-	Product_DB * product_db;
-    QSqlDatabase  _db;
+	QSqlDatabase  _db;
+	
+	void createHorizontalTabs();
 
+	Product_DB * product_db;
 	QHash <int, Product> products;
 	QStandardItemModel *productsTableModel;
 	// DEFAULT - начальное состояние, ADD_PRODUCT - добавление товара, UPDATE_PRODUCT - изменение товара
@@ -36,8 +38,12 @@ private:
 	void fillProducts();
 	void clearTable();
 
-	void createHorizontalTabs();
+	
 
+	void initManagerWindow();
+	void fillManagetsProductTable();
+	void clearManagersProductsTable();
+	
 private slots:
 	void directAddProduct();
 	void addProduct();
@@ -46,6 +52,10 @@ private slots:
 	void showProduct();
 	void removeProduct();
 	void searchProduct();
+
+
+
+	void searchManagersProductTable();
 };
 
 #endif // MAINWINDOW_H

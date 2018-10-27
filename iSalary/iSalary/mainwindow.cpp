@@ -41,6 +41,11 @@ MainWindow::MainWindow( QWidget *parent ) : QMainWindow(parent) {
 	connect( ui.deleteProductButton, SIGNAL( clicked() ), this, SLOT( removeProduct() ) );
 
 	connect( ui.searchButton, SIGNAL( clicked() ), this, SLOT( searchProduct() ) );
+
+
+	initManagerWindow();
+
+	connect( ui.managerProductSearchButton, SIGNAL( clicked() ), this, SLOT( searchManagersProductTable() ) );
 }
 
 MainWindow::~MainWindow() {
@@ -66,6 +71,63 @@ void MainWindow::createHorizontalTabs() {
 		tabbar->setTabButton(i, QTabBar::LeftSide, lbl);
 	}
 }
+
+void MainWindow::initManagerWindow() {
+	productsTableModel = new QStandardItemModel;
+	fillManagetsProductTable();
+}
+
+void MainWindow::clearManagersProductsTable() {
+	productsTableModel->clear();
+	QStringList horizontalHeader;
+    horizontalHeader.append( c->toUnicode( "Название товара" ) );
+    horizontalHeader.append( c->toUnicode( "Процент комиссии" ) );
+	productsTableModel->setHorizontalHeaderLabels( horizontalHeader );
+	ui.managersProductTable->setModel( productsTableModel );
+    ui.managersProductTable->resizeColumnsToContents();
+}
+
+void MainWindow::fillManagetsProductTable() {
+    clearManagersProductsTable();
+	
+	auto _products = product_db -> getAll();
+
+    for ( int idx = 0; idx < _products.size(); idx++) {
+		Product product = _products[idx];
+		products[ product.getId() ] = product;
+		QStandardItem *item;
+		item = new QStandardItem( product.getName() );
+		productsTableModel->setItem( idx, 0, item );
+		item = new QStandardItem( QString::number( product.getCommission() ) + "%" );
+		productsTableModel->setItem( idx, 1, item );
+	}
+
+	ui.addSaleButton->setEnabled( !products.empty() );
+	ui.productComboBox->setEnabled( !products.empty() );
+}
+
+void MainWindow::searchManagersProductTable() {
+	QString nameProduct = ui.managerProductSearch->text();
+	if ( nameProduct != "" ) {
+		clearManagersProductsTable();
+		for ( auto it = products.begin(); it != products.end(); it++ ) {
+			if ( ( *it ).getName() == nameProduct) {
+				Product product = ( *it );
+				QStandardItem *item;
+				item = new QStandardItem( product.getName() );
+				productsTableModel->setItem( 0, 0, item );
+				item = new QStandardItem( QString::number( product.getCommission() ) + "%" );
+				productsTableModel->setItem( 0, 1, item );
+			}
+		}
+	} else {
+		fillManagetsProductTable();
+	}
+}
+
+
+
+
 
 void MainWindow::initProductWindow() {
 	productsTableModel = new QStandardItemModel;
