@@ -1,8 +1,8 @@
 #pragma once
-#include "user.h"
+//#include "user.h"
 #include <QString>
 #include <QDate>
-class Manager : public User {
+class Manager {//: public User {
 private:
 	QString firstName;
 	QString secondName;
