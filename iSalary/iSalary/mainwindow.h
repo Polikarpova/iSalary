@@ -45,6 +45,7 @@ private slots:
 	void updateProduct();
 	void showProduct();
 	void removeProduct();
+	void searchProduct();
 };
 
 #endif // MAINWINDOW_H

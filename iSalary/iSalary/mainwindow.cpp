@@ -39,6 +39,8 @@ MainWindow::MainWindow( QWidget *parent ) : QMainWindow(parent) {
 	connect( ui.saveProductButton, SIGNAL( clicked() ), this, SLOT( updateProduct() ) );
 
 	connect( ui.deleteProductButton, SIGNAL( clicked() ), this, SLOT( removeProduct() ) );
+
+	connect( ui.searchButton, SIGNAL( clicked() ), this, SLOT( searchProduct() ) );
 }
 
 MainWindow::~MainWindow() {
@@ -182,4 +184,26 @@ void MainWindow::fillProducts() {
 	}
 
 	ui.deleteProductButton->setEnabled( !products.empty() );
+}
+
+void MainWindow::searchProduct() {
+	QString nameProduct = ui.productSearch->text();
+	if ( nameProduct != "" ) {
+		clearTable();
+		for ( auto it = products.begin(); it != products.end(); it++ ) {
+			if ( ( *it ).getName() == nameProduct) {
+				Product product = (*it);
+				QStandardItem *item;
+				item = new QStandardItem( product.getName() );
+				productsTableModel->setItem( 0, 0, item );
+				item = new QStandardItem( QString::number( product.getCommission() ) + "%" );
+				productsTableModel->setItem( 0, 1, item );
+				item = new QStandardItem( QString::number( product.getId() ) );
+				productsTableModel->setItem( 0, 2, item );
+			}
+		}
+	}
+	else {
+		fillProducts();
+	}
 }
