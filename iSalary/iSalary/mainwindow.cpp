@@ -12,7 +12,7 @@ MainWindow::MainWindow( QWidget *parent ) : QMainWindow(parent) {
 	auto drivers =  QSqlDatabase::drivers();
 	QString mes = "";
 
-    for ( auto it = drivers.begin(); it != drivers.end(); it++)
+    for ( auto it = drivers.begin(); it != drivers.end(); it++ )
         mes += *it + "\n";
 
 	_db = QSqlDatabase::addDatabase( "QMYSQL" );
@@ -50,12 +50,12 @@ MainWindow::~MainWindow() {
 void MainWindow::createHorizontalTabs() {
 
 	QStringList tabs_text;
-	tabs_text << c->toUnicode("Сотрудники") << c->toUnicode("Товары") << c->toUnicode("Корректировки") << c->toUnicode("Продажи") <<
-				  c->toUnicode("Статистика")<< c->toUnicode("Зарплата");
+	tabs_text << c->toUnicode( "Сотрудники" ) << c->toUnicode( "Товары" ) << c->toUnicode( "Корректировки" ) 
+		<< c->toUnicode( "Продажи" ) << c->toUnicode( "Статистика" ) << c->toUnicode( "Зарплата");
 	QTabWidget *tabw = ui.tabWidget;
 	
-	for( int i = 0; i < 6; i++) {
-		tabw->setTabText(i, "");
+	for ( int i = 0; i < 6; i++ ) {
+		tabw->setTabText( i, "" );
 	}
 	
 	QTabBar *tabbar = tabw->tabBar();
@@ -152,8 +152,8 @@ void MainWindow::showProduct() {
 
 void MainWindow::fillProduct( Product & product ) {
 	int id;
-	product.setName(ui.productName->text());
-	product.setCommission(ui.productPercent->value());
+	product.setName( ui.productName->text() );
+	product.setCommission( ui.productPercent->value() );
 }
 
 void MainWindow::clearTable() {
@@ -192,7 +192,7 @@ void MainWindow::searchProduct() {
 		clearTable();
 		for ( auto it = products.begin(); it != products.end(); it++ ) {
 			if ( ( *it ).getName() == nameProduct) {
-				Product product = (*it);
+				Product product = ( *it );
 				QStandardItem *item;
 				item = new QStandardItem( product.getName() );
 				productsTableModel->setItem( 0, 0, item );
@@ -202,8 +202,7 @@ void MainWindow::searchProduct() {
 				productsTableModel->setItem( 0, 2, item );
 			}
 		}
-	}
-	else {
+	} else {
 		fillProducts();
 	}
 }
