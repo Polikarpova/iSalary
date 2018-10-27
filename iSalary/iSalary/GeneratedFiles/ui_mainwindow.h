@@ -816,6 +816,7 @@ public:
 
         productTable = new QTableView(tabProducts);
         productTable->setObjectName(QStringLiteral("productTable"));
+        productTable->setEnabled(true);
 
         verticalLayout_4->addWidget(productTable);
 
@@ -1126,7 +1127,7 @@ public:
         correctionHistoryList->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 98, 28));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 444, 207));
         correctionHistoryList->setWidget(scrollAreaWidgetContents);
 
         verticalLayout_12->addWidget(correctionHistoryList);

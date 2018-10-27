@@ -790,7 +790,11 @@
                    </layout>
                   </item>
                   <item>
-                   <widget class="QTableView" name="productTable"/>
+                   <widget class="QTableView" name="productTable">
+                    <property name="enabled">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
                   </item>
                   <item>
                    <widget class="QPushButton" name="addProductButton">
@@ -1227,8 +1231,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>98</width>
-                       <height>28</height>
+                       <width>444</width>
+                       <height>207</height>
                       </rect>
                      </property>
                     </widget>

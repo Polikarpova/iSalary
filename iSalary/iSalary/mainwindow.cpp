@@ -107,7 +107,8 @@ void MainWindow::addProduct() {
 }
 
 void MainWindow::directUpdateProduct() {
-	if ( status == DEFAULT ) {
+	bool isSelected = !ui.productTable->selectionModel()->selectedIndexes().empty();
+	if ( status == DEFAULT && isSelected == true ) {
 		ui.productButtonsStackedWidget->setCurrentIndex( 1 );
 		ui.productTable->setEnabled( false );
 		setInputsEnabledPageProducts( true );
@@ -130,11 +131,14 @@ void MainWindow::updateProduct() {
 }
 
 void MainWindow::removeProduct() {
-	int row = ui.productTable->currentIndex().row();
-	QString id = productsTableModel->data( productsTableModel->index( ui.productTable->currentIndex().row(), 2 ) ).toString();
-	product_db->remove( id.toInt() );
-	fillProducts();
-	clearInputsPageProducts();
+	bool isSelected = !ui.productTable->selectionModel()->selectedIndexes().empty();
+	if ( isSelected ) {
+		int row = ui.productTable->currentIndex().row();
+		QString id = productsTableModel->data( productsTableModel->index( ui.productTable->currentIndex().row(), 2 ) ).toString();
+		product_db->remove( id.toInt() );
+		fillProducts();
+		clearInputsPageProducts();
+	}
 }
 
 void MainWindow::showProduct() {
