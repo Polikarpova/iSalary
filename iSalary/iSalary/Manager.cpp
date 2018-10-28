@@ -39,6 +39,14 @@ Manager::~Manager(void) {
 }
 
 
+void Manager::setId( int _id ) {
+	id = _id;
+}
+int Manager::getId() {
+	return id;
+}
+
+
 void Manager::setFirstName( QString _firstName ) {
 	firstName = _firstName;
 }
