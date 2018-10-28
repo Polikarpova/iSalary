@@ -6,6 +6,12 @@
 
 #include "AuthPage.h"
 
+#include "QTextCodec"
+#include "Product_DB.h"
+#include "Product.h"
+#include "QStandardItemModel"
+#include "QStandardItem"
+
 /**
 * Перечисление основных виджетов программы
 */
@@ -38,6 +44,31 @@ private:
 	void createHorizontalTabs();
     void enterProgram( const UserDTO& user, UserType userType);
     
+	//димы
+	QSqlDatabase  _db;
+
+	Product_DB * product_db;
+	QHash <int, Product> products;
+	QStandardItemModel *productsTableModel;
+	// DEFAULT - начальное состояние, ADD_PRODUCT - добавление товара, UPDATE_PRODUCT - изменение товара
+	enum StatusType {DEFAULT, ADD_PRODUCT, UPDATE_PRODUCT};
+	StatusType status;  
+
+	void initProductWindow();
+	void setInputsEnabledPageProducts( bool isEnabled );
+	void clearInputsPageProducts();
+	void fillProduct( Product & product );
+	void fillProducts();
+	void clearTable();
+
+private slots:
+	void directAddProduct();
+	void addProduct();
+	void directUpdateProduct();
+	void updateProduct();
+	void showProduct();
+	void removeProduct();
+	void searchProduct();
 };
 
 #endif // MAINWINDOW_H

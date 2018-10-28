@@ -295,7 +295,7 @@ public:
     QLabel *label_23;
     QHBoxLayout *horizontalLayout_22;
     QLineEdit *productSearch_2;
-    QPushButton *pushButton;
+    QPushButton *managerProductSearchButton;
     QSpacerItem *horizontalSpacer_5;
     QTableView *managersProductTable;
     QHBoxLayout *horizontalLayout_13;
@@ -1126,7 +1126,7 @@ public:
         correctionHistoryList->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 351, 207));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 98, 28));
         correctionHistoryList->setWidget(scrollAreaWidgetContents);
 
         verticalLayout_12->addWidget(correctionHistoryList);
@@ -1730,11 +1730,11 @@ public:
 
         horizontalLayout_22->addWidget(productSearch_2);
 
-        pushButton = new QPushButton(manager);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setIcon(icon);
+        managerProductSearchButton = new QPushButton(manager);
+        managerProductSearchButton->setObjectName(QStringLiteral("managerProductSearchButton"));
+        managerProductSearchButton->setIcon(icon);
 
-        horizontalLayout_22->addWidget(pushButton);
+        horizontalLayout_22->addWidget(managerProductSearchButton);
 
         horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -1790,8 +1790,8 @@ public:
         retranslateUi(MainWindowClass);
 
         auth_program_stackedWidget->setCurrentIndex(1);
-        boss_manager_stackedWidget->setCurrentIndex(0);
-        tabWidget->setCurrentIndex(0);
+        boss_manager_stackedWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(1);
         managersDataTab->setCurrentIndex(0);
         managersButtonsStackedWidget->setCurrentIndex(0);
         productButtonsStackedWidget->setCurrentIndex(0);
@@ -1914,7 +1914,7 @@ public:
         productSearch_2->setInputMask(QString());
         productSearch_2->setText(QString());
         productSearch_2->setPlaceholderText(QApplication::translate("MainWindowClass", "\320\277\320\276\320\270\321\201\320\272 \320\277\320\276 \320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\216", 0));
-        pushButton->setText(QString());
+        managerProductSearchButton->setText(QString());
         quitButton->setText(QApplication::translate("MainWindowClass", "\320\222\321\213\320\271\321\202\320\270", 0));
     } // retranslateUi
 

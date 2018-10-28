@@ -107,6 +107,21 @@
     <ClCompile Include="AuthPage.cpp">
       <Filter>Source Files\View</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Users\Пользователь\Desktop\дима\Product_DB.cpp">
+      <Filter>Source Files\Model\DB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Users\Пользователь\Desktop\дима\Sale.cpp">
+      <Filter>Source Files\Model\DomainModel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Users\Пользователь\Desktop\дима\ActiveSale.cpp">
+      <Filter>Source Files\Model\DomainModel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Users\Пользователь\Desktop\дима\Manager.cpp">
+      <Filter>Source Files\Model\DomainModel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Users\Пользователь\Desktop\дима\Product.cpp">
+      <Filter>Source Files\Model\DomainModel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -152,6 +167,21 @@
     </ClInclude>
     <ClInclude Include="SignResultDTO.h">
       <Filter>Header Files\Model\ModelFacade</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Users\Пользователь\Desktop\дима\ActiveSale.h">
+      <Filter>Header Files\Model\DomainModel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Users\Пользователь\Desktop\дима\Manager.h">
+      <Filter>Header Files\Model\DomainModel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Users\Пользователь\Desktop\дима\Product.h">
+      <Filter>Header Files\Model\DomainModel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Users\Пользователь\Desktop\дима\Sale.h">
+      <Filter>Header Files\Model\DomainModel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Users\Пользователь\Desktop\дима\Product_DB.h">
+      <Filter>Header Files\Model\DB</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

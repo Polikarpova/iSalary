@@ -77,6 +77,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\Users\Пользователь\Desktop\дима\ActiveSale.cpp" />
+    <ClCompile Include="..\..\..\..\Users\Пользователь\Desktop\дима\Manager.cpp" />
+    <ClCompile Include="..\..\..\..\Users\Пользователь\Desktop\дима\Product.cpp" />
+    <ClCompile Include="..\..\..\..\Users\Пользователь\Desktop\дима\Product_DB.cpp" />
+    <ClCompile Include="..\..\..\..\Users\Пользователь\Desktop\дима\Sale.cpp" />
     <ClCompile Include="AuthorizationFacade.cpp" />
     <ClCompile Include="AuthorizationModule.cpp" />
     <ClCompile Include="AuthPage.cpp" />
@@ -129,6 +134,11 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\Users\Пользователь\Desktop\дима\ActiveSale.h" />
+    <ClInclude Include="..\..\..\..\Users\Пользователь\Desktop\дима\Manager.h" />
+    <ClInclude Include="..\..\..\..\Users\Пользователь\Desktop\дима\Product.h" />
+    <ClInclude Include="..\..\..\..\Users\Пользователь\Desktop\дима\Product_DB.h" />
+    <ClInclude Include="..\..\..\..\Users\Пользователь\Desktop\дима\Sale.h" />
     <ClInclude Include="AuthorizationFacade.h" />
     <ClInclude Include="AuthorizationModule.h" />
     <CustomBuild Include="AuthPage.h">
