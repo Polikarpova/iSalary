@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1001</width>
+    <width>814</width>
     <height>620</height>
    </rect>
   </property>
@@ -19,7 +19,7 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout_17">
     <item>
-     <widget class="QStackedWidget" name="stackedWidget_4">
+     <widget class="QStackedWidget" name="auth_program_stackedWidget">
       <property name="currentIndex">
        <number>1</number>
       </property>
@@ -163,7 +163,7 @@
       <widget class="QWidget" name="main">
        <layout class="QVBoxLayout" name="verticalLayout_6">
         <item>
-         <widget class="QStackedWidget" name="stackedWidget_3">
+         <widget class="QStackedWidget" name="boss_manager_stackedWidget">
           <property name="currentIndex">
            <number>0</number>
           </property>
@@ -1227,7 +1227,7 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>444</width>
+                       <width>351</width>
                        <height>207</height>
                       </rect>
                      </property>
@@ -2229,7 +2229,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1001</width>
+     <width>814</width>
      <height>21</height>
     </rect>
    </property>
