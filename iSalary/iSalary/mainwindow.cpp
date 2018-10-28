@@ -2,10 +2,26 @@
 #include <qlabel.h>
 #include <qtextcodec.h>
 
-MainWindow::MainWindow( QWidget *parent ) : QMainWindow(parent) {
+MainWindow::MainWindow( AuthPage* authPage, QWidget *parent ) : QMainWindow(parent) {
 	ui.setupUi(this);
 	
+    ui.auth_program_stackedWidget->setCurrentIndex( AUTH_WIDGET);
+
 	createHorizontalTabs();
+
+    this->authPage = authPage;
+    this->authPage->setUI( ui.loginInput, ui.passwordInput, ui.enterButton, ui.errorLabel);
+    
+    connect(this->authPage, &AuthPage::userLoggedIn, this, &MainWindow::enterProgram);
+}
+
+void MainWindow::enterProgram( const UserDTO& user, UserType userType){
+    if( userType == MANAGER) {
+        ui.boss_manager_stackedWidget->setCurrentIndex( MANAGER_WIDGET);
+    } else if ( userType == BOSS ){
+        ui.boss_manager_stackedWidget->setCurrentIndex( BOSS_WIDGET);
+    }
+    ui.auth_program_stackedWidget->setCurrentIndex( PROGRAM_WIDGET);
 }
 
 void MainWindow::createHorizontalTabs() {
