@@ -4,14 +4,19 @@
 
 /**
 * Структура, описывающая результат попытки авторизации
-*
+* @author Курносов
 */
-struct SignInResult : UserInfo {
+struct SignInResult : public UserInfo {
 public:
-    bool success;
+    bool success; /**< Успешность попытки */
 };
 
-struct SignUpResult: SignInResult {
+
+/**
+* Структура, описывающая результат попытки регистрации
+* @author Курносов
+*/
+struct SignUpResult : public SignInResult {
 public:
-    QString failReason;
+    QString failReason; /**< Причина неудачи попытки */
 };

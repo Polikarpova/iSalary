@@ -39,6 +39,7 @@ public:
 
     /**
     * Установить Логин
+    * @param login - новый логин
     */
     void setLogin( const QString& login);
 
@@ -50,6 +51,7 @@ public:
 
     /**
     * Установить новый пароль
+    * @param login - новый пароль
     */
     void setPassword( const QString& password);
 

@@ -20,9 +20,20 @@ public:
 	~AuthorizationModule(void);
 	/**
 	 * Авторизация пользователя
-	 *
+     * @param login - логин пользователя
+     * @param password - пароль пользователя
+     * @return SignInResult - структура, содержащая информацю об успешности авторизации и автроизованного пользователя
 	 */
 	SignInResult signIn( const QString& login, const QString& password);
+
+    
+    /**
+	* Регистрация нового пользователя
+    * @param login - логин пользователя
+    * @param password - пароль пользователя
+    * @param userType - тип пользователя
+    * @return SignUpResult - структура, содержащая информацю об успешности попытки регистрации и объект зарегистрированного пользователя
+	*/
 	SignUpResult signUp( const QString& login, const QString& password, UserType userType);
 
 private:
