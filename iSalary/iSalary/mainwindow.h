@@ -6,6 +6,8 @@
 #include "QTextCodec"
 #include "Product_DB.h"
 #include "Product.h"
+#include "Sale_DB.h"
+#include "Sale.h"
 #include "QStandardItemModel"
 #include "QStandardItem"
 
@@ -21,7 +23,7 @@ private:
 	Ui::MainWindowClass ui;
 	QTextCodec* c ;
 	QSqlDatabase  _db;
-	
+	int current_user_id;
 	void createHorizontalTabs();
 
 	Product_DB * product_db;
@@ -39,10 +41,15 @@ private:
 	void clearTable();
 
 	
-
+	Sale_DB * sale_db;
+	QHash <int, Sale> sales;
+	QStandardItemModel *salesTableModel;
 	void initManagerWindow();
-	void fillManagetsProductTable();
+	void fillManagersProductTable();
 	void clearManagersProductsTable();
+	void fillSale( Sale & sale );
+	void fillManagersUnconfirmedSalesTable();
+	void clearManagersUnconfirmedSalesTable();
 	
 private slots:
 	void directAddProduct();
@@ -56,6 +63,7 @@ private slots:
 
 
 	void searchManagersProductTable();
+	void addSale();
 };
 
 #endif // MAINWINDOW_H

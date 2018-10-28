@@ -96,6 +96,7 @@
     <ClCompile Include="Product.cpp" />
     <ClCompile Include="Product_DB.cpp" />
     <ClCompile Include="Sale.cpp" />
+    <ClCompile Include="Sale_DB.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -129,6 +130,7 @@
     <ClInclude Include="Product.h" />
     <ClInclude Include="Product_DB.h" />
     <ClInclude Include="Sale.h" />
+    <ClInclude Include="Sale_DB.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.qrc">

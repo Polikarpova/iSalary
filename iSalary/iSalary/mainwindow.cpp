@@ -8,7 +8,6 @@ MainWindow::MainWindow( QWidget *parent ) : QMainWindow(parent) {
 	c = QTextCodec::codecForLocale();
 	createHorizontalTabs();
 
-
 	auto drivers =  QSqlDatabase::drivers();
 	QString mes = "";
 
@@ -42,10 +41,16 @@ MainWindow::MainWindow( QWidget *parent ) : QMainWindow(parent) {
 
 	connect( ui.searchButton, SIGNAL( clicked() ), this, SLOT( searchProduct() ) );
 
+	
+	
+	current_user_id = 1;
+	sale_db = new Sale_DB( _db, "sales" );
+    sale_db->init();
 
 	initManagerWindow();
 
 	connect( ui.managerProductSearchButton, SIGNAL( clicked() ), this, SLOT( searchManagersProductTable() ) );
+	connect( ui.addSaleButton, SIGNAL( clicked() ), this, SLOT( addSale() ) );
 }
 
 MainWindow::~MainWindow() {
@@ -73,8 +78,81 @@ void MainWindow::createHorizontalTabs() {
 }
 
 void MainWindow::initManagerWindow() {
-	productsTableModel = new QStandardItemModel;
-	fillManagetsProductTable();
+	salesTableModel = new QStandardItemModel;
+	fillManagersProductTable();
+	fillManagersUnconfirmedSalesTable();
+}
+
+void MainWindow::clearManagersUnconfirmedSalesTable() {
+	salesTableModel->clear();
+	QStringList horizontalHeader;
+    horizontalHeader.append( c->toUnicode( "Название товара" ) );
+    horizontalHeader.append( c->toUnicode( "Количество" ) );
+	horizontalHeader.append( c->toUnicode( "Стоимость" ) );
+	horizontalHeader.append( c->toUnicode( "Процент комиссии" ) );
+	salesTableModel->setHorizontalHeaderLabels( horizontalHeader );
+	ui.unconfirmedSales->setModel( salesTableModel );
+    ui.unconfirmedSales->resizeColumnsToContents();
+}
+
+void MainWindow::fillManagersUnconfirmedSalesTable() {
+    clearManagersUnconfirmedSalesTable();
+	
+	auto _sales = sale_db -> getAll( current_user_id );
+	int allCount = 0;
+	double allCost = 0, salary = 0;
+    for ( int idx = 0; idx < _sales.size(); idx++) {
+		Sale sale = _sales[idx];
+		sale.setProduct(products[sale.getProductId()]);
+		sales[ sale.getId() ] = sale;
+		QStandardItem *item;
+		item = new QStandardItem( sale.getProduct().getName() );
+		salesTableModel->setItem( idx, 0, item );
+		item = new QStandardItem( QString::number( sale.getCount() ) );
+		salesTableModel->setItem( idx, 1, item );
+		item = new QStandardItem( QString::number( sale.getCost() ) );
+		salesTableModel->setItem( idx, 2, item );
+		item = new QStandardItem( QString::number( sale.getProduct().getCommission() ) + "%" );
+		salesTableModel->setItem( idx, 3, item );
+
+		allCount += sale.getCount();
+		allCost += sale.getCost();
+		salary += sale.getCost() / 100 * sale.getProduct().getCommission();
+	}
+	int lastRow = _sales.size();
+	QStandardItem *item;
+	item = new QStandardItem(  c->toUnicode( "Итого:" ) );
+	salesTableModel->setItem( lastRow, 0, item );
+	item = new QStandardItem( QString::number( allCount ) );
+	salesTableModel->setItem( lastRow, 1, item );
+	item = new QStandardItem( QString::number( allCost ) );
+	salesTableModel->setItem( lastRow, 2, item );
+	item = new QStandardItem( QString::number( salary ) );
+	salesTableModel->setItem( lastRow, 3, item );
+
+	ui.currentSalary->setText( QString::number( salary ) );
+}
+
+void MainWindow::addSale() {
+	Sale sale;
+	fillSale( sale );
+	sale_db->create( sale );
+	fillManagersUnconfirmedSalesTable();
+}
+
+void MainWindow::fillSale( Sale & sale ) {
+	Manager saler;
+	saler.setFirstName( "Dima" );
+	saler.setId( 1 );
+	sale.setSaler( saler );
+	QString nameProduct = ui.productComboBox->currentText();
+	for ( auto it = products.begin(); it != products.end(); it++ ) {
+		if ( ( *it ).getName() == nameProduct ) {
+			sale.setProduct( *it );
+		}
+	}
+	sale.setCost( ui.priceSale->value() );
+	sale.setCount( ui.countSaleProducts->value() );
 }
 
 void MainWindow::clearManagersProductsTable() {
@@ -87,7 +165,7 @@ void MainWindow::clearManagersProductsTable() {
     ui.managersProductTable->resizeColumnsToContents();
 }
 
-void MainWindow::fillManagetsProductTable() {
+void MainWindow::fillManagersProductTable() {
     clearManagersProductsTable();
 	
 	auto _products = product_db -> getAll();
@@ -100,9 +178,10 @@ void MainWindow::fillManagetsProductTable() {
 		productsTableModel->setItem( idx, 0, item );
 		item = new QStandardItem( QString::number( product.getCommission() ) + "%" );
 		productsTableModel->setItem( idx, 1, item );
+		ui.productComboBox->addItem( product.getName() );
 	}
 
-	ui.addSaleButton->setEnabled( !products.empty() );
+	ui.deleteProductButton->setEnabled( !products.empty() );
 	ui.productComboBox->setEnabled( !products.empty() );
 }
 
@@ -121,7 +200,7 @@ void MainWindow::searchManagersProductTable() {
 			}
 		}
 	} else {
-		fillManagetsProductTable();
+		fillManagersProductTable();
 	}
 }
 
@@ -213,7 +292,6 @@ void MainWindow::showProduct() {
 }
 
 void MainWindow::fillProduct( Product & product ) {
-	int id;
 	product.setName( ui.productName->text() );
 	product.setCommission( ui.productPercent->value() );
 }
@@ -253,7 +331,7 @@ void MainWindow::searchProduct() {
 	if ( nameProduct != "" ) {
 		clearTable();
 		for ( auto it = products.begin(); it != products.end(); it++ ) {
-			if ( ( *it ).getName() == nameProduct) {
+			if ( ( *it ).getName() == nameProduct ) {
 				Product product = ( *it );
 				QStandardItem *item;
 				item = new QStandardItem( product.getName() );

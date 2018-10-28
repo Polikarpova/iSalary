@@ -1685,6 +1685,7 @@ public:
         priceSale = new QDoubleSpinBox(manager);
         priceSale->setObjectName(QStringLiteral("priceSale"));
         priceSale->setMinimum(0.01);
+        priceSale->setMaximum(100000);
         priceSale->setSingleStep(0.01);
         priceSale->setValue(1);
 

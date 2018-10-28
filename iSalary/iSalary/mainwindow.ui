@@ -2090,6 +2090,9 @@
                   <property name="minimum">
                    <double>0.010000000000000</double>
                   </property>
+                  <property name="maximum">
+                   <double>99999.990000000005239</double>
+                  </property>
                   <property name="singleStep">
                    <double>0.010000000000000</double>
                   </property>
