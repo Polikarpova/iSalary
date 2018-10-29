@@ -27,7 +27,7 @@ public:
     * Получить Имя менеджера
     * @return -Имя менеджера
     */
-    QString getFirstName();
+    QString getFirstName() const;
     
     /**
     * Изменить Имя менеджера
@@ -39,7 +39,7 @@ public:
     * Получить Фамилию менеджера
     * @return -Фамилия менеджера
     */
-    QString getSecondName();
+    QString getSecondName() const;
     
     /**
     * Изменить Фамилию менеджера
@@ -51,7 +51,7 @@ public:
     * Получить Отчество менеджера
     * @return -Отчество менеджера
     */
-    QString getThirdName();
+    QString getThirdName() const;
     
     /**
     * Изменить Отчество менеджера
@@ -59,7 +59,7 @@ public:
     */
     void setThirdName( const QString& thirdname);
     
-    Sex getSex();
+    Sex getSex() const;
     
     /**
     * Изменить Пол менеджера
@@ -71,7 +71,7 @@ public:
     * Получить серийный номер паспорта менеджера
     * @return -серийный номер паспорта менеджера
     */
-    QString getPassportSerial();
+    QString getPassportSerial() const;
     
     /**
     * Изменить Серию паспорта менеджера
@@ -83,7 +83,7 @@ public:
     * Получить номер паспорта менеджера
     * @return -номер паспорта менеджера
     */
-    QString getPassportNumber();
+    QString getPassportNumber() const;
     
     /**
     * Изменить Номер паспорта менеджера
@@ -95,7 +95,7 @@ public:
     * Получить дату выдачи паспорта менеджера
     * @return -дата выдачи паспорта менеджера
     */
-    QDate getPassportDateIssue();
+    QDate getPassportDateIssue() const;
     
     /**
     * Изменить Дату выдачи паспорта менеджера
@@ -107,7 +107,7 @@ public:
     * Получить адрес прописки менеджера
     * @return -адрес прописки менеджера
     */
-    QString getAddress();
+    QString getAddress() const;
     
     /**
     * Изменить Адрес прописки менеджера
@@ -120,7 +120,7 @@ public:
     * Получить ИНН менеджера
     * @return -ИНН менеджера
     */
-    QString getINN();
+    QString getINN() const;
     
     /**
     * Изменить ИНН менеджера
@@ -133,7 +133,7 @@ public:
     * Получить E-mail менеджера
     * @return -E-mail менеджера
     */
-    QString getEmail();
+    QString getEmail() const;
     
     /**
     * Изменить E-Mail менеджера
@@ -146,7 +146,7 @@ public:
     * Получить сотовый номер менеджера
     * @return -сотовый номер менеджера
     */
-    QString getMobileNumber();
+    QString getMobileNumber() const;
     
     /**
     * Изменить Сотовый номер менеджера
@@ -158,7 +158,7 @@ public:
     * Получить дата найма менеджера
     * @return -дата найма менеджера
     */
-    QDate getDateOfEmployment();
+    QDate getDateOfEmployment() const;
     
     /**
     * Изменить Дату найма менеджера
@@ -182,5 +182,6 @@ private:
     QString email;
     QString mobileNumber;
     QDate dateOfEmplyment;
+
 };
 
