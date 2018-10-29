@@ -169,7 +169,7 @@ public:
     ~Manager( void);
 
 private:
-    int id;
+
     QString firstName;
     QString secondName;
     QString thirdName;
