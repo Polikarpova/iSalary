@@ -6,8 +6,9 @@
 
 #include "Manager.h"
 #include "UserDB.h"
+#include "IManagerRepository.h"
 
-class ManagerDB : protected UserDB
+class ManagerDB : protected UserDB, public IManagerRepository
 {
 public:
 
@@ -40,7 +41,7 @@ public:
     * Обновить запись о менеджере в БД
     * @param manager - обновляемый менеджер
     */
-    void update( const Manager& manager);
+    void update( const Manager& manager) override;
     
     /**
     * Найти менеджера по ИНН
@@ -48,7 +49,7 @@ public:
     * @param[out] manager - Указатель, по которому будет записан переданный менеджер, если будет найден ( можно передать NULL)
     * @return удалось ли найти менеджера с таким ИНН
     */
-    bool findByINN( const QString& INN, Manager* manager);
+    bool findByINN( const QString& INN, Manager* manager) override;
 
     /**
     * Найти менеджера по ИНН
@@ -57,7 +58,7 @@ public:
     * @param[out] manager - Указатель, по которому будет записан переданный менеджер, если будет найден ( можно передать NULL)
     * @return удалось ли найти менеджера с таким ИНН
     */
-    bool findByPassport( const QString& passportSerial, const QString passportNumber, Manager* manager);
+    bool findByPassport( const QString& passportSerial, const QString passportNumber, Manager* manager) override;
 
 private:
     QSqlDatabase* db;       /**< экземпляр БД к которой будут применяться запросы */
