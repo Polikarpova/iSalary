@@ -5,6 +5,8 @@
 #include "UserDB.h"
 #include "AuthPage.h"
 
+#include "test_userdb.h"
+
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
@@ -19,7 +21,12 @@ int main(int argc, char *argv[])
     sqlDB.setPassword( "root");
     bool isOpen = sqlDB.open();
 
-    UserDB * userDB = new UserDB( &sqlDB);
+	freopen("testing.log", "w", stdout);
+	Test_UserDB test( &sqlDB );
+	QTest::qExec(&test);
+    
+	UserDB * userDB = new UserDB( &sqlDB);
+
     AuthorizationModule * authModule = new AuthorizationModule( userDB);
     AuthorizationFacade * authFacade = new AuthorizationFacade( authModule);
     AuthPage * authPage = new AuthPage( authFacade);

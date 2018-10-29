@@ -1,8 +1,5 @@
 #include "UserDB.h"
 
-UserDB::UserDB(){
-    this->init();
-}
 
 UserDB::UserDB( QSqlDatabase* database){
     this->init();
@@ -79,7 +76,7 @@ UserInfo UserDB::getById( int id) {
     if( query.next()) {
         userInfo = this->readOneRecord(query);
     } else { 
-        handleError("Запись не найдена");
+        handleError("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
     }
     return userInfo;
 }
@@ -140,7 +137,7 @@ UserInfo UserDB::findByLoginPassword( const QString& login, const QString& passw
     if( query.next()) {
         userInfo = this->readOneRecord(query);
     } else { 
-        handleError( "Запись не найдена");
+        handleError( "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
     }
     return userInfo;
 }
@@ -166,7 +163,7 @@ UserInfo UserDB::findByLogin( const QString& login) {
     if( query.next()) {
         userInfo = this->readOneRecord(query);
     } else { 
-        handleError("Запись не найдена");
+        handleError("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
     }
     return userInfo;
 }

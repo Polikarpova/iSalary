@@ -1,0 +1,7 @@
+********* Start testing of Test_UserDB *********
+Config: Using QtTest library 5.5.1, Qt 5.5.1 (i386-little_endian-ilp32 shared (dynamic) debug build; by MSVC 2010)
+PASS   : Test_UserDB::initTestCase()
+PASS   : Test_UserDB::test_getByIds()
+PASS   : Test_UserDB::cleanupTestCase()
+Totals: 3 passed, 0 failed, 0 skipped, 0 blacklisted
+********* Finished testing of Test_UserDB *********
