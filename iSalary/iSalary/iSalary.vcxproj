@@ -139,6 +139,8 @@
     <ClInclude Include="..\..\..\..\Users\Пользователь\Desktop\дима\Product.h" />
     <ClInclude Include="..\..\..\..\Users\Пользователь\Desktop\дима\Product_DB.h" />
     <ClInclude Include="..\..\..\..\Users\Пользователь\Desktop\дима\Sale.h" />
+    <ClInclude Include="AccoutingPeriod.h" />
+    <ClInclude Include="AccoutingPeriodDB.h" />
     <ClInclude Include="AuthorizationFacade.h" />
     <ClInclude Include="AuthorizationModule.h" />
     <CustomBuild Include="AuthPage.h">
@@ -151,8 +153,12 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_TESTLIB_LIB -DQT_WIDGETS_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtSql" "-I$(QTDIR)\include\QtTest" "-I$(QTDIR)\include\QtWidgets"</Command>
     </CustomBuild>
+    <ClInclude Include="CloseAccoutingPeriod.h" />
+    <ClInclude Include="ClosedSale.h" />
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h" />
     <ClInclude Include="IUserRepository.h" />
+    <ClInclude Include="OpenAccoutingPeriod.h" />
+    <ClInclude Include="Salary.h" />
     <ClInclude Include="SignResult.h" />
     <ClInclude Include="SignResultDTO.h" />
     <ClInclude Include="User.h" />

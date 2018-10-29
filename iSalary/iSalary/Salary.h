@@ -1,0 +1,6 @@
+class Salary {
+
+public:
+
+	Salary();
+}

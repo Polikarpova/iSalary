@@ -12,10 +12,6 @@ void UserDB::init(){
     this->tableName = "users";
     this->idField = "id";
     this->userTypeField ="type";
-
-	QSqlQuery query( *db );
-	query.prepare( "CREATE TABLE  IF NOT EXISTS `" + this->tableName + "` (`id` int NOT NULL PRIMARY KEY AUTO_INCREMENT, `name` NVARCHAR(45) NOT NULL,`commission` DOUBLE NOT NULL)" );
-    query.exec();
 }
 
 User UserDB::insert( const User& user, UserType type) {

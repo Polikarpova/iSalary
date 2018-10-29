@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 	sqlDB= QSqlDatabase::addDatabase( "QMYSQL");
 	sqlDB.setHostName( "127.0.0.1");
     sqlDB.setPort( 3306);
-    sqlDB.setDatabaseName( "test");
+    sqlDB.setDatabaseName( "mdkp");
     sqlDB.setUserName( "root");
     sqlDB.setPassword( "root");
     bool isOpen = sqlDB.open();
