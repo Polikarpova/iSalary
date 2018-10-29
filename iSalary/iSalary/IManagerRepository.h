@@ -27,6 +27,12 @@ public:
     * @return удалось ли найти менеджера с таким ИНН
     */
     virtual bool findByPassport( const QString& passportSerial, const QString passportNumber, Manager* manager) = 0;
+    
+    /**
+    * Обновить запись о менеджере в БД, необходимо наличие хотя бы Пользователь с таким же id 
+    * @param manager - обновляемый менеджер
+    */
+    virtual void update( const Manager& manager) = 0;
 
     virtual ~IManagerRepository(void);
 };
