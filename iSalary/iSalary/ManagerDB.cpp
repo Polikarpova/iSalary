@@ -131,6 +131,7 @@ void ManagerDB::update( const Manager& manager) {
     QString sql = "UPDATE %0 SET `%1` = :%1, `%2` = :%2, `%3` = :%3, \
                   `%4` = :%4, `%5` = :%5, `%6` = :%6, `%7` = :%7, \
                   `%8` = :%8, `%9` = :%9, `%10` = :%10, `%11` = :%11 , `%12` = :%12 \
+                  `%13` = :%13 \
                   WHERE `%15` = :`%15` ";
 
     sql = sql.arg(
@@ -150,9 +151,8 @@ void ManagerDB::update( const Manager& manager) {
         this->mobileNumberField,
         this->dateOfEmploymentField
     );
-    sql = sql.arg(
-        UserDB::idField
-    );
+    sql = sql.arg( UserDB::userTypeField); 
+    sql = sql.arg( UserDB::idField);
     
     QSqlQuery query( *db);
     query.prepare( sql);
@@ -170,6 +170,8 @@ void ManagerDB::update( const Manager& manager) {
     query.bindValue( ":" + this->emailField, manager.getEmail());
     query.bindValue( ":" + this->mobileNumberField, manager.getMobileNumber());
     query.bindValue( ":" + this->dateOfEmploymentField, manager.getDateOfEmployment());
+
+    query.bindValue( ":" + UserDB::userTypeField, MANAGER);
 
     this->execQuery( query);
 }
