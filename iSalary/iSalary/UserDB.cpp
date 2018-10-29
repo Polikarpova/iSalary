@@ -76,11 +76,42 @@ UserInfo UserDB::getById( int id) {
     if( query.next()) {
         userInfo = this->readOneRecord(query);
     } else { 
-        handleError("Запись не найдена");
+        handleError("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
     }
     return userInfo;
 }
 
+QList<UserInfo> UserDB::getByIds( QList<int> ids) {
+    QList<UserInfo> users;
+    if( ids.size() > 0) { 
+        QSqlQuery query( *db);
+
+        QString sql = "SELECT `%1`,`%2`,`%3`,`%4` FROM %0 WHERE `%1` IN (%10)";
+        sql = sql.arg(
+            this->tableName,
+            this->idField,
+            this->loginField,
+            this->passwordField,
+            this->userTypeField
+        );
+
+        QString idsStr = "";
+        for( int iId = 0; iId < ids.size()-1; iId++){
+            idsStr += QString::number( ids[iId]) + ",";
+        }
+        idsStr += QString::number( ids.last());
+        sql = sql.arg( idsStr);
+        query.prepare(sql);
+        
+        this->execQuery( query);
+        UserInfo userInfo;
+        while( query.next()){
+            userInfo = readOneRecord( query);
+            users.push_back(userInfo);
+        }
+    }
+    return users;
+}
 
 UserInfo UserDB::findByLoginPassword( const QString& login, const QString& password) {
     QSqlQuery query( *db);
@@ -106,7 +137,7 @@ UserInfo UserDB::findByLoginPassword( const QString& login, const QString& passw
     if( query.next()) {
         userInfo = this->readOneRecord(query);
     } else { 
-        handleError( "Запись не найдена");
+        handleError( "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
     }
     return userInfo;
 }
@@ -132,7 +163,7 @@ UserInfo UserDB::findByLogin( const QString& login) {
     if( query.next()) {
         userInfo = this->readOneRecord(query);
     } else { 
-        handleError("Запись не найдена");
+        handleError("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
     }
     return userInfo;
 }
