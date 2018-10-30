@@ -22,8 +22,8 @@ int main(int argc, char *argv[])
     bool isOpen = sqlDB.open();
 
 	freopen("testing.log", "w", stdout);
-	Test_UserDB test( &sqlDB );
-	QTest::qExec(&test);
+	Test_UserDB test_userDB( &sqlDB );
+	QTest::qExec( &test_userDB );
     
 	UserDB * userDB = new UserDB( &sqlDB);
 
