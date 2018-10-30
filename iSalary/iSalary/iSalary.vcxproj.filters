@@ -69,6 +69,12 @@
     <Filter Include="Source Files\Model\DomainModel\ModelFacade">
       <UniqueIdentifier>{34827d0e-3589-40d5-a815-be93014426e1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Test">
+      <UniqueIdentifier>{d7a7f21d-9bb2-4296-928f-04a499543274}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Test">
+      <UniqueIdentifier>{53f1093b-4c27-47f4-b9dc-2d928645f6eb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -107,14 +113,23 @@
     <ClCompile Include="AuthPage.cpp">
       <Filter>Source Files\View</Filter>
     </ClCompile>
-    <ClCompile Include="test_userdb.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_test_userdb.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_test_userdb.cpp">
       <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_test_managerdb.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_test_managerdb.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="test_userdb.cpp">
+      <Filter>Source Files\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="test_managerdb.cpp">
+      <Filter>Source Files\Test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -130,8 +145,11 @@
     <CustomBuild Include="AuthPage.h">
       <Filter>Header Files\View</Filter>
     </CustomBuild>
+    <CustomBuild Include="test_managerdb.h">
+      <Filter>Header Files\Test</Filter>
+    </CustomBuild>
     <CustomBuild Include="test_userdb.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Test</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
