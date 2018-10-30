@@ -34,6 +34,5 @@ public:
     */
     virtual void update( const Manager& manager) = 0;
 
-    virtual ~IManagerRepository(void);
 };
 

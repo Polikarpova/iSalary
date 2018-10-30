@@ -1,5 +1,8 @@
 #include "UserDB.h"
 
+UserDB::UserDB() {
+    this->init();
+}
 
 UserDB::UserDB( QSqlDatabase* database){
     this->init();
