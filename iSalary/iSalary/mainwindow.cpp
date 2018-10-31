@@ -9,7 +9,9 @@ MainWindow::MainWindow( AuthPage* authPage, QWidget *parent ) : QMainWindow(pare
 	
 //    ui.auth_program_stackedWidget->setCurrentIndex( AUTH_WIDGET);
     ui.auth_program_stackedWidget->setCurrentIndex( PROGRAM_WIDGET);
-	ui.boss_manager_stackedWidget->setCurrentIndex( BOSS_WIDGET);
+
+	//MANAGER_WIDGET BOSS_WIDGET
+	ui.boss_manager_stackedWidget->setCurrentIndex( MANAGER_WIDGET);
 
 	createHorizontalTabs();
 
@@ -52,6 +54,15 @@ MainWindow::MainWindow( AuthPage* authPage, QWidget *parent ) : QMainWindow(pare
 
 	connect( ui.searchButton, SIGNAL( clicked() ), this, SLOT( searchProduct() ) );
 
+	current_user_id = 1;
+	sale_db = new Sale_DB( _db, "sales" );
+    sale_db->init();
+
+	initManagerWindow();
+
+	connect( ui.managerProductSearchButton, SIGNAL( clicked() ), this, SLOT( searchManagersProductTable() ) );
+	connect( ui.addSaleButton, SIGNAL( clicked() ), this, SLOT( addSale() ) );
+
 }
 
 void MainWindow::enterProgram( const UserDTO& user, UserType userType){
@@ -85,6 +96,190 @@ void MainWindow::createHorizontalTabs() {
 
 MainWindow::~MainWindow() {
 
+}
+
+//
+void MainWindow::initManagerWindow() {
+	unconfirmedSalesTableModel = new QStandardItemModel;
+	confirmedSalesTableModel = new QStandardItemModel;
+	fillManagersProductTable();
+	fillManagersConfirmedSalesTable();
+	fillManagersUnconfirmedSalesTable();
+}
+
+void MainWindow::clearManagersConfirmedSalesTable() {
+	confirmedSalesTableModel->clear();
+	QStringList horizontalHeader;
+    horizontalHeader.append( c->toUnicode( "Íàçâàíèå òîâàðà" ) );
+    horizontalHeader.append( c->toUnicode( "Êîëè÷åñòâî" ) );
+	horizontalHeader.append( c->toUnicode( "Ñòîèìîñòü" ) );
+	horizontalHeader.append( c->toUnicode( "Ïðîöåíò êîìèññèè" ) );
+	confirmedSalesTableModel->setHorizontalHeaderLabels( horizontalHeader );
+	ui.confirmedSales->setModel( confirmedSalesTableModel );
+    ui.confirmedSales->resizeColumnsToContents();
+}
+
+void MainWindow::fillManagersConfirmedSalesTable() {
+    clearManagersConfirmedSalesTable();
+	
+	auto _sales = sale_db -> getActiveAll( current_user_id );
+	int allCount = 0, lastRow = 0;
+	double allCost = 0, salary = 0;
+    for ( int idx = 0; idx < _sales.size(); idx++) {
+		if ( _sales[idx].isConfirmed() == true) {
+			ActiveSale sale = _sales[idx];
+			sale.setProduct(products[sale.getProductId()]);
+			sales[ sale.getId() ] = sale;
+			QStandardItem *item;
+			item = new QStandardItem( sale.getProductName() );
+			confirmedSalesTableModel->setItem( lastRow, 0, item );
+			item = new QStandardItem( QString::number( sale.getCount() ) );
+			confirmedSalesTableModel->setItem( lastRow, 1, item );
+			item = new QStandardItem( QString::number( sale.getCost() ) );
+			confirmedSalesTableModel->setItem( lastRow, 2, item );
+			item = new QStandardItem( QString::number( sale.getProductCommission() ) + "%" );
+			confirmedSalesTableModel->setItem( lastRow, 3, item );
+
+			allCount += sale.getCount();
+			allCost += sale.getCost();
+			salary += sale.getCost() / 100 * sale.getProductCommission();
+			lastRow++;
+		}
+	}
+	QStandardItem *item;
+	item = new QStandardItem(  c->toUnicode( "Èòîãî:" ) );
+	confirmedSalesTableModel->setItem( lastRow, 0, item );
+	item = new QStandardItem( QString::number( allCount ) );
+	confirmedSalesTableModel->setItem( lastRow, 1, item );
+	item = new QStandardItem( QString::number( allCost ) );
+	confirmedSalesTableModel->setItem( lastRow, 2, item );
+	item = new QStandardItem( QString::number( salary ) );
+	confirmedSalesTableModel->setItem( lastRow, 3, item );
+
+	ui.currentSalary->setText( QString::number( salary ) );
+}
+
+void MainWindow::clearManagersUnconfirmedSalesTable() {
+	unconfirmedSalesTableModel->clear();
+	QStringList horizontalHeader;
+    horizontalHeader.append( c->toUnicode( "Íàçâàíèå òîâàðà" ) );
+    horizontalHeader.append( c->toUnicode( "Êîëè÷åñòâî" ) );
+	horizontalHeader.append( c->toUnicode( "Ñòîèìîñòü" ) );
+	horizontalHeader.append( c->toUnicode( "Ïðîöåíò êîìèññèè" ) );
+	unconfirmedSalesTableModel->setHorizontalHeaderLabels( horizontalHeader );
+	ui.unconfirmedSales->setModel( unconfirmedSalesTableModel );
+    ui.unconfirmedSales->resizeColumnsToContents();
+}
+
+void MainWindow::fillManagersUnconfirmedSalesTable() {
+    clearManagersUnconfirmedSalesTable();
+	
+	auto _sales = sale_db -> getActiveAll( current_user_id );
+	int allCount = 0, lastRow = 0;
+	double allCost = 0, salary = 0;
+    for ( int idx = 0; idx < _sales.size(); idx++) {
+		if ( _sales[idx].isConfirmed() == false ) {
+			
+			ActiveSale sale = _sales[idx];
+			sale.setProduct(products[sale.getProductId()]);
+			sales[ sale.getId() ] = sale;
+			QStandardItem *item;
+			item = new QStandardItem( sale.getProductName() );
+			unconfirmedSalesTableModel->setItem( lastRow, 0, item );
+			item = new QStandardItem( QString::number( sale.getCount() ) );
+			unconfirmedSalesTableModel->setItem( lastRow, 1, item );
+			item = new QStandardItem( QString::number( sale.getCost() ) );
+			unconfirmedSalesTableModel->setItem( lastRow, 2, item );
+			item = new QStandardItem( QString::number( sale.getProductCommission() ) + "%" );
+			unconfirmedSalesTableModel->setItem( lastRow, 3, item );
+
+			allCount += sale.getCount();
+			allCost += sale.getCost();
+			salary += sale.getCost() / 100 * sale.getProductCommission();
+			lastRow++;
+		}
+	}
+	QStandardItem *item;
+	item = new QStandardItem(  c->toUnicode( "Èòîãî:" ) );
+	unconfirmedSalesTableModel->setItem( lastRow, 0, item );
+	item = new QStandardItem( QString::number( allCount ) );
+	unconfirmedSalesTableModel->setItem( lastRow, 1, item );
+	item = new QStandardItem( QString::number( allCost ) );
+	unconfirmedSalesTableModel->setItem( lastRow, 2, item );
+	item = new QStandardItem( QString::number( salary ) );
+	unconfirmedSalesTableModel->setItem( lastRow, 3, item );
+}
+
+void MainWindow::addSale() {
+	ActiveSale sale;
+	fillSale( sale );
+	sale_db->create( sale );
+	fillManagersUnconfirmedSalesTable();
+}
+
+void MainWindow::fillSale( ActiveSale & sale ) {
+	Manager saler;
+	saler.setFirstName( "Dima" );
+	saler.setId( current_user_id );
+	sale.setSaler( saler );
+	QString nameProduct = ui.productComboBox->currentText();
+	for ( auto it = products.begin(); it != products.end(); it++ ) {
+		if ( ( *it ).getName() == nameProduct ) {
+			sale.setProduct( *it );
+		}
+	}
+	sale.setCost( ui.priceSale->value() );
+	sale.setCount( ui.countSaleProducts->value() );
+}
+
+
+void MainWindow::clearManagersProductsTable() {
+	productsTableModel->clear();
+	QStringList horizontalHeader;
+    horizontalHeader.append( c->toUnicode( "Íàçâàíèå òîâàðà" ) );
+    horizontalHeader.append( c->toUnicode( "Ïðîöåíò êîìèññèè" ) );
+	productsTableModel->setHorizontalHeaderLabels( horizontalHeader );
+	ui.managersProductTable->setModel( productsTableModel );
+    ui.managersProductTable->resizeColumnsToContents();
+}
+
+void MainWindow::fillManagersProductTable() {
+    clearManagersProductsTable();
+	
+	auto _products = product_db -> getAll();
+
+    for ( int idx = 0; idx < _products.size(); idx++) {
+		Product product = _products[idx];
+		products[ product.getId() ] = product;
+		QStandardItem *item;
+		item = new QStandardItem( product.getName() );
+		productsTableModel->setItem( idx, 0, item );
+		item = new QStandardItem( QString::number( product.getCommission() ) + "%" );
+		productsTableModel->setItem( idx, 1, item );
+		ui.productComboBox->addItem( product.getName() );
+	}
+
+	ui.deleteProductButton->setEnabled( !products.empty() );
+	ui.productComboBox->setEnabled( !products.empty() );
+}
+
+void MainWindow::searchManagersProductTable() {
+	QString nameProduct = ui.managerProductSearch->text();
+	if ( nameProduct != "" ) {
+		clearManagersProductsTable();
+		for ( auto it = products.begin(); it != products.end(); it++ ) {
+			if ( ( *it ).getName() == nameProduct) {
+				Product product = ( *it );
+				QStandardItem *item;
+				item = new QStandardItem( product.getName() );
+				productsTableModel->setItem( 0, 0, item );
+				item = new QStandardItem( QString::number( product.getCommission() ) + "%" );
+				productsTableModel->setItem( 0, 1, item );
+			}
+		}
+	} else {
+		fillManagersProductTable();
+	}
 }
 
 //
