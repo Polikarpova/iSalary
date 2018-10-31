@@ -4,6 +4,7 @@
 #include <QDate>
 class Manager {//: public User {
 private:
+	int id;
 	QString firstName;
 	QString secondName;
 	QString thirdName;
@@ -39,6 +40,9 @@ public:
 	);
 	~Manager(void);
 
+	void setId( int _id );
+	int getId();
+	
 	void setFirstName( QString _firstName );
 	QString getFirstName();
 
@@ -94,4 +98,3 @@ public:
 	void setDateOfEmployment( QDate _dateOfEmployment );
 	QDate getDateOfEmployment();
 };
-

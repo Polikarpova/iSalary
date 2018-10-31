@@ -3,11 +3,6 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_mainwindow.h"
-#include "QTextCodec"
-#include "Product_DB.h"
-#include "Product.h"
-#include "QStandardItemModel"
-#include "QStandardItem"
 
 #include "AuthPage.h"
 
@@ -18,7 +13,7 @@
 #include "QStandardItem"
 
 /**
-* ������������ �������� �������� ���������
+* Ïåðå÷èñëåíèå îñíîâíûõ âèäæåòîâ ïðîãðàììû
 */
 enum ProgramWidgets {
     AUTH_WIDGET = 0,
@@ -26,7 +21,7 @@ enum ProgramWidgets {
 };
 
 /**
-* ������������ �������� �������� �� �����
+* Ïåðå÷èñëåíèå îñíîâíûõ âèäæåòîâ ïî ðîëÿì
 */
 enum UserRoleWidgets {
     BOSS_WIDGET = 0,
@@ -43,23 +38,17 @@ public:
 
 private:
 	Ui::MainWindowClass ui;
-	QTextCodec* c ;
-	QSqlDatabase  _db;
-	
-	void createHorizontalTabs();
 
     AuthPage* authPage;
 
 	void createHorizontalTabs();
     void enterProgram( const UserDTO& user, UserType userType);
     
-	//����
 	QSqlDatabase  _db;
 
 	Product_DB * product_db;
 	QHash <int, Product> products;
 	QStandardItemModel *productsTableModel;
-	// DEFAULT - ��������� ���������, ADD_PRODUCT - ���������� ������, UPDATE_PRODUCT - ��������� ������
 	enum StatusType {DEFAULT, ADD_PRODUCT, UPDATE_PRODUCT};
 	StatusType status;  
 
@@ -78,10 +67,6 @@ private slots:
 	void showProduct();
 	void removeProduct();
 	void searchProduct();
-	void searchManagersProductTable();
-	void clearManagersProductsTable();
-	void fillManagetsProductTable();
-	void initManagerWindow();
 };
 
 #endif // MAINWINDOW_H

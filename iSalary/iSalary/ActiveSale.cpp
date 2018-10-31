@@ -3,6 +3,7 @@
 
 ActiveSale::ActiveSale(void)
 {
+	isConfirm = false;
 }
 
 
@@ -16,4 +17,24 @@ void ActiveSale::confirm() {
 
 void ActiveSale::cancelConfirm() {
 	isConfirm = false;
+}
+
+bool ActiveSale::isConfirmed() {
+	return isConfirm;
+}
+
+QString ActiveSale::getProductName() {
+	return product.getName();
+}
+
+double ActiveSale::getProductCommission() {
+	return product.getCommission();
+}
+
+void ActiveSale::setProduct( Product _product ) {
+	product = _product;
+}
+
+Product ActiveSale::getProduct() {
+	return product;
 }

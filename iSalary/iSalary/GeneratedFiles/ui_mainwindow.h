@@ -310,7 +310,7 @@ public:
     {
         if (MainWindowClass->objectName().isEmpty())
             MainWindowClass->setObjectName(QStringLiteral("MainWindowClass"));
-        MainWindowClass->resize(1001, 620);
+        MainWindowClass->resize(814, 620);
         MainWindowClass->setStyleSheet(QStringLiteral("QMainWindow {background-color: white}"));
         centralWidget = new QWidget(MainWindowClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
@@ -1128,7 +1128,7 @@ public:
         correctionHistoryList->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 444, 207));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 351, 207));
         correctionHistoryList->setWidget(scrollAreaWidgetContents);
 
         verticalLayout_12->addWidget(correctionHistoryList);
@@ -1784,7 +1784,7 @@ public:
         MainWindowClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindowClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1001, 21));
+        menuBar->setGeometry(QRect(0, 0, 814, 21));
         MainWindowClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindowClass);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -1795,9 +1795,9 @@ public:
 
         retranslateUi(MainWindowClass);
 
-        stackedWidget_4->setCurrentIndex(1);
-        stackedWidget_3->setCurrentIndex(1);
-        tabWidget->setCurrentIndex(1);
+        auth_program_stackedWidget->setCurrentIndex(1);
+        boss_manager_stackedWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(0);
         managersDataTab->setCurrentIndex(0);
         managersButtonsStackedWidget->setCurrentIndex(0);
         productButtonsStackedWidget->setCurrentIndex(0);

@@ -2,7 +2,7 @@
 #include <qlabel.h>
 #include <qtextcodec.h>
 
-QTextCodec *c = QTextCodec::codecForLocale();
+QTextCodec* c = QTextCodec::codecForName("UTF-8");
 
 MainWindow::MainWindow( AuthPage* authPage, QWidget *parent ) : QMainWindow(parent) {
 	ui.setupUi(this);
@@ -52,12 +52,6 @@ MainWindow::MainWindow( AuthPage* authPage, QWidget *parent ) : QMainWindow(pare
 
 	connect( ui.searchButton, SIGNAL( clicked() ), this, SLOT( searchProduct() ) );
 
-	initManagerWindow();
-	connect( ui.managerProductSearchButton, SIGNAL( clicked() ), this, SLOT( searchManagersProductTable() ) );
-}
-
-MainWindow::~MainWindow() {
-
 }
 
 void MainWindow::enterProgram( const UserDTO& user, UserType userType){
@@ -72,12 +66,12 @@ void MainWindow::enterProgram( const UserDTO& user, UserType userType){
 void MainWindow::createHorizontalTabs() {
 
 	QStringList tabs_text;
-	tabs_text << c->toUnicode("����������") << c->toUnicode("������") << c->toUnicode("�������������") << c->toUnicode("�������") <<
-				  c->toUnicode("����������")<< c->toUnicode("��������");
+	tabs_text << c->toUnicode("Сотрудники") << c->toUnicode("Товары") << c->toUnicode("Корректировки") << c->toUnicode("Продажи") <<
+				  c->toUnicode("Статистика")<< c->toUnicode("Зарплата");
 	QTabWidget *tabw = ui.tabWidget;
 	
-	for ( int i = 0; i < 6; i++ ) {
-		tabw->setTabText( i, "" );
+	for( int i = 0; i < 6; i++) {
+		tabw->setTabText(i, "");
 	}
 	
 	QTabBar *tabbar = tabw->tabBar();
@@ -89,19 +83,8 @@ void MainWindow::createHorizontalTabs() {
 	}
 }
 
-void MainWindow::initManagerWindow() {
-	productsTableModel = new QStandardItemModel;
-	fillManagetsProductTable();
-}
+MainWindow::~MainWindow() {
 
-void MainWindow::clearManagersProductsTable() {
-	productsTableModel->clear();
-	QStringList horizontalHeader;
-    horizontalHeader.append( c->toUnicode( "�������� ������" ) );
-    horizontalHeader.append( c->toUnicode( "������� ��������" ) );
-	productsTableModel->setHorizontalHeaderLabels( horizontalHeader );
-	ui.managersProductTable->setModel( productsTableModel );
-    ui.managersProductTable->resizeColumnsToContents();
 }
 
 //
@@ -197,189 +180,8 @@ void MainWindow::fillProduct( Product & product ) {
 void MainWindow::clearTable() {
 	productsTableModel->clear();
 	QStringList horizontalHeader;
-    horizontalHeader.append( c->toUnicode( "�������� ������" ) );
-    horizontalHeader.append( c->toUnicode( "������� ��������" ) );
-	productsTableModel->setHorizontalHeaderLabels( horizontalHeader );
-	ui.productTable->setModel( productsTableModel );
-    ui.productTable->resizeColumnsToContents();
-}
-
-void MainWindow::fillProducts() {
-    clearTable();
-	
-	auto _products = product_db -> getAll();
-
-    for ( int idx = 0; idx < _products.size(); idx++) {
-		Product product = _products[idx];
-		products[ product.getId() ] = product;
-		QStandardItem *item;
-		item = new QStandardItem( product.getName() );
-		productsTableModel->setItem( idx, 0, item );
-		item = new QStandardItem( QString::number( product.getCommission() ) + "%" );
-		productsTableModel->setItem( idx, 1, item );
-		item = new QStandardItem( QString::number( product.getId() ) );
-		productsTableModel->setItem( idx, 2, item );
-	}
-
-	ui.deleteProductButton->setEnabled( !products.empty() );
-}
-
-void MainWindow::searchProduct() {
-	QString nameProduct = ui.productSearch->text();
-	if ( nameProduct != "" ) {
-		clearTable();
-		for ( auto it = products.begin(); it != products.end(); it++ ) {
-			if ( ( *it ).getName() == nameProduct) {
-				Product product = ( *it );
-				QStandardItem *item;
-				item = new QStandardItem( product.getName() );
-				productsTableModel->setItem( 0, 0, item );
-				item = new QStandardItem( QString::number( product.getCommission() ) + "%" );
-				productsTableModel->setItem( 0, 1, item );
-				item = new QStandardItem( QString::number( product.getId() ) );
-				productsTableModel->setItem( 0, 2, item );
-			}
-		}
-	} else {
-		fillProducts();
-	}
-}
-void MainWindow::fillManagetsProductTable() {
-    clearManagersProductsTable();
-	
-	auto _products = product_db -> getAll();
-
-    for ( int idx = 0; idx < _products.size(); idx++) {
-		Product product = _products[idx];
-		products[ product.getId() ] = product;
-		QStandardItem *item;
-		item = new QStandardItem( product.getName() );
-		productsTableModel->setItem( idx, 0, item );
-		item = new QStandardItem( QString::number( product.getCommission() ) + "%" );
-		productsTableModel->setItem( idx, 1, item );
-	}
-
-	ui.addSaleButton->setEnabled( !products.empty() );
-	ui.productComboBox->setEnabled( !products.empty() );
-}
-
-void MainWindow::searchManagersProductTable() {
-	QString nameProduct = ui.managerProductSearch->text();
-	if ( nameProduct != "" ) {
-		clearManagersProductsTable();
-		for ( auto it = products.begin(); it != products.end(); it++ ) {
-			if ( ( *it ).getName() == nameProduct) {
-				Product product = ( *it );
-				QStandardItem *item;
-				item = new QStandardItem( product.getName() );
-				productsTableModel->setItem( 0, 0, item );
-				item = new QStandardItem( QString::number( product.getCommission() ) + "%" );
-				productsTableModel->setItem( 0, 1, item );
-			}
-		}
-	} else {
-		fillManagetsProductTable();
-	}
-}
-
-
-
-
-
-void MainWindow::initProductWindow() {
-	productsTableModel = new QStandardItemModel;
-	fillProducts();
-	status = DEFAULT;
-}
-
-void MainWindow::setInputsEnabledPageProducts( bool isEnabled ) {
-	ui.productName->setEnabled( isEnabled );
-	ui.productPercent->setEnabled( isEnabled );
-}
-
-void MainWindow::clearInputsPageProducts() {
-	ui.productName->clear();
-	ui.productPercent->clear();
-}
-
-void MainWindow::directAddProduct() {
-	if ( status == DEFAULT ) {
-		ui.productButtonsStackedWidget->setCurrentIndex( 2 );
-		ui.addProductButton->setEnabled( false );
-		ui.productTable->setEnabled( false );
-		setInputsEnabledPageProducts( true );
-		clearInputsPageProducts();
-		status = ADD_PRODUCT;
-	} else {
-		ui.productButtonsStackedWidget->setCurrentIndex( 0 );
-		ui.addProductButton->setEnabled( true );
-		ui.productTable->setEnabled( true );
-		setInputsEnabledPageProducts( false );
-		status = DEFAULT;
-	}
-}
-
-void MainWindow::addProduct() {
-	Product product;
-	fillProduct( product );
-	product_db->create( product );
-	fillProducts();
-	directAddProduct();
-}
-
-void MainWindow::directUpdateProduct() {
-	bool isSelected = !ui.productTable->selectionModel()->selectedIndexes().empty();
-	if ( status == DEFAULT && isSelected == true ) {
-		ui.productButtonsStackedWidget->setCurrentIndex( 1 );
-		ui.productTable->setEnabled( false );
-		setInputsEnabledPageProducts( true );
-		status = UPDATE_PRODUCT;
-	} else {
-		ui.productButtonsStackedWidget->setCurrentIndex( 0 );
-		ui.productTable->setEnabled( true );
-		setInputsEnabledPageProducts( false );
-		status = DEFAULT;
-	}
-}
-
-void MainWindow::updateProduct() {
-	QString id = productsTableModel->data( productsTableModel->index( ui.productTable->currentIndex().row(), 2 ) ).toString();
-	Product product = products[ id.toInt() ];
-	fillProduct( product );
-	product_db->update( product );
-	fillProducts();
-	directUpdateProduct();
-}
-
-void MainWindow::removeProduct() {
-	bool isSelected = !ui.productTable->selectionModel()->selectedIndexes().empty();
-	if ( isSelected ) {
-		int row = ui.productTable->currentIndex().row();
-		QString id = productsTableModel->data( productsTableModel->index( ui.productTable->currentIndex().row(), 2 ) ).toString();
-		product_db->remove( id.toInt() );
-		fillProducts();
-		clearInputsPageProducts();
-	}
-}
-
-void MainWindow::showProduct() {
-	QString id = productsTableModel->data( productsTableModel->index( ui.productTable->currentIndex().row(), 2 ) ).toString();
-	Product product = products[ id.toInt() ];
-	ui.productName->setText( product.getName() );
-	ui.productPercent->setValue( product.getCommission() );
-}
-
-void MainWindow::fillProduct( Product & product ) {
-	int id;
-	product.setName( ui.productName->text() );
-	product.setCommission( ui.productPercent->value() );
-}
-
-void MainWindow::clearTable() {
-	productsTableModel->clear();
-	QStringList horizontalHeader;
-    horizontalHeader.append( c->toUnicode( "�������� ������" ) );
-    horizontalHeader.append( c->toUnicode( "������� ��������" ) );
+    horizontalHeader.append( c->toUnicode( "Название" ) );
+    horizontalHeader.append( c->toUnicode( "Коммиссия" ) );
 	productsTableModel->setHorizontalHeaderLabels( horizontalHeader );
 	ui.productTable->setModel( productsTableModel );
     ui.productTable->resizeColumnsToContents();

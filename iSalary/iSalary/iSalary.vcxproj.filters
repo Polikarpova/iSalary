@@ -119,23 +119,29 @@
     <ClCompile Include="AuthPage.cpp">
       <Filter>Source Files\View</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Users\Пользователь\Desktop\дима\Product_DB.cpp">
-      <Filter>Source Files\Model\DB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Users\Пользователь\Desktop\дима\Sale.cpp">
-      <Filter>Source Files\Model\DomainModel</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Users\Пользователь\Desktop\дима\ActiveSale.cpp">
-      <Filter>Source Files\Model\DomainModel</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Users\Пользователь\Desktop\дима\Manager.cpp">
-      <Filter>Source Files\Model\DomainModel\PersonnelAccountingModule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Users\Пользователь\Desktop\дима\Product.cpp">
-      <Filter>Source Files\Model\DomainModel\SalesModule</Filter>
-    </ClCompile>
     <ClCompile Include="AccoutingPeriodDB.cpp">
       <Filter>Source Files\Model\DB</Filter>
+    </ClCompile>
+    <ClCompile Include="ClosedSale.cpp">
+      <Filter>Source Files\Model\DomainModel\SalesModule</Filter>
+    </ClCompile>
+    <ClCompile Include="Sale_DB.cpp">
+      <Filter>Source Files\Model\DB</Filter>
+    </ClCompile>
+    <ClCompile Include="Product_DB.cpp">
+      <Filter>Source Files\Model\DB</Filter>
+    </ClCompile>
+    <ClCompile Include="Product.cpp">
+      <Filter>Source Files\Model\DomainModel\SalesModule</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager.cpp">
+      <Filter>Source Files\Model\DomainModel\PersonnelAccountingModule</Filter>
+    </ClCompile>
+    <ClCompile Include="ActiveSale.cpp">
+      <Filter>Source Files\Model\DomainModel\SalesModule</Filter>
+    </ClCompile>
+    <ClCompile Include="Sale.cpp">
+      <Filter>Source Files\Model\DomainModel\SalesModule</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -183,17 +189,8 @@
     <ClInclude Include="SignResultDTO.h">
       <Filter>Header Files\Model\ModelFacade</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Users\Пользователь\Desktop\дима\Product_DB.h">
-      <Filter>Header Files\Model\DB</Filter>
-    </ClInclude>
     <ClInclude Include="AccoutingPeriodDB.h">
       <Filter>Header Files\Model\DB</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Users\Пользователь\Desktop\дима\Product.h">
-      <Filter>Header Files\Model\DomainModel\SalesModule</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Users\Пользователь\Desktop\дима\Manager.h">
-      <Filter>Header Files\Model\DomainModel\PersonnelAccountingModule</Filter>
     </ClInclude>
     <ClInclude Include="Salary.h">
       <Filter>Header Files\Model\DomainModel\SalesModule</Filter>
@@ -204,17 +201,29 @@
     <ClInclude Include="OpenAccoutingPeriod.h">
       <Filter>Header Files\Model\DomainModel\SalesModule</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Users\Пользователь\Desktop\дима\ActiveSale.h">
-      <Filter>Header Files\Model\DomainModel\SalesModule</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Users\Пользователь\Desktop\дима\Sale.h">
-      <Filter>Header Files\Model\DomainModel\SalesModule</Filter>
-    </ClInclude>
     <ClInclude Include="ClosedSale.h">
       <Filter>Header Files\Model\DomainModel\SalesModule</Filter>
     </ClInclude>
     <ClInclude Include="CloseAccoutingPeriod.h">
       <Filter>Header Files\Model\DomainModel\SalesModule</Filter>
+    </ClInclude>
+    <ClInclude Include="Sale_DB.h">
+      <Filter>Header Files\Model\DB</Filter>
+    </ClInclude>
+    <ClInclude Include="Product.h">
+      <Filter>Header Files\Model\DomainModel\SalesModule</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager.h">
+      <Filter>Header Files\Model\DomainModel\PersonnelAccountingModule</Filter>
+    </ClInclude>
+    <ClInclude Include="ActiveSale.h">
+      <Filter>Header Files\Model\DomainModel\SalesModule</Filter>
+    </ClInclude>
+    <ClInclude Include="Sale.h">
+      <Filter>Header Files\Model\DomainModel\SalesModule</Filter>
+    </ClInclude>
+    <ClInclude Include="Product_DB.h">
+      <Filter>Header Files\Model\DB</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
