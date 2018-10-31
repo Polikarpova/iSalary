@@ -110,10 +110,10 @@ void MainWindow::initManagerWindow() {
 void MainWindow::clearManagersConfirmedSalesTable() {
 	confirmedSalesTableModel->clear();
 	QStringList horizontalHeader;
-    horizontalHeader.append( c->toUnicode( "Íàçâàíèå òîâàðà" ) );
-    horizontalHeader.append( c->toUnicode( "Êîëè÷åñòâî" ) );
-	horizontalHeader.append( c->toUnicode( "Ñòîèìîñòü" ) );
-	horizontalHeader.append( c->toUnicode( "Ïðîöåíò êîìèññèè" ) );
+    horizontalHeader.append( c->toUnicode( "Название" ) );
+    horizontalHeader.append( c->toUnicode( "Количество" ) );
+	horizontalHeader.append( c->toUnicode( "Стоимость" ) );
+	horizontalHeader.append( c->toUnicode( "Процент комиссии" ) );
 	confirmedSalesTableModel->setHorizontalHeaderLabels( horizontalHeader );
 	ui.confirmedSales->setModel( confirmedSalesTableModel );
     ui.confirmedSales->resizeColumnsToContents();
@@ -147,7 +147,7 @@ void MainWindow::fillManagersConfirmedSalesTable() {
 		}
 	}
 	QStandardItem *item;
-	item = new QStandardItem(  c->toUnicode( "Èòîãî:" ) );
+	item = new QStandardItem(  c->toUnicode( "Итого:" ) );
 	confirmedSalesTableModel->setItem( lastRow, 0, item );
 	item = new QStandardItem( QString::number( allCount ) );
 	confirmedSalesTableModel->setItem( lastRow, 1, item );
@@ -162,10 +162,10 @@ void MainWindow::fillManagersConfirmedSalesTable() {
 void MainWindow::clearManagersUnconfirmedSalesTable() {
 	unconfirmedSalesTableModel->clear();
 	QStringList horizontalHeader;
-    horizontalHeader.append( c->toUnicode( "Íàçâàíèå òîâàðà" ) );
-    horizontalHeader.append( c->toUnicode( "Êîëè÷åñòâî" ) );
-	horizontalHeader.append( c->toUnicode( "Ñòîèìîñòü" ) );
-	horizontalHeader.append( c->toUnicode( "Ïðîöåíò êîìèññèè" ) );
+    horizontalHeader.append( c->toUnicode( "Название" ) );
+    horizontalHeader.append( c->toUnicode( "Количество" ) );
+	horizontalHeader.append( c->toUnicode( "Стоимость" ) );
+	horizontalHeader.append( c->toUnicode( "Процент комиссии" ) );
 	unconfirmedSalesTableModel->setHorizontalHeaderLabels( horizontalHeader );
 	ui.unconfirmedSales->setModel( unconfirmedSalesTableModel );
     ui.unconfirmedSales->resizeColumnsToContents();
@@ -200,7 +200,7 @@ void MainWindow::fillManagersUnconfirmedSalesTable() {
 		}
 	}
 	QStandardItem *item;
-	item = new QStandardItem(  c->toUnicode( "Èòîãî:" ) );
+	item = new QStandardItem(  c->toUnicode( "Итого:" ) );
 	unconfirmedSalesTableModel->setItem( lastRow, 0, item );
 	item = new QStandardItem( QString::number( allCount ) );
 	unconfirmedSalesTableModel->setItem( lastRow, 1, item );
@@ -236,8 +236,8 @@ void MainWindow::fillSale( ActiveSale & sale ) {
 void MainWindow::clearManagersProductsTable() {
 	productsTableModel->clear();
 	QStringList horizontalHeader;
-    horizontalHeader.append( c->toUnicode( "Íàçâàíèå òîâàðà" ) );
-    horizontalHeader.append( c->toUnicode( "Ïðîöåíò êîìèññèè" ) );
+    horizontalHeader.append( c->toUnicode( "Название" ) );
+    horizontalHeader.append( c->toUnicode( "Комиссия" ) );
 	productsTableModel->setHorizontalHeaderLabels( horizontalHeader );
 	ui.managersProductTable->setModel( productsTableModel );
     ui.managersProductTable->resizeColumnsToContents();
@@ -376,7 +376,7 @@ void MainWindow::clearTable() {
 	productsTableModel->clear();
 	QStringList horizontalHeader;
     horizontalHeader.append( c->toUnicode( "Название" ) );
-    horizontalHeader.append( c->toUnicode( "Коммиссия" ) );
+    horizontalHeader.append( c->toUnicode( "Комиссия" ) );
 	productsTableModel->setHorizontalHeaderLabels( horizontalHeader );
 	ui.productTable->setModel( productsTableModel );
     ui.productTable->resizeColumnsToContents();

@@ -310,7 +310,7 @@ public:
     {
         if (MainWindowClass->objectName().isEmpty())
             MainWindowClass->setObjectName(QStringLiteral("MainWindowClass"));
-        MainWindowClass->resize(814, 620);
+        MainWindowClass->resize(1044, 611);
         MainWindowClass->setStyleSheet(QStringLiteral("QMainWindow {background-color: white}"));
         centralWidget = new QWidget(MainWindowClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
@@ -1685,6 +1685,7 @@ public:
         priceSale = new QDoubleSpinBox(manager);
         priceSale->setObjectName(QStringLiteral("priceSale"));
         priceSale->setMinimum(0.01);
+        priceSale->setMaximum(1e+08);
         priceSale->setSingleStep(0.01);
         priceSale->setValue(1);
 
@@ -1784,7 +1785,7 @@ public:
         MainWindowClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindowClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 814, 21));
+        menuBar->setGeometry(QRect(0, 0, 1044, 21));
         MainWindowClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindowClass);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -1796,8 +1797,8 @@ public:
         retranslateUi(MainWindowClass);
 
         auth_program_stackedWidget->setCurrentIndex(1);
-        boss_manager_stackedWidget->setCurrentIndex(0);
-        tabWidget->setCurrentIndex(0);
+        boss_manager_stackedWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(2);
         managersDataTab->setCurrentIndex(0);
         managersButtonsStackedWidget->setCurrentIndex(0);
         productButtonsStackedWidget->setCurrentIndex(0);
