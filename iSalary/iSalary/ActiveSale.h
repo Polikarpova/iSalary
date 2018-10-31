@@ -13,5 +13,10 @@ public:
 
 	void confirm();
 	void cancelConfirm();
+	bool isConfirmed();
+	QString getProductName() override;
+	double getProductCommission() override;
+	void setProduct( Product product ) override;
+	Product getProduct() override;
 };
 
