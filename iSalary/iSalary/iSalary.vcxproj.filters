@@ -68,6 +68,9 @@
     <ClCompile Include="Sale_DB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ClosedSale.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -100,6 +103,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Sale_DB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClosedSale.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

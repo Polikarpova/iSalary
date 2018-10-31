@@ -78,72 +78,127 @@ void MainWindow::createHorizontalTabs() {
 }
 
 void MainWindow::initManagerWindow() {
-	salesTableModel = new QStandardItemModel;
+	unconfirmedSalesTableModel = new QStandardItemModel;
+	confirmedSalesTableModel = new QStandardItemModel;
 	fillManagersProductTable();
+	fillManagersConfirmedSalesTable();
 	fillManagersUnconfirmedSalesTable();
 }
 
-void MainWindow::clearManagersUnconfirmedSalesTable() {
-	salesTableModel->clear();
+void MainWindow::clearManagersConfirmedSalesTable() {
+	confirmedSalesTableModel->clear();
 	QStringList horizontalHeader;
     horizontalHeader.append( c->toUnicode( "Название товара" ) );
     horizontalHeader.append( c->toUnicode( "Количество" ) );
 	horizontalHeader.append( c->toUnicode( "Стоимость" ) );
 	horizontalHeader.append( c->toUnicode( "Процент комиссии" ) );
-	salesTableModel->setHorizontalHeaderLabels( horizontalHeader );
-	ui.unconfirmedSales->setModel( salesTableModel );
+	confirmedSalesTableModel->setHorizontalHeaderLabels( horizontalHeader );
+	ui.confirmedSales->setModel( confirmedSalesTableModel );
+    ui.confirmedSales->resizeColumnsToContents();
+}
+
+void MainWindow::fillManagersConfirmedSalesTable() {
+    clearManagersConfirmedSalesTable();
+	
+	auto _sales = sale_db -> getActiveAll( current_user_id );
+	int allCount = 0, lastRow = 0;
+	double allCost = 0, salary = 0;
+    for ( int idx = 0; idx < _sales.size(); idx++) {
+		if ( _sales[idx].isConfirmed() == true) {
+			ActiveSale sale = _sales[idx];
+			sale.setProduct(products[sale.getProductId()]);
+			sales[ sale.getId() ] = sale;
+			QStandardItem *item;
+			item = new QStandardItem( sale.getProductName() );
+			confirmedSalesTableModel->setItem( lastRow, 0, item );
+			item = new QStandardItem( QString::number( sale.getCount() ) );
+			confirmedSalesTableModel->setItem( lastRow, 1, item );
+			item = new QStandardItem( QString::number( sale.getCost() ) );
+			confirmedSalesTableModel->setItem( lastRow, 2, item );
+			item = new QStandardItem( QString::number( sale.getProductCommission() ) + "%" );
+			confirmedSalesTableModel->setItem( lastRow, 3, item );
+
+			allCount += sale.getCount();
+			allCost += sale.getCost();
+			salary += sale.getCost() / 100 * sale.getProductCommission();
+			lastRow++;
+		}
+	}
+	QStandardItem *item;
+	item = new QStandardItem(  c->toUnicode( "Итого:" ) );
+	confirmedSalesTableModel->setItem( lastRow, 0, item );
+	item = new QStandardItem( QString::number( allCount ) );
+	confirmedSalesTableModel->setItem( lastRow, 1, item );
+	item = new QStandardItem( QString::number( allCost ) );
+	confirmedSalesTableModel->setItem( lastRow, 2, item );
+	item = new QStandardItem( QString::number( salary ) );
+	confirmedSalesTableModel->setItem( lastRow, 3, item );
+
+	ui.currentSalary->setText( QString::number( salary ) );
+}
+
+void MainWindow::clearManagersUnconfirmedSalesTable() {
+	unconfirmedSalesTableModel->clear();
+	QStringList horizontalHeader;
+    horizontalHeader.append( c->toUnicode( "Название товара" ) );
+    horizontalHeader.append( c->toUnicode( "Количество" ) );
+	horizontalHeader.append( c->toUnicode( "Стоимость" ) );
+	horizontalHeader.append( c->toUnicode( "Процент комиссии" ) );
+	unconfirmedSalesTableModel->setHorizontalHeaderLabels( horizontalHeader );
+	ui.unconfirmedSales->setModel( unconfirmedSalesTableModel );
     ui.unconfirmedSales->resizeColumnsToContents();
 }
 
 void MainWindow::fillManagersUnconfirmedSalesTable() {
     clearManagersUnconfirmedSalesTable();
 	
-	auto _sales = sale_db -> getAll( current_user_id );
-	int allCount = 0;
+	auto _sales = sale_db -> getActiveAll( current_user_id );
+	int allCount = 0, lastRow = 0;
 	double allCost = 0, salary = 0;
     for ( int idx = 0; idx < _sales.size(); idx++) {
-		Sale sale = _sales[idx];
-		sale.setProduct(products[sale.getProductId()]);
-		sales[ sale.getId() ] = sale;
-		QStandardItem *item;
-		item = new QStandardItem( sale.getProduct().getName() );
-		salesTableModel->setItem( idx, 0, item );
-		item = new QStandardItem( QString::number( sale.getCount() ) );
-		salesTableModel->setItem( idx, 1, item );
-		item = new QStandardItem( QString::number( sale.getCost() ) );
-		salesTableModel->setItem( idx, 2, item );
-		item = new QStandardItem( QString::number( sale.getProduct().getCommission() ) + "%" );
-		salesTableModel->setItem( idx, 3, item );
+		if ( _sales[idx].isConfirmed() == false ) {
+			
+			ActiveSale sale = _sales[idx];
+			sale.setProduct(products[sale.getProductId()]);
+			sales[ sale.getId() ] = sale;
+			QStandardItem *item;
+			item = new QStandardItem( sale.getProductName() );
+			unconfirmedSalesTableModel->setItem( lastRow, 0, item );
+			item = new QStandardItem( QString::number( sale.getCount() ) );
+			unconfirmedSalesTableModel->setItem( lastRow, 1, item );
+			item = new QStandardItem( QString::number( sale.getCost() ) );
+			unconfirmedSalesTableModel->setItem( lastRow, 2, item );
+			item = new QStandardItem( QString::number( sale.getProductCommission() ) + "%" );
+			unconfirmedSalesTableModel->setItem( lastRow, 3, item );
 
-		allCount += sale.getCount();
-		allCost += sale.getCost();
-		salary += sale.getCost() / 100 * sale.getProduct().getCommission();
+			allCount += sale.getCount();
+			allCost += sale.getCost();
+			salary += sale.getCost() / 100 * sale.getProductCommission();
+			lastRow++;
+		}
 	}
-	int lastRow = _sales.size();
 	QStandardItem *item;
 	item = new QStandardItem(  c->toUnicode( "Итого:" ) );
-	salesTableModel->setItem( lastRow, 0, item );
+	unconfirmedSalesTableModel->setItem( lastRow, 0, item );
 	item = new QStandardItem( QString::number( allCount ) );
-	salesTableModel->setItem( lastRow, 1, item );
+	unconfirmedSalesTableModel->setItem( lastRow, 1, item );
 	item = new QStandardItem( QString::number( allCost ) );
-	salesTableModel->setItem( lastRow, 2, item );
+	unconfirmedSalesTableModel->setItem( lastRow, 2, item );
 	item = new QStandardItem( QString::number( salary ) );
-	salesTableModel->setItem( lastRow, 3, item );
-
-	ui.currentSalary->setText( QString::number( salary ) );
+	unconfirmedSalesTableModel->setItem( lastRow, 3, item );
 }
 
 void MainWindow::addSale() {
-	Sale sale;
+	ActiveSale sale;
 	fillSale( sale );
 	sale_db->create( sale );
 	fillManagersUnconfirmedSalesTable();
 }
 
-void MainWindow::fillSale( Sale & sale ) {
+void MainWindow::fillSale( ActiveSale & sale ) {
 	Manager saler;
 	saler.setFirstName( "Dima" );
-	saler.setId( 1 );
+	saler.setId( current_user_id );
 	sale.setSaler( saler );
 	QString nameProduct = ui.productComboBox->currentText();
 	for ( auto it = products.begin(); it != products.end(); it++ ) {
@@ -154,6 +209,7 @@ void MainWindow::fillSale( Sale & sale ) {
 	sale.setCost( ui.priceSale->value() );
 	sale.setCount( ui.countSaleProducts->value() );
 }
+
 
 void MainWindow::clearManagersProductsTable() {
 	productsTableModel->clear();

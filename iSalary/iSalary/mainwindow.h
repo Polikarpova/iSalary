@@ -7,7 +7,8 @@
 #include "Product_DB.h"
 #include "Product.h"
 #include "Sale_DB.h"
-#include "Sale.h"
+#include "ActiveSale.h"
+#include "ClosedSale.h"
 #include "QStandardItemModel"
 #include "QStandardItem"
 
@@ -42,14 +43,16 @@ private:
 
 	
 	Sale_DB * sale_db;
-	QHash <int, Sale> sales;
-	QStandardItemModel *salesTableModel;
+	QHash <int, ActiveSale> sales;
+	QStandardItemModel *unconfirmedSalesTableModel, *confirmedSalesTableModel;
 	void initManagerWindow();
 	void fillManagersProductTable();
 	void clearManagersProductsTable();
-	void fillSale( Sale & sale );
+	void fillSale( ActiveSale & sale );
 	void fillManagersUnconfirmedSalesTable();
 	void clearManagersUnconfirmedSalesTable();
+	void fillManagersConfirmedSalesTable();
+	void clearManagersConfirmedSalesTable();
 	
 private slots:
 	void directAddProduct();
