@@ -79,6 +79,7 @@
   <ItemGroup>
     <ClCompile Include="ActiveSale.cpp" />
     <ClCompile Include="Manager.cpp" />
+    <ClCompile Include="ManagerDB.cpp" />
     <ClCompile Include="Product.cpp" />
     <ClCompile Include="Product_DB.cpp" />
     <ClCompile Include="AccoutingPeriodDB.cpp" />
@@ -138,7 +139,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActiveSale.h" />
+    <ClInclude Include="IManagerRepository.h" />
     <ClInclude Include="Manager.h" />
+    <ClInclude Include="ManagerDB.h" />
     <ClInclude Include="Product.h" />
     <ClInclude Include="AccoutingPeriod.h" />
     <ClInclude Include="AccoutingPeriodDB.h" />

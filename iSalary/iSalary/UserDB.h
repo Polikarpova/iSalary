@@ -4,6 +4,7 @@
 #include <qsqlquery.h>
 #include <qvariant.h>
 #include <qsqlerror.h>
+#include <qlist.h>
 
 #include "User.h"
 #include "UserInfo.h"
@@ -44,9 +45,17 @@ public:
     * Получение записи о пользователе из БД по его ID
     * @throws TODO: SQLException
     * @throws Запись не найдена
-    * @return Структура, хранящая запись о пользователе и его тип или null, если запись не найдена 
+    * @return Структура, хранящая запись о пользователе и его тип
     */ 
     UserInfo getById( int userId);
+
+    /**
+    * Получение списка записей о пользователе из БД по списку ID
+    * @throws TODO: SQLException
+    * @throws Запись не найдена
+    * @return список Структур, хранящих запись о пользователе и его тип
+    */ 
+    QList<UserInfo> getByIds( QList<int> userIds);
   
     /**
     * @see IUserRepository::findByLoginPassword
@@ -60,6 +69,12 @@ public:
 
 
 protected:
+    
+    /**
+    * Контруктор по-умолчанию
+    */
+    UserDB();
+
     /*
     * Инициализация полей
     */

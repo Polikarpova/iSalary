@@ -1,159 +1,117 @@
 #include "Manager.h"
 
 
-Manager::Manager(void) {
-	dateOfEmployment = QDate::currentDate();
-}
-Manager::Manager(
-	QString _firstName,
-	QString _secondName,
-	QString _thirdName,
-	QDate _dateOfBirth,
-	bool _isMale,
-	QString _passportSerial,
-	QString _passportNumber,
-	QString _passportIssued,
-	QDate _passportIssueDate,
-	QString _placeOfRegistration,
-	QString _INN,
-	QString _email,
-	QString _mobileNumber,
-	QDate _dateOfEmployment
-) {
-	firstName = _firstName;
-	secondName = _secondName;
-	thirdName = _thirdName;
-	dateOfBirth = _dateOfBirth;
-	isMale = _isMale;
-	passportSerial = _passportSerial;
-	passportNumber = _passportNumber;
-	passportIssued = _passportIssued;
-	passportIssueDate = _passportIssueDate;
-	placeOfRegistration = _placeOfRegistration;
-	INN = _INN;
-	email = _email;
-	mobileNumber = _mobileNumber;
-	dateOfEmployment = _dateOfEmployment;
-}
-Manager::~Manager(void) {
+Manager::Manager(void){
+    this->dateOfEmplyment = QDate::currentDate();
 }
 
+Manager::Manager( int id){
+    this->id = id;
+}
 
 void Manager::setId( int _id ) {
 	id = _id;
 }
-int Manager::getId() {
-	return id;
+
+Manager::~Manager(void){
 }
 
+QString Manager::getFirstName() const{
+    return this->firstName;
+};
+  
+void Manager::setFirstName( const QString& firstname){
+    this->firstName = firstname;
+};
+  
+QString Manager::getSecondName() const{
+     return this->secondName;
+};
+  
+void Manager::setSecondName( const QString& secondname){
+    this->secondName = secondname;
+};
+  
+QString Manager::getThirdName() const{
+    return this->thirdName;
+};
+  
+void Manager::setThirdName( const QString& thirdname){
+    this->thirdName = thirdname;
+};
+    
+Sex Manager::getSex() const{
+    return this->sex;
+};
+  
+void Manager::setSex( Sex sex){
+    this->sex = sex;
+};
 
-void Manager::setFirstName( QString _firstName ) {
-	firstName = _firstName;
+QString Manager::getPassportSerial() const{
+    return this->passportSerial;
+};
+  
+void Manager::setPassportSerial( const QString& passportSerial){
+    if( passportSerial.size() == 4){
+        this->passportSerial = passportSerial;
+    }
+};
+  
+QString Manager::getPassportNumber() const{
+    return this->passportNumber;
 }
-QString Manager::getFirstName() {
-	return firstName;
+  
+void Manager::setPassportNumber( const QString& passportNumber){
+    if( passportNumber.size() == 6){
+        this->mobileNumber = passportNumber;
+    }
+};
+  
+QDate Manager::getPassportDateIssue() const{
+    return this->passportIssueDate;
+};
+  
+void Manager::setPassportDateIssue( const QDate& date){
+    this->passportIssueDate = date;
+};
+  
+QString Manager::getAddress() const{
+    return this->address;
+};
+    
+void Manager::setAddress( const QString& address){
+    this->address = address;
+};
+    
+QString Manager::getINN() const{
+    return this->INN;
 }
-
-
-void Manager::setSecondName( QString _secondName ) {
-	secondName = _secondName;
+  
+void Manager::setINN( const QString& INN){
+    this->INN = INN;
+};
+  
+QString Manager::getEmail() const{
+    return this->email;
 }
-QString Manager::getSecondName() {
-	return secondName;
+  
+void Manager::setEmail( const QString& email){
+    this->email = email;
 }
-
-
-void Manager::setThirdName( QString _thirdName ) {
-	thirdName = _thirdName;
+  
+QString Manager::getMobileNumber() const{
+    return this->mobileNumber;
 }
-QString Manager::getThirdName() {
-	return thirdName;
+  
+void Manager::setMobileNumber( const QString& mobileNumber){
+    this->mobileNumber = mobileNumber;
+};
+    
+QDate Manager::getDateOfEmployment() const{
+    return this->dateOfEmplyment;
 }
-
-
-void Manager::setDateOfBirth( QDate _dateOfBirth ) {
-	dateOfBirth = _dateOfBirth;
-}
-QDate Manager::getDateOfBirth() {
-	return dateOfBirth;
-}
-
-
-void Manager::setIsMale( bool _isMale ) {
-	isMale = _isMale;
-}
-bool Manager::getIsMale() {
-	return isMale;
-}
-
-
-void Manager::setPassportSerial( QString _passportSerial ) {
-	passportSerial = _passportSerial;
-}
-QString Manager::getPassportSerial() {
-	return passportSerial;
-}
-
-
-void Manager::setPassportNumber( QString _passportNumber ) {
-	passportNumber = _passportNumber;
-}
-QString Manager::getPassportNumber() {
-	return passportNumber;
-}
-
-
-void Manager::setPassportIssued( QString _passportIssued ) {
-	passportIssued = _passportIssued;
-}
-QString Manager::getPassportIssued() {
-	return passportIssued;
-}
-
-
-void Manager::setPassportIssueDate( QDate _passportIssueDate ) {
-	passportIssueDate = _passportIssueDate;
-}
-QDate Manager::getPassportIssueDate() {
-	return passportIssueDate;
-}
-
-
-void Manager::setPlaceOfRegistration( QString _placeOfRegistration ) {
-	placeOfRegistration = _placeOfRegistration;
-}
-QString Manager::getPlaceOfRegistration() {
-	return placeOfRegistration;
-}
-
-
-void Manager::setINN( QString _INN ) {
-	INN = _INN;
-}
-QString Manager::getINN() {
-	return INN;
-}
-
-
-void Manager::setEmail( QString _email ) {
-	email = _email;
-}
-QString Manager::getEmail() {
-	return email;
-}
-
-
-void Manager::setMobileNumber( QString _mobileNumber ) {
-	mobileNumber = _mobileNumber;
-}
-QString Manager::getMobileNumber() {
-	return mobileNumber;
-}
-
-
-void Manager::setDateOfEmployment( QDate _dateOfEmployment ) {
-	dateOfEmployment = _dateOfEmployment;
-}
-QDate Manager::getDateOfEmployment() {
-	return dateOfEmployment;
-}
+  
+void Manager::setDateOfEmployment(const QDate& date){
+    this->dateOfEmplyment = date;
+};

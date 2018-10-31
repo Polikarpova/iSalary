@@ -1,100 +1,189 @@
 #pragma once
-//#include "user.h"
-#include <QString>
-#include <QDate>
-class Manager {//: public User {
-private:
-	int id;
-	QString firstName;
-	QString secondName;
-	QString thirdName;
-	QDate dateOfBirth;
-	bool isMale;
-	QString passportSerial;
-	QString passportNumber;
-	QString passportIssued;
-	QDate passportIssueDate;
-	QString placeOfRegistration;
-	QString INN;
-	QString email;
-	QString mobileNumber;
-	QDate dateOfEmployment;
 
+#include <qstring.h>
+#include <qdatetime.h>
+
+#include "User.h"
+
+/**
+* Пол
+*/
+enum Sex {
+    MALE = 1,
+    FEMALE = 2
+};
+
+/**
+* Класс Менеджера
+* Содержит всю информацию по менеджеру
+*/
+class Manager : public User
+{
 public:
-	Manager(void);
-	Manager( 
-		QString _firstName,
-		QString _secondName,
-		QString _thirdName,
-		QDate _dateOfBirth,
-		bool _isMale,
-		QString _passportSerial,
-		QString _passportNumber,
-		QString _passportIssued,
-		QDate _passportIssueDate,
-		QString _placeOfRegistration,
-		QString _INN,
-		QString _email,
-		QString _mobileNumber,
-		QDate _dateOfEmployment
-	);
-	~Manager(void);
+    Manager( void);
+    Manager( int id);
 
 	void setId( int _id );
-	int getId();
-	
-	void setFirstName( QString _firstName );
-	QString getFirstName();
 
+    /**
+    * Получить Имя менеджера
+    * @return -Имя менеджера
+    */
+    QString getFirstName() const;
+    
+    /**
+    * Изменить Имя менеджера
+    * @param firstname -новое Имя менеджера
+    */
+    void setFirstName( const QString& firstname);
+    
+    /**
+    * Получить Фамилию менеджера
+    * @return -Фамилия менеджера
+    */
+    QString getSecondName() const;
+    
+    /**
+    * Изменить Фамилию менеджера
+    * @param secondname -новую Фамилию менеджера
+    */
+    void setSecondName( const QString& secondname);
+    
+    /**
+    * Получить Отчество менеджера
+    * @return -Отчество менеджера
+    */
+    QString getThirdName() const;
+    
+    /**
+    * Изменить Отчество менеджера
+    * @param thirdname -новое Отчество менеджера
+    */
+    void setThirdName( const QString& thirdname);
+    
+    Sex getSex() const;
+    
+    /**
+    * Изменить Пол менеджера
+    * @param sex -новый пол менеджера
+    */
+    void setSex( Sex sex);
 
-	void setSecondName( QString _secondName );
-	QString getSecondName();
+    /**
+    * Получить серийный номер паспорта менеджера
+    * @return -серийный номер паспорта менеджера
+    */
+    QString getPassportSerial() const;
+    
+    /**
+    * Изменить Серию паспорта менеджера
+    * @param passportSerial -новая серия паспорта менеджера длиной в 4 символа
+    */
+    void setPassportSerial( const QString& passportSerial);
+    
+    /**
+    * Получить номер паспорта менеджера
+    * @return -номер паспорта менеджера
+    */
+    QString getPassportNumber() const;
+    
+    /**
+    * Изменить Номер паспорта менеджера
+    * @param passportNumber -новый Номер паспорта менеджера длиной в 6 символов
+    */
+    void setPassportNumber( const QString& passportNumber);
+    
+    /**
+    * Получить дату выдачи паспорта менеджера
+    * @return -дата выдачи паспорта менеджера
+    */
+    QDate getPassportDateIssue() const;
+    
+    /**
+    * Изменить Дату выдачи паспорта менеджера
+    * @param date -новая Дата выдачи паспорта менеджера
+    */
+    void setPassportDateIssue( const QDate& date);
+    
+    /**
+    * Получить адрес прописки менеджера
+    * @return -адрес прописки менеджера
+    */
+    QString getAddress() const;
+    
+    /**
+    * Изменить Адрес прописки менеджера
+    * @param passportNumber -новый Адрес прописки менеджера
+    */
+    void setAddress( const QString& passportNumber);
+    
+    
+    /**
+    * Получить ИНН менеджера
+    * @return -ИНН менеджера
+    */
+    QString getINN() const;
+    
+    /**
+    * Изменить ИНН менеджера
+    * @param INN -новый ИНН менеджера
+    * @todo: проверка корректности
+    */
+    void setINN( const QString& INN);
+    
+    /**
+    * Получить E-mail менеджера
+    * @return -E-mail менеджера
+    */
+    QString getEmail() const;
+    
+    /**
+    * Изменить E-Mail менеджера
+    * @param email -новый E-mail менеджера
+    * @todo: проверка корректности
+    */
+    void setEmail( const QString& email);
+    
+    /**
+    * Получить сотовый номер менеджера
+    * @return -сотовый номер менеджера
+    */
+    QString getMobileNumber() const;
+    
+    /**
+    * Изменить Сотовый номер менеджера
+    * @param mobileNumber -Сотовый номер менеджера
+    */
+    void setMobileNumber( const QString& mobileNumber);
+    
+    /**
+    * Получить дата найма менеджера
+    * @return -дата найма менеджера
+    */
+    QDate getDateOfEmployment() const;
+    
+    /**
+    * Изменить Дату найма менеджера
+    * @param date -новая Дата найма менеджера
+    */
+    void setDateOfEmployment(const QDate& date);
 
+    ~Manager( void);
 
-	void setThirdName( QString _thirdName );
-	QString getThirdName();
+private:
 
+    QString firstName;
+    QString secondName;
+    QString thirdName;
+    Sex sex;
+    QString passportSerial;
+    QString passportNumber;
+    QDate passportIssueDate;
+    QString address;
+    QString INN;
+    QString email;
+    QString mobileNumber;
+    QDate dateOfEmplyment;
 
-	void setDateOfBirth( QDate _dateOfBirth );
-	QDate getDateOfBirth();
-
-
-	void setIsMale( bool _isMale );
-	bool getIsMale();
-
-
-	void setPassportSerial( QString _passportSerial );
-	QString getPassportSerial();
-
-
-	void setPassportNumber( QString _passportNumber );
-	QString getPassportNumber();
-
-
-	void setPassportIssued( QString _passportIssued );
-	QString getPassportIssued();
-
-
-	void setPassportIssueDate( QDate _passportIssueDate );
-	QDate getPassportIssueDate();
-
-
-	void setPlaceOfRegistration( QString _placeOfRegistration );
-	QString getPlaceOfRegistration();
-
-
-	void setINN( QString _INN );
-	QString getINN();
-
-
-	void setEmail( QString _email );
-	QString getEmail();
-
-
-	void setMobileNumber( QString _mobileNumber );
-	QString getMobileNumber();
-
-
-	void setDateOfEmployment( QDate _dateOfEmployment );
-	QDate getDateOfEmployment();
 };
+
