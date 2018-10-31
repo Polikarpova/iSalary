@@ -18,7 +18,6 @@ private:
 	int saler_id;
 	Manager saler;
 	int product_id;
-	Product product;
 	SaleStatus status;
 	
 public:
@@ -43,7 +42,10 @@ public:
 	void setProductId( int _id );
 	int getProductId();
 
-	void setProduct( Product product );
-	Product getProduct();
+	virtual void setProduct( Product product ) = 0;
+	virtual Product getProduct() = 0;
+
+	virtual QString getProductName() = 0;
+	virtual double getProductCommission() = 0;
 };
 

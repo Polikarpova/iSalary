@@ -56,11 +56,3 @@ void Sale::setProductId( int _id) {
 int Sale::getProductId() {
 	return product_id;
 }
-
-
-void Sale::setProduct( Product _product ) {
-	product = _product;
-}
-Product Sale::getProduct() {
-	return product;
-}
