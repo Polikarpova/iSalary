@@ -425,7 +425,7 @@ public:
         tabWidget->setDocumentMode(false);
         tabWidget->setTabsClosable(false);
         tabWidget->setMovable(false);
-        tabWidget->setTabBarAutoHide(false);
+        tabWidget->setProperty("tabBarAutoHide", QVariant(false));
         tabManagers = new QWidget();
         tabManagers->setObjectName(QStringLiteral("tabManagers"));
         horizontalLayout_3 = new QHBoxLayout(tabManagers);
@@ -476,7 +476,7 @@ public:
         managersDataTab->setUsesScrollButtons(true);
         managersDataTab->setDocumentMode(false);
         managersDataTab->setTabsClosable(false);
-        managersDataTab->setTabBarAutoHide(false);
+        managersDataTab->setProperty("tabBarAutoHide", QVariant(false));
         personalDataTab = new QWidget();
         personalDataTab->setObjectName(QStringLiteral("personalDataTab"));
         verticalLayout_20 = new QVBoxLayout(personalDataTab);
@@ -533,9 +533,9 @@ public:
         dateOfBirth->setFrame(true);
         dateOfBirth->setButtonSymbols(QAbstractSpinBox::UpDownArrows);
         dateOfBirth->setKeyboardTracking(true);
-        dateOfBirth->setProperty("showGroupSeparator", QVariant(false));
         dateOfBirth->setMinimumDate(QDate(1900, 9, 14));
         dateOfBirth->setCalendarPopup(true);
+        dateOfBirth->setProperty("showGroupSeparator", QVariant(false));
 
         formLayout_4->setWidget(3, QFormLayout::FieldRole, dateOfBirth);
 
@@ -624,9 +624,9 @@ public:
         dateOfReceipt->setFrame(true);
         dateOfReceipt->setButtonSymbols(QAbstractSpinBox::UpDownArrows);
         dateOfReceipt->setKeyboardTracking(true);
-        dateOfReceipt->setProperty("showGroupSeparator", QVariant(false));
         dateOfReceipt->setMinimumDate(QDate(1900, 9, 14));
         dateOfReceipt->setCalendarPopup(true);
+        dateOfReceipt->setProperty("showGroupSeparator", QVariant(false));
 
         formLayout_3->setWidget(1, QFormLayout::FieldRole, dateOfReceipt);
 
@@ -796,7 +796,7 @@ public:
         horizontalLayout_14->setObjectName(QStringLiteral("horizontalLayout_14"));
         productSearch = new QLineEdit(tabProducts);
         productSearch->setObjectName(QStringLiteral("productSearch"));
-        productSearch->setClearButtonEnabled(false);
+        productSearch->setProperty("clearButtonEnabled", QVariant(false));
 
         horizontalLayout_14->addWidget(productSearch);
 
@@ -853,7 +853,7 @@ public:
         productName = new QLineEdit(tabProducts);
         productName->setObjectName(QStringLiteral("productName"));
         productName->setEnabled(false);
-        productName->setClearButtonEnabled(false);
+        productName->setProperty("clearButtonEnabled", QVariant(false));
 
         formLayout_6->setWidget(0, QFormLayout::FieldRole, productName);
 
@@ -1092,9 +1092,9 @@ public:
         correctionDateOfSale->setFrame(true);
         correctionDateOfSale->setButtonSymbols(QAbstractSpinBox::UpDownArrows);
         correctionDateOfSale->setKeyboardTracking(true);
-        correctionDateOfSale->setProperty("showGroupSeparator", QVariant(false));
         correctionDateOfSale->setMinimumDate(QDate(1900, 9, 14));
         correctionDateOfSale->setCalendarPopup(true);
+        correctionDateOfSale->setProperty("showGroupSeparator", QVariant(false));
 
         formLayout_7->setWidget(5, QFormLayout::FieldRole, correctionDateOfSale);
 
@@ -1128,7 +1128,7 @@ public:
         correctionHistoryList->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 444, 207));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 98, 28));
         correctionHistoryList->setWidget(scrollAreaWidgetContents);
 
         verticalLayout_12->addWidget(correctionHistoryList);
@@ -1175,9 +1175,9 @@ public:
         salesDateInput->setFrame(true);
         salesDateInput->setButtonSymbols(QAbstractSpinBox::UpDownArrows);
         salesDateInput->setKeyboardTracking(true);
-        salesDateInput->setProperty("showGroupSeparator", QVariant(false));
         salesDateInput->setMinimumDate(QDate(1900, 9, 14));
         salesDateInput->setCalendarPopup(true);
+        salesDateInput->setProperty("showGroupSeparator", QVariant(false));
 
         horizontalLayout_34->addWidget(salesDateInput);
 
@@ -1257,9 +1257,9 @@ public:
         statisticStartPeriod->setFrame(true);
         statisticStartPeriod->setButtonSymbols(QAbstractSpinBox::UpDownArrows);
         statisticStartPeriod->setKeyboardTracking(true);
-        statisticStartPeriod->setProperty("showGroupSeparator", QVariant(false));
         statisticStartPeriod->setMinimumDate(QDate(1900, 9, 14));
         statisticStartPeriod->setCalendarPopup(true);
+        statisticStartPeriod->setProperty("showGroupSeparator", QVariant(false));
 
         horizontalLayout_36->addWidget(statisticStartPeriod);
 
@@ -1279,9 +1279,9 @@ public:
         statisticEndPeriod->setFrame(true);
         statisticEndPeriod->setButtonSymbols(QAbstractSpinBox::UpDownArrows);
         statisticEndPeriod->setKeyboardTracking(true);
-        statisticEndPeriod->setProperty("showGroupSeparator", QVariant(false));
         statisticEndPeriod->setMinimumDate(QDate(1900, 9, 14));
         statisticEndPeriod->setCalendarPopup(true);
+        statisticEndPeriod->setProperty("showGroupSeparator", QVariant(false));
 
         horizontalLayout_36->addWidget(statisticEndPeriod);
 
@@ -1491,9 +1491,9 @@ public:
         salaryDateOfReceipt->setFrame(true);
         salaryDateOfReceipt->setButtonSymbols(QAbstractSpinBox::UpDownArrows);
         salaryDateOfReceipt->setKeyboardTracking(true);
-        salaryDateOfReceipt->setProperty("showGroupSeparator", QVariant(false));
         salaryDateOfReceipt->setMinimumDate(QDate(1900, 9, 14));
         salaryDateOfReceipt->setCalendarPopup(true);
+        salaryDateOfReceipt->setProperty("showGroupSeparator", QVariant(false));
 
         formLayout_10->setWidget(1, QFormLayout::FieldRole, salaryDateOfReceipt);
 
@@ -1609,7 +1609,7 @@ public:
         currentSalary = new QLineEdit(manager);
         currentSalary->setObjectName(QStringLiteral("currentSalary"));
         currentSalary->setEnabled(false);
-        currentSalary->setClearButtonEnabled(false);
+        currentSalary->setProperty("clearButtonEnabled", QVariant(false));
 
         horizontalLayout_23->addWidget(currentSalary);
 
@@ -1733,7 +1733,7 @@ public:
         horizontalLayout_22->setObjectName(QStringLiteral("horizontalLayout_22"));
         managerProductSearch = new QLineEdit(manager);
         managerProductSearch->setObjectName(QStringLiteral("managerProductSearch"));
-        managerProductSearch->setClearButtonEnabled(false);
+        managerProductSearch->setProperty("clearButtonEnabled", QVariant(false));
 
         horizontalLayout_22->addWidget(managerProductSearch);
 
