@@ -6,16 +6,6 @@
 #include "OpenAccoutingPeriod.h"
 #include "AccoutingPeriod.h"
 
-/*
-CREATE TABLE `accouting_period` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `dataFrom` date NOT NULL,
-  `dataTo` date DEFAULT NULL,
-  `status` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-*/
-
 /**
 * Класс доступа к БД для сущности AccoutingPeriod
 *

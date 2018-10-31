@@ -82,6 +82,7 @@
     <ClCompile Include="..\..\..\..\Users\Пользователь\Desktop\дима\Product.cpp" />
     <ClCompile Include="..\..\..\..\Users\Пользователь\Desktop\дима\Product_DB.cpp" />
     <ClCompile Include="..\..\..\..\Users\Пользователь\Desktop\дима\Sale.cpp" />
+    <ClCompile Include="AccoutingPeriodDB.cpp" />
     <ClCompile Include="AuthorizationFacade.cpp" />
     <ClCompile Include="AuthorizationModule.cpp" />
     <ClCompile Include="AuthPage.cpp" />

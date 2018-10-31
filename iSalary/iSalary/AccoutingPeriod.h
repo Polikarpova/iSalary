@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Salary.h"
 #include "Manager.h"
 
@@ -23,11 +25,6 @@ public:
     * @param database - экземпляр уже настроенной QSqlDatabase
     */
     AccoutingPeriod( void);
-
-	/**
-	* Деструктор
-	*/
-	virtual ~AccoutingPeriod() = 0 {};
 
 	/**
 	* Считает зарплату для одного менеджера
