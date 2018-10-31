@@ -3,6 +3,11 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_mainwindow.h"
+#include "QTextCodec"
+#include "Product_DB.h"
+#include "Product.h"
+#include "QStandardItemModel"
+#include "QStandardItem"
 
 #include "AuthPage.h"
 
@@ -13,7 +18,7 @@
 #include "QStandardItem"
 
 /**
-* Перечисление основных виджетов программы
+* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 */
 enum ProgramWidgets {
     AUTH_WIDGET = 0,
@@ -21,7 +26,7 @@ enum ProgramWidgets {
 };
 
 /**
-* Перечисление основных виджетов по ролям
+* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 */
 enum UserRoleWidgets {
     BOSS_WIDGET = 0,
@@ -38,19 +43,23 @@ public:
 
 private:
 	Ui::MainWindowClass ui;
+	QTextCodec* c ;
+	QSqlDatabase  _db;
+	
+	void createHorizontalTabs();
 
     AuthPage* authPage;
 
 	void createHorizontalTabs();
     void enterProgram( const UserDTO& user, UserType userType);
     
-	//димы
+	//пїЅпїЅпїЅпїЅ
 	QSqlDatabase  _db;
 
 	Product_DB * product_db;
 	QHash <int, Product> products;
 	QStandardItemModel *productsTableModel;
-	// DEFAULT - начальное состояние, ADD_PRODUCT - добавление товара, UPDATE_PRODUCT - изменение товара
+	// DEFAULT - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, ADD_PRODUCT - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, UPDATE_PRODUCT - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	enum StatusType {DEFAULT, ADD_PRODUCT, UPDATE_PRODUCT};
 	StatusType status;  
 
@@ -69,6 +78,10 @@ private slots:
 	void showProduct();
 	void removeProduct();
 	void searchProduct();
+	void searchManagersProductTable();
+	void clearManagersProductsTable();
+	void fillManagetsProductTable();
+	void initManagerWindow();
 };
 
 #endif // MAINWINDOW_H
