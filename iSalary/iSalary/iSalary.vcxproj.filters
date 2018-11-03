@@ -137,6 +137,27 @@
     <ClCompile Include="Manager.cpp">
       <Filter>Source Files\Model\DomainModel\PersonnalAccountingModule</Filter>
     </ClCompile>
+    <ClCompile Include="PersonnalAccountingFacade.cpp">
+      <Filter>Source Files\Model\ModelFacade</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_EmployeesPage.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_EmployeesPage.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="EmployeesPage.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="EmployeesTableModel.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_EmployeesTableModel.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_EmployeesTableModel.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -153,6 +174,12 @@
     </CustomBuild>
     <CustomBuild Include="test_userdb.h">
       <Filter>Header Files\Test</Filter>
+    </CustomBuild>
+    <CustomBuild Include="EmployeesPage.h">
+      <Filter>Header Files\View</Filter>
+    </CustomBuild>
+    <CustomBuild Include="EmployeesTableModel.h">
+      <Filter>Header Files\View</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -197,6 +224,12 @@
     </ClInclude>
     <ClInclude Include="ManagerDB.h">
       <Filter>Header Files\DB</Filter>
+    </ClInclude>
+    <ClInclude Include="PersonnalAccountingFacade.h">
+      <Filter>Header Files\Model\ModelFacade</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagerDTO.h">
+      <Filter>Header Files\Model\ModelFacade</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
