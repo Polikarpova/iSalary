@@ -28,7 +28,7 @@ public:
     * Нанять менеджера
     * @return - результат попытки найма
     */
-    bool Employ( const Manager& manager);
+    bool employ( const Manager& manager);
 
 private:
     IManagerRepository* managerRepository; /**< хранилище менеджеров */

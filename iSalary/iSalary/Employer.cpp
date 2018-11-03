@@ -7,7 +7,7 @@ Employer::Employer( IUserRepository* users, IManagerRepository* managers){
 }
 
 
-bool Employer::Employ( const Manager& manager){
+bool Employer::employ( const Manager& manager){
     bool isINNUniq = !this->managerRepository->findByINN( manager.getINN(), NULL);
     bool isPassporUniq = !this->managerRepository->findByPassport( manager.getPassportSerial(), manager.getPassportNumber(), NULL);
     
