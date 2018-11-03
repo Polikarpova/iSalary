@@ -87,7 +87,7 @@ UserInfo UserDB::getById( int id) {
 QList<UserInfo> UserDB::getByIds( QList<int> ids) {
     QList<UserInfo> users;
     if( ids.size() > 0) { 
-        QSqlQuery query( *db);
+        QSqlQuery query( *this->db);
 
         QString sql = "SELECT `%1`,`%2`,`%3`,`%4` FROM %0 WHERE `%1` IN (%10)";
         sql = sql.arg(
@@ -173,12 +173,14 @@ UserInfo UserDB::findByLogin( const QString& login) {
 
 
 void UserDB::handleError( const QSqlError& error) const {
-    QSqlError err = error;
+
+    QSqlError * err = new QSqlError(error);
+    QString text = err->text();
     throw err;
 }
 
 void UserDB::handleError( const QString& error) const {
-    QString err = error;
+    QString * err = new QString(error);
     throw err;
 }
 
