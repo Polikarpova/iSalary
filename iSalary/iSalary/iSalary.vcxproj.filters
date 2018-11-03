@@ -128,9 +128,6 @@
     <ClCompile Include="test_userdb.cpp">
       <Filter>Source Files\Test</Filter>
     </ClCompile>
-    <ClCompile Include="ManagerDB.cpp">
-      <Filter>Source Files\DB</Filter>
-    </ClCompile>
     <ClCompile Include="Employer.cpp">
       <Filter>Source Files\Model\DomainModel\PersonnalAccountingModule</Filter>
     </ClCompile>
