@@ -82,6 +82,8 @@ void EmployeesPage::setUI(
 
     this->cancelAddBtn = cancelAddBtn;
     connect( this->cancelAddBtn, &QPushButton::clicked, this, &EmployeesPage::cancel);
+
+    this->fillInputDefaultStyles();
 }
 
 void EmployeesPage::refreshList() {
@@ -105,6 +107,10 @@ void EmployeesPage::refreshList() {
 }
 
 void EmployeesPage::showDetailsById( int managerId) {
+    this->enableInputs( false);
+    this->buttonStackedWidget->setCurrentIndex( PAGE_BTNS_SHOW);
+    this->clearErrors();
+
     const ManagerDTO& manager = this->managers[ managerId];
 
     this->firstNameInput->setText( manager.firstName);
@@ -144,23 +150,27 @@ void EmployeesPage::startAdd() {
 }
 
 void EmployeesPage::saveEdit() {
-    ManagerDTO manager = this->readFromInputs();
-    manager.id = this->getSelectedManagerId();
-    this->personnalAccouting->updateManager( manager);
+    if( validateInputs()){
+        ManagerDTO manager = this->readFromInputs();
+        manager.id = this->getSelectedManagerId();
     
-    this->refreshList();
+        this->personnalAccouting->updateManager( manager);
+    
+        this->refreshList();
+    }
 }
 
 void EmployeesPage::saveAdd() {
-    ManagerDTO manager = this->readFromInputs();
-    this->personnalAccouting->hireManager( manager);
+    if( validateInputs()) {
+        ManagerDTO manager = this->readFromInputs();
     
-    this->refreshList();
+        this->personnalAccouting->hireManager( manager);
+    
+        this->refreshList();
+    }
 }
 
 void EmployeesPage::cancel() {
-    this->enableInputs( false);
-    this->buttonStackedWidget->setCurrentIndex( PAGE_BTNS_SHOW);
     this->showDetails( this->managersTable->currentIndex());
 }
 
@@ -236,3 +246,90 @@ ManagerDTO EmployeesPage::readFromInputs() {
 }
 
 
+bool EmployeesPage::validateInputs() {
+
+    ManagerDTO manager = this->readFromInputs();
+    bool isOk = true;
+    if( manager.firstName.size() == 0 ) {
+        inputError( this->firstNameInput);
+        isOk = false;
+    }
+    
+    if( manager.secondName.size() == 0 ) {
+        inputError( this->secondNameInput);
+        isOk = false;
+    }
+
+    if( manager.thirdName.size() == 0 ) {
+        inputError( this->thirdNameInput);
+        isOk = false;
+    }
+
+    if( manager.passportSerial == 0 ) {
+        inputError( this->passportSerialInput);
+        isOk = false;
+    }
+    
+    if( manager.passportNumber == 0 ) {
+        inputError( this->passportNumberInput);
+        isOk = false;
+    }
+    /*
+    if( manager.address.size() ){
+        inputError( this->addressInput);
+        isOk = false;
+    }
+    */
+
+    if( manager.INN.size() == 0 ) {
+        inputError( this->INNInput);
+        isOk = false;
+    }
+
+    if( manager.login.size() == 0 ) {
+        inputError( this->loginInput);
+        isOk = false;
+    }
+
+    if( manager.passwword.size() == 0 ) {
+        inputError( this->passwordInput);
+        isOk = false;
+    }
+
+    return isOk;
+}
+
+
+void EmployeesPage::fillInputDefaultStyles() {
+    
+    
+    this->widgetDefaultStyles[ this->loginInput] = this->loginInput->styleSheet();
+    this->widgetDefaultStyles[ this->passwordInput] = this->passwordInput->styleSheet();
+
+    this->widgetDefaultStyles[ this->firstNameInput] = this->firstNameInput->styleSheet();
+    this->widgetDefaultStyles[ this->secondNameInput] = this->secondNameInput->styleSheet();
+    this->widgetDefaultStyles[ this->thirdNameInput] = this->thirdNameInput->styleSheet();
+    this->widgetDefaultStyles[ this->birthdayInput] = this->birthdayInput->styleSheet();
+    this->widgetDefaultStyles[ this->passportSerialInput] = this->passportSerialInput->styleSheet();
+    this->widgetDefaultStyles[ this->passportNumberInput] = this->passportNumberInput->styleSheet();
+    this->widgetDefaultStyles[ this->maleInput] = this->maleInput->styleSheet();
+    this->widgetDefaultStyles[ this->femaleInput] = this->femaleInput->styleSheet();
+    this->widgetDefaultStyles[ this->passportSourceInput] = this->passportSourceInput->styleSheet();
+    this->widgetDefaultStyles[ this->passportIssueDate] = this->passportIssueDate->styleSheet();
+    this->widgetDefaultStyles[ this->addressInput] = this->addressInput->styleSheet();
+    this->widgetDefaultStyles[ this->INNInput] = this->INNInput->styleSheet();
+}
+
+void EmployeesPage::inputError( QWidget* edit) {
+    edit->setStyleSheet("border: 1px solid red");
+}
+
+void EmployeesPage::clearError( QWidget* edit) {
+    edit->setStyleSheet( this->widgetDefaultStyles[edit]);
+}
+
+void EmployeesPage::clearErrors() {
+    for( auto iWidgetStyle = this->widgetDefaultStyles.begin(); iWidgetStyle != this->widgetDefaultStyles.end(); iWidgetStyle++){
+        iWidgetStyle.key()->setStyleSheet( iWidgetStyle.value());
+    }
+}

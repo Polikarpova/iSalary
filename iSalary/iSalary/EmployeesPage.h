@@ -79,6 +79,18 @@ protected:
 
     ManagerDTO readFromInputs();
     
+    bool validateInputs();
+
+    QHash<QWidget*, QString> widgetDefaultStyles;
+
+    void fillInputDefaultStyles();
+
+    void inputError( QWidget* edit);
+    
+    void clearError( QWidget* edit);
+
+    void clearErrors();
+    
     enum Btns_Page {
         PAGE_BTNS_SHOW,
         PAGE_BTNS_EDIT,
