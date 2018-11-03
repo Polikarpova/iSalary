@@ -1,9 +1,11 @@
+#pragma once
 #include <QSqlQuery>
 #include <QSqlDatabase>
 #include <QVariant>
 #include <QSqlResult>
 #include "ActiveSale.h"
 #include "ClosedSale.h"
+#include "Manager.h"
 #include <QVector>
 #include <QSqlError>
 
@@ -24,4 +26,3 @@ protected:
 private:
 	QSqlDatabase _db;
 };
-

@@ -1,101 +1,189 @@
 #pragma once
-//#include "user.h"
-#include <QString>
-#include <QDate>
-class Manager {//: public User {
-private:
-	int id;
-	QString firstName;
-	QString secondName;
-	QString thirdName;
-	QDate dateOfBirth;
-	bool isMale;
-	QString passportSerial;
-	QString passportNumber;
-	QString passportIssued;
-	QDate passportIssueDate;
-	QString placeOfRegistration;
-	QString INN;
-	QString email;
-	QString mobileNumber;
-	QDate dateOfEmployment;
 
+#include <qstring.h>
+#include <qdatetime.h>
+
+#include "User.h"
+
+/**
+* ���
+*/
+enum Sex {
+    MALE = 1,
+    FEMALE = 2
+};
+
+/**
+* ����� ���������
+* �������� ��� ���������� �� ���������
+*/
+class Manager : public User
+{
 public:
-	Manager(void);
-	Manager( 
-		QString _firstName,
-		QString _secondName,
-		QString _thirdName,
-		QDate _dateOfBirth,
-		bool _isMale,
-		QString _passportSerial,
-		QString _passportNumber,
-		QString _passportIssued,
-		QDate _passportIssueDate,
-		QString _placeOfRegistration,
-		QString _INN,
-		QString _email,
-		QString _mobileNumber,
-		QDate _dateOfEmployment
-	);
-	~Manager(void);
+    Manager( void);
+    Manager( int id);
 
 	void setId( int _id );
-	int getId();
-	
-	void setFirstName( QString _firstName );
-	QString getFirstName();
 
+    /**
+    * �������� ��� ���������
+    * @return -��� ���������
+    */
+    QString getFirstName() const;
+    
+    /**
+    * �������� ��� ���������
+    * @param firstname -����� ��� ���������
+    */
+    void setFirstName( const QString& firstname);
+    
+    /**
+    * �������� ������� ���������
+    * @return -������� ���������
+    */
+    QString getSecondName() const;
+    
+    /**
+    * �������� ������� ���������
+    * @param secondname -����� ������� ���������
+    */
+    void setSecondName( const QString& secondname);
+    
+    /**
+    * �������� �������� ���������
+    * @return -�������� ���������
+    */
+    QString getThirdName() const;
+    
+    /**
+    * �������� �������� ���������
+    * @param thirdname -����� �������� ���������
+    */
+    void setThirdName( const QString& thirdname);
+    
+    Sex getSex() const;
+    
+    /**
+    * �������� ��� ���������
+    * @param sex -����� ��� ���������
+    */
+    void setSex( Sex sex);
 
-	void setSecondName( QString _secondName );
-	QString getSecondName();
+    /**
+    * �������� �������� ����� �������� ���������
+    * @return -�������� ����� �������� ���������
+    */
+    QString getPassportSerial() const;
+    
+    /**
+    * �������� ����� �������� ���������
+    * @param passportSerial -����� ����� �������� ��������� ������ � 4 �������
+    */
+    void setPassportSerial( const QString& passportSerial);
+    
+    /**
+    * �������� ����� �������� ���������
+    * @return -����� �������� ���������
+    */
+    QString getPassportNumber() const;
+    
+    /**
+    * �������� ����� �������� ���������
+    * @param passportNumber -����� ����� �������� ��������� ������ � 6 ��������
+    */
+    void setPassportNumber( const QString& passportNumber);
+    
+    /**
+    * �������� ���� ������ �������� ���������
+    * @return -���� ������ �������� ���������
+    */
+    QDate getPassportDateIssue() const;
+    
+    /**
+    * �������� ���� ������ �������� ���������
+    * @param date -����� ���� ������ �������� ���������
+    */
+    void setPassportDateIssue( const QDate& date);
+    
+    /**
+    * �������� ����� �������� ���������
+    * @return -����� �������� ���������
+    */
+    QString getAddress() const;
+    
+    /**
+    * �������� ����� �������� ���������
+    * @param passportNumber -����� ����� �������� ���������
+    */
+    void setAddress( const QString& passportNumber);
+    
+    
+    /**
+    * �������� ��� ���������
+    * @return -��� ���������
+    */
+    QString getINN() const;
+    
+    /**
+    * �������� ��� ���������
+    * @param INN -����� ��� ���������
+    * @todo: �������� ������������
+    */
+    void setINN( const QString& INN);
+    
+    /**
+    * �������� E-mail ���������
+    * @return -E-mail ���������
+    */
+    QString getEmail() const;
+    
+    /**
+    * �������� E-Mail ���������
+    * @param email -����� E-mail ���������
+    * @todo: �������� ������������
+    */
+    void setEmail( const QString& email);
+    
+    /**
+    * �������� ������� ����� ���������
+    * @return -������� ����� ���������
+    */
+    QString getMobileNumber() const;
+    
+    /**
+    * �������� ������� ����� ���������
+    * @param mobileNumber -������� ����� ���������
+    */
+    void setMobileNumber( const QString& mobileNumber);
+    
+    /**
+    * �������� ���� ����� ���������
+    * @return -���� ����� ���������
+    */
+    QDate getDateOfEmployment() const;
+    
+    /**
+    * �������� ���� ����� ���������
+    * @param date -����� ���� ����� ���������
+    */
+    void setDateOfEmployment(const QDate& date);
 
+    ~Manager( void);
 
-	void setThirdName( QString _thirdName );
-	QString getThirdName();
+private:
 
+    QString firstName;
+    QString secondName;
+    QString thirdName;
+    Sex sex;
+    QString passportSerial;
+    QString passportNumber;
+    QDate passportIssueDate;
+    QString address;
+    QString INN;
+    QString email;
+    QString mobileNumber;
+    QDate dateOfEmplyment;
 
-	void setDateOfBirth( QDate _dateOfBirth );
-	QDate getDateOfBirth();
-
-
-	void setIsMale( bool _isMale );
-	bool getIsMale();
-
-
-	void setPassportSerial( QString _passportSerial );
-	QString getPassportSerial();
-
-
-	void setPassportNumber( QString _passportNumber );
-	QString getPassportNumber();
-
-
-	void setPassportIssued( QString _passportIssued );
-	QString getPassportIssued();
-
-
-	void setPassportIssueDate( QDate _passportIssueDate );
-	QDate getPassportIssueDate();
-
-
-	void setPlaceOfRegistration( QString _placeOfRegistration );
-	QString getPlaceOfRegistration();
-
-
-	void setINN( QString _INN );
-	QString getINN();
-
-
-	void setEmail( QString _email );
-	QString getEmail();
-
-
-	void setMobileNumber( QString _mobileNumber );
-	QString getMobileNumber();
-
-
-	void setDateOfEmployment( QDate _dateOfEmployment );
-	QDate getDateOfEmployment();
 };
 

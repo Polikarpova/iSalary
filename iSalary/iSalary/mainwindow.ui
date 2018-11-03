@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1001</width>
-    <height>620</height>
+    <width>1044</width>
+    <height>611</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout_17">
     <item>
-     <widget class="QStackedWidget" name="stackedWidget_4">
+     <widget class="QStackedWidget" name="auth_program_stackedWidget">
       <property name="currentIndex">
        <number>1</number>
       </property>
@@ -163,7 +163,7 @@
       <widget class="QWidget" name="main">
        <layout class="QVBoxLayout" name="verticalLayout_6">
         <item>
-         <widget class="QStackedWidget" name="stackedWidget_3">
+         <widget class="QStackedWidget" name="boss_manager_stackedWidget">
           <property name="currentIndex">
            <number>1</number>
           </property>
@@ -178,7 +178,7 @@
                <enum>QTabWidget::Rounded</enum>
               </property>
               <property name="currentIndex">
-               <number>1</number>
+               <number>2</number>
               </property>
               <property name="elideMode">
                <enum>Qt::ElideMiddle</enum>
@@ -1231,8 +1231,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>98</width>
-                       <height>28</height>
+                       <width>351</width>
+                       <height>207</height>
                       </rect>
                      </property>
                     </widget>
@@ -2091,7 +2091,7 @@
                    <double>0.010000000000000</double>
                   </property>
                   <property name="maximum">
-                   <double>99999.990000000005239</double>
+                   <double>99999999.000000000000000</double>
                   </property>
                   <property name="singleStep">
                    <double>0.010000000000000</double>
@@ -2237,7 +2237,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1001</width>
+     <width>1044</width>
      <height>21</height>
     </rect>
    </property>

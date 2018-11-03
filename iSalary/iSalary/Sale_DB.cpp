@@ -1,5 +1,6 @@
 #include "Sale_DB.h"
-
+#include "ActiveSale.h"
+#include "Manager.h"
 
 Sale_DB::Sale_DB( QSqlDatabase &db, QString table_name ) {
 	_db = db;
@@ -69,17 +70,3 @@ QVector<ActiveSale> Sale_DB::getActiveAll( int manager_id ) {
     }
     return sales;
 }
-
-//QVector<ClosedSale> Sale_DB::getClosedAll( int manager_id ) {
-//    QSqlQuery query( QString( "SELECT * FROM " ) + TABLE_NAME, _db );
-//    QVector<ActiveSale> sales;
-//    while ( query.next() ) {
-//        if ( query.value( "isActive" ).value<int>() == 0 ) {
-//			ClosedSale sale = read( &query );
-//			if ( sale.getSalerId() == manager_id ) {
-//				sales.append( sale );
-//			}
-//		}	
-//    }
-//    return sales;
-//}

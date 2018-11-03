@@ -47,7 +47,7 @@ class Ui_MainWindowClass
 public:
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout_17;
-    QStackedWidget *stackedWidget_4;
+    QStackedWidget *auth_program_stackedWidget;
     QWidget *enter;
     QVBoxLayout *verticalLayout_8;
     QVBoxLayout *verticalLayout_7;
@@ -67,7 +67,7 @@ public:
     QSpacerItem *verticalSpacer;
     QWidget *main;
     QVBoxLayout *verticalLayout_6;
-    QStackedWidget *stackedWidget_3;
+    QStackedWidget *boss_manager_stackedWidget;
     QWidget *owner;
     QVBoxLayout *verticalLayout_5;
     QTabWidget *tabWidget;
@@ -310,7 +310,7 @@ public:
     {
         if (MainWindowClass->objectName().isEmpty())
             MainWindowClass->setObjectName(QStringLiteral("MainWindowClass"));
-        MainWindowClass->resize(1001, 620);
+        MainWindowClass->resize(1044, 611);
         MainWindowClass->setStyleSheet(QStringLiteral("QMainWindow {background-color: white}"));
         centralWidget = new QWidget(MainWindowClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
@@ -318,8 +318,8 @@ public:
         horizontalLayout_17->setSpacing(6);
         horizontalLayout_17->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_17->setObjectName(QStringLiteral("horizontalLayout_17"));
-        stackedWidget_4 = new QStackedWidget(centralWidget);
-        stackedWidget_4->setObjectName(QStringLiteral("stackedWidget_4"));
+        auth_program_stackedWidget = new QStackedWidget(centralWidget);
+        auth_program_stackedWidget->setObjectName(QStringLiteral("auth_program_stackedWidget"));
         enter = new QWidget();
         enter->setObjectName(QStringLiteral("enter"));
         verticalLayout_8 = new QVBoxLayout(enter);
@@ -401,15 +401,15 @@ public:
 
         verticalLayout_8->addLayout(verticalLayout_7);
 
-        stackedWidget_4->addWidget(enter);
+        auth_program_stackedWidget->addWidget(enter);
         main = new QWidget();
         main->setObjectName(QStringLiteral("main"));
         verticalLayout_6 = new QVBoxLayout(main);
         verticalLayout_6->setSpacing(6);
         verticalLayout_6->setContentsMargins(11, 11, 11, 11);
         verticalLayout_6->setObjectName(QStringLiteral("verticalLayout_6"));
-        stackedWidget_3 = new QStackedWidget(main);
-        stackedWidget_3->setObjectName(QStringLiteral("stackedWidget_3"));
+        boss_manager_stackedWidget = new QStackedWidget(main);
+        boss_manager_stackedWidget->setObjectName(QStringLiteral("boss_manager_stackedWidget"));
         owner = new QWidget();
         owner->setObjectName(QStringLiteral("owner"));
         verticalLayout_5 = new QVBoxLayout(owner);
@@ -425,7 +425,7 @@ public:
         tabWidget->setDocumentMode(false);
         tabWidget->setTabsClosable(false);
         tabWidget->setMovable(false);
-        tabWidget->setProperty("tabBarAutoHide", QVariant(false));
+        tabWidget->setTabBarAutoHide(false);
         tabManagers = new QWidget();
         tabManagers->setObjectName(QStringLiteral("tabManagers"));
         horizontalLayout_3 = new QHBoxLayout(tabManagers);
@@ -476,7 +476,7 @@ public:
         managersDataTab->setUsesScrollButtons(true);
         managersDataTab->setDocumentMode(false);
         managersDataTab->setTabsClosable(false);
-        managersDataTab->setProperty("tabBarAutoHide", QVariant(false));
+        managersDataTab->setTabBarAutoHide(false);
         personalDataTab = new QWidget();
         personalDataTab->setObjectName(QStringLiteral("personalDataTab"));
         verticalLayout_20 = new QVBoxLayout(personalDataTab);
@@ -533,9 +533,9 @@ public:
         dateOfBirth->setFrame(true);
         dateOfBirth->setButtonSymbols(QAbstractSpinBox::UpDownArrows);
         dateOfBirth->setKeyboardTracking(true);
+        dateOfBirth->setProperty("showGroupSeparator", QVariant(false));
         dateOfBirth->setMinimumDate(QDate(1900, 9, 14));
         dateOfBirth->setCalendarPopup(true);
-        dateOfBirth->setProperty("showGroupSeparator", QVariant(false));
 
         formLayout_4->setWidget(3, QFormLayout::FieldRole, dateOfBirth);
 
@@ -624,9 +624,9 @@ public:
         dateOfReceipt->setFrame(true);
         dateOfReceipt->setButtonSymbols(QAbstractSpinBox::UpDownArrows);
         dateOfReceipt->setKeyboardTracking(true);
+        dateOfReceipt->setProperty("showGroupSeparator", QVariant(false));
         dateOfReceipt->setMinimumDate(QDate(1900, 9, 14));
         dateOfReceipt->setCalendarPopup(true);
-        dateOfReceipt->setProperty("showGroupSeparator", QVariant(false));
 
         formLayout_3->setWidget(1, QFormLayout::FieldRole, dateOfReceipt);
 
@@ -796,7 +796,7 @@ public:
         horizontalLayout_14->setObjectName(QStringLiteral("horizontalLayout_14"));
         productSearch = new QLineEdit(tabProducts);
         productSearch->setObjectName(QStringLiteral("productSearch"));
-        productSearch->setProperty("clearButtonEnabled", QVariant(false));
+        productSearch->setClearButtonEnabled(false);
 
         horizontalLayout_14->addWidget(productSearch);
 
@@ -853,7 +853,7 @@ public:
         productName = new QLineEdit(tabProducts);
         productName->setObjectName(QStringLiteral("productName"));
         productName->setEnabled(false);
-        productName->setProperty("clearButtonEnabled", QVariant(false));
+        productName->setClearButtonEnabled(false);
 
         formLayout_6->setWidget(0, QFormLayout::FieldRole, productName);
 
@@ -1092,9 +1092,9 @@ public:
         correctionDateOfSale->setFrame(true);
         correctionDateOfSale->setButtonSymbols(QAbstractSpinBox::UpDownArrows);
         correctionDateOfSale->setKeyboardTracking(true);
+        correctionDateOfSale->setProperty("showGroupSeparator", QVariant(false));
         correctionDateOfSale->setMinimumDate(QDate(1900, 9, 14));
         correctionDateOfSale->setCalendarPopup(true);
-        correctionDateOfSale->setProperty("showGroupSeparator", QVariant(false));
 
         formLayout_7->setWidget(5, QFormLayout::FieldRole, correctionDateOfSale);
 
@@ -1128,7 +1128,7 @@ public:
         correctionHistoryList->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 98, 28));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 351, 207));
         correctionHistoryList->setWidget(scrollAreaWidgetContents);
 
         verticalLayout_12->addWidget(correctionHistoryList);
@@ -1175,9 +1175,9 @@ public:
         salesDateInput->setFrame(true);
         salesDateInput->setButtonSymbols(QAbstractSpinBox::UpDownArrows);
         salesDateInput->setKeyboardTracking(true);
+        salesDateInput->setProperty("showGroupSeparator", QVariant(false));
         salesDateInput->setMinimumDate(QDate(1900, 9, 14));
         salesDateInput->setCalendarPopup(true);
-        salesDateInput->setProperty("showGroupSeparator", QVariant(false));
 
         horizontalLayout_34->addWidget(salesDateInput);
 
@@ -1257,9 +1257,9 @@ public:
         statisticStartPeriod->setFrame(true);
         statisticStartPeriod->setButtonSymbols(QAbstractSpinBox::UpDownArrows);
         statisticStartPeriod->setKeyboardTracking(true);
+        statisticStartPeriod->setProperty("showGroupSeparator", QVariant(false));
         statisticStartPeriod->setMinimumDate(QDate(1900, 9, 14));
         statisticStartPeriod->setCalendarPopup(true);
-        statisticStartPeriod->setProperty("showGroupSeparator", QVariant(false));
 
         horizontalLayout_36->addWidget(statisticStartPeriod);
 
@@ -1279,9 +1279,9 @@ public:
         statisticEndPeriod->setFrame(true);
         statisticEndPeriod->setButtonSymbols(QAbstractSpinBox::UpDownArrows);
         statisticEndPeriod->setKeyboardTracking(true);
+        statisticEndPeriod->setProperty("showGroupSeparator", QVariant(false));
         statisticEndPeriod->setMinimumDate(QDate(1900, 9, 14));
         statisticEndPeriod->setCalendarPopup(true);
-        statisticEndPeriod->setProperty("showGroupSeparator", QVariant(false));
 
         horizontalLayout_36->addWidget(statisticEndPeriod);
 
@@ -1491,9 +1491,9 @@ public:
         salaryDateOfReceipt->setFrame(true);
         salaryDateOfReceipt->setButtonSymbols(QAbstractSpinBox::UpDownArrows);
         salaryDateOfReceipt->setKeyboardTracking(true);
+        salaryDateOfReceipt->setProperty("showGroupSeparator", QVariant(false));
         salaryDateOfReceipt->setMinimumDate(QDate(1900, 9, 14));
         salaryDateOfReceipt->setCalendarPopup(true);
-        salaryDateOfReceipt->setProperty("showGroupSeparator", QVariant(false));
 
         formLayout_10->setWidget(1, QFormLayout::FieldRole, salaryDateOfReceipt);
 
@@ -1578,7 +1578,7 @@ public:
 
         verticalLayout_5->addWidget(tabWidget);
 
-        stackedWidget_3->addWidget(owner);
+        boss_manager_stackedWidget->addWidget(owner);
         manager = new QWidget();
         manager->setObjectName(QStringLiteral("manager"));
         horizontalLayout_24 = new QHBoxLayout(manager);
@@ -1609,7 +1609,7 @@ public:
         currentSalary = new QLineEdit(manager);
         currentSalary->setObjectName(QStringLiteral("currentSalary"));
         currentSalary->setEnabled(false);
-        currentSalary->setProperty("clearButtonEnabled", QVariant(false));
+        currentSalary->setClearButtonEnabled(false);
 
         horizontalLayout_23->addWidget(currentSalary);
 
@@ -1685,7 +1685,7 @@ public:
         priceSale = new QDoubleSpinBox(manager);
         priceSale->setObjectName(QStringLiteral("priceSale"));
         priceSale->setMinimum(0.01);
-        priceSale->setMaximum(100000);
+        priceSale->setMaximum(1e+08);
         priceSale->setSingleStep(0.01);
         priceSale->setValue(1);
 
@@ -1733,7 +1733,7 @@ public:
         horizontalLayout_22->setObjectName(QStringLiteral("horizontalLayout_22"));
         managerProductSearch = new QLineEdit(manager);
         managerProductSearch->setObjectName(QStringLiteral("managerProductSearch"));
-        managerProductSearch->setProperty("clearButtonEnabled", QVariant(false));
+        managerProductSearch->setClearButtonEnabled(false);
 
         horizontalLayout_22->addWidget(managerProductSearch);
 
@@ -1758,9 +1758,9 @@ public:
 
         horizontalLayout_24->addLayout(verticalLayout_9);
 
-        stackedWidget_3->addWidget(manager);
+        boss_manager_stackedWidget->addWidget(manager);
 
-        verticalLayout_6->addWidget(stackedWidget_3);
+        verticalLayout_6->addWidget(boss_manager_stackedWidget);
 
         horizontalLayout_13 = new QHBoxLayout();
         horizontalLayout_13->setSpacing(6);
@@ -1778,14 +1778,14 @@ public:
 
         verticalLayout_6->addLayout(horizontalLayout_13);
 
-        stackedWidget_4->addWidget(main);
+        auth_program_stackedWidget->addWidget(main);
 
-        horizontalLayout_17->addWidget(stackedWidget_4);
+        horizontalLayout_17->addWidget(auth_program_stackedWidget);
 
         MainWindowClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindowClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1001, 21));
+        menuBar->setGeometry(QRect(0, 0, 1044, 21));
         MainWindowClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindowClass);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -1796,9 +1796,9 @@ public:
 
         retranslateUi(MainWindowClass);
 
-        stackedWidget_4->setCurrentIndex(1);
-        stackedWidget_3->setCurrentIndex(1);
-        tabWidget->setCurrentIndex(1);
+        auth_program_stackedWidget->setCurrentIndex(1);
+        boss_manager_stackedWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(2);
         managersDataTab->setCurrentIndex(0);
         managersButtonsStackedWidget->setCurrentIndex(0);
         productButtonsStackedWidget->setCurrentIndex(0);

@@ -4,6 +4,9 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_mainwindow.h"
 #include "QTextCodec"
+
+#include "AuthPage.h"
+
 #include "Product_DB.h"
 #include "Product.h"
 #include "Sale_DB.h"
@@ -12,25 +15,46 @@
 #include "QStandardItemModel"
 #include "QStandardItem"
 
+#include "Sale_DB.h"
+#include "ActiveSale.h"
+#include "ClosedSale.h"
+
+/**
+* ГЏГҐГ°ГҐГ·ГЁГ±Г«ГҐГ­ГЁГҐ Г®Г±Г­Г®ГўГ­Г»Гµ ГўГЁГ¤Г¦ГҐГІГ®Гў ГЇГ°Г®ГЈГ°Г Г¬Г¬Г»
+*/
+enum ProgramWidgets {
+    AUTH_WIDGET = 0,
+    PROGRAM_WIDGET = 1
+};
+
+/**
+* ГЏГҐГ°ГҐГ·ГЁГ±Г«ГҐГ­ГЁГҐ Г®Г±Г­Г®ГўГ­Г»Гµ ГўГЁГ¤Г¦ГҐГІГ®Гў ГЇГ® Г°Г®Г«ГїГ¬
+*/
+enum UserRoleWidgets {
+    BOSS_WIDGET = 0,
+    MANAGER_WIDGET = 1
+};
+
 class MainWindow : public QMainWindow
 {
 	Q_OBJECT
 
 public:
-	MainWindow(QWidget *parent = 0);
+	MainWindow(AuthPage* authPage, QWidget *parent = 0);
 	~MainWindow();
 
 private:
 	Ui::MainWindowClass ui;
-	QTextCodec* c ;
 	QSqlDatabase  _db;
+    AuthPage* authPage;
 	int current_user_id;
 	void createHorizontalTabs();
+
+    void enterProgram( const UserDTO& user, UserType userType);
 
 	Product_DB * product_db;
 	QHash <int, Product> products;
 	QStandardItemModel *productsTableModel;
-	// DEFAULT - начальное состояние, ADD_PRODUCT - добавление товара, UPDATE_PRODUCT - изменение товара
 	enum StatusType {DEFAULT, ADD_PRODUCT, UPDATE_PRODUCT};
 	StatusType status;  
 
@@ -41,7 +65,6 @@ private:
 	void fillProducts();
 	void clearTable();
 
-	
 	Sale_DB * sale_db;
 	QHash <int, ActiveSale> sales;
 	QStandardItemModel *unconfirmedSalesTableModel, *confirmedSalesTableModel;
@@ -53,7 +76,7 @@ private:
 	void clearManagersUnconfirmedSalesTable();
 	void fillManagersConfirmedSalesTable();
 	void clearManagersConfirmedSalesTable();
-	
+
 private slots:
 	void directAddProduct();
 	void addProduct();
@@ -62,8 +85,6 @@ private slots:
 	void showProduct();
 	void removeProduct();
 	void searchProduct();
-
-
 
 	void searchManagersProductTable();
 	void addSale();

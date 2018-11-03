@@ -42,10 +42,9 @@ public:
 	void setProductId( int _id );
 	int getProductId();
 
-	virtual void setProduct( Product product ) = 0;
-	virtual Product getProduct() = 0;
+	virtual void setProduct( Product product ) = 0 {};
+	virtual Product getProduct() = 0 {};
 
-	virtual QString getProductName() = 0;
-	virtual double getProductCommission() = 0;
+	virtual QString getProductName() = 0 {};
+	virtual double getProductCommission() = 0 {};
 };
-

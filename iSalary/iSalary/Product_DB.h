@@ -1,3 +1,4 @@
+#pragma once
 #include <QSqlQuery>
 #include <QSqlDatabase>
 #include <QVariant>

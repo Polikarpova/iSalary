@@ -2,11 +2,23 @@
 #include <qlabel.h>
 #include <qtextcodec.h>
 
+QTextCodec* c = QTextCodec::codecForName("UTF-8");
 
-MainWindow::MainWindow( QWidget *parent ) : QMainWindow(parent) {
+MainWindow::MainWindow( AuthPage* authPage, QWidget *parent ) : QMainWindow(parent) {
 	ui.setupUi(this);
-	c = QTextCodec::codecForLocale();
+	
+//    ui.auth_program_stackedWidget->setCurrentIndex( AUTH_WIDGET);
+    ui.auth_program_stackedWidget->setCurrentIndex( PROGRAM_WIDGET);
+
+	//MANAGER_WIDGET BOSS_WIDGET
+	ui.boss_manager_stackedWidget->setCurrentIndex( MANAGER_WIDGET);
+
 	createHorizontalTabs();
+
+    this->authPage = authPage;
+    this->authPage->setUI( ui.loginInput, ui.passwordInput, ui.enterButton, ui.errorLabel);
+    
+    connect(this->authPage, &AuthPage::userLoggedIn, this, &MainWindow::enterProgram);
 
 	auto drivers =  QSqlDatabase::drivers();
 	QString mes = "";
@@ -27,6 +39,7 @@ MainWindow::MainWindow( QWidget *parent ) : QMainWindow(parent) {
 
 	initProductWindow();
 
+	ui.productTable->setEditTriggers(0);
 	connect( ui.productTable->selectionModel(), SIGNAL( currentChanged ( const QModelIndex &, const QModelIndex & ) ), this, SLOT( showProduct() ) );
 
 	connect( ui.addProductButton, SIGNAL( clicked() ), this, SLOT( directAddProduct() ) );
@@ -41,8 +54,6 @@ MainWindow::MainWindow( QWidget *parent ) : QMainWindow(parent) {
 
 	connect( ui.searchButton, SIGNAL( clicked() ), this, SLOT( searchProduct() ) );
 
-	
-	
 	current_user_id = 1;
 	sale_db = new Sale_DB( _db, "sales" );
     sale_db->init();
@@ -51,21 +62,27 @@ MainWindow::MainWindow( QWidget *parent ) : QMainWindow(parent) {
 
 	connect( ui.managerProductSearchButton, SIGNAL( clicked() ), this, SLOT( searchManagersProductTable() ) );
 	connect( ui.addSaleButton, SIGNAL( clicked() ), this, SLOT( addSale() ) );
+
 }
 
-MainWindow::~MainWindow() {
-
+void MainWindow::enterProgram( const UserDTO& user, UserType userType){
+    if( userType == MANAGER) {
+        ui.boss_manager_stackedWidget->setCurrentIndex( MANAGER_WIDGET);
+    } else if ( userType == BOSS ){
+        ui.boss_manager_stackedWidget->setCurrentIndex( BOSS_WIDGET);
+    }
+    ui.auth_program_stackedWidget->setCurrentIndex( PROGRAM_WIDGET);
 }
 
 void MainWindow::createHorizontalTabs() {
 
 	QStringList tabs_text;
-	tabs_text << c->toUnicode( "Сотрудники" ) << c->toUnicode( "Товары" ) << c->toUnicode( "Корректировки" ) 
-		<< c->toUnicode( "Продажи" ) << c->toUnicode( "Статистика" ) << c->toUnicode( "Зарплата");
+	tabs_text << c->toUnicode("РЎРѕС‚СЂСѓРґРЅРёРєРё") << c->toUnicode("РўРѕРІР°СЂС‹") << c->toUnicode("РљРѕСЂСЂРµРєС‚РёСЂРѕРІРєРё") << c->toUnicode("РџСЂРѕРґР°Р¶Рё") <<
+				  c->toUnicode("РЎС‚Р°С‚РёСЃС‚РёРєР°")<< c->toUnicode("Р—Р°СЂРїР»Р°С‚Р°");
 	QTabWidget *tabw = ui.tabWidget;
 	
-	for ( int i = 0; i < 6; i++ ) {
-		tabw->setTabText( i, "" );
+	for( int i = 0; i < 6; i++) {
+		tabw->setTabText(i, "");
 	}
 	
 	QTabBar *tabbar = tabw->tabBar();
@@ -77,6 +94,11 @@ void MainWindow::createHorizontalTabs() {
 	}
 }
 
+MainWindow::~MainWindow() {
+
+}
+
+//
 void MainWindow::initManagerWindow() {
 	unconfirmedSalesTableModel = new QStandardItemModel;
 	confirmedSalesTableModel = new QStandardItemModel;
@@ -88,10 +110,10 @@ void MainWindow::initManagerWindow() {
 void MainWindow::clearManagersConfirmedSalesTable() {
 	confirmedSalesTableModel->clear();
 	QStringList horizontalHeader;
-    horizontalHeader.append( c->toUnicode( "Название товара" ) );
-    horizontalHeader.append( c->toUnicode( "Количество" ) );
-	horizontalHeader.append( c->toUnicode( "Стоимость" ) );
-	horizontalHeader.append( c->toUnicode( "Процент комиссии" ) );
+    horizontalHeader.append( c->toUnicode( "РќР°Р·РІР°РЅРёРµ" ) );
+    horizontalHeader.append( c->toUnicode( "РљРѕР»РёС‡РµСЃС‚РІРѕ" ) );
+	horizontalHeader.append( c->toUnicode( "РЎС‚РѕРёРјРѕСЃС‚СЊ" ) );
+	horizontalHeader.append( c->toUnicode( "РџСЂРѕС†РµРЅС‚ РєРѕРјРёСЃСЃРёРё" ) );
 	confirmedSalesTableModel->setHorizontalHeaderLabels( horizontalHeader );
 	ui.confirmedSales->setModel( confirmedSalesTableModel );
     ui.confirmedSales->resizeColumnsToContents();
@@ -125,7 +147,7 @@ void MainWindow::fillManagersConfirmedSalesTable() {
 		}
 	}
 	QStandardItem *item;
-	item = new QStandardItem(  c->toUnicode( "Итого:" ) );
+	item = new QStandardItem(  c->toUnicode( "РС‚РѕРіРѕ:" ) );
 	confirmedSalesTableModel->setItem( lastRow, 0, item );
 	item = new QStandardItem( QString::number( allCount ) );
 	confirmedSalesTableModel->setItem( lastRow, 1, item );
@@ -140,10 +162,10 @@ void MainWindow::fillManagersConfirmedSalesTable() {
 void MainWindow::clearManagersUnconfirmedSalesTable() {
 	unconfirmedSalesTableModel->clear();
 	QStringList horizontalHeader;
-    horizontalHeader.append( c->toUnicode( "Название товара" ) );
-    horizontalHeader.append( c->toUnicode( "Количество" ) );
-	horizontalHeader.append( c->toUnicode( "Стоимость" ) );
-	horizontalHeader.append( c->toUnicode( "Процент комиссии" ) );
+    horizontalHeader.append( c->toUnicode( "РќР°Р·РІР°РЅРёРµ" ) );
+    horizontalHeader.append( c->toUnicode( "РљРѕР»РёС‡РµСЃС‚РІРѕ" ) );
+	horizontalHeader.append( c->toUnicode( "РЎС‚РѕРёРјРѕСЃС‚СЊ" ) );
+	horizontalHeader.append( c->toUnicode( "РџСЂРѕС†РµРЅС‚ РєРѕРјРёСЃСЃРёРё" ) );
 	unconfirmedSalesTableModel->setHorizontalHeaderLabels( horizontalHeader );
 	ui.unconfirmedSales->setModel( unconfirmedSalesTableModel );
     ui.unconfirmedSales->resizeColumnsToContents();
@@ -178,7 +200,7 @@ void MainWindow::fillManagersUnconfirmedSalesTable() {
 		}
 	}
 	QStandardItem *item;
-	item = new QStandardItem(  c->toUnicode( "Итого:" ) );
+	item = new QStandardItem(  c->toUnicode( "РС‚РѕРіРѕ:" ) );
 	unconfirmedSalesTableModel->setItem( lastRow, 0, item );
 	item = new QStandardItem( QString::number( allCount ) );
 	unconfirmedSalesTableModel->setItem( lastRow, 1, item );
@@ -214,8 +236,8 @@ void MainWindow::fillSale( ActiveSale & sale ) {
 void MainWindow::clearManagersProductsTable() {
 	productsTableModel->clear();
 	QStringList horizontalHeader;
-    horizontalHeader.append( c->toUnicode( "Название товара" ) );
-    horizontalHeader.append( c->toUnicode( "Процент комиссии" ) );
+    horizontalHeader.append( c->toUnicode( "РќР°Р·РІР°РЅРёРµ" ) );
+    horizontalHeader.append( c->toUnicode( "РљРѕРјРёСЃСЃРёСЏ" ) );
 	productsTableModel->setHorizontalHeaderLabels( horizontalHeader );
 	ui.managersProductTable->setModel( productsTableModel );
     ui.managersProductTable->resizeColumnsToContents();
@@ -260,10 +282,7 @@ void MainWindow::searchManagersProductTable() {
 	}
 }
 
-
-
-
-
+//
 void MainWindow::initProductWindow() {
 	productsTableModel = new QStandardItemModel;
 	fillProducts();
@@ -348,6 +367,7 @@ void MainWindow::showProduct() {
 }
 
 void MainWindow::fillProduct( Product & product ) {
+	int id;
 	product.setName( ui.productName->text() );
 	product.setCommission( ui.productPercent->value() );
 }
@@ -355,8 +375,8 @@ void MainWindow::fillProduct( Product & product ) {
 void MainWindow::clearTable() {
 	productsTableModel->clear();
 	QStringList horizontalHeader;
-    horizontalHeader.append( c->toUnicode( "Название товара" ) );
-    horizontalHeader.append( c->toUnicode( "Процент комиссии" ) );
+    horizontalHeader.append( c->toUnicode( "РќР°Р·РІР°РЅРёРµ" ) );
+    horizontalHeader.append( c->toUnicode( "РљРѕРјРёСЃСЃРёСЏ" ) );
 	productsTableModel->setHorizontalHeaderLabels( horizontalHeader );
 	ui.productTable->setModel( productsTableModel );
     ui.productTable->resizeColumnsToContents();
@@ -387,7 +407,7 @@ void MainWindow::searchProduct() {
 	if ( nameProduct != "" ) {
 		clearTable();
 		for ( auto it = products.begin(); it != products.end(); it++ ) {
-			if ( ( *it ).getName() == nameProduct ) {
+			if ( ( *it ).getName() == nameProduct) {
 				Product product = ( *it );
 				QStandardItem *item;
 				item = new QStandardItem( product.getName() );
