@@ -42,7 +42,7 @@ void UserDB::update( const User& user) {
 
     UserInfo existUser = this->getById( user.getId());
 
-    QString sql = "UPDATE %0 SET `%1` = :%1, `%2` = :%2 WHERE `%3` = :`%3`";
+    QString sql = "UPDATE %0 SET `%1` = :%1, `%2` = :%2 WHERE `%3` = :%3";
     sql = sql.arg(
       this->tableName, 
       this->loginField,
@@ -187,6 +187,7 @@ void UserDB::handleError( const QString& error) const {
 void UserDB::execQuery( QSqlQuery& query) const {
     bool isSuccess = query.exec();
     if( !isSuccess ){
+        QString err = query.lastError().text();
         this->handleError( query.lastError());
     }
 }
