@@ -11,6 +11,8 @@
 #include <qtableview.h>
 #include <qpushbutton.h>
 
+#include <qheaderview.h>
+
 #include "PersonnalAccountingFacade.h"
 #include "EmployeesTableModel.h"
 

@@ -17,7 +17,7 @@ int EmployeesTableModel::rowCount( const QModelIndex& parent ) const {
 
 int EmployeesTableModel::columnCount( const QModelIndex& parent ) const {
     Q_UNUSED( parent )
-    return LAST;
+    return COLUMN_LAST;
 }
 
 QVariant EmployeesTableModel::headerData( int section, Qt::Orientation orientation, int role ) const {
@@ -30,11 +30,11 @@ QVariant EmployeesTableModel::headerData( int section, Qt::Orientation orientati
     }
  
     switch( section ) {
-    case ID:
+    case COLUMN_ID:
         return trUtf8( "id" );
-    case FIO:
+    case COLUMN_FIO:
         return trUtf8( "ФИО" );
-    case EMPLOY_DATE:
+    case COLUMN_EMPLOY_DATE:
         return trUtf8( "Дата найма" );
     }
  
@@ -53,7 +53,7 @@ QVariant EmployeesTableModel::data( const QModelIndex& index, int role ) const {
     int row = index.row();
     int col = index.column();
     
-    if( row < managerTable.size() && col < LAST) {
+    if( row < managerTable.size() && col < COLUMN_LAST) {
         return managerTable[ index.row() ][ Column( index.column() ) ];
     } else {
         return QVariant("Too big index");

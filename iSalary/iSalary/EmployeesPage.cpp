@@ -32,6 +32,9 @@ void EmployeesPage::setUI(
     this->managersTable->setSelectionBehavior( QAbstractItemView::SelectRows);
     auto model = new EmployeesTableModel();
     this->managersTable->setModel( model);
+    this->managersTable->setColumnHidden( EmployeesTableModel::COLUMN_ID, true);
+    this->managersTable->horizontalHeader()->setStretchLastSection(true);
+    
 
     this->firstNameInput = firstNameInput;
     this->secondNameInput = secondNameInput;
