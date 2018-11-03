@@ -53,13 +53,31 @@ QVariant EmployeesTableModel::data( const QModelIndex& index, int role ) const {
     int row = index.row();
     int col = index.column();
     
-    if( row < managerTable.size() && col < COLUMN_LAST) {
-        return managerTable[ index.row() ][ Column( index.column() ) ];
+    if( row < this->managerTable.size() && col < COLUMN_LAST) {
+        return this->managerTable[ index.row()][ Column( index.column())];
     } else {
         return QVariant("Too big index");
     }
 }
  
+int EmployeesTableModel::getRecordId( int row) {
+    int id = -1;
+
+    if ( row >= 0 && row < this->managerTable.size() ){
+        id = this->managerTable.at(row).at(COLUMN_ID).value<int>();
+    }
+    return id;
+}
+
+QModelIndex EmployeesTableModel::getIndexByRecordId( int id) {
+    QModelIndex index;
+    for( int iRow = 0; iRow < this->managerTable.size(); iRow++) {
+        if ( this->managerTable.at( iRow).at( COLUMN_ID) == id){
+            index = this->createIndex( iRow, COLUMN_ID);
+        }
+    }
+    return index;
+}
 
 void EmployeesTableModel::refreshData(const QList<ManagerDTO>& managers){
     

@@ -15,6 +15,8 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, QWidge
     this->employeesPage = employeesPage;
     this->employeesPage->setUI(
         ui.managersTable,
+        ui.login,
+        ui.password,
         ui.firstName,
         ui.secondName,
         ui.thirdName,
@@ -27,10 +29,13 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, QWidge
         ui.dateOfReceipt,
         ui.registration,
         ui.INN,
+        ui.managersButtonsStackedWidget,
         ui.managerEditButton,
         ui.addManagerButton,
+        ui.saveManagerButton,
         ui.cancelManagerButton,
-        ui.saveManagerButton
+        ui.managerSubmitAddButton,
+        ui.managerCancelAddButton
     );
     connect( ui.tabWidget, &QTabWidget::currentChanged, this, &MainWindow::refreshBossPage);
     //this->employeesPage->refreshList();

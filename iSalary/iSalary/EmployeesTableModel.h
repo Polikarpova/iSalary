@@ -11,6 +11,8 @@ public:
     ~EmployeesTableModel(void);
 
     void refreshData(const QList<ManagerDTO>& managers);
+    int getRecordId( int row);
+    QModelIndex getIndexByRecordId( int id);
 
     int rowCount( const QModelIndex& parent ) const override;
     int columnCount( const QModelIndex& parent ) const override;
