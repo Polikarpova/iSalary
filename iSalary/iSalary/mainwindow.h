@@ -68,6 +68,7 @@ private:
 	Sale_DB * sale_db;
 	QHash <int, ActiveSale> sales;
 	QStandardItemModel *unconfirmedSalesTableModel, *confirmedSalesTableModel;
+	QStandardItemModel *managerProductsTableModel;
 	void initManagerWindow();
 	void fillManagersProductTable();
 	void clearManagersProductsTable();

@@ -165,7 +165,7 @@
         <item>
          <widget class="QStackedWidget" name="boss_manager_stackedWidget">
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="owner">
            <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -178,7 +178,7 @@
                <enum>QTabWidget::Rounded</enum>
               </property>
               <property name="currentIndex">
-               <number>2</number>
+               <number>1</number>
               </property>
               <property name="elideMode">
                <enum>Qt::ElideMiddle</enum>
@@ -195,7 +195,7 @@
               <property name="movable">
                <bool>false</bool>
               </property>
-              <property name="tabBarAutoHide" stdset="0">
+              <property name="tabBarAutoHide">
                <bool>false</bool>
               </property>
               <widget class="QWidget" name="tabManagers">
@@ -284,7 +284,7 @@
                     <property name="tabsClosable">
                      <bool>false</bool>
                     </property>
-                    <property name="tabBarAutoHide" stdset="0">
+                    <property name="tabBarAutoHide">
                      <bool>false</bool>
                     </property>
                     <widget class="QWidget" name="personalDataTab">
@@ -366,6 +366,9 @@
                           <property name="keyboardTracking">
                            <bool>true</bool>
                           </property>
+                          <property name="showGroupSeparator" stdset="0">
+                           <bool>false</bool>
+                          </property>
                           <property name="minimumDate">
                            <date>
                             <year>1900</year>
@@ -375,9 +378,6 @@
                           </property>
                           <property name="calendarPopup">
                            <bool>true</bool>
-                          </property>
-                          <property name="showGroupSeparator" stdset="0">
-                           <bool>false</bool>
                           </property>
                          </widget>
                         </item>
@@ -505,6 +505,9 @@
                           <property name="keyboardTracking">
                            <bool>true</bool>
                           </property>
+                          <property name="showGroupSeparator" stdset="0">
+                           <bool>false</bool>
+                          </property>
                           <property name="minimumDate">
                            <date>
                             <year>1900</year>
@@ -514,9 +517,6 @@
                           </property>
                           <property name="calendarPopup">
                            <bool>true</bool>
-                          </property>
-                          <property name="showGroupSeparator" stdset="0">
-                           <bool>false</bool>
                           </property>
                          </widget>
                         </item>
@@ -758,7 +758,7 @@
                       <property name="placeholderText">
                        <string>поиск по названию</string>
                       </property>
-                      <property name="clearButtonEnabled" stdset="0">
+                      <property name="clearButtonEnabled">
                        <bool>false</bool>
                       </property>
                      </widget>
@@ -853,7 +853,7 @@
                       <property name="text">
                        <string/>
                       </property>
-                      <property name="clearButtonEnabled" stdset="0">
+                      <property name="clearButtonEnabled">
                        <bool>false</bool>
                       </property>
                      </widget>
@@ -1176,6 +1176,9 @@
                       <property name="keyboardTracking">
                        <bool>true</bool>
                       </property>
+                      <property name="showGroupSeparator" stdset="0">
+                       <bool>false</bool>
+                      </property>
                       <property name="minimumDate">
                        <date>
                         <year>1900</year>
@@ -1185,9 +1188,6 @@
                       </property>
                       <property name="calendarPopup">
                        <bool>true</bool>
-                      </property>
-                      <property name="showGroupSeparator" stdset="0">
-                       <bool>false</bool>
                       </property>
                      </widget>
                     </item>
@@ -1231,8 +1231,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>351</width>
-                       <height>207</height>
+                       <width>466</width>
+                       <height>198</height>
                       </rect>
                      </property>
                     </widget>
@@ -1314,6 +1314,9 @@
                       <property name="keyboardTracking">
                        <bool>true</bool>
                       </property>
+                      <property name="showGroupSeparator" stdset="0">
+                       <bool>false</bool>
+                      </property>
                       <property name="minimumDate">
                        <date>
                         <year>1900</year>
@@ -1323,9 +1326,6 @@
                       </property>
                       <property name="calendarPopup">
                        <bool>true</bool>
-                      </property>
-                      <property name="showGroupSeparator" stdset="0">
-                       <bool>false</bool>
                       </property>
                      </widget>
                     </item>
@@ -1421,6 +1421,9 @@
                       <property name="keyboardTracking">
                        <bool>true</bool>
                       </property>
+                      <property name="showGroupSeparator" stdset="0">
+                       <bool>false</bool>
+                      </property>
                       <property name="minimumDate">
                        <date>
                         <year>1900</year>
@@ -1430,9 +1433,6 @@
                       </property>
                       <property name="calendarPopup">
                        <bool>true</bool>
-                      </property>
-                      <property name="showGroupSeparator" stdset="0">
-                       <bool>false</bool>
                       </property>
                      </widget>
                     </item>
@@ -1476,6 +1476,9 @@
                       <property name="keyboardTracking">
                        <bool>true</bool>
                       </property>
+                      <property name="showGroupSeparator" stdset="0">
+                       <bool>false</bool>
+                      </property>
                       <property name="minimumDate">
                        <date>
                         <year>1900</year>
@@ -1485,9 +1488,6 @@
                       </property>
                       <property name="calendarPopup">
                        <bool>true</bool>
-                      </property>
-                      <property name="showGroupSeparator" stdset="0">
-                       <bool>false</bool>
                       </property>
                      </widget>
                     </item>
@@ -1783,6 +1783,9 @@
                         <property name="keyboardTracking">
                          <bool>true</bool>
                         </property>
+                        <property name="showGroupSeparator" stdset="0">
+                         <bool>false</bool>
+                        </property>
                         <property name="minimumDate">
                          <date>
                           <year>1900</year>
@@ -1792,9 +1795,6 @@
                         </property>
                         <property name="calendarPopup">
                          <bool>true</bool>
-                        </property>
-                        <property name="showGroupSeparator" stdset="0">
-                         <bool>false</bool>
                         </property>
                        </widget>
                       </item>
@@ -1966,7 +1966,7 @@
                   <property name="text">
                    <string/>
                   </property>
-                  <property name="clearButtonEnabled" stdset="0">
+                  <property name="clearButtonEnabled">
                    <bool>false</bool>
                   </property>
                  </widget>
@@ -2156,7 +2156,7 @@
                   <property name="placeholderText">
                    <string>поиск по названию</string>
                   </property>
-                  <property name="clearButtonEnabled" stdset="0">
+                  <property name="clearButtonEnabled">
                    <bool>false</bool>
                   </property>
                  </widget>

@@ -81,6 +81,12 @@
     <Filter Include="Source Files\Model\DomainModel\SalesModule">
       <UniqueIdentifier>{7bb601fc-1937-4b82-9506-d2937ab53234}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Test">
+      <UniqueIdentifier>{1e43c7cc-d4e5-4605-9315-292cc2f76b7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Test">
+      <UniqueIdentifier>{38c40405-bf40-423b-b70a-2440ceda8ecf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -146,6 +152,15 @@
     <ClCompile Include="ManagerDB.cpp">
       <Filter>Source Files\Model\DB</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_test_product_db.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_test_product_db.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="test_product_db.cpp">
+      <Filter>Source Files\Test</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -159,6 +174,9 @@
     </CustomBuild>
     <CustomBuild Include="AuthPage.h">
       <Filter>Header Files\View</Filter>
+    </CustomBuild>
+    <CustomBuild Include="test_product_db.h">
+      <Filter>Header Files\Test</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
