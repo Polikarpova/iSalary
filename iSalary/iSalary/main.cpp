@@ -1,9 +1,15 @@
 #include <QtWidgets/QApplication>
 
 #include "mainwindow.h"
+
 #include "AuthorizationFacade.h"
+#include "PersonnalAccountingFacade.h"
+
 #include "UserDB.h"
+#include "ManagerDB.h"
+
 #include "AuthPage.h"
+#include "EmployeesPage.h"
 
 #include "test_userdb.h"
 
@@ -25,21 +31,24 @@ int main(int argc, char *argv[])
 	Test_UserDB test( &sqlDB );
 	QTest::qExec(&test);
     
-	UserDB * userDB = new UserDB( &sqlDB);
+	UserDB userDB( &sqlDB);
 
-    AuthorizationModule * authModule = new AuthorizationModule( userDB);
-    AuthorizationFacade * authFacade = new AuthorizationFacade( authModule);
-    AuthPage * authPage = new AuthPage( authFacade);
+    AuthorizationModule authModule( &userDB);
+    AuthorizationFacade authFacade( &authModule);
+    AuthPage authPage( &authFacade);
 
-    MainWindow w( authPage);
+    ManagerDB managerDB( &sqlDB, &userDB);
+    Employer employer(&userDB, &managerDB);
+    PersonnalAccountingFacade personnalAccountingFacade(&employer, &managerDB);
+    EmployeesPage employeesPage(&personnalAccountingFacade);
+
+    MainWindow w( &authPage, &employeesPage);
 	w.show();
-
-	int exitCode = a.exec();
-
-    delete authPage;
-    delete authFacade;
-    delete authModule;
-    delete userDB;
-
+    
+    int stop = 2;
+    
+    int exitCode =-1;
+    exitCode = a.exec();
     return exitCode;
+    
 }
