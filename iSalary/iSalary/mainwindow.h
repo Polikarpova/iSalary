@@ -5,6 +5,7 @@
 #include "ui_mainwindow.h"
 
 #include "AuthPage.h"
+#include "EmployeesPage.h"
 
 /**
 * Перечисление основных виджетов программы
@@ -27,17 +28,28 @@ class MainWindow : public QMainWindow
 	Q_OBJECT
 
 public:
-	MainWindow(AuthPage* authPage, QWidget *parent = 0);
+    MainWindow(AuthPage* authPage, EmployeesPage* employeesPage, QWidget *parent = 0);
 	~MainWindow();
 
 private:
 	Ui::MainWindowClass ui;
 
     AuthPage* authPage;
+    EmployeesPage* employeesPage;
 
 	void createHorizontalTabs();
     void enterProgram( const UserDTO& user, UserType userType);
     
+    enum BossPage {
+        PAGE_EMPLOYEES = 0,
+        PAGE_PRODUCTS,
+        PAGE_CORRECTIONS,
+        PAGE_SALES,
+        PAGE_STATISTIC,
+        PAGE_SALARY
+    };
+
+    void refreshBossPage( int page);
 };
 
 #endif // MAINWINDOW_H

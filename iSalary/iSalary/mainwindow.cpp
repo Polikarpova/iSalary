@@ -2,7 +2,7 @@
 #include <qlabel.h>
 #include <qtextcodec.h>
 
-MainWindow::MainWindow( AuthPage* authPage, QWidget *parent ) : QMainWindow(parent) {
+MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, QWidget *parent ) : QMainWindow(parent) {
 	ui.setupUi(this);
 	
     ui.auth_program_stackedWidget->setCurrentIndex( AUTH_WIDGET);
@@ -11,7 +11,30 @@ MainWindow::MainWindow( AuthPage* authPage, QWidget *parent ) : QMainWindow(pare
 
     this->authPage = authPage;
     this->authPage->setUI( ui.loginInput, ui.passwordInput, ui.enterButton, ui.errorLabel);
-    
+
+    this->employeesPage = employeesPage;
+    this->employeesPage->setUI(
+        ui.managersTable,
+        ui.firstName,
+        ui.secondName,
+        ui.thirdName,
+        ui.dateOfBirth,
+        ui.pasportSeries,
+        ui.pasportNumber,
+        ui.maleRButton,
+        ui.femaleRButton,
+        ui.pasportSourse,
+        ui.dateOfReceipt,
+        ui.registration,
+        ui.INN,
+        ui.managerEditButton,
+        ui.addManagerButton,
+        ui.cancelManagerButton,
+        ui.saveManagerButton
+    );
+    connect( ui.tabWidget, &QTabWidget::currentChanged, this, &MainWindow::refreshBossPage);
+    //this->employeesPage->refreshList();
+
     connect(this->authPage, &AuthPage::userLoggedIn, this, &MainWindow::enterProgram);
 }
 
@@ -20,6 +43,7 @@ void MainWindow::enterProgram( const UserDTO& user, UserType userType){
         ui.boss_manager_stackedWidget->setCurrentIndex( MANAGER_WIDGET);
     } else if ( userType == BOSS ){
         ui.boss_manager_stackedWidget->setCurrentIndex( BOSS_WIDGET);
+        this->refreshBossPage(0);
     }
     ui.auth_program_stackedWidget->setCurrentIndex( PROGRAM_WIDGET);
 }
@@ -44,6 +68,15 @@ void MainWindow::createHorizontalTabs() {
 		tabbar->setTabButton(i, QTabBar::LeftSide, lbl);
 	}
 }
+
+void MainWindow::refreshBossPage( int page){
+
+    switch( page){
+        case PAGE_EMPLOYEES: this->employeesPage->refreshList(); break;
+        default:;
+    }
+}
+
 
 MainWindow::~MainWindow() {
 
