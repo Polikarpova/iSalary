@@ -144,7 +144,7 @@ void EmployeesPage::startEdit() {
 }
 
 void EmployeesPage::startAdd() {
-    this->buttonStackedWidget->setCurrentIndex( PAGE_BTNS_EDIT);
+    this->buttonStackedWidget->setCurrentIndex( PAGE_BTNS_ADD);
     this->clearInputs();
     this->enableInputs(true);
 }

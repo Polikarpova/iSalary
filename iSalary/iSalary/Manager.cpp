@@ -9,6 +9,19 @@ Manager::Manager( int id){
     this->id = id;
 }
 
+Manager::Manager( const User& user){
+    this->id = user.getId();
+    this->login = user.getLogin();
+    this->password = user.getPassword();
+}
+
+
+void Manager::setUserInfo( const User& user){
+    this->id = user.getId();
+    this->login = user.getLogin();
+    this->password = user.getPassword();
+}
+
 Manager::~Manager(void){
 }
 

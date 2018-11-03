@@ -14,7 +14,7 @@ enum EmployResult {
 /**
 * Класс, "нанимающий" менеджеров 
 */
-class Employer{
+class Employer {
 public:
 
     /**
@@ -28,7 +28,7 @@ public:
     * Нанять менеджера
     * @return - результат попытки найма
     */
-    bool employ( const Manager& manager);
+    bool employ( Manager& manager);
 
 private:
     IManagerRepository* managerRepository; /**< хранилище менеджеров */

@@ -22,6 +22,7 @@ class Manager : public User
 public:
     Manager( void);
     Manager( int id);
+    Manager( const User& user);
 
     /**
     * Получить Имя менеджера
@@ -166,6 +167,7 @@ public:
     */
     void setDateOfEmployment(const QDate& date);
 
+    void setUserInfo( const User& user);
     ~Manager( void);
 
 private:

@@ -7,14 +7,15 @@ Employer::Employer( IUserRepository* users, IManagerRepository* managers){
 }
 
 
-bool Employer::employ( const Manager& manager){
+bool Employer::employ( Manager& manager){
     bool isINNUniq = !this->managerRepository->findByINN( manager.getINN(), NULL);
     bool isPassporUniq = !this->managerRepository->findByPassport( manager.getPassportSerial(), manager.getPassportNumber(), NULL);
     
     bool isSuccess = isINNUniq && isPassporUniq;
 
     if( isSuccess){
-        this->userRepository->insert( manager, MANAGER);
+        User user  = this->userRepository->insert( manager, MANAGER);
+        manager.setUserInfo( user);
         this->managerRepository->update( manager);
     }
 
