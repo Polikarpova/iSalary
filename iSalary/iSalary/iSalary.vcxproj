@@ -124,10 +124,12 @@
     <ClCompile Include="mainwindow.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="ManagerDB.cpp" />
+    <ClCompile Include="ManagerValidator.cpp" />
     <ClCompile Include="PersonnalAccountingFacade.cpp" />
     <ClCompile Include="test_userdb.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="UserDB.cpp" />
+    <ClCompile Include="UserValidator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -157,6 +159,8 @@
   <ItemGroup>
     <ClInclude Include="AuthorizationFacade.h" />
     <ClInclude Include="AuthorizationModule.h" />
+    <ClInclude Include="ManagerValidator.h" />
+    <ClInclude Include="UserValidator.h" />
     <CustomBuild Include="AuthPage.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing AuthPage.h...</Message>

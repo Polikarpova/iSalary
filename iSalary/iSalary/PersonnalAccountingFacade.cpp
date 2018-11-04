@@ -1,9 +1,10 @@
 #include "PersonnalAccountingFacade.h"
 
 
-PersonnalAccountingFacade::PersonnalAccountingFacade(Employer* employer, ManagerDB* managerDB){
+PersonnalAccountingFacade::PersonnalAccountingFacade(Employer* employer, ManagerDB* managerDB, ManagerValidator* managerValidator){
     this->employer = employer;
     this->managerDB = managerDB;
+    this->managerValidator = managerValidator;
 }
 
 
@@ -30,7 +31,12 @@ ManagerDTO PersonnalAccountingFacade::hireManager( const ManagerDTO& manager){
 
 void PersonnalAccountingFacade::updateManager( const ManagerDTO& manager){
     Manager m = this->fromDTO( manager);
-    this->managerDB->update(m);
+    QString error;
+    if( this->managerValidator->isManagerValid( m, &error)) {
+        this->managerDB->update(m);
+    } else {
+        throw new QString( error);
+    }
 }
 
 Manager PersonnalAccountingFacade::fromDTO( const ManagerDTO& manager){

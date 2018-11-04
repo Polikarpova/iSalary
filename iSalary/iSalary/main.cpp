@@ -32,14 +32,15 @@ int main(int argc, char *argv[])
 	QTest::qExec( &test_userDB );
     
 	UserDB userDB( &sqlDB);
-
-    AuthorizationModule authModule( &userDB);
+    UserValidator userValidator( &userDB);
+    AuthorizationModule authModule( &userValidator, &userDB);
     AuthorizationFacade authFacade( &authModule);
     AuthPage authPage( &authFacade);
 
     ManagerDB managerDB( &sqlDB, &userDB);
-    Employer employer( &authModule, &managerDB);
-    PersonnalAccountingFacade personnalAccountingFacade( &employer, &managerDB);
+    ManagerValidator managerValidator( &userDB, &managerDB);
+    Employer employer( &authModule, &managerDB, &managerValidator);
+    PersonnalAccountingFacade personnalAccountingFacade( &employer, &managerDB, &managerValidator);
     EmployeesPage employeesPage( &personnalAccountingFacade);
 
     MainWindow w( &authPage, &employeesPage);

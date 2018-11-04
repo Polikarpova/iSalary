@@ -1,7 +1,8 @@
 #include "AuthorizationModule.h"
 
-AuthorizationModule::AuthorizationModule(IUserRepository* userRepository){
+AuthorizationModule::AuthorizationModule(UserValidator* userValidator, IUserRepository* userRepository){
     this->userRepository = userRepository;
+    this->userValidator = userValidator;
 }
 
 
@@ -34,25 +35,16 @@ SignInResult AuthorizationModule::signIn( const QString& login, const QString& p
 
 SignUpResult AuthorizationModule::signUp( const QString& login, const QString& password, UserType userType) {
     UserInfo user;
-    bool isExist = true;
-    try {
-        user = userRepository->findByLogin(login);
-    } catch (char* ex) {
-        isExist = false;
-    }
-
+    
+    User newUser;
+    newUser.setLogin(login);
+    newUser.setPassword(password);
     SignUpResult result;
-    if( !isExist){
+    if( this->userValidator->isUserValid(newUser, &result.failReason)) {
         result.success = true;
-        User newUser;
-        newUser.setLogin(login);
-        newUser.setPassword(password);
 
         result.user = userRepository->insert( newUser, userType);
         result.type = MANAGER;
-    } else {
-        result.success = false;
-        result.failReason = "Данный логин уже занят";
     }
 
     return result;

@@ -2,6 +2,7 @@
 #include "IManagerRepository.h"
 #include "IUserRepository.h"
 #include "AuthorizationModule.h"
+#include "ManagerValidator.h"
 
 /**
 * Перечисление вохможных результатов попытки найма
@@ -23,7 +24,7 @@ public:
     * @param AuthorizationModule - модуль авторизации и регистрации
     * @param IManagerRepository - хранилище менеджеров
     */
-    Employer( AuthorizationModule*, IManagerRepository*);
+    Employer( AuthorizationModule*, IManagerRepository*, ManagerValidator*);
 
     /**
     * Нанять менеджера
@@ -34,5 +35,6 @@ public:
 private:
     IManagerRepository* managerRepository; /**< хранилище менеджеров */
     AuthorizationModule* authorizationModule; /**< хранилище пользователей */
+    ManagerValidator* managerValidator;
 };
 

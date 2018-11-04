@@ -131,9 +131,6 @@
     <ClCompile Include="Employer.cpp">
       <Filter>Source Files\Model\DomainModel\PersonnalAccountingModule</Filter>
     </ClCompile>
-    <ClCompile Include="Manager.cpp">
-      <Filter>Source Files\Model\DomainModel\PersonnalAccountingModule</Filter>
-    </ClCompile>
     <ClCompile Include="PersonnalAccountingFacade.cpp">
       <Filter>Source Files\Model\ModelFacade</Filter>
     </ClCompile>
@@ -160,6 +157,15 @@
     </ClCompile>
     <ClCompile Include="ErrorMessageHandler.cpp">
       <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="UserValidator.cpp">
+      <Filter>Source Files\Model\DomainModel\AuthorizationModule</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager.cpp">
+      <Filter>Source Files\Model\DomainModel\PersonnalAccountingModule</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagerValidator.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -236,6 +242,12 @@
     </ClInclude>
     <ClInclude Include="ErrorMessageHandler.h">
       <Filter>Header Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="UserValidator.h">
+      <Filter>Header Files\Model\DomainModel\AuthorizationModule</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagerValidator.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

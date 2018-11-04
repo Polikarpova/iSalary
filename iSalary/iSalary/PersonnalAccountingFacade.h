@@ -12,7 +12,7 @@ public:
     ManagerDTO hireManager( const ManagerDTO& manager);
     void updateManager( const ManagerDTO& manager);
 
-    PersonnalAccountingFacade(Employer* employer, ManagerDB* managerDB);
+    PersonnalAccountingFacade(Employer* employer, ManagerDB* managerDB, ManagerValidator* managerValidator);
     ~PersonnalAccountingFacade(void);
 
 protected:
@@ -22,5 +22,6 @@ protected:
 private:
     Employer* employer;
     ManagerDB* managerDB;
+    ManagerValidator* managerValidator; //TODO: найти этому лучшее место
 };
 
