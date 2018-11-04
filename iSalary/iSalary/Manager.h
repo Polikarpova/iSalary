@@ -60,6 +60,22 @@ public:
     */
     void setThirdName( const QString& thirdname);
     
+    /**
+    * Получить дату рождения менеджера
+    * @return - дата рождения менеджера
+    */
+    QDate getDateOfBirth() const;
+    
+    /**
+    * Изменить дату рождения менеджера
+    * @param dateOfBirth -новая дата рождения менеджера
+    */
+    void setDateOfBirth( const QDate& dateOfBirth);
+    
+    /**
+    * Получить Пол менеджера
+    * @return -Пол менеджера
+    */
     Sex getSex() const;
     
     /**
@@ -103,6 +119,18 @@ public:
     * @param date -новая Дата выдачи паспорта менеджера
     */
     void setPassportDateIssue( const QDate& date);
+    
+    /**
+    * Получить название учреждения, которое выдало паспорт менеджера
+    * @return -название учреждения, которое выдало паспорт менеджера
+    */
+    QString getPassportSource() const;
+    
+    /**
+    * Изменить название учреждения, которое выдало паспорт менеджера
+    * @param passportNumber - новое значение названия учреждения, которое выдало паспорт менеджера
+    */
+    void setPassportSource( const QString& passportSource);
     
     /**
     * Получить адрес прописки менеджера
@@ -174,11 +202,13 @@ private:
 
     QString firstName;
     QString secondName;
+    QDate dateOfBirth;
     QString thirdName;
     Sex sex;
     QString passportSerial;
     QString passportNumber;
     QDate passportIssueDate;
+    QString passportSource;
     QString address;
     QString INN;
     QString email;

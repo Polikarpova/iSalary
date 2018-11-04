@@ -248,6 +248,8 @@ ManagerDTO EmployeesPage::readFromInputs() {
     manager.secondName = this->secondNameInput->text();
     manager.thirdName = this->thirdNameInput->text();
 
+    manager.dateOfBirth = this->birthdayInput->date();
+
     manager.login = this->loginInput->text();
     manager.passwword = this->passwordInput->text();
 
@@ -265,6 +267,7 @@ ManagerDTO EmployeesPage::readFromInputs() {
         manager.passportSerial = QString( passportSerialSize - manager.passportSerial.size(), '0')
           + manager.passportSerial;
     }
+    manager.passportSource = this->passportSourceInput->text();
     manager.address = this->passportSourceInput->text();
 
     manager.INN = this->INNInput->text();

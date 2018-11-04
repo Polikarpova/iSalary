@@ -43,6 +43,7 @@ Manager PersonnalAccountingFacade::fromDTO( const ManagerDTO& manager){
     Manager obj( manager.id);
     obj.setAddress( manager.address);
     obj.setDateOfEmployment( manager.dateOfEmplyment);
+    obj.setDateOfBirth( manager.dateOfBirth);
     obj.setEmail( manager.email);
     obj.setFirstName( manager.firstName);
     obj.setINN( manager.INN);
@@ -51,6 +52,7 @@ Manager PersonnalAccountingFacade::fromDTO( const ManagerDTO& manager){
     obj.setPassportDateIssue( manager.passportIssueDate);
     obj.setPassportNumber( manager.passportNumber);
     obj.setPassportSerial( manager.passportSerial);
+    obj.setPassportSource( manager.passportSource);
     obj.setPassword( manager.passwword);
     obj.setSecondName( manager.secondName);
     obj.setSex( manager.sex);
@@ -63,6 +65,7 @@ ManagerDTO PersonnalAccountingFacade::toDTO( const Manager& manager){
     ManagerDTO dto;
     dto.address = manager.getAddress();
     dto.dateOfEmplyment = manager.getDateOfEmployment();
+    dto.dateOfBirth = manager.getDateOfBirth();
     dto.email = manager.getEmail();
     dto.firstName = manager.getFirstName();
     dto.id = manager.getId();
@@ -72,6 +75,7 @@ ManagerDTO PersonnalAccountingFacade::toDTO( const Manager& manager){
     dto.passportIssueDate = manager.getPassportDateIssue();
     dto.passportSerial = manager.getPassportSerial();
     dto.passportNumber = manager.getPassportNumber();
+    dto.passportSource = manager.getPassportSource();
     dto.passwword = manager.getPassword();
     dto.secondName = manager.getSecondName();
     dto.sex = manager.getSex();

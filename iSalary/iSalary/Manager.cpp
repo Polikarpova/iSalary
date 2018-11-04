@@ -22,9 +22,6 @@ void Manager::setUserInfo( const User& user){
     this->password = user.getPassword();
 }
 
-Manager::~Manager(void){
-}
-
 QString Manager::getFirstName() const{
     return this->firstName;
 };
@@ -48,7 +45,15 @@ QString Manager::getThirdName() const{
 void Manager::setThirdName( const QString& thirdname){
     this->thirdName = thirdname;
 };
-    
+
+QDate Manager::getDateOfBirth() const{
+    return this->dateOfBirth;
+};
+  
+void Manager::setDateOfBirth( const QDate& dateOfBirth){
+    this->dateOfBirth = dateOfBirth;
+};
+
 Sex Manager::getSex() const{
     return this->sex;
 };
@@ -84,7 +89,18 @@ QDate Manager::getPassportDateIssue() const{
 void Manager::setPassportDateIssue( const QDate& date){
     this->passportIssueDate = date;
 };
+
+QString Manager::getPassportSource() const{
+    return this->passportSource;
+}
   
+void Manager::setPassportSource( const QString& passportSource){
+    this->passportSource = passportSource;
+};
+  
+QString Manager::getPassportNumber() const{
+    return this->passportNumber;
+} 
 QString Manager::getAddress() const{
     return this->address;
 };
@@ -124,3 +140,6 @@ QDate Manager::getDateOfEmployment() const{
 void Manager::setDateOfEmployment(const QDate& date){
     this->dateOfEmplyment = date;
 };
+
+Manager::~Manager(void){
+}
