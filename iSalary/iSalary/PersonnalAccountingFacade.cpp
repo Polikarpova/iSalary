@@ -22,10 +22,10 @@ QList<ManagerDTO> PersonnalAccountingFacade::getAllManagers(){
     return managerDTOs;
 }
 
-bool PersonnalAccountingFacade::hireManager( const ManagerDTO& manager){
+ManagerDTO PersonnalAccountingFacade::hireManager( const ManagerDTO& manager){
     Manager m = this->fromDTO( manager);
-    bool isOk = this->employer->employ(m);
-    return isOk;
+    m = this->employer->employ(m);
+    return this->toDTO( m);
 }
 
 void PersonnalAccountingFacade::updateManager( const ManagerDTO& manager){

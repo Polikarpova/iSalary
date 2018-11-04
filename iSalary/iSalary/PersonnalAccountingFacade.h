@@ -9,7 +9,7 @@
 class PersonnalAccountingFacade {
 public:
     QList<ManagerDTO> getAllManagers();
-    bool hireManager( const ManagerDTO& manager);
+    ManagerDTO hireManager( const ManagerDTO& manager);
     void updateManager( const ManagerDTO& manager);
 
     PersonnalAccountingFacade(Employer* employer, ManagerDB* managerDB);

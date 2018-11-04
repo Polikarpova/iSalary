@@ -1,6 +1,7 @@
 #pragma once
 #include "IManagerRepository.h"
 #include "IUserRepository.h"
+#include "AuthorizationModule.h"
 
 /**
 * Перечисление вохможных результатов попытки найма
@@ -19,19 +20,19 @@ public:
 
     /**
     * Контруктор
-    * @param IUserRepository - хранилище пользователей
+    * @param AuthorizationModule - модуль авторизации и регистрации
     * @param IManagerRepository - хранилище менеджеров
     */
-    Employer( IUserRepository*, IManagerRepository*);
+    Employer( AuthorizationModule*, IManagerRepository*);
 
     /**
     * Нанять менеджера
     * @return - результат попытки найма
     */
-    bool employ( Manager& manager);
+    Manager& employ( Manager& manager);
 
 private:
     IManagerRepository* managerRepository; /**< хранилище менеджеров */
-    IUserRepository* userRepository; /**< хранилище пользователей */
+    AuthorizationModule* authorizationModule; /**< хранилище пользователей */
 };
 

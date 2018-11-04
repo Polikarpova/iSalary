@@ -38,9 +38,9 @@ int main(int argc, char *argv[])
     AuthPage authPage( &authFacade);
 
     ManagerDB managerDB( &sqlDB, &userDB);
-    Employer employer(&userDB, &managerDB);
-    PersonnalAccountingFacade personnalAccountingFacade(&employer, &managerDB);
-    EmployeesPage employeesPage(&personnalAccountingFacade);
+    Employer employer( &authModule, &managerDB);
+    PersonnalAccountingFacade personnalAccountingFacade( &employer, &managerDB);
+    EmployeesPage employeesPage( &personnalAccountingFacade);
 
     MainWindow w( &authPage, &employeesPage);
 	w.show();
