@@ -57,7 +57,7 @@ public:
 
 	~User(void);
 
-private:
+protected:
     int id;             /**< id пользователя*/
     QString login;		/**< Логин пользователя*/
     QString password;	/**< Пароль пользователя*/
