@@ -18,6 +18,7 @@ void EmployeesPage::setUI(
   QDateTimeEdit* birthdayInput,
   QSpinBox* passportSerialInput,
   QSpinBox* passportNumberInput,
+  QGroupBox* sexChecKGroup,
   QRadioButton* maleInput,
   QRadioButton* femaleInput,
   QLineEdit* passportSourceInput,
@@ -55,6 +56,7 @@ void EmployeesPage::setUI(
     this->birthdayInput = birthdayInput;
     this->passportSerialInput = passportSerialInput;
     this->passportNumberInput = passportNumberInput;
+    this->sexCheckGroup = sexChecKGroup;
     this->maleInput = maleInput;
     this->femaleInput = femaleInput;
     this->passportSourceInput = passportSourceInput;
@@ -204,6 +206,7 @@ void EmployeesPage::enableInputs( bool isEnable) {
     this->birthdayInput->setEnabled( isEnable);
     this->passportSerialInput->setEnabled( isEnable);
     this->passportNumberInput->setEnabled( isEnable);
+    this->sexCheckGroup->setEnabled( isEnable);
     this->maleInput->setEnabled( isEnable);
     this->femaleInput->setEnabled( isEnable);
     this->passportSourceInput->setEnabled( isEnable);

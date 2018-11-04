@@ -165,7 +165,7 @@
       <Filter>Source Files\Model\DomainModel\PersonnalAccountingModule</Filter>
     </ClCompile>
     <ClCompile Include="ManagerValidator.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Model\DomainModel\PersonnalAccountingModule</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -247,7 +247,7 @@
       <Filter>Header Files\Model\DomainModel\AuthorizationModule</Filter>
     </ClInclude>
     <ClInclude Include="ManagerValidator.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Model\DomainModel\PersonnalAccountingModule</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

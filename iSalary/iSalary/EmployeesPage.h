@@ -10,8 +10,10 @@
 #include <qspinbox.h>
 #include <qradiobutton.h>
 #include <qpushbutton.h>
-#include <qtableview.h>
 #include <qstackedwidget.h>
+#include <qgroupbox.h>
+
+#include <qtableview.h>
 
 #include <qheaderview.h>
 #include <qmodelindex>
@@ -37,6 +39,7 @@ public:
       QDateTimeEdit* birthdayInput,
       QSpinBox* passportSerialInput,
       QSpinBox* passportNumberInput,
+      QGroupBox* sexChecKGroup,
       QRadioButton* maleInput,
       QRadioButton* femaleInput,
       QLineEdit* passportSourceInput,
@@ -121,6 +124,7 @@ private:
     QSpinBox* passportSerialInput;
     QSpinBox* passportNumberInput;
 
+    QGroupBox* sexCheckGroup;
     QRadioButton* maleInput;
     QRadioButton* femaleInput;
 

@@ -25,6 +25,7 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, QWidge
         ui.dateOfBirth,
         ui.pasportSeries,
         ui.pasportNumber,
+        ui.sexGroup,
         ui.maleRButton,
         ui.femaleRButton,
         ui.pasportSourse,
