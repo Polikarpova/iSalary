@@ -19,6 +19,7 @@
 
 #include "PersonnalAccountingFacade.h"
 #include "EmployeesTableModel.h"
+#include "ErrorMessageHandler.h"
 
 class EmployeesPage : public QObject {
 Q_OBJECT
@@ -50,6 +51,8 @@ public:
       QPushButton* confirmAddBtn,
       QPushButton* cancelAddBtn
     );
+
+    void setErrorHandler( ErrorMessageHandler* errorHandler);
 
     void refreshList();
 
@@ -101,6 +104,8 @@ private:
     PersonnalAccountingFacade* personnalAccouting;
 
     QHash<int, ManagerDTO> managers;
+
+    ErrorMessageHandler* errorHandler;
 
     QTableView* managersTable;
 

@@ -37,6 +37,8 @@ private:
     AuthPage* authPage;
     EmployeesPage* employeesPage;
 
+    ErrorMessageHandler* errorHandler;
+
 	void createHorizontalTabs();
     void enterProgram( const UserDTO& user, UserType userType);
     

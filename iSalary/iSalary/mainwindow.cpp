@@ -9,6 +9,8 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, QWidge
 
 	createHorizontalTabs();
 
+    this->errorHandler = new ErrorMessageHandler( this);
+
     this->authPage = authPage;
     this->authPage->setUI( ui.loginInput, ui.passwordInput, ui.enterButton, ui.errorLabel);
 
@@ -37,6 +39,7 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, QWidge
         ui.managerSubmitAddButton,
         ui.managerCancelAddButton
     );
+    this->employeesPage->setErrorHandler( errorHandler);
     connect( ui.tabWidget, &QTabWidget::currentChanged, this, &MainWindow::refreshBossPage);
     //this->employeesPage->refreshList();
 
@@ -84,5 +87,5 @@ void MainWindow::refreshBossPage( int page){
 
 
 MainWindow::~MainWindow() {
-
+    delete this->errorHandler;
 }

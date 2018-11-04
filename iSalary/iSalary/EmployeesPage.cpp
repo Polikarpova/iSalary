@@ -86,14 +86,25 @@ void EmployeesPage::setUI(
     this->fillInputDefaultStyles();
 }
 
-void EmployeesPage::refreshList() {
-    int currentManagerId = this->getSelectedManagerId();
+void EmployeesPage::setErrorHandler( ErrorMessageHandler* errorHandler) {
+    this->errorHandler = errorHandler;
+}
 
-    this->managers.clear();
-    QList<ManagerDTO> managersList = this->personnalAccouting->getAllManagers();
-    for ( auto iManager = managersList.begin(); iManager != managersList.end(); iManager++){
-        managers.insert( iManager->id, *iManager);
+void EmployeesPage::refreshList() {
+    QList<ManagerDTO> managersList;
+    
+    try {
+        managersList = this->personnalAccouting->getAllManagers();
+    } catch( QString* error) { 
+        this->errorHandler->handleError( error);
     }
+    
+    int currentManagerId = this->getSelectedManagerId();
+        
+    this->managers.clear();
+        for ( auto iManager = managersList.begin(); iManager != managersList.end(); iManager++){
+            managers.insert( iManager->id, *iManager);
+        }
     
     EmployeesTableModel* model = static_cast<EmployeesTableModel*>( this->managersTable->model());
     model->refreshData( managersList);
@@ -150,23 +161,31 @@ void EmployeesPage::startAdd() {
 }
 
 void EmployeesPage::saveEdit() {
-    if( validateInputs()){
-        ManagerDTO manager = this->readFromInputs();
-        manager.id = this->getSelectedManagerId();
+    try {
+        if( validateInputs()){
+            ManagerDTO manager = this->readFromInputs();
+            manager.id = this->getSelectedManagerId();
     
-        this->personnalAccouting->updateManager( manager);
+            this->personnalAccouting->updateManager( manager);
     
-        this->refreshList();
+            this->refreshList();
+        }
+    } catch( QString* error) {
+        this->errorHandler->handleError( error);
     }
 }
 
 void EmployeesPage::saveAdd() {
-    if( validateInputs()) {
-        ManagerDTO manager = this->readFromInputs();
+    try {
+        if( validateInputs()) {
+            ManagerDTO manager = this->readFromInputs();
     
-        this->personnalAccouting->hireManager( manager);
+            this->personnalAccouting->hireManager( manager);
     
-        this->refreshList();
+            this->refreshList();
+        }
+    } catch( QString* error) {
+        this->errorHandler->handleError( error);
     }
 }
 
