@@ -19,6 +19,40 @@ bool ManagerValidator::isManagerValid( const Manager& manager, QString* errorOut
         isValid = false;
     }
 
+    if( manager.getFirstName().size() < 1){
+        error += "Имя должно содержать хотя бы один символ\n";
+        isValid = false;
+    }
+    
+    if( manager.getSecondName().size() < 1){
+        error += "Фамилия должна содержать хотя бы один символ\n";
+        isValid = false;
+    }
+
+    bool isNumber = false;
+    manager.getPassportSerial().toInt( &isNumber);
+    if( manager.getPassportSerial().size() != 4 || isNumber ) {
+        error += "Серия паспорта должна состоять из 4 цифр";
+        isValid = false;
+    }
+
+    manager.getPassportNumber().toInt( &isNumber);
+    if( manager.getPassportNumber().size() != 6 || isNumber ) {
+        error += "Номер паспорта должен состоять из 6 цифр";
+        isValid = false;
+    }
+
+    if( manager.getPassportDateIssue() > QDate::currentDate()) {
+        error += "Дата выдачи паспорта не может быть больше текущей";
+        isValid = false;
+    }
+    
+    manager.getINN().toULongLong(&isNumber);
+    if( manager.getINN().size() == 12 && isNumber) {
+        error += "ИНН должен состоять из 12 цифр";
+        isValid = false;
+    }
+
     *errorOutput = error;
     return isValid;
 }

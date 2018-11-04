@@ -3,6 +3,7 @@
 #include "uservalidator.h"
 #include "IManagerRepository.h"
 
+
 class ManagerValidator : protected UserValidator {
 public:
 

@@ -33,6 +33,24 @@ bool UserValidator::isUserValid( const User& user, QString* errorOutput) {
         }
     }
 
+    
+    QRegExp onlyLatin("[a-z]+");
+    bool isPasswordValid = ( onlyLatin.indexIn( user.getPassword()) == 0 
+      && onlyLatin.matchedLength() == user.getPassword().size()); 
+        
+    if( !isPasswordValid) {
+        error += "Пароль должен состоять из символов латинского алфавита\n";
+        isValid = false;
+    }
+
+    bool isLoginValid = onlyLatin.indexIn( user.getLogin()) == 0 
+      && onlyLatin.matchedLength() == user.getLogin().size(); 
+        
+    if( !isLoginValid) { 
+        error += "Логин должен состоять из символов латинского алфавита\n";
+        isValid = false;
+    }
+
     *errorOutput = error;
     
     return isValid;
