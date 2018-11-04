@@ -240,14 +240,14 @@
     <ClInclude Include="ManagerDTO.h">
       <Filter>Header Files\Model\ModelFacade</Filter>
     </ClInclude>
-    <ClInclude Include="ErrorMessageHandler.h">
-      <Filter>Header Files\View</Filter>
-    </ClInclude>
     <ClInclude Include="UserValidator.h">
       <Filter>Header Files\Model\DomainModel\AuthorizationModule</Filter>
     </ClInclude>
     <ClInclude Include="ManagerValidator.h">
       <Filter>Header Files\Model\DomainModel\PersonnalAccountingModule</Filter>
+    </ClInclude>
+    <ClInclude Include="ErrorMessageHandler.h">
+      <Filter>Header Files\View</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
