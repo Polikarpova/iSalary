@@ -252,8 +252,19 @@ ManagerDTO EmployeesPage::readFromInputs() {
     manager.passwword = this->passwordInput->text();
 
     manager.passportIssueDate = this->passportIssueDate->date();
-    manager.passportNumber = this->passportNumberInput->value();
-    manager.passportSerial = this->passportSerialInput->value();
+    manager.passportNumber = QString::number( this->passportNumberInput->value());
+    int passportNumberSize = 6;
+    if( manager.passportNumber.size() < passportNumberSize) {
+        manager.passportNumber = QString( passportNumberSize - manager.passportNumber.size(), '0')
+          + manager.passportNumber;
+    }
+
+    manager.passportSerial = QString::number( this->passportSerialInput->value());
+    int passportSerialSize = 6;
+    if( manager.passportSerial.size() < passportSerialSize) {
+        manager.passportSerial = QString( passportSerialSize - manager.passportSerial.size(), '0')
+          + manager.passportSerial;
+    }
     manager.address = this->passportSourceInput->text();
 
     manager.INN = this->INNInput->text();
