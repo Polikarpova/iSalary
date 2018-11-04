@@ -375,6 +375,7 @@ public:
         errorLabel = new QLabel(enter);
         errorLabel->setObjectName(QStringLiteral("errorLabel"));
         errorLabel->setStyleSheet(QStringLiteral("QLabel {color: red}"));
+        errorLabel->setAlignment(Qt::AlignCenter);
 
         gridLayout_3->addWidget(errorLabel, 4, 0, 1, 1);
 
@@ -1126,7 +1127,7 @@ public:
         correctionHistoryList->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 351, 207));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 98, 28));
         correctionHistoryList->setWidget(scrollAreaWidgetContents);
 
         verticalLayout_12->addWidget(correctionHistoryList);
@@ -1789,7 +1790,7 @@ public:
 
         retranslateUi(MainWindowClass);
 
-        auth_program_stackedWidget->setCurrentIndex(1);
+        auth_program_stackedWidget->setCurrentIndex(0);
         boss_manager_stackedWidget->setCurrentIndex(0);
         tabWidget->setCurrentIndex(0);
         managersDataTab->setCurrentIndex(0);
