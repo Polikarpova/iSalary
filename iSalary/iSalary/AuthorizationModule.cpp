@@ -16,7 +16,7 @@ SignInResult AuthorizationModule::signIn( const QString& login, const QString& p
     bool isExist = true;
     try {
         user = userRepository->findByLoginPassword(login, password);
-    } catch (QString ex) {
+    } catch (QString* ex) {
         isExist = false;
     }
 
