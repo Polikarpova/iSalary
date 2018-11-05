@@ -87,6 +87,12 @@
     <Filter Include="Source Files\Test">
       <UniqueIdentifier>{38c40405-bf40-423b-b70a-2440ceda8ecf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Test\Test_DB">
+      <UniqueIdentifier>{1614602b-1887-444d-95ea-27f35039a60b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Test\Test_DB">
+      <UniqueIdentifier>{6a3347ab-d349-45c3-85ee-44db2c83231c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -159,7 +165,19 @@
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="test_product_db.cpp">
+      <Filter>Source Files\Test\Test_DB</Filter>
+    </ClCompile>
+    <ClCompile Include="Test.cpp">
       <Filter>Source Files\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_test_user_db.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_test_user_db.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="test_user_db.cpp">
+      <Filter>Source Files\Test\Test_DB</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -176,7 +194,10 @@
       <Filter>Header Files\View</Filter>
     </CustomBuild>
     <CustomBuild Include="test_product_db.h">
-      <Filter>Header Files\Test</Filter>
+      <Filter>Header Files\Test\Test_DB</Filter>
+    </CustomBuild>
+    <CustomBuild Include="test_user_db.h">
+      <Filter>Header Files\Test\Test_DB</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -251,6 +272,9 @@
     </ClInclude>
     <ClInclude Include="IManagerRepository.h">
       <Filter>Header Files\Model\DomainModel\PersonnelAccountingModule</Filter>
+    </ClInclude>
+    <ClInclude Include="Test.h">
+      <Filter>Header Files\Test</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

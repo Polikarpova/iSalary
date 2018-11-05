@@ -5,6 +5,7 @@
 #include "UserDB.h"
 #include "AuthPage.h"
 
+#include "Test.h"
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
@@ -14,7 +15,11 @@ int main(int argc, char *argv[])
 	sqlDB= QSqlDatabase::addDatabase( "QMYSQL");
 	sqlDB.setHostName( "127.0.0.1");
     sqlDB.setPort( 3306);
-    sqlDB.setDatabaseName( "mdkp");
+
+	Test test = Test(sqlDB);
+	test.startTesting();
+
+	sqlDB.setDatabaseName( "mdkp");
     sqlDB.setUserName( "root");
     sqlDB.setPassword( "root");
     bool isOpen = sqlDB.open();
