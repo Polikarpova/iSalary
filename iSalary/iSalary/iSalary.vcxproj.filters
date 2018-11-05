@@ -45,12 +45,6 @@
     <Filter Include="Header Files\View">
       <UniqueIdentifier>{cc89e1c5-d313-4ef6-918a-48213f7cdb73}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Model\DB">
-      <UniqueIdentifier>{f252a43d-19e3-4298-8fe4-60b7bd05b75a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Model\DB">
-      <UniqueIdentifier>{e706a7a2-f357-489e-bd27-a9fdc7c11c6c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Model\DomainModel">
       <UniqueIdentifier>{22fc301f-2a8e-42c7-9727-62b165a80902}</UniqueIdentifier>
     </Filter>
@@ -66,7 +60,19 @@
     <Filter Include="Header Files\Model\ModelFacade">
       <UniqueIdentifier>{2b7415ba-e883-425f-9b2a-ca8539aaa014}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Model\DomainModel\ModelFacade">
+    <Filter Include="Header Files\Test">
+      <UniqueIdentifier>{d7a7f21d-9bb2-4296-928f-04a499543274}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Test">
+      <UniqueIdentifier>{53f1093b-4c27-47f4-b9dc-2d928645f6eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\DomainModel\PersonnalAccountingModule">
+      <UniqueIdentifier>{bb8538e1-3182-4774-bcb9-bd25c01e5f5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\DomainModel\PersonnalAccountingModule">
+      <UniqueIdentifier>{e9e99bdb-9e05-4d16-b7cd-026c853c8666}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\ModelFacade">
       <UniqueIdentifier>{34827d0e-3589-40d5-a815-be93014426e1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Model\DomainModel\SalesModule">
@@ -92,6 +98,11 @@
     </Filter>
     <Filter Include="Source Files\Test\Test_DB">
       <UniqueIdentifier>{6a3347ab-d349-45c3-85ee-44db2c83231c}</UniqueIdentifier>
+    <Filter Include="Source Files\DB">
+      <UniqueIdentifier>{e706a7a2-f357-489e-bd27-a9fdc7c11c6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DB">
+      <UniqueIdentifier>{f252a43d-19e3-4298-8fe4-60b7bd05b75a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -117,10 +128,10 @@
       <Filter>Source Files\Model\DomainModel\AuthorizationModule</Filter>
     </ClCompile>
     <ClCompile Include="UserDB.cpp">
-      <Filter>Source Files\Model\DB</Filter>
+      <Filter>Source Files\DB</Filter>
     </ClCompile>
     <ClCompile Include="AuthorizationFacade.cpp">
-      <Filter>Source Files\Model\DomainModel\ModelFacade</Filter>
+      <Filter>Source Files\Model\ModelFacade</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_AuthPage.cpp">
       <Filter>Generated Files\Debug</Filter>
@@ -178,6 +189,53 @@
     </ClCompile>
     <ClCompile Include="test_user_db.cpp">
       <Filter>Source Files\Test\Test_DB</Filter>
+    <ClCompile Include="GeneratedFiles\Debug\moc_test_userdb.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_test_userdb.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="test_userdb.cpp">
+      <Filter>Source Files\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Employer.cpp">
+      <Filter>Source Files\Model\DomainModel\PersonnalAccountingModule</Filter>
+    </ClCompile>
+    <ClCompile Include="PersonnalAccountingFacade.cpp">
+      <Filter>Source Files\Model\ModelFacade</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_EmployeesPage.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_EmployeesPage.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="EmployeesPage.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="EmployeesTableModel.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_EmployeesTableModel.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_EmployeesTableModel.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagerDB.cpp">
+      <Filter>Source Files\DB</Filter>
+    </ClCompile>
+    <ClCompile Include="ErrorMessageHandler.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="UserValidator.cpp">
+      <Filter>Source Files\Model\DomainModel\AuthorizationModule</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager.cpp">
+      <Filter>Source Files\Model\DomainModel\PersonnalAccountingModule</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagerValidator.cpp">
+      <Filter>Source Files\Model\DomainModel\PersonnalAccountingModule</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -198,6 +256,14 @@
     </CustomBuild>
     <CustomBuild Include="test_user_db.h">
       <Filter>Header Files\Test\Test_DB</Filter>
+    <CustomBuild Include="test_userdb.h">
+      <Filter>Header Files\Test</Filter>
+    </CustomBuild>
+    <CustomBuild Include="EmployeesPage.h">
+      <Filter>Header Files\View</Filter>
+    </CustomBuild>
+    <CustomBuild Include="EmployeesTableModel.h">
+      <Filter>Header Files\View</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -220,7 +286,7 @@
       <Filter>Header Files\Model\DomainModel\AuthorizationModule</Filter>
     </ClInclude>
     <ClInclude Include="UserDB.h">
-      <Filter>Header Files\Model\DB</Filter>
+      <Filter>Header Files\DB</Filter>
     </ClInclude>
     <ClInclude Include="AuthorizationFacade.h">
       <Filter>Header Files\Model\ModelFacade</Filter>
@@ -275,6 +341,32 @@
     </ClInclude>
     <ClInclude Include="Test.h">
       <Filter>Header Files\Test</Filter>
+    <ClInclude Include="Employer.h">
+      <Filter>Header Files\Model\DomainModel\PersonnalAccountingModule</Filter>
+    </ClInclude>
+    <ClInclude Include="IManagerRepository.h">
+      <Filter>Header Files\Model\DomainModel\PersonnalAccountingModule</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager.h">
+      <Filter>Header Files\Model\DomainModel\PersonnalAccountingModule</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagerDB.h">
+      <Filter>Header Files\DB</Filter>
+    </ClInclude>
+    <ClInclude Include="PersonnalAccountingFacade.h">
+      <Filter>Header Files\Model\ModelFacade</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagerDTO.h">
+      <Filter>Header Files\Model\ModelFacade</Filter>
+    </ClInclude>
+    <ClInclude Include="UserValidator.h">
+      <Filter>Header Files\Model\DomainModel\AuthorizationModule</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagerValidator.h">
+      <Filter>Header Files\Model\DomainModel\PersonnalAccountingModule</Filter>
+    </ClInclude>
+    <ClInclude Include="ErrorMessageHandler.h">
+      <Filter>Header Files\View</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

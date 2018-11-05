@@ -5,7 +5,7 @@
 #include "User.h"
 #include "SignResult.h"
 #include "IUserRepository.h"
-
+#include "UserValidator.h"
 
 
 
@@ -16,7 +16,7 @@
 class AuthorizationModule
 {
 public:
-	AuthorizationModule(IUserRepository* userRepository);
+	AuthorizationModule(UserValidator* userValidator, IUserRepository* userRepository);
 	~AuthorizationModule(void);
 	/**
 	 * Авторизация пользователя
@@ -38,4 +38,5 @@ public:
 
 private:
     IUserRepository* userRepository;
+    UserValidator* userValidator;
 };
