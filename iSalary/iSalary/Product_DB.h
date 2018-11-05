@@ -16,11 +16,12 @@ public:
 	void update(Product product);
 	void remove(int id);
 	void fillProduct( Product & product, const QSqlQuery * sqlQuery );
+	Product findByName( QString productName );
 	QVector<Product> getAll();
 
 protected:
 	QString TABLE_NAME;
-	Product read(const QSqlQuery * sqlQuery);
+	Product read( QSqlQuery * sqlQuery );
 
 private:
 	QSqlDatabase _db;

@@ -50,7 +50,7 @@ void Product_DB::remove( int id ) {
     bool isOk = query.exec();
 }
 
-Product Product_DB::read( const QSqlQuery * sqlQuery ){
+Product Product_DB::read( QSqlQuery * sqlQuery ) {
     Product product;
     fillProduct( product, sqlQuery );
     return product;
@@ -70,4 +70,14 @@ QVector<Product> Product_DB::getAll() {
         products.append( product );
     }
     return products;
+}
+
+Product Product_DB::findByName( QString productName ) {
+	productName.insert( 0, "'");
+	productName += "'";
+	QSqlQuery query( "SELECT * FROM products WHERE name = " + productName, _db );
+	bool isOk = query.next();
+	QString s = query.lastError().text();
+	Product product = read( &query );
+	return product;
 }
