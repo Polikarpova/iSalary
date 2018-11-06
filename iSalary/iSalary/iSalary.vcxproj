@@ -108,6 +108,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainwindow.cpp" />
     <ClCompile Include="Sale.cpp" />
+    <ClCompile Include="SaleFacade.cpp" />
     <ClCompile Include="Sale_DB.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="UserDB.cpp" />
@@ -139,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActiveSale.h" />
+    <ClInclude Include="ActiveSaleDTO.h" />
     <ClInclude Include="IManagerRepository.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="ManagerDB.h" />
@@ -162,9 +164,11 @@
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h" />
     <ClInclude Include="IUserRepository.h" />
     <ClInclude Include="OpenAccoutingPeriod.h" />
+    <ClInclude Include="ProductDTO.h" />
     <ClInclude Include="Product_DB.h" />
     <ClInclude Include="Salary.h" />
     <ClInclude Include="Sale.h" />
+    <ClInclude Include="SalesFacade.h" />
     <ClInclude Include="Sale_DB.h" />
     <ClInclude Include="SignResult.h" />
     <ClInclude Include="SignResultDTO.h" />

@@ -21,6 +21,29 @@ void ManagerDB::init(){
     this->emailField = "email";
     this->mobileNumberField = "mobileNumber";
     this->dateOfEmploymentField = "dateOfEmployment";
+
+	QSqlQuery query( *this->db );
+    query.prepare( "CREATE TABLE `users` (\
+`id` int(11) NOT NULL AUTO_INCREMENT,\
+`login` varchar(50) CHARACTER SET utf8 NOT NULL,\
+`password` varchar(50) CHARACTER SET utf8 NOT NULL,\
+`type` int(11) NOT NULL,\
+`firstName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,\
+`secondName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,\
+`thirdName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,\
+`sex` int(11) DEFAULT NULL,\
+`passportSerial` varchar(6) CHARACTER SET utf8 DEFAULT NULL,\
+`passportNumber` varchar(8) CHARACTER SET utf8 DEFAULT NULL,\
+`passportIssueDate` date DEFAULT NULL,\
+`address` varchar(100) CHARACTER SET utf8 DEFAULT NULL,\
+`INN` varchar(40) CHARACTER SET utf8 DEFAULT NULL,\
+`email` varchar(100) CHARACTER SET utf8 DEFAULT NULL,\
+`mobileNumber` varchar(100) CHARACTER SET utf8 DEFAULT NULL,\
+`dateOfEmployment` date DEFAULT NULL,\
+PRIMARY KEY (`id`) )" );
+    query.exec();
+
+	
 }
 
 Manager ManagerDB::getById( int id){

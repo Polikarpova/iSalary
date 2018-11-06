@@ -146,6 +146,9 @@
     <ClCompile Include="ManagerDB.cpp">
       <Filter>Source Files\Model\DB</Filter>
     </ClCompile>
+    <ClCompile Include="SaleFacade.cpp">
+      <Filter>Source Files\Model\DomainModel\ModelFacade</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -233,6 +236,15 @@
     </ClInclude>
     <ClInclude Include="IManagerRepository.h">
       <Filter>Header Files\Model\DomainModel\PersonnelAccountingModule</Filter>
+    </ClInclude>
+    <ClInclude Include="SalesFacade.h">
+      <Filter>Header Files\Model\ModelFacade</Filter>
+    </ClInclude>
+    <ClInclude Include="ActiveSaleDTO.h">
+      <Filter>Header Files\Model\ModelFacade</Filter>
+    </ClInclude>
+    <ClInclude Include="ProductDTO.h">
+      <Filter>Header Files\Model\ModelFacade</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
