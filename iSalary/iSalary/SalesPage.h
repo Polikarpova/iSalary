@@ -19,7 +19,7 @@ signals:
 private slots:
 
 private:
-    SalesFacade * authFacade;
+    SalesFacade * salesFacade;
     
 	QDateEdit* salesDateInput;
 	QTableView* managersSalesTable;

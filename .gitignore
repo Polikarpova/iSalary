@@ -1,10 +1,9 @@
 /TZ
 /iSalaryPrototype
 ipch
-*.suo
 *.sdf
 *.opensdf
 iSalary/Win32/*
 iSalary/iSalary/Debug/
-*.vcxproj.*
 /GeneratedFiles
+iSalary/iSalary.suo

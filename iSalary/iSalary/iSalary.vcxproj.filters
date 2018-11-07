@@ -81,6 +81,12 @@
     <Filter Include="Source Files\Model\DomainModel\SalesModule">
       <UniqueIdentifier>{7bb601fc-1937-4b82-9506-d2937ab53234}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Test">
+      <UniqueIdentifier>{60ff7132-5d3d-4045-afdf-2ee102533627}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Test">
+      <UniqueIdentifier>{0c2553cd-550e-42fe-a8e6-98f88f9f31ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -146,8 +152,59 @@
     <ClCompile Include="ManagerDB.cpp">
       <Filter>Source Files\Model\DB</Filter>
     </ClCompile>
-    <ClCompile Include="SaleFacade.cpp">
+    <ClCompile Include="SalesFacade.cpp">
       <Filter>Source Files\Model\DomainModel\ModelFacade</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_EmployeesPage.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_EmployeesPage.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="EmployeesPage.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_EmployeesTableModel.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_EmployeesTableModel.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="EmployeesTableModel.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="Employer.cpp">
+      <Filter>Source Files\Model\DomainModel\PersonnelAccountingModule</Filter>
+    </ClCompile>
+    <ClCompile Include="ErrorMessageHandler.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagerValidator.cpp">
+      <Filter>Source Files\Model\DomainModel\PersonnelAccountingModule</Filter>
+    </ClCompile>
+    <ClCompile Include="UserValidator.cpp">
+      <Filter>Source Files\Model\DomainModel\AuthorizationModule</Filter>
+    </ClCompile>
+    <ClCompile Include="PersonnalAccountingFacade.cpp">
+      <Filter>Source Files\Model\DomainModel\ModelFacade</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_test_userdb.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_test_userdb.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="test_userdb.cpp">
+      <Filter>Source Files\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SalesPage.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_SalesPage.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SalesPage.cpp">
+      <Filter>Generated Files\Release</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +218,18 @@
       <Filter>Resource Files</Filter>
     </CustomBuild>
     <CustomBuild Include="AuthPage.h">
+      <Filter>Header Files\View</Filter>
+    </CustomBuild>
+    <CustomBuild Include="EmployeesPage.h">
+      <Filter>Header Files\View</Filter>
+    </CustomBuild>
+    <CustomBuild Include="EmployeesTableModel.h">
+      <Filter>Header Files\View</Filter>
+    </CustomBuild>
+    <CustomBuild Include="test_userdb.h">
+      <Filter>Header Files\Test</Filter>
+    </CustomBuild>
+    <CustomBuild Include="SalesPage.h">
       <Filter>Header Files\View</Filter>
     </CustomBuild>
   </ItemGroup>
@@ -245,6 +314,24 @@
     </ClInclude>
     <ClInclude Include="ProductDTO.h">
       <Filter>Header Files\Model\ModelFacade</Filter>
+    </ClInclude>
+    <ClInclude Include="Employer.h">
+      <Filter>Header Files\Model\DomainModel\PersonnelAccountingModule</Filter>
+    </ClInclude>
+    <ClInclude Include="ErrorMessageHandler.h">
+      <Filter>Header Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagerValidator.h">
+      <Filter>Header Files\Model\DomainModel\PersonnelAccountingModule</Filter>
+    </ClInclude>
+    <ClInclude Include="UserValidator.h">
+      <Filter>Header Files\Model\DomainModel\AuthorizationModule</Filter>
+    </ClInclude>
+    <ClInclude Include="PersonnalAccountingFacade.h">
+      <Filter>Header Files\Model\ModelFacade</Filter>
+    </ClInclude>
+    <ClInclude Include="Codec.h">
+      <Filter>Source Files\View</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

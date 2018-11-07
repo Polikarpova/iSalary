@@ -1,23 +1,51 @@
 #include "mainwindow.h"
 #include <qlabel.h>
-#include <qtextcodec.h>
-
-QTextCodec* c = QTextCodec::codecForName("UTF-8");
-
-MainWindow::MainWindow( AuthPage* authPage, QWidget *parent ) : QMainWindow(parent) {
+MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, QWidget *parent ) : QMainWindow(parent) {
 	ui.setupUi(this);
 	
-//    ui.auth_program_stackedWidget->setCurrentIndex( AUTH_WIDGET);
-    ui.auth_program_stackedWidget->setCurrentIndex( PROGRAM_WIDGET);
+    ui.auth_program_stackedWidget->setCurrentIndex( AUTH_WIDGET);
+   // ui.auth_program_stackedWidget->setCurrentIndex( PROGRAM_WIDGET);
 
 	//MANAGER_WIDGET BOSS_WIDGET
-	ui.boss_manager_stackedWidget->setCurrentIndex( MANAGER_WIDGET);
+	//ui.boss_manager_stackedWidget->setCurrentIndex( MANAGER_WIDGET);
 
 	createHorizontalTabs();
 
+    this->errorHandler = new ErrorMessageHandler( this);
+
     this->authPage = authPage;
     this->authPage->setUI( ui.loginInput, ui.passwordInput, ui.enterButton, ui.errorLabel);
-    
+
+    this->employeesPage = employeesPage;
+    this->employeesPage->setUI(
+        ui.managersTable,
+        ui.login,
+        ui.password,
+        ui.firstName,
+        ui.secondName,
+        ui.thirdName,
+        ui.dateOfBirth,
+        ui.pasportSeries,
+        ui.pasportNumber,
+        ui.sexGroup,
+        ui.maleRButton,
+        ui.femaleRButton,
+        ui.pasportSourse,
+        ui.dateOfReceipt,
+        ui.registration,
+        ui.INN,
+        ui.managersButtonsStackedWidget,
+        ui.managerEditButton,
+        ui.addManagerButton,
+        ui.saveManagerButton,
+        ui.cancelManagerButton,
+        ui.managerSubmitAddButton,
+        ui.managerCancelAddButton
+    );
+    this->employeesPage->setErrorHandler( errorHandler);
+    connect( ui.tabWidget, &QTabWidget::currentChanged, this, &MainWindow::refreshBossPage);
+    //this->employeesPage->refreshList();
+
     connect(this->authPage, &AuthPage::userLoggedIn, this, &MainWindow::enterProgram);
 
 	auto drivers =  QSqlDatabase::drivers();
@@ -29,10 +57,15 @@ MainWindow::MainWindow( AuthPage* authPage, QWidget *parent ) : QMainWindow(pare
 	_db = QSqlDatabase::addDatabase( "QMYSQL" );
 	_db.setHostName( "127.0.0.1" );
     _db.setPort( 3306 );
-    _db.setDatabaseName( "mdkp" );
+    _db.setDatabaseName( "test" );
     _db.setUserName( "root" );
     _db.setPassword( "root" );
 	bool ok = _db.open();
+    
+    if( _db.lastError().type() != QSqlError::NoError){
+        QMessageBox::critical( 0, "Nu epta", _db.lastError().text());
+    }
+
 	QString s = _db.lastError().text();
 	product_db = new Product_DB( _db, "products" );
     product_db->init();
@@ -70,6 +103,7 @@ void MainWindow::enterProgram( const UserDTO& user, UserType userType){
         ui.boss_manager_stackedWidget->setCurrentIndex( MANAGER_WIDGET);
     } else if ( userType == BOSS ){
         ui.boss_manager_stackedWidget->setCurrentIndex( BOSS_WIDGET);
+        this->refreshBossPage(0);
     }
     ui.auth_program_stackedWidget->setCurrentIndex( PROGRAM_WIDGET);
 }
@@ -94,8 +128,12 @@ void MainWindow::createHorizontalTabs() {
 	}
 }
 
-MainWindow::~MainWindow() {
+void MainWindow::refreshBossPage( int page){
 
+    switch( page){
+        case PAGE_EMPLOYEES: this->employeesPage->refreshList(); break;
+        default:;
+    }
 }
 
 //
@@ -421,4 +459,8 @@ void MainWindow::searchProduct() {
 	} else {
 		fillProducts();
 	}
+}
+
+MainWindow::~MainWindow() {
+    delete this->errorHandler;
 }

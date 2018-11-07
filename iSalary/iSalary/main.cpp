@@ -1,15 +1,23 @@
 #include <QtWidgets/QApplication>
 
 #include "mainwindow.h"
+
 #include "AuthorizationFacade.h"
+#include "PersonnalAccountingFacade.h"
+
 #include "SalesFacade.h"
 
 #include "UserDB.h"
+#include "ManagerDB.h"
+
 #include "Sale_DB.h"
 #include "ManagerDB.h"
 
 #include "AuthPage.h"
+#include "EmployeesPage.h"
 #include "SalesPage.h"
+
+#include "test_userdb.h"
 
 int main(int argc, char *argv[])
 {
@@ -20,30 +28,43 @@ int main(int argc, char *argv[])
 	sqlDB= QSqlDatabase::addDatabase( "QMYSQL");
 	sqlDB.setHostName( "127.0.0.1");
     sqlDB.setPort( 3306);
-    sqlDB.setDatabaseName( "mdkp");
+    sqlDB.setDatabaseName( "test");
     sqlDB.setUserName( "root");
     sqlDB.setPassword( "root");
     bool isOpen = sqlDB.open();
 
-    UserDB * userDB = new UserDB( &sqlDB);
-    AuthorizationModule * authModule = new AuthorizationModule( userDB);
-    AuthorizationFacade * authFacade = new AuthorizationFacade( authModule);
-    AuthPage * authPage = new AuthPage( authFacade);
+    if( sqlDB.lastError().type() != QSqlError::NoError){
+        QMessageBox::critical( 0, "Nu epta", sqlDB.lastError().text());
+    }
 
-	Sale_DB * saleDB = new Sale_DB( &sqlDB, QString("sales"));
-	ManagerDB * managerDB = new ManagerDB(&sqlDB, userDB);
-	SalesFacade * salesFacade = new SalesFacade(managerDB, saleDB);
-	SalesPage * salesPage = new SalesPage(salesFacade);
+	freopen("testing.log", "w", stdout);
+	Test_UserDB test_userDB( &sqlDB );
+	QTest::qExec( &test_userDB );
+    
+	UserDB userDB( &sqlDB);
+    UserValidator userValidator( &userDB);
+    AuthorizationModule authModule( &userValidator, &userDB);
+    AuthorizationFacade authFacade( &authModule);
+    AuthPage authPage( &authFacade);
 
-    MainWindow w( authPage , salesPage);
+    ManagerDB managerDB( &sqlDB, &userDB);
+    ManagerValidator managerValidator( &userDB, &managerDB);
+    Employer employer( &authModule, &managerDB, &managerValidator);
+    PersonnalAccountingFacade personnalAccountingFacade( &employer, &managerDB, &managerValidator);
+    EmployeesPage employeesPage( &personnalAccountingFacade);
+
+    Sale_DB * saleDB = new Sale_DB( sqlDB, QString("sales"));
+	SalesFacade * salesFacade = new SalesFacade(&managerDB, saleDB);
+    SalesPage salesPage(salesFacade);
+
+    MainWindow w( &authPage, &employeesPage);
+	
 	w.show();
-
-	int exitCode = a.exec();
-
-    delete authPage;
-    delete authFacade;
-    delete authModule;
-    delete userDB;
-
+    
+    int stop = 2;
+    
+    int exitCode =-1;
+    exitCode = a.exec();
     return exitCode;
+    
 }

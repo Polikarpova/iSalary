@@ -25,7 +25,7 @@ public:
     * @throws «апись не найдена
     * @return запись продажи с заданным id
     */ 
-    const Sale& getById( int id);
+    int getById( int id);
 
 protected:
 	QString TABLE_NAME;

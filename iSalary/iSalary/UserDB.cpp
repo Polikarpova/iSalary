@@ -42,7 +42,7 @@ void UserDB::update( const User& user) {
 
     UserInfo existUser = this->getById( user.getId());
 
-    QString sql = "UPDATE %0 SET `%1` = :%1, `%2` = :%2 WHERE `%3` = :`%3`";
+    QString sql = "UPDATE %0 SET `%1` = :%1, `%2` = :%2 WHERE `%3` = :%3";
     sql = sql.arg(
       this->tableName, 
       this->loginField,
@@ -87,7 +87,7 @@ UserInfo UserDB::getById( int id) {
 QList<UserInfo> UserDB::getByIds( QList<int> ids) {
     QList<UserInfo> users;
     if( ids.size() > 0) { 
-        QSqlQuery query( *db);
+        QSqlQuery query( *this->db);
 
         QString sql = "SELECT `%1`,`%2`,`%3`,`%4` FROM %0 WHERE `%1` IN (%10)";
         sql = sql.arg(
@@ -173,18 +173,21 @@ UserInfo UserDB::findByLogin( const QString& login) {
 
 
 void UserDB::handleError( const QSqlError& error) const {
-    QSqlError err = error;
+
+    QSqlError * err = new QSqlError(error);
+    QString text = err->text() + db->lastError().text();
     throw err;
 }
 
 void UserDB::handleError( const QString& error) const {
-    QString err = error;
+    QString * err = new QString(error);
     throw err;
 }
 
 void UserDB::execQuery( QSqlQuery& query) const {
     bool isSuccess = query.exec();
     if( !isSuccess ){
+        QString err = query.lastError().text();
         this->handleError( query.lastError());
     }
 }

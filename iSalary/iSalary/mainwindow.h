@@ -3,9 +3,10 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_mainwindow.h"
-#include "QTextCodec"
+#include "Codec.h"
 
 #include "AuthPage.h"
+#include "EmployeesPage.h"
 #include "SalesPage.h"
 
 #include "Product_DB.h"
@@ -38,7 +39,7 @@ class MainWindow : public QMainWindow
 	Q_OBJECT
 
 public:
-	MainWindow(AuthPage* authPage, SalesPage * salesPage, QWidget *parent = 0);
+    MainWindow(AuthPage* authPage, EmployeesPage* employeesPage, QWidget *parent = 0);
 	~MainWindow();
 
 private:
@@ -48,11 +49,25 @@ private:
     
 	AuthPage* authPage;
 	SalesPage* salesPage;
+    EmployeesPage* employeesPage;
 
 	int current_user_id;
+    ErrorMessageHandler* errorHandler;
+
 	void createHorizontalTabs();
 
     void enterProgram( const UserDTO& user, UserType userType);
+    
+    enum BossPage {
+        PAGE_EMPLOYEES = 0,
+        PAGE_PRODUCTS,
+        PAGE_CORRECTIONS,
+        PAGE_SALES,
+        PAGE_STATISTIC,
+        PAGE_SALARY
+    };
+
+    void refreshBossPage( int page);
 
 	Product_DB * product_db;
 	QHash <int, Product> products;

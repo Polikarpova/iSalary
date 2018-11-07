@@ -71,9 +71,11 @@ QVector<ActiveSale> Sale_DB::getActiveAll( int manager_id ) {
     return sales;
 }
 
-const Sale& Sale_DB::getById(int id) {
+int Sale_DB::getById(int id) {
 
     QString sql = "SELECT * FROM %1 WHERE id = %2";
 
 	sql.arg(TABLE_NAME, QString(id));
+
+    return 0;
 }
