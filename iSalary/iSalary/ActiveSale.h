@@ -14,9 +14,12 @@ public:
 
 	void confirm();
 	void cancelConfirm();
+
 	bool isConfirmed();
 	QString getProductName();
 	double getProductCommission();
-	void setProduct( Product product );
 	Product getProduct();
+	QDate getConfirmDate();
+	
+	void setProduct( Product product );
 };
