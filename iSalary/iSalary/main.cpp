@@ -2,8 +2,14 @@
 
 #include "mainwindow.h"
 #include "AuthorizationFacade.h"
+#include "SalesFacade.h"
+
 #include "UserDB.h"
+#include "Sale_DB.h"
+#include "ManagerDB.h"
+
 #include "AuthPage.h"
+#include "SalesPage.h"
 
 int main(int argc, char *argv[])
 {
@@ -24,7 +30,12 @@ int main(int argc, char *argv[])
     AuthorizationFacade * authFacade = new AuthorizationFacade( authModule);
     AuthPage * authPage = new AuthPage( authFacade);
 
-    MainWindow w( authPage);
+	Sale_DB * saleDB = new Sale_DB( &sqlDB, QString("sales"));
+	ManagerDB * managerDB = new ManagerDB(&sqlDB, userDB);
+	SalesFacade * salesFacade = new SalesFacade(managerDB, saleDB);
+	SalesPage * salesPage = new SalesPage(salesFacade);
+
+    MainWindow w( authPage , salesPage);
 	w.show();
 
 	int exitCode = a.exec();

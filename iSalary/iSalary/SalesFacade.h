@@ -8,10 +8,10 @@
 * Класс, предоставляющий доступ к функциям приложения, связанным с продажами
 * @author Поликарпова
 */
-class SaleFacade {
+class SalesFacade {
 public:
 
-	SaleFacade( ManagerDB* manager, Sale_DB* sale);
+	SalesFacade( ManagerDB* manager, Sale_DB* sale);
 
 	/**
 	* Метод подтверждает определённую продажу

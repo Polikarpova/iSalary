@@ -6,6 +6,7 @@
 #include "QTextCodec"
 
 #include "AuthPage.h"
+#include "SalesPage.h"
 
 #include "Product_DB.h"
 #include "Product.h"
@@ -37,13 +38,17 @@ class MainWindow : public QMainWindow
 	Q_OBJECT
 
 public:
-	MainWindow(AuthPage* authPage, QWidget *parent = 0);
+	MainWindow(AuthPage* authPage, SalesPage * salesPage, QWidget *parent = 0);
 	~MainWindow();
 
 private:
 	Ui::MainWindowClass ui;
+
 	QSqlDatabase  _db;
-    AuthPage* authPage;
+    
+	AuthPage* authPage;
+	SalesPage* salesPage;
+
 	int current_user_id;
 	void createHorizontalTabs();
 

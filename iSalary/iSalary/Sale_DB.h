@@ -18,6 +18,14 @@ public:
 	void create( ActiveSale sale );
 	void fillSale( ActiveSale & sale, const QSqlQuery * sqlQuery );
 	QVector<ActiveSale> getActiveAll( int manager_id );
+	
+	/**
+    * Получение записи о продаже из БД по его ID
+    * @throws TODO: SQLException
+    * @throws Запись не найдена
+    * @return запись продажи с заданным id
+    */ 
+    const Sale& getById( int id);
 
 protected:
 	QString TABLE_NAME;
