@@ -41,11 +41,21 @@ class MainWindow : public QMainWindow
 	Q_OBJECT
 
 public:
+	Ui::MainWindowClass ui;
+
     MainWindow(AuthPage* authPage, EmployeesPage* employeesPage, QWidget *parent = 0);
 	~MainWindow();
 
+	enum BossPage {
+        PAGE_EMPLOYEES,
+        PAGE_PRODUCTS,
+        PAGE_CORRECTIONS,
+        PAGE_SALES,
+        PAGE_STATISTIC,
+        PAGE_SALARY
+    };
+
 private:
-	Ui::MainWindowClass ui;
 	QSqlDatabase  _db;
     AuthPage* authPage;
 	int current_user_id;
@@ -95,14 +105,7 @@ private slots:
 	void searchManagersProductTable();
 	void addSale();
     
-    enum BossPage {
-        PAGE_EMPLOYEES = 0,
-        PAGE_PRODUCTS,
-        PAGE_CORRECTIONS,
-        PAGE_SALES,
-        PAGE_STATISTIC,
-        PAGE_SALARY
-    };
+    
 
     void refreshBossPage( int page);
 };
