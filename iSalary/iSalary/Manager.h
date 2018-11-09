@@ -28,11 +28,6 @@ public:
     /**
     * �������� ��� ���������
     * @return -��� ���������
-    Manager( const User& user);
-
-    /**
-    * �������� ��� ���������
-    * @return -��� ���������
     */
     QString getFirstName() const;
     
@@ -66,22 +61,6 @@ public:
     */
     void setThirdName( const QString& thirdname);
     
-    /**
-    * �������� ���� �������� ���������
-    * @return - ���� �������� ���������
-    */
-    QDate getDateOfBirth() const;
-    
-    /**
-    * �������� ���� �������� ���������
-    * @param dateOfBirth -����� ���� �������� ���������
-    */
-    void setDateOfBirth( const QDate& dateOfBirth);
-    
-    /**
-    * �������� ��� ���������
-    * @return -��� ���������
-    */
     Sex getSex() const;
     
     /**
@@ -125,18 +104,6 @@ public:
     * @param date -����� ���� ������ �������� ���������
     */
     void setPassportDateIssue( const QDate& date);
-    
-    /**
-    * �������� �������� ����������, ������� ������ ������� ���������
-    * @return -�������� ����������, ������� ������ ������� ���������
-    */
-    QString getPassportSource() const;
-    
-    /**
-    * �������� �������� ����������, ������� ������ ������� ���������
-    * @param passportNumber - ����� �������� �������� ����������, ������� ������ ������� ���������
-    */
-    void setPassportSource( const QString& passportSource);
     
     /**
     * �������� ����� �������� ���������
@@ -201,20 +168,17 @@ public:
     */
     void setDateOfEmployment(const QDate& date);
 
-    void setUserInfo( const User& user);
     ~Manager( void);
 
 private:
 
     QString firstName;
     QString secondName;
-    QDate dateOfBirth;
     QString thirdName;
     Sex sex;
     QString passportSerial;
     QString passportNumber;
     QDate passportIssueDate;
-    QString passportSource;
     QString address;
     QString INN;
     QString email;

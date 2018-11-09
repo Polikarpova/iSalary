@@ -1,6 +1,7 @@
 /TZ
 /iSalaryPrototype
 ipch
+*.suo
 *.sdf
 *.opensdf
 iSalary/Win32/*

@@ -6,7 +6,6 @@
 #include "QTextCodec"
 
 #include "AuthPage.h"
-#include "EmployeesPage.h"
 
 #include "Product_DB.h"
 #include "Product.h"
@@ -41,28 +40,14 @@ class MainWindow : public QMainWindow
 	Q_OBJECT
 
 public:
-	Ui::MainWindowClass ui;
-
-    MainWindow(AuthPage* authPage, EmployeesPage* employeesPage, QWidget *parent = 0);
+	MainWindow(AuthPage* authPage, QWidget *parent = 0);
 	~MainWindow();
 
-	enum BossPage {
-        PAGE_EMPLOYEES,
-        PAGE_PRODUCTS,
-        PAGE_CORRECTIONS,
-        PAGE_SALES,
-        PAGE_STATISTIC,
-        PAGE_SALARY
-    };
-
 private:
+	Ui::MainWindowClass ui;
 	QSqlDatabase  _db;
     AuthPage* authPage;
 	int current_user_id;
-    EmployeesPage* employeesPage;
-
-    ErrorMessageHandler* errorHandler;
-
 	void createHorizontalTabs();
 
     void enterProgram( const UserDTO& user, UserType userType);
@@ -104,10 +89,6 @@ private slots:
 
 	void searchManagersProductTable();
 	void addSale();
-    
-    
-
-    void refreshBossPage( int page);
 };
 
 #endif // MAINWINDOW_H
