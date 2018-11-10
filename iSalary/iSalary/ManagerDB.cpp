@@ -32,7 +32,7 @@ Manager ManagerDB::getById( int id) {
     }
 
     if( user.type != MANAGER) {
-        throw "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
+        throw new QString("Запись не найдена");
     }
     QString sql = "SELECT `%1`, `%2`, `%3`, `%4`, `%5`, `%6`, `%7`, `%8`, `%9, `%10`, `%11`, `%12` FROM %0 WHERE %15 = :%15";
     sql = sql.arg(
@@ -68,7 +68,7 @@ Manager ManagerDB::getById( int id) {
     if( query.next()) {
         manager = this->readOneRecord(query);
     } else { 
-        handleError("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
+        handleError("Запись не найдена");
     }
 
     return manager;

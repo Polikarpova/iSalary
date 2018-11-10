@@ -78,6 +78,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ActiveSale.cpp" />
+    <ClCompile Include="Codec.cpp" />
     <ClCompile Include="EmployeesPage.cpp" />
     <ClCompile Include="EmployeesTableModel.cpp" />
     <ClCompile Include="Employer.cpp" />

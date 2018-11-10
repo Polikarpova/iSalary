@@ -2,10 +2,11 @@
 #define CODEC_H
 
 #include <qtextcodec.h>
+#include <qstring.h>
 
-const QString& toUni( const QString& str){
-    QTextCodec* c = QTextCodec::codecForName("UTF-8");
-    return c->toUnicode(str.toLocal8Bit());
-}
+QString toUnicode( const char* str);
+
+QString toUnicode( const QString& str);
+
 
 #endif

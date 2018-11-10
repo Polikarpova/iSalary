@@ -6,7 +6,7 @@ ErrorMessageHandler::ErrorMessageHandler( QWidget* blockWidget) {
 }
 
 void ErrorMessageHandler::handleError(QString* error) {
-    QMessageBox::warning( blockWidget, "Îøèáêà", toUni( *error));
+    QMessageBox::warning( blockWidget, "Îøèáêà", toUnicode( error->toStdString().c_str()));
 }
 
 ErrorMessageHandler::~ErrorMessageHandler(void) {

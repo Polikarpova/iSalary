@@ -2,6 +2,12 @@
 #define MAINWINDOW_H
 
 #include <QtWidgets/QMainWindow>
+#include <qlabel.h>
+#include <qtabbar.h>
+#include <qtabwidget.h>
+#include <qstring.h>
+#include <qstringlist.h>
+
 #include "ui_mainwindow.h"
 #include "Codec.h"
 
@@ -19,7 +25,7 @@
 #include "ClosedSale.h"
 
 /**
-* ГЏГҐГ°ГҐГ·ГЁГ±Г«ГҐГ­ГЁГҐ Г®Г±Г­Г®ГўГ­Г»Гµ ГўГЁГ¤Г¦ГҐГІГ®Гў ГЇГ°Г®ГЈГ°Г Г¬Г¬Г»
+* Перечисление основных виджетов программы
 */
 enum ProgramWidgets {
     AUTH_WIDGET = 0,
@@ -27,7 +33,7 @@ enum ProgramWidgets {
 };
 
 /**
-* ГЏГҐГ°ГҐГ·ГЁГ±Г«ГҐГ­ГЁГҐ Г®Г±Г­Г®ГўГ­Г»Гµ ГўГЁГ¤Г¦ГҐГІГ®Гў ГЇГ® Г°Г®Г«ГїГ¬
+* Перечисление основных виджетов по ролям
 */
 enum UserRoleWidgets {
     BOSS_WIDGET = 0,

@@ -20,15 +20,15 @@ public:
 	QVector<ActiveSale> getActiveAll( int manager_id );
 	
 	/**
-    * Οξλσχενθε ηΰοθρθ ξ οπξδΰζε θη ΑΔ οξ εγξ ID
+    *         ID
     * @throws TODO: SQLException
-    * @throws Ηΰοθρό νε νΰιδενΰ
-    * @return ηΰοθρό οπξδΰζθ ρ ηΰδΰννϋμ id
+    * @throws   
+    * @return     id
     */ 
     int getById( int id);
 
 protected:
-	QString TABLE_NAME;
+	QString TABLE_NAME;ϋ
 	ActiveSale read(const QSqlQuery * sqlQuery);
 
 private:

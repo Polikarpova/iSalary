@@ -22,6 +22,6 @@ protected:
 private:
     Employer* employer;
     ManagerDB* managerDB;
-    ManagerValidator* managerValidator; //TODO: íàéòè ıòîìó ëó÷øåå ìåñòî
+    ManagerValidator* managerValidator; //TODO: ˜˜˜˜˜ ˜˜˜˜˜ ˜˜˜˜˜˜ ˜˜˜˜˜
 };
 
