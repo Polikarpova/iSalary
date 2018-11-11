@@ -20,15 +20,15 @@ bool UserValidator::isUserValid( const User& user, QString* errorOutput) {
 
     if( !isValid) {
         if( errorOutput) {
-            error += "Пользователь с заданным логином уже существует\n";
+            error += toUnicode("Пользователь с заданным логином уже существует\n");
         }
     } else {
         if( user.getLogin().size() < 3) {
-            error += "Слишком короткий логин\n";
+            error += toUnicode("Слишком короткий логин\n");
             isValid = false;
         }
         if( user.getPassword().size() < 3) { 
-            error += "Слишком короткий пароль\n";
+            error += toUnicode("Слишком короткий пароль\n");
             isValid = false;
         }
     }
@@ -39,7 +39,7 @@ bool UserValidator::isUserValid( const User& user, QString* errorOutput) {
       && onlyLatin.matchedLength() == user.getPassword().size()); 
         
     if( !isPasswordValid) {
-        error += "Пароль должен состоять из символов латинского алфавита\n";
+        error += toUnicode("Пароль должен состоять из символов латинского алфавита\n");
         isValid = false;
     }
 
@@ -47,7 +47,7 @@ bool UserValidator::isUserValid( const User& user, QString* errorOutput) {
       && onlyLatin.matchedLength() == user.getLogin().size(); 
         
     if( !isLoginValid) { 
-        error += "Логин должен состоять из символов латинского алфавита\n";
+        error += toUnicode("Логин должен состоять из символов латинского алфавита\n");
         isValid = false;
     }
 

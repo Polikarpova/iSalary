@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QAbstractTableModel>
-
+#include "Codec.h"
 #include "ManagerDTO.h"
 
 class EmployeesTableModel : public QAbstractTableModel {

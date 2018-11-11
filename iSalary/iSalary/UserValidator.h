@@ -1,6 +1,7 @@
 #pragma once
 
 #include <qregexp.h>
+#include "Codec.h"
 
 #include "IUserRepository.h"
 

@@ -31,11 +31,11 @@ QVariant EmployeesTableModel::headerData( int section, Qt::Orientation orientati
  
     switch( section ) {
     case COLUMN_ID:
-        return trUtf8( "id" );
+		return toUnicode( "id" );
     case COLUMN_FIO:
-        return trUtf8( "ФИО" );
+        return toUnicode( "ФИО" );
     case COLUMN_EMPLOY_DATE:
-        return trUtf8( "Дата найма" );
+        return toUnicode( "Дата найма" );
     }
  
     return QVariant();
