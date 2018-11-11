@@ -13,6 +13,7 @@
 
 #include "ManagersSalesTableModel.h"
 #include "UnconfirmedSalesTableModel.h"
+#include "ConfirmedSalesTableModel.h"
 #include <qheaderview.h>
 #include <qmodelindex>
 #include <qabstractitemview.h>
@@ -40,13 +41,15 @@ protected:
 	
 	int getSelectedManagerSalesId();
 	int getSelectedUnconfirmedSalesId();
+	int getSelectedConfirmedSalesId();
 
 	/**
     * Обновление таблицы со списком менежеров и инормацией об активных продажах
     */
 	void updateManagersTable();
-	void updateConfirmedTable();
 	void updateUnconfirmedTable();
+	void updateConfirmedTable();
+	
 
 private:
 	ErrorMessageHandler* errorHandler;
@@ -63,4 +66,5 @@ private:
 	QHash<int, ManagerActiveSalesStatisticDTO> managersSales;
 
 	void deleteConfirmSalesFromList( QList<ActiveSaleDTO>& list);
+	void deleteUnconfirmSalesFromList( QList<ActiveSaleDTO>& list);
 };

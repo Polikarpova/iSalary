@@ -68,6 +68,17 @@ void SalesPage::initUnconfirmedSalesTable( QTableView* unconfirmedSalesTable) {
 void SalesPage::initConfirmedSalesTable( QTableView* confirmedSalesTable) {
 
 	this->confirmedSalesTable = confirmedSalesTable;
+	auto model = new ConfirmedSalesTableModel();
+	this->confirmedSalesTable->setModel( model);
+
+	this->confirmedSalesTable->horizontalHeader()->setStretchLastSection(true);
+	this->confirmedSalesTable->setSelectionBehavior( QAbstractItemView::SelectRows);
+	this->confirmedSalesTable->setSelectionMode( QAbstractItemView::SingleSelection);
+
+	//скрытие поля с id
+	//this->confirmedSalesTable->setColumnHidden( ConfirmedSalesTableModel::COLUMN_ID, true);
+
+	//connect( this->confirmedSalesTable, &QTableView::clicked, this, &EmployeesPage::showDetails);
 }
 
 void SalesPage::updateManagersTable() {
@@ -111,7 +122,7 @@ void SalesPage::updateManagersTable() {
 	}
 }
 
-void SalesPage::updateConfirmedTable() {
+void SalesPage::updateUnconfirmedTable() {
 
 	//получаем нужную инфу из фасада(бд)
 	QList<ActiveSaleDTO> list;
@@ -167,9 +178,62 @@ void SalesPage::deleteConfirmSalesFromList( QList<ActiveSaleDTO>& list) {
 	}
 }
 
-void SalesPage::updateUnconfirmedTable() {
+void SalesPage::updateConfirmedTable() {
 
+	//получаем нужную инфу из фасада(бд)
+	QList<ActiveSaleDTO> list;
+
+	try {
+	
+		list = this->salesFacade->getActiveSales();
+	} catch( QString* error) {
+	
+		this->errorHandler->handleError( error);
+	}
+
+
+	//если это были изменены данные (1), то необходимо получить текущую строчку
+	//узнаем текущую строчку
+	int currentId = this->getSelectedConfirmedSalesId();
+
+	//чистим Qhash
+	this->confirmedSales.clear();
+	//заполняем его новыми данными из бд
+	for ( auto i = list.begin(); i != list.end(); i++) {
+	
+		this->confirmedSales.insert( i->id, *i);
+	}
+
+	//инициализируем и заполняем модель
+	ConfirmedSalesTableModel* model = static_cast<ConfirmedSalesTableModel*>( this->confirmedSalesTable->model());
+	this->deleteUnconfirmSalesFromList(list);	//удаляем не нужные строки
+	model->refreshData( list);
+
+	//если это (1) пытаемся установить его текущим
+	if( currentId != -1) {
+	
+		QModelIndex index = model->getIndexByRecordId( currentId);
+		if( index.isValid() ) {
+		
+			this->confirmedSalesTable->setCurrentIndex( index);
+		}
+	}
 }
+
+void SalesPage::deleteUnconfirmSalesFromList( QList<ActiveSaleDTO>& list) {
+
+	QMutableListIterator<ActiveSaleDTO> i(list);
+
+	i.toBack();
+
+	while (i.hasPrevious()) {
+		if (!i.previous().isConfirm) {
+		
+			i.remove();
+		}
+	}
+}
+
 
 int SalesPage::getSelectedManagerSalesId() {
 
@@ -181,6 +245,12 @@ int SalesPage::getSelectedUnconfirmedSalesId() {
 
 	auto model = static_cast<UnconfirmedSalesTableModel*>( this->unconfirmedSalesTable->model());
 	return model->getRecordId( this->unconfirmedSalesTable->currentIndex().row());
+}
+
+int SalesPage::getSelectedConfirmedSalesId() {
+
+	auto model = static_cast<ConfirmedSalesTableModel*>( this->confirmedSalesTable->model());
+	return model->getRecordId( this->confirmedSalesTable->currentIndex().row());
 }
 
 //===SLOTS===//
