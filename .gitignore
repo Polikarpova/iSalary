@@ -1,10 +1,41 @@
 /TZ
 /iSalaryPrototype
+/iSalary/iSalary/GeneratedFiles
+/iSalary/iSalary/Debug
 ipch
-*.suo
-*.sdf
-*.opensdf
-iSalary/Win32/*
-iSalary/iSalary/Debug/
-*.vcxproj.*
-/GeneratedFiles
+/iSalary/iSalary.sdf
+/iSalary/iSalary.suo
+
+/iSalary/iSalary.opensdf
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app

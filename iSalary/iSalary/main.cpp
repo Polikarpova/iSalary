@@ -5,7 +5,7 @@
 #include "UserDB.h"
 #include "AuthPage.h"
 #include "ProductPage.h"
-
+#include "ManagerPage.h"
 
 #include "Test.h"
 int main(int argc, char *argv[])
@@ -35,7 +35,11 @@ int main(int argc, char *argv[])
 	ProductFacade *productFacade = new ProductFacade( product_DB );
 	ProductPage *productPage = new ProductPage( productFacade );
 
-    MainWindow w( authPage, productPage);
+	Sale_DB *sale_DB = new Sale_DB( sqlDB, "sales" );
+	SaleFacade *saleFacade = new SaleFacade( sale_DB );
+	ManagerPage *managerPage = new ManagerPage( productFacade, saleFacade );
+
+    MainWindow w( authPage, productPage, managerPage);
 	w.show();
 
 	int exitCode = a.exec();

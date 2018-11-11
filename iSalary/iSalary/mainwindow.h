@@ -7,6 +7,7 @@
 
 #include "AuthPage.h"
 #include "ProductPage.h"
+#include "ManagerPage.h"
 
 #include "Product_DB.h"
 #include "Product.h"
@@ -41,7 +42,7 @@ class MainWindow : public QMainWindow
 	Q_OBJECT
 
 public:
-	MainWindow(AuthPage* authPage, ProductPage *productPage, QWidget *parent = 0);
+	MainWindow(AuthPage* authPage, ProductPage *productPage, ManagerPage *managerPage, QWidget *parent = 0);
 	~MainWindow();
 
 private:
@@ -49,30 +50,13 @@ private:
 	QSqlDatabase  _db;
     AuthPage* authPage;
 	ProductPage *productPage;
-	int current_user_id;
-	void createHorizontalTabs();
+	ManagerPage *managerPage;
 
+	void createHorizontalTabs();
     void enterProgram( const UserDTO& user, UserType userType);
 
-	Product_DB * product_db;
-	QHash <int, Product> products;
-	
-	Sale_DB * sale_db;
-	QHash <int, ActiveSale> sales;
-	QStandardItemModel *unconfirmedSalesTableModel, *confirmedSalesTableModel;
-	QStandardItemModel *managerProductsTableModel;
-	void initManagerWindow();
-	void fillManagersProductTable();
-	void clearManagersProductsTable();
-	void fillSale( ActiveSale & sale );
-	void fillManagersUnconfirmedSalesTable();
-	void clearManagersUnconfirmedSalesTable();
-	void fillManagersConfirmedSalesTable();
-	void clearManagersConfirmedSalesTable();
-
 private slots:
-	void searchManagersProductTable();
-	void addSale();
+
 };
 
 #endif // MAINWINDOW_H
