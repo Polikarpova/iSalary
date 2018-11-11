@@ -7,6 +7,5 @@ iSalary/Win32/*
 iSalary/iSalary/Debug/*
 /GeneratedFiles
 iSalary/iSalary.suo
-/iSalary/iSalary/*.vcxproj
-/iSalary/iSalary/*.vcxproj.*
-*.suo
+iSalary/iSalary/*.vcxproj
+iSalary/iSalary/*.vcxproj.*
