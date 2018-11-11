@@ -85,3 +85,10 @@ Product Product_DB::findByName( QString productName ) {
 	Product product = read( &query );
 	return product;
 }
+
+Product Product_DB::findById( int id ) {
+	QSqlQuery query("SELECT * FROM " + TABLE_NAME + " WHERE id = " + QString::number(id), _db);
+    bool isSuccess = query.next();
+	Product product = read( &query );
+	return product;
+}

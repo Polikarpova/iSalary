@@ -17,6 +17,7 @@ public:
 	bool remove(int id);
 	void fillProduct( Product & product, const QSqlQuery * sqlQuery );
 	Product findByName( QString productName );
+	Product findById( int id );
 	QVector<Product> getAll();
 
 protected:
