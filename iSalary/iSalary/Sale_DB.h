@@ -28,7 +28,7 @@ public:
     int getById( int id);
 
 protected:
-	QString TABLE_NAME;û
+	QString TABLE_NAME;
 	ActiveSale read(const QSqlQuery * sqlQuery);
 
 private:
