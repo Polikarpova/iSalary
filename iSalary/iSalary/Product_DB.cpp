@@ -4,6 +4,7 @@
 Product_DB::Product_DB( QSqlDatabase &db, QString table_name ) {
 	_db = db;
 	TABLE_NAME = table_name;
+	this->init();
 }
 
 
@@ -17,37 +18,40 @@ void Product_DB::init() {
     query.exec();
 }
 
-void Product_DB::create( Product product ) {
+bool Product_DB::create( Product product ) {
 
     QSqlQuery query( _db );
 	query.prepare( QString( "INSERT INTO " + TABLE_NAME + " (`name`, `commission`) VALUES(:name, :commission)" ) );
     query.bindValue( ":name", product.getName() );
 	query.bindValue( ":commission",  product.getCommission() );
 
-    bool isOk = query.exec();
-    if ( !isOk ) {
+    bool isSuccess = query.exec();
+    if ( !isSuccess ) {
 		QString s = _db.lastError().text();
         int stop = 2;
     }
+	return isSuccess;
 }
 
-void Product_DB::update( Product product ) {
+bool Product_DB::update( Product product ) {
 
     QSqlQuery query( _db );
 	query.prepare(QString( "UPDATE " + TABLE_NAME + " SET `name` = :name, `commission` = :commission WHERE id = ") + QString::number( product.getId() ) );
     query.bindValue( ":name", product.getName() );
 	query.bindValue( ":commission",  product.getCommission() );
 
-    bool isOk = query.exec();
-    if ( !isOk ) {
+	bool isSuccess = query.exec();
+    if ( !isSuccess ) {
 		QString s = _db.lastError().text();
         int stop = 2;
     }
+	return isSuccess;
 }
 
-void Product_DB::remove( int id ) {
+bool Product_DB::remove( int id ) {
 	QSqlQuery query("DELETE FROM " + TABLE_NAME + " WHERE id = " + QString::number(id), _db);
-    bool isOk = query.exec();
+    bool isSuccess = query.exec();
+	return isSuccess;
 }
 
 Product Product_DB::read( QSqlQuery * sqlQuery ) {

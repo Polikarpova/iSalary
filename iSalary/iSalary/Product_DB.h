@@ -12,9 +12,9 @@ public:
 	Product_DB( QSqlDatabase &db, QString table_name );
 	~Product_DB(void);
 	void init();
-	void create(Product product);
-	void update(Product product);
-	void remove(int id);
+	bool create(Product product);
+	bool update(Product product);
+	bool remove(int id);
 	void fillProduct( Product & product, const QSqlQuery * sqlQuery );
 	Product findByName( QString productName );
 	QVector<Product> getAll();
