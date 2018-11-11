@@ -139,6 +139,7 @@ void SalesPage::updateConfirmedTable() {
 
 	//инициализируем и заполняем модель
 	UnconfirmedSalesTableModel* model = static_cast<UnconfirmedSalesTableModel*>( this->unconfirmedSalesTable->model());
+	this->deleteConfirmSalesFromList(list);	//удаляем не нужные строки
 	model->refreshData( list);
 
 	//если это (1) пытаемся установить его текущим
@@ -148,6 +149,20 @@ void SalesPage::updateConfirmedTable() {
 		if( index.isValid() ) {
 		
 			this->unconfirmedSalesTable->setCurrentIndex( index);
+		}
+	}
+}
+
+void SalesPage::deleteConfirmSalesFromList( QList<ActiveSaleDTO>& list) {
+
+	QMutableListIterator<ActiveSaleDTO> i(list);
+
+	i.toBack();
+
+	while (i.hasPrevious()) {
+		if (i.previous().isConfirm) {
+		
+			i.remove();
 		}
 	}
 }

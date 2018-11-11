@@ -61,4 +61,6 @@ private:
 	QHash<int, ActiveSaleDTO> unconfirmedSales;
 	QHash<int, ActiveSaleDTO> confirmedSales;
 	QHash<int, ManagerActiveSalesStatisticDTO> managersSales;
+
+	void deleteConfirmSalesFromList( QList<ActiveSaleDTO>& list);
 };

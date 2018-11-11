@@ -46,6 +46,7 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
 
 	this->salesPage = salesPage;
 	this->salesPage->setUI(ui.salesDateInput, ui.managersSalesTable, ui.unconfirmedSalesTable, ui.confirmedSalesTable);
+	this->salesPage->setErrorHandler( errorHandler);
 
     connect(this->authPage, &AuthPage::userLoggedIn, this, &MainWindow::enterProgram);
 
@@ -142,6 +143,7 @@ void MainWindow::refreshBossPage( int page){
 
     switch( page){
         case PAGE_EMPLOYEES: this->employeesPage->refreshList(); break;
+		case PAGE_SALES: this->salesPage->refreshPage(); break;
         default:;
     }
 }

@@ -148,7 +148,7 @@ ActiveSaleDTO Sale_DB::readActiveSalesToDTO( const QSqlQuery& query) {
 
 	result.price = query.value("price").value<double>();
 	result.count = query.value("count").value<int>();
-	result.isConfirm = query.value("isConfirm").value<bool>();
+	result.isConfirm = query.value("isConfirmed").value<int>() ? true : false;
 
 	return result;
 }

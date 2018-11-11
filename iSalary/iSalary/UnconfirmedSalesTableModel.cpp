@@ -111,8 +111,9 @@ void UnconfirmedSalesTableModel::refreshData(const QList<ActiveSaleDTO>& sales) 
         this->beginInsertRows( QModelIndex(), 0, sales.size() - 1);
 
         for( int i = 0; i < sales.size(); i++) {
-            const ActiveSaleDTO& sale = sales[i];
-            QList<QVariant> row;
+            
+			const ActiveSaleDTO& sale = sales[i];
+			QList<QVariant> row;
         
 			row << sale.id;
 			row << sale.managerName;
@@ -123,7 +124,7 @@ void UnconfirmedSalesTableModel::refreshData(const QList<ActiveSaleDTO>& sales) 
 			row << sale.product.commission;
 			row << "action";
             
-            this->table.append( row);
+			this->table.append( row);
         }
 
         this->endInsertRows();
