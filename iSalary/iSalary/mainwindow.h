@@ -45,7 +45,7 @@ class MainWindow : public QMainWindow
 	Q_OBJECT
 
 public:
-    MainWindow(AuthPage* authPage, EmployeesPage* employeesPage, QWidget *parent = 0);
+	MainWindow(AuthPage* authPage, EmployeesPage* employeesPage, SalesPage* salesPage, QWidget *parent = 0);
 	~MainWindow();
 
 private:

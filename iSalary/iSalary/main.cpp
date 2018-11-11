@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 	sqlDB= QSqlDatabase::addDatabase( "QMYSQL");
 	sqlDB.setHostName( "127.0.0.1");
     sqlDB.setPort( 3306);
-    sqlDB.setDatabaseName( "test");
+    sqlDB.setDatabaseName( "mdkp");
     sqlDB.setUserName( "root");
     sqlDB.setPassword( "root");
     bool isOpen = sqlDB.open();
@@ -37,9 +37,9 @@ int main(int argc, char *argv[])
         QMessageBox::critical( 0, "Nu epta", sqlDB.lastError().text());
     }
 
-	freopen("testing.log", "w", stdout);
+	/*freopen("testing.log", "w", stdout);
 	Test_UserDB test_userDB( &sqlDB );
-	QTest::qExec( &test_userDB );
+	QTest::qExec( &test_userDB );*/
     
 	UserDB userDB( &sqlDB);
     UserValidator userValidator( &userDB);
@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
 	SalesFacade * salesFacade = new SalesFacade(&managerDB, saleDB);
     SalesPage salesPage(salesFacade);
 
-    MainWindow w( &authPage, &employeesPage);
+    MainWindow w( &authPage, &employeesPage, &salesPage);
 	
 	w.show();
     

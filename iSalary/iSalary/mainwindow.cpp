@@ -1,12 +1,11 @@
 #include "mainwindow.h"
-MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, QWidget *parent ) : QMainWindow(parent) {
+MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesPage* salesPage, QWidget *parent ) : QMainWindow(parent) {
 	ui.setupUi(this);
 	
-    ui.auth_program_stackedWidget->setCurrentIndex( AUTH_WIDGET);
-   // ui.auth_program_stackedWidget->setCurrentIndex( PROGRAM_WIDGET);
+	//блокировка вкладки корректировки
+	ui.tabWidget->setTabEnabled(2, false);
 
-	//MANAGER_WIDGET BOSS_WIDGET
-	//ui.boss_manager_stackedWidget->setCurrentIndex( MANAGER_WIDGET);
+    ui.auth_program_stackedWidget->setCurrentIndex( AUTH_WIDGET);
 
 	createHorizontalTabs();
 
@@ -45,6 +44,9 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, QWidge
     connect( ui.tabWidget, &QTabWidget::currentChanged, this, &MainWindow::refreshBossPage);
     //this->employeesPage->refreshList();
 
+	this->salesPage = salesPage;
+	this->salesPage->setUI(ui.salesDateInput, ui.managersSalesTable, ui.unconfirmedSalesTable, ui.confirmedSalesTable);
+
     connect(this->authPage, &AuthPage::userLoggedIn, this, &MainWindow::enterProgram);
 
 	auto drivers =  QSqlDatabase::drivers();
@@ -56,7 +58,7 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, QWidge
 	_db = QSqlDatabase::addDatabase( "QMYSQL" );
 	_db.setHostName( "127.0.0.1" );
     _db.setPort( 3306 );
-    _db.setDatabaseName( "test" );
+    _db.setDatabaseName( "mdkp" );
     _db.setUserName( "root" );
     _db.setPassword( "root" );
 	bool ok = _db.open();
@@ -86,11 +88,15 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, QWidge
 
 	connect( ui.searchButton, SIGNAL( clicked() ), this, SLOT( searchProduct() ) );
 
-	current_user_id = 1;
+	current_user_id = 2;
 	sale_db = new Sale_DB( _db, "sales" );
     sale_db->init();
 
 	initManagerWindow();
+
+	ui.managersProductTable->setEditTriggers(0);
+	ui.confirmedSales->setEditTriggers(0);
+	ui.unconfirmedSales->setEditTriggers(0);
 
 	connect( ui.managerProductSearchButton, SIGNAL( clicked() ), this, SLOT( searchManagersProductTable() ) );
 	connect( ui.addSaleButton, SIGNAL( clicked() ), this, SLOT( addSale() ) );

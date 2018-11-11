@@ -5,7 +5,13 @@
 #include <qobject.h>
 
 #include "SalesFacade.h"
-#include "SignResultDTO.h"
+#include "ActiveSaleDTO.h"
+#include "ManagerActiveSalesStatisticDTO.h"
+
+#include "ManagersSalesTableModel.h"
+#include <qheaderview.h>
+#include <qmodelindex>
+#include <qabstractitemview.h>
 
 class SalesPage : public QObject{
     Q_OBJECT
@@ -16,7 +22,15 @@ public:
 
 signals:
 
-private slots:
+protected slots:
+
+	void dateChanged();
+
+protected:
+
+	void initManagersTable (QTableView* managersSalesTable);
+	void initUnconfirmedSalesTable( QTableView* unconfirmedSalesTable);
+	void initConfirmedSalesTable( QTableView* confirmedSalesTable);
 
 private:
     SalesFacade * salesFacade;
@@ -26,6 +40,7 @@ private:
 	QTableView* unconfirmedSalesTable;
 	QTableView* confirmedSalesTable;
 
-    void showLogInError( const QString& error);
+	QHash<int, ActiveSaleDTO> unconfirmedSales;
+	QHash<int, ActiveSaleDTO> confirmedSales;
+	QHash<int, ManagerActiveSalesStatisticDTO> managersSales;
 };
-
