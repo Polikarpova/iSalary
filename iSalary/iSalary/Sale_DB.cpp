@@ -100,6 +100,25 @@ QList<ManagerActiveSalesStatisticDTO> Sale_DB::getManagerActiveSalesSatistic() {
 	return result;
 }
 
+QList<ActiveSaleDTO> Sale_DB::getActiveSales() {
+
+	//создаем строку с sql-запросом
+	QString sql = "select users.firstName, users.secondName, users.thirdName, sales.*, products.name, products.commission from sales, users, products where sales.manager_id = users.id AND sales.product_id = products.id AND sales.isActive = 1";
+	QSqlQuery query( this->_db);
+	query.prepare(sql);
+
+	this->execQuery( query);
+
+	QList<ActiveSaleDTO> result;
+
+	while( query.next() ) {
+	
+		result.append( this->readActiveSalesToDTO(query) );
+	}
+
+	return result;
+}
+
 ManagerActiveSalesStatisticDTO Sale_DB::readToDTO( const QSqlQuery& query) {
 
 	struct ManagerActiveSalesStatisticDTO result;
@@ -113,6 +132,27 @@ ManagerActiveSalesStatisticDTO Sale_DB::readToDTO( const QSqlQuery& query) {
 
 	return result;
 }
+
+ActiveSaleDTO Sale_DB::readActiveSalesToDTO( const QSqlQuery& query) {
+
+	struct ActiveSaleDTO result;
+
+	result.id = query.value("id").value<int>();
+	result.managerName = query.value("secondName").value<QString>() + " " +
+						 query.value("firstName").value<QString>() + " " +
+						 query.value("thirdName").value<QString>();
+	
+	result.product.id = query.value("product_id").value<int>();
+	result.product.name = query.value("name").value<QString>();
+	result.product.commission = query.value("commission").value<double>();
+
+	result.price = query.value("price").value<double>();
+	result.count = query.value("count").value<int>();
+	result.isConfirm = query.value("isConfirm").value<bool>();
+
+	return result;
+}
+
 
 void Sale_DB::execQuery( QSqlQuery& query) const {
     bool isSuccess = query.exec();

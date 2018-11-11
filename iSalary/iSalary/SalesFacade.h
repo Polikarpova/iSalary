@@ -27,11 +27,17 @@ public:
 	void cancelConfirmSale( ActiveSaleDTO sale);
 
 	/**
+	* ¬озращает активные продажи (подтвержденные и неподтвержденные) всех менеджеров
+	* @return список продаж
+	*/
+	QList<ActiveSaleDTO> getActiveSales();
+
+	/**
 	* ¬озращает активные продажи (подтвержденные и неподтвержденные) определенного менеджера
 	* @param managerId - id менеджера
 	* @return список продаж менеджера с указанным id
 	*/
-	QList<ActiveSaleDTO> getActiveSales( int managerId);
+	QList<ActiveSaleDTO> getActiveSalesForManager( int managerId);
 
 	/**
 	* ¬озращает статистику продаж дл€ страницы "ѕродажи" всех менеджеров за определенный день

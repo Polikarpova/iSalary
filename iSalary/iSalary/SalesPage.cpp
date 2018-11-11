@@ -11,8 +11,8 @@ SalesPage::~SalesPage( void) {
 void SalesPage::refreshPage() {
 
 	this->updateManagersTable();
-	this->updateConfirmedTable();
 	this->updateUnconfirmedTable();
+	this->updateConfirmedTable();
 }
 
 void SalesPage::setErrorHandler( ErrorMessageHandler* errorHandler) {
@@ -53,7 +53,7 @@ void SalesPage::initUnconfirmedSalesTable( QTableView* unconfirmedSalesTable) {
 
 	this->unconfirmedSalesTable = unconfirmedSalesTable;
 	auto model = new UnconfirmedSalesTableModel();
-	this->managersSalesTable->setModel( model);
+	this->unconfirmedSalesTable->setModel( model);
 
 	this->unconfirmedSalesTable->horizontalHeader()->setStretchLastSection(true);
 	this->unconfirmedSalesTable->setSelectionBehavior( QAbstractItemView::SelectRows);
@@ -113,6 +113,43 @@ void SalesPage::updateManagersTable() {
 
 void SalesPage::updateConfirmedTable() {
 
+	//получаем нужную инфу из фасада(бд)
+	QList<ActiveSaleDTO> list;
+
+	try {
+	
+		list = this->salesFacade->getActiveSales();
+	} catch( QString* error) {
+	
+		this->errorHandler->handleError( error);
+	}
+
+
+	//если это были изменены данные (1), то необходимо получить текущую строчку
+	//узнаем текущую строчку
+	int currentId = this->getSelectedUnconfirmedSalesId();
+
+	//чистим Qhash
+	this->unconfirmedSales.clear();
+	//заполняем его новыми данными из бд
+	for ( auto i = list.begin(); i != list.end(); i++) {
+	
+		this->unconfirmedSales.insert( i->id, *i);
+	}
+
+	//инициализируем и заполняем модель
+	UnconfirmedSalesTableModel* model = static_cast<UnconfirmedSalesTableModel*>( this->unconfirmedSalesTable->model());
+	model->refreshData( list);
+
+	//если это (1) пытаемся установить его текущим
+	if( currentId != -1) {
+	
+		QModelIndex index = model->getIndexByRecordId( currentId);
+		if( index.isValid() ) {
+		
+			this->unconfirmedSalesTable->setCurrentIndex( index);
+		}
+	}
 }
 
 void SalesPage::updateUnconfirmedTable() {
@@ -123,6 +160,12 @@ int SalesPage::getSelectedManagerSalesId() {
 
 	auto model = static_cast<ManagersSalesTableModel*>( this->managersSalesTable->model());
 	return model->getRecordId( this->managersSalesTable->currentIndex().row());
+}
+
+int SalesPage::getSelectedUnconfirmedSalesId() {
+
+	auto model = static_cast<UnconfirmedSalesTableModel*>( this->unconfirmedSalesTable->model());
+	return model->getRecordId( this->unconfirmedSalesTable->currentIndex().row());
 }
 
 //===SLOTS===//

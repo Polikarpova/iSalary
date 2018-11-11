@@ -12,6 +12,7 @@
 #include "ManagerActiveSalesStatisticDTO.h"
 
 #include "ManagersSalesTableModel.h"
+#include "UnconfirmedSalesTableModel.h"
 #include <qheaderview.h>
 #include <qmodelindex>
 #include <qabstractitemview.h>
@@ -38,6 +39,7 @@ protected:
 	void initConfirmedSalesTable( QTableView* confirmedSalesTable);
 	
 	int getSelectedManagerSalesId();
+	int getSelectedUnconfirmedSalesId();
 
 	/**
     * Обновление таблицы со списком менежеров и инормацией об активных продажах

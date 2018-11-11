@@ -3,15 +3,15 @@
 #include "Codec.h"
 #include <QAbstractTableModel>
 
-#include "ManagerActiveSalesStatisticDTO.h"
+#include "ActiveSaleDTO.h"
 
-class ManagersSalesTableModel : public QAbstractTableModel {
+class UnconfirmedSalesTableModel : public QAbstractTableModel {
     Q_OBJECT
 public:
-    ManagersSalesTableModel(QObject* parent = 0);
-    ~ManagersSalesTableModel(void);
+    UnconfirmedSalesTableModel(QObject* parent = 0);
+    ~UnconfirmedSalesTableModel(void);
 
-	void refreshData(const QList<ManagerActiveSalesStatisticDTO>& managers);
+	void refreshData(const QList<ActiveSaleDTO>& sales);
     int getRecordId( int row);
     QModelIndex getIndexByRecordId( int id);
 
@@ -24,8 +24,12 @@ public:
     enum Column {
 		COLUMN_ID,
         COLUMN_FIO,
-        COLUMN_CONFIRM_COUNT,
-        COLUMN_UNCONFIRM_COUNT,
+        COLUMN_DATE,
+        COLUMN_NAME,
+        COLUMN_COUNT,
+        COLUMN_PRICE,
+        COLUMN_COMMISION,
+        COLUMN_ACTION,
         COLUMN_LAST /*Обозначает кол-во столбцов, на самом деле не существует*/
     };
 

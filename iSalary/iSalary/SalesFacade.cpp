@@ -15,6 +15,13 @@ void SalesFacade::cancelConfirmSale( ActiveSaleDTO sale) {
 
 }
 
+QList<ActiveSaleDTO> SalesFacade::getActiveSales(){
+
+	//QList<ManagerActiveSalesStatisticDTO> result;
+
+	return this->s->getActiveSales();
+}
+
 QList<ManagerActiveSalesStatisticDTO> SalesFacade::getActiveSalesStatistic( QDate date){
 
 	//QList<ManagerActiveSalesStatisticDTO> result;
