@@ -4,6 +4,8 @@
 #include "AuthorizationFacade.h"
 #include "UserDB.h"
 #include "AuthPage.h"
+#include "ProductPage.h"
+
 
 #include "Test.h"
 int main(int argc, char *argv[])
@@ -29,7 +31,11 @@ int main(int argc, char *argv[])
     AuthorizationFacade * authFacade = new AuthorizationFacade( authModule);
     AuthPage * authPage = new AuthPage( authFacade);
 
-    MainWindow w( authPage);
+	Product_DB *product_DB = new Product_DB( sqlDB, "products" );
+	ProductFacade *productFacade = new ProductFacade( product_DB );
+	ProductPage *productPage = new ProductPage( productFacade );
+
+    MainWindow w( authPage, productPage);
 	w.show();
 
 	int exitCode = a.exec();
