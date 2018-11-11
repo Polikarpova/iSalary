@@ -11,6 +11,7 @@ public:
 	ProductDTO updateProduct( Product product );
 	ProductDTO removeProduct( int id );
 	ProductDTO findByName( QString productName );
+	ProductDTO findById( int id );
 	ProductDTO getAll();
 private:
 	Product_DB *product_DB;

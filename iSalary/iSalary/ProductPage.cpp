@@ -209,7 +209,7 @@ void ProductPage::searchProduct() {
 		}
 
 		if (result.isSuccess == false ) {
-		
+			
 		}
 	} else {
 		fillProducts();

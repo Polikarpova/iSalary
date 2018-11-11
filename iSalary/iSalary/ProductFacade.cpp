@@ -47,6 +47,18 @@ ProductDTO ProductFacade::findByName( QString productName ) {
 	return result;
 }
 
+ProductDTO ProductFacade::findById( int id ) {
+	Product product = product_DB->findById( id );
+	ProductDTO result;
+	result.product = product;
+	result.isEmpty = false;
+	bool isSuccess = true;
+	if (product.getId() == 0)
+		isSuccess = false;
+	result.isSuccess = isSuccess;
+	return result;
+}
+
 ProductDTO ProductFacade::getAll() {
 	QVector<Product>products = product_DB->getAll();
 	ProductDTO result;
