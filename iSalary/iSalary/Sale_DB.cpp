@@ -5,6 +5,7 @@
 Sale_DB::Sale_DB( QSqlDatabase &db, QString table_name ) {
 	_db = db;
 	TABLE_NAME = table_name;
+	this->init();
 }
 
 
@@ -19,7 +20,7 @@ void Sale_DB::init() {
     query.exec();
 }
 
-void Sale_DB::create( ActiveSale sale ) {
+bool Sale_DB::create( ActiveSale sale ) {
 
     QSqlQuery query( _db );
 	query.prepare( QString( "INSERT INTO " + TABLE_NAME + 
@@ -31,14 +32,21 @@ void Sale_DB::create( ActiveSale sale ) {
 	query.bindValue( ":isActive", 1 );
 	query.bindValue( ":isConfirmed",  0 );
 
-    bool isOk = query.exec();
-    if ( !isOk ) {
+    bool isSuccess = query.exec();
+    if ( !isSuccess ) {
 		QString s = _db.lastError().text();
         int stop = 2;
     }
+	return isSuccess;
 }
 
-ActiveSale Sale_DB::read( const QSqlQuery * sqlQuery ){
+bool Sale_DB::remove( int id ) {
+	QSqlQuery query("DELETE FROM " + TABLE_NAME + " WHERE id = " + QString::number(id), _db);
+    bool isSuccess = query.exec();
+	return isSuccess;
+}
+
+ActiveSale Sale_DB::read( const QSqlQuery * sqlQuery ) {
     ActiveSale sale;
     fillSale( sale, sqlQuery );
     return sale;
