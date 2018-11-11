@@ -6,6 +6,7 @@
 #include "QTextCodec"
 
 #include "AuthPage.h"
+#include "ProductPage.h"
 
 #include "Product_DB.h"
 #include "Product.h"
@@ -40,13 +41,14 @@ class MainWindow : public QMainWindow
 	Q_OBJECT
 
 public:
-	MainWindow(AuthPage* authPage, QWidget *parent = 0);
+	MainWindow(AuthPage* authPage, ProductPage *productPage, QWidget *parent = 0);
 	~MainWindow();
 
 private:
 	Ui::MainWindowClass ui;
 	QSqlDatabase  _db;
     AuthPage* authPage;
+	ProductPage *productPage;
 	int current_user_id;
 	void createHorizontalTabs();
 
@@ -54,17 +56,7 @@ private:
 
 	Product_DB * product_db;
 	QHash <int, Product> products;
-	QStandardItemModel *productsTableModel;
-	enum StatusType {DEFAULT, ADD_PRODUCT, UPDATE_PRODUCT};
-	StatusType status;  
-
-	void initProductWindow();
-	void setInputsEnabledPageProducts( bool isEnabled );
-	void clearInputsPageProducts();
-	void fillProduct( Product & product );
-	void fillProducts();
-	void clearTable();
-
+	
 	Sale_DB * sale_db;
 	QHash <int, ActiveSale> sales;
 	QStandardItemModel *unconfirmedSalesTableModel, *confirmedSalesTableModel;
@@ -79,14 +71,6 @@ private:
 	void clearManagersConfirmedSalesTable();
 
 private slots:
-	void directAddProduct();
-	void addProduct();
-	void directUpdateProduct();
-	void updateProduct();
-	void showProduct();
-	void removeProduct();
-	void searchProduct();
-
 	void searchManagersProductTable();
 	void addSale();
 };
