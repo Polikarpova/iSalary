@@ -1,7 +1,9 @@
 #pragma once
 
-#include <QAbstractTableModel>
 #include "Codec.h"
+#include <QAbstractTableModel>
+
+#include "ManagerActiveSalesStatisticDTO.h"
 
 class ManagersSalesTableModel : public QAbstractTableModel {
     Q_OBJECT
@@ -9,6 +11,7 @@ public:
     ManagersSalesTableModel(QObject* parent = 0);
     ~ManagersSalesTableModel(void);
 
+	void refreshData(const QList<ManagerActiveSalesStatisticDTO>& managers);
     int getRecordId( int row);
     QModelIndex getIndexByRecordId( int id);
 
@@ -19,10 +22,10 @@ public:
 
     
     enum Column {
+		COLUMN_ID,
         COLUMN_FIO,
         COLUMN_CONFIRM_COUNT,
         COLUMN_UNCONFIRM_COUNT,
-		COLUMN_ID,
         COLUMN_LAST /*Обозначает кол-во столбцов, на самом деле не существует*/
     };
 

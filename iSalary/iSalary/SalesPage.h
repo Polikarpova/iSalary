@@ -1,8 +1,11 @@
 #pragma once
 
+#include "Codec.h"
 #include <QDateEdit>
 #include <QTableView>
 #include <qobject.h>
+
+#include "ErrorMessageHandler.h"
 
 #include "SalesFacade.h"
 #include "ActiveSaleDTO.h"
@@ -20,7 +23,9 @@ public:
     void setUI( QDateEdit* salesDateInput, QTableView* managersSalesTable, QTableView* unconfirmedSalesTable, QTableView* confirmedSalesTable);
     ~SalesPage( void);
 
-signals:
+	void refreshPage();
+
+	void setErrorHandler( ErrorMessageHandler* errorHandler);
 
 protected slots:
 
@@ -31,8 +36,19 @@ protected:
 	void initManagersTable (QTableView* managersSalesTable);
 	void initUnconfirmedSalesTable( QTableView* unconfirmedSalesTable);
 	void initConfirmedSalesTable( QTableView* confirmedSalesTable);
+	
+	int getSelectedManagerSalesId();
+
+	/**
+    * Обновление таблицы со списком менежеров и инормацией об активных продажах
+    */
+	void updateManagersTable();
+	void updateConfirmedTable();
+	void updateUnconfirmedTable();
 
 private:
+	ErrorMessageHandler* errorHandler;
+
     SalesFacade * salesFacade;
     
 	QDateEdit* salesDateInput;

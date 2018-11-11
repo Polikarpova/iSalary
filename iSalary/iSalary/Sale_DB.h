@@ -9,6 +9,9 @@
 #include <QVector>
 #include <QSqlError>
 
+#include <qlist.h>
+#include "ManagerActiveSalesStatisticDTO.h"
+
 class Sale_DB
 {
 public:
@@ -27,9 +30,23 @@ public:
     */ 
     int getById( int id);
 
+	QList<ManagerActiveSalesStatisticDTO> getManagerActiveSalesSatistic();
+
 protected:
 	QString TABLE_NAME;
 	ActiveSale read(const QSqlQuery * sqlQuery);
+	ManagerActiveSalesStatisticDTO readToDTO( const QSqlQuery& query);
+	void execQuery( QSqlQuery& query) const;
+	
+	/*
+    * Обработка ошибки - выкидывает исключение с переданной ошибкой
+    */
+    void handleError( const QSqlError& error) const;
+    
+    /*
+    * Обработка ошибки - выкидывает исключение с переданным текстом
+    */
+    void handleError( const QString& error) const;
 
 private:
 	QSqlDatabase _db;

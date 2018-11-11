@@ -79,3 +79,57 @@ int Sale_DB::getById(int id) {
 
     return 0;
 }
+
+QList<ManagerActiveSalesStatisticDTO> Sale_DB::getManagerActiveSalesSatistic() {
+
+	//создаем строку с sql-запросом
+	QString sql = "select users.id, users.firstName, users.secondName, users.thirdName,	( select count(sales.isConfirmed) from sales, users where sales.manager_id = users.id AND sales.isActive = 1 AND sales.isConfirmed = 1) as confrim, count(sales.isConfirmed) as unconfirm from users, sales where sales.manager_id = users.id AND sales.isActive = 1 AND sales.isConfirmed = 0;";
+
+	QSqlQuery query( this->_db);
+	query.prepare(sql);
+
+	this->execQuery( query);
+
+	QList<ManagerActiveSalesStatisticDTO> result;
+
+	while( query.next() ) {
+	
+		result.append( this->readToDTO(query) );
+	}
+
+	return result;
+}
+
+ManagerActiveSalesStatisticDTO Sale_DB::readToDTO( const QSqlQuery& query) {
+
+	struct ManagerActiveSalesStatisticDTO result;
+
+	result.managerId = query.value("id").value<int>();
+	result.managerName = query.value("secondName").value<QString>() + " " +
+						 query.value("firstName").value<QString>() + " " +
+						 query.value("thirdName").value<QString>();
+	result.confirmCount = query.value("confirm").value<int>();
+	result.unconfirmCount = query.value("unconfirm").value<int>();
+
+	return result;
+}
+
+void Sale_DB::execQuery( QSqlQuery& query) const {
+    bool isSuccess = query.exec();
+    if( !isSuccess ){
+        QString err = query.lastError().text();
+        this->handleError( query.lastError());
+    }
+}
+
+void Sale_DB::handleError( const QSqlError& error) const {
+
+    QSqlError * err = new QSqlError(error);
+	QString text = err->text() + this->_db.lastError().text();
+    throw err;
+}
+
+void Sale_DB::handleError( const QString& error) const {
+    QString * err = new QString(error);
+    throw err;
+}

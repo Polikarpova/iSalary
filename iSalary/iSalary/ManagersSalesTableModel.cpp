@@ -9,6 +9,7 @@ ManagersSalesTableModel::ManagersSalesTableModel(QObject* parent){
 ManagersSalesTableModel::~ManagersSalesTableModel(void){
 }
 
+//===OVERRIDE===//
 int ManagersSalesTableModel::rowCount( const QModelIndex& parent ) const {
     Q_UNUSED( parent )
     return table.count();
@@ -58,5 +59,60 @@ QVariant ManagersSalesTableModel::data( const QModelIndex& index, int role ) con
         return this->table[ index.row()][ Column( index.column())];
     } else {
         return QVariant("Too big index");
+    }
+}
+//===OVERRIDE===//
+
+int ManagersSalesTableModel::getRecordId( int row) {
+    int id = -1;
+
+    if( row >= 0 && row < this->table.size() ) {
+        
+		id = this->table.at(row).at(COLUMN_ID).value<int>();
+    }
+
+    return id;
+}
+
+QModelIndex ManagersSalesTableModel::getIndexByRecordId( int id) {
+    
+	QModelIndex index;
+    
+	for( int iRow = 0; iRow < this->table.size(); iRow++) {
+
+        if( this->table.at( iRow).at( COLUMN_ID) == id) {
+
+            index = this->createIndex( iRow, COLUMN_ID);
+        }
+    }
+    return index;
+}
+
+void ManagersSalesTableModel::refreshData(const QList<ManagerActiveSalesStatisticDTO>& managers) {
+
+	if( table.size() > 0) {
+        this->beginRemoveRows( QModelIndex(), 0, table.size() - 1);
+
+        this->table.clear();
+
+        this->endRemoveRows();
+    }
+
+    if( managers.size() > 0) { 
+        this->beginInsertRows( QModelIndex(), 0, managers.size() - 1);
+
+        for( int i = 0; i < managers.size(); i++) {
+            const ManagerActiveSalesStatisticDTO& manager = managers[i];
+            QList<QVariant> row;
+        
+			row << manager.managerId;
+			row << manager.managerName;
+			row << manager.confirmCount;
+			row << manager.unconfirmCount;
+            
+            this->table.append( row);
+        }
+
+        this->endInsertRows();
     }
 }

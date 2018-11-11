@@ -8,6 +8,17 @@ SalesPage::SalesPage( SalesFacade * salesFacade){
 SalesPage::~SalesPage( void) {
 }
 
+void SalesPage::refreshPage() {
+
+	this->updateManagersTable();
+	this->updateConfirmedTable();
+	this->updateUnconfirmedTable();
+}
+
+void SalesPage::setErrorHandler( ErrorMessageHandler* errorHandler) {
+    this->errorHandler = errorHandler;
+}
+
 void SalesPage::setUI( QDateEdit* salesDateInput, QTableView* managersSalesTable, QTableView* unconfirmedSalesTable, QTableView* confirmedSalesTable)
 {
 	this->salesDateInput = salesDateInput;
@@ -17,12 +28,12 @@ void SalesPage::setUI( QDateEdit* salesDateInput, QTableView* managersSalesTable
 	this->initManagersTable( managersSalesTable);
 	this->initUnconfirmedSalesTable( unconfirmedSalesTable);
 	this->initConfirmedSalesTable( confirmedSalesTable);
+
+	this->refreshPage();
 }
 
 void SalesPage::initManagersTable( QTableView* managersSalesTable) {
 	
- //   connect( this->managersTable, &QTableView::clicked, this, &EmployeesPage::showDetails);
-
 	//настройки таблиц
 	this->managersSalesTable = managersSalesTable;
 	auto model = new ManagersSalesTableModel();
@@ -33,13 +44,25 @@ void SalesPage::initManagersTable( QTableView* managersSalesTable) {
 	this->managersSalesTable->setSelectionMode( QAbstractItemView::SingleSelection);
 
 	//скрытие пол€ с id
-	//this->managersTable->setColumnHidden( EmployeesTableModel::COLUMN_ID, true);
+	//this->managersSalesTable->setColumnHidden( ManagersSalesTableModel::COLUMN_ID, true);
+
+	//connect( this->managersSalesTable, &QTableView::clicked, this, &EmployeesPage::showDetails);
 }
 
 void SalesPage::initUnconfirmedSalesTable( QTableView* unconfirmedSalesTable) {
 
 	this->unconfirmedSalesTable = unconfirmedSalesTable;
+	auto model = new UnconfirmedSalesTableModel();
+	this->managersSalesTable->setModel( model);
 
+	this->unconfirmedSalesTable->horizontalHeader()->setStretchLastSection(true);
+	this->unconfirmedSalesTable->setSelectionBehavior( QAbstractItemView::SelectRows);
+	this->unconfirmedSalesTable->setSelectionMode( QAbstractItemView::SingleSelection);
+
+	//скрытие пол€ с id
+	//this->unconfirmedSalesTable->setColumnHidden( UnconfirmedSalesTableModel::COLUMN_ID, true);
+
+	//connect( this->unconfirmedSalesTable, &QTableView::clicked, this, &EmployeesPage::showDetails);
 }
 
 void SalesPage::initConfirmedSalesTable( QTableView* confirmedSalesTable) {
@@ -47,9 +70,66 @@ void SalesPage::initConfirmedSalesTable( QTableView* confirmedSalesTable) {
 	this->confirmedSalesTable = confirmedSalesTable;
 }
 
+void SalesPage::updateManagersTable() {
+
+	//получаем нужную инфу из фасада(бд)
+	QList<ManagerActiveSalesStatisticDTO> list;
+
+	try {
+	
+		list = this->salesFacade->getActiveSalesStatistic( this->salesDateInput->date() );
+	} catch( QString* error) {
+	
+		this->errorHandler->handleError( error);
+	}
+
+
+	//если это были изменены данные (1), то необходимо получить текущую строчку
+	//узнаем текущую строчку
+	int currentId = this->getSelectedManagerSalesId();
+
+	//чистим Qhash
+	this->managersSales.clear();
+	//заполн€ем его новыми данными из бд
+	for ( auto iManager = list.begin(); iManager != list.end(); iManager++) {
+	
+		this->managersSales.insert( iManager->managerId, *iManager);
+	}
+
+	//инициализируем и заполн€ем модель
+	ManagersSalesTableModel* model = static_cast<ManagersSalesTableModel*>( this->managersSalesTable->model());
+	model->refreshData( list);
+
+	//если это (1) пытаемс€ установить его текущим
+	if( currentId != -1) {
+	
+		QModelIndex index = model->getIndexByRecordId( currentId);
+		if( index.isValid() ) {
+		
+			this->managersSalesTable->setCurrentIndex( index);
+		}
+	}
+}
+
+void SalesPage::updateConfirmedTable() {
+
+}
+
+void SalesPage::updateUnconfirmedTable() {
+
+}
+
+int SalesPage::getSelectedManagerSalesId() {
+
+	auto model = static_cast<ManagersSalesTableModel*>( this->managersSalesTable->model());
+	return model->getRecordId( this->managersSalesTable->currentIndex().row());
+}
+
 //===SLOTS===//
 void SalesPage::dateChanged() {
 
-	//обновл€ем все таблицы в соответсвии с датой
-	QMessageBox::information(0, "Date changed", "You choose this date: " + this->salesDateInput->date().toString());
+	//обновл€ем все таблицы в соответствии с датой
+	//QMessageBox::information( 0, toUnicode("ƒата изменилась"), toUnicode("¬ы выбрали эту дату: ") + this->salesDateInput->date().toString() ); //debug
+
+	this->updateManagersTable();
 }
