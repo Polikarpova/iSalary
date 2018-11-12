@@ -52,7 +52,22 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
 	this->salesPage->setErrorHandler( errorHandler);
 
 	this->salaryPage = salaryPage;
-
+	this->salaryPage->setUI(
+		ui.salaryAccountingPeriod, 
+		ui.salaryTable, 
+		ui.salaryTotalTable, 
+		ui.managerFIOLabel, 
+		ui.salaryPasportSeries, 
+		ui.salaryPasportNumber, 
+		ui.salaryPasportSourse, 
+		ui.salaryDateOfReceipt, 
+		ui.salaryMaleRButton, 
+		ui.salaryFemaleRButton, 
+		ui.salaryINN, 
+		ui.closeAccountingPeriod, 
+		ui.salesButton, 
+		ui.dataButton	
+	);
 	this->salaryPage->setErrorHandler( errorHandler);
 
     connect(this->authPage, &AuthPage::userLoggedIn, this, &MainWindow::enterProgram);
@@ -157,6 +172,7 @@ void MainWindow::refreshBossPage( int page){
     switch( page){
         case PAGE_EMPLOYEES: this->employeesPage->refreshList(); break;
 		case PAGE_SALES: this->salesPage->refreshPage(); break;
+		case PAGE_SALARY: this->salaryPage->refreshPage(); break;
         default:;
     }
 }

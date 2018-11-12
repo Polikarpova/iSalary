@@ -39,9 +39,8 @@ protected slots:
 
 protected:
 
-	//void initManagersTable (QTableView* managersSalesTable);
-	//void initUnconfirmedSalesTable( QTableView* unconfirmedSalesTable);
-	//void initConfirmedSalesTable( QTableView* confirmedSalesTable);
+	void initSalaryTable (QTableView* salaryTable);
+	void initSalaryTotalTable( QTableView* salaryTotalTable);
 	//
 	//int getSelectedManagerSalesId();
 	//int getSelectedUnconfirmedSalesId();
