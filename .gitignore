@@ -2,11 +2,17 @@
 /iSalaryPrototype
 /iSalary/iSalary/GeneratedFiles
 /iSalary/iSalary/Debug
+/iSalary/Win32/Debug/iSalary.ilk
+
+/iSalary/Win32/Debug/iSalary.pdb
+
 ipch
 /iSalary/iSalary.sdf
 /iSalary/iSalary.suo
 
 /iSalary/iSalary.opensdf
+/iSalary/iSalary/testing.log
+
 # Prerequisites
 *.d
 
