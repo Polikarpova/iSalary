@@ -50,8 +50,14 @@ class MainWindow : public QMainWindow
 	Q_OBJECT
 
 public:
-	MainWindow(AuthPage* authPage, ProductPage *productPage, ManagerPage *managerPage, QWidget *parent = 0);
-	MainWindow(AuthPage* authPage, EmployeesPage* employeesPage, SalesPage* salesPage, QWidget *parent = 0);
+	MainWindow(
+		AuthPage* authPage,
+		EmployeesPage* employeesPage, 
+		SalesPage* salesPage,
+		ProductPage *productPage, 
+		ManagerPage *managerPage, 
+		QWidget *parent = 0
+	);
 	~MainWindow();
 
 private:
@@ -61,9 +67,6 @@ private:
     AuthPage* authPage;
 	ProductPage *productPage;
 	ManagerPage *managerPage;
-
-    
-	AuthPage* authPage;
 	SalesPage* salesPage;
     EmployeesPage* employeesPage;
 
@@ -84,42 +87,8 @@ private:
 
     void refreshBossPage( int page);
 
-	Product_DB * product_db;
-	QHash <int, Product> products;
-	QStandardItemModel *productsTableModel;
-	enum StatusType {DEFAULT, ADD_PRODUCT, UPDATE_PRODUCT};
-	StatusType status;  
-
-	void initProductWindow();
-	void setInputsEnabledPageProducts( bool isEnabled );
-	void clearInputsPageProducts();
-	void fillProduct( Product & product );
-	void fillProducts();
-	void clearTable();
-
-	Sale_DB * sale_db;
-	QHash <int, ActiveSale> sales;
-	QStandardItemModel *unconfirmedSalesTableModel, *confirmedSalesTableModel;
-	void initManagerWindow();
-	void fillManagersProductTable();
-	void clearManagersProductsTable();
-	void fillSale( ActiveSale & sale );
-	void fillManagersUnconfirmedSalesTable();
-	void clearManagersUnconfirmedSalesTable();
-	void fillManagersConfirmedSalesTable();
-	void clearManagersConfirmedSalesTable();
-
 private slots:
-	void directAddProduct();
-	void addProduct();
-	void directUpdateProduct();
-	void updateProduct();
-	void showProduct();
-	void removeProduct();
-	void searchProduct();
-
-	void searchManagersProductTable();
-	void addSale();
+	
 };
 
 #endif // MAINWINDOW_H

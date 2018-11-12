@@ -41,11 +41,6 @@ int main(int argc, char *argv[])
     sqlDB.setPassword( "root");
     bool isOpen = sqlDB.open();
 
-    UserDB * userDB = new UserDB( &sqlDB);
-    AuthorizationModule * authModule = new AuthorizationModule( userDB);
-    AuthorizationFacade * authFacade = new AuthorizationFacade( authModule);
-    AuthPage * authPage = new AuthPage( authFacade);
-
 	Product_DB *product_DB = new Product_DB( sqlDB, "products" );
 	ProductFacade *productFacade = new ProductFacade( product_DB );
 	ProductPage *productPage = new ProductPage( productFacade );
@@ -53,15 +48,6 @@ int main(int argc, char *argv[])
 	Sale_DB *sale_DB = new Sale_DB( sqlDB, "sales" );
 	SaleFacade *saleFacade = new SaleFacade( sale_DB );
 	ManagerPage *managerPage = new ManagerPage( productFacade, saleFacade );
-
-    MainWindow w( authPage, productPage, managerPage);
-    if( sqlDB.lastError().type() != QSqlError::NoError){
-        QMessageBox::critical( 0, "Nu epta", sqlDB.lastError().text());
-    }
-
-	/*freopen("testing.log", "w", stdout);
-	Test_UserDB test_userDB( &sqlDB );
-	QTest::qExec( &test_userDB );*/
     
 	UserDB userDB( &sqlDB);
     UserValidator userValidator( &userDB);
@@ -79,16 +65,17 @@ int main(int argc, char *argv[])
 	SalesFacade * salesFacade = new SalesFacade(&managerDB, saleDB);
     SalesPage salesPage(salesFacade);
 
-    MainWindow w( &authPage, &employeesPage, &salesPage);
+    MainWindow w( 
+		&authPage, 
+		&employeesPage, 
+		&salesPage, 
+		productPage,
+		managerPage
+	);
 	
 	w.show();
 
 	int exitCode = a.exec();
-
-    delete authPage;
-    delete authFacade;
-    delete authModule;
-    delete userDB;
 
     return exitCode;
 }
