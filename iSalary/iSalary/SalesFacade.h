@@ -2,6 +2,7 @@
 
 #include "ManagerDB.h"
 #include "Sale_DB.h"
+#include "AccoutingPeriodDB.h"
 #include "ActiveSaleDTO.h"
 #include "ManagerActiveSalesStatisticDTO.h"
 
@@ -12,7 +13,7 @@
 class SalesFacade {
 public:
 
-	SalesFacade( ManagerDB* manager, Sale_DB* sale);
+	SalesFacade( ManagerDB* manager, Sale_DB* sale, AccoutingPeriodDB* period);
 
 	/**
 	* Метод подтверждает определённую продажу
@@ -50,4 +51,5 @@ private:
 
 	ManagerDB* m;
 	Sale_DB* s;
+	AccoutingPeriodDB* ap;
 };

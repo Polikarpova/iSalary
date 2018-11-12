@@ -1,9 +1,12 @@
 #include "mainwindow.h"
-MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesPage* salesPage, QWidget *parent ) : QMainWindow(parent) {
+MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesPage* salesPage, SalaryPage* salaryPage, QWidget *parent ) : QMainWindow(parent) {
 	ui.setupUi(this);
 	
 	//блокировка вкладки корректировки
 	ui.tabWidget->setTabEnabled(2, false);
+	ui.tabWidget->setTabEnabled(4, false);
+	ui.tabWidget->setTabToolTip(2, "Реализация отменена");
+	ui.tabWidget->setTabToolTip(4, "Заблокировано до лучших времен");
 
     ui.auth_program_stackedWidget->setCurrentIndex( AUTH_WIDGET);
 
@@ -47,6 +50,10 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
 	this->salesPage = salesPage;
 	this->salesPage->setUI(ui.salesDateInput, ui.managersSalesTable, ui.unconfirmedSalesTable, ui.confirmedSalesTable);
 	this->salesPage->setErrorHandler( errorHandler);
+
+	this->salaryPage = salaryPage;
+
+	this->salaryPage->setErrorHandler( errorHandler);
 
     connect(this->authPage, &AuthPage::userLoggedIn, this, &MainWindow::enterProgram);
 

@@ -9,13 +9,13 @@
 
 #include "UserDB.h"
 #include "ManagerDB.h"
-
 #include "Sale_DB.h"
-#include "ManagerDB.h"
+#include "AccoutingPeriodDB.h"
 
 #include "AuthPage.h"
 #include "EmployeesPage.h"
 #include "SalesPage.h"
+#include "SalaryPage.h"
 
 #include "test_userdb.h"
 
@@ -53,11 +53,14 @@ int main(int argc, char *argv[])
     PersonnalAccountingFacade personnalAccountingFacade( &employer, &managerDB, &managerValidator);
     EmployeesPage employeesPage( &personnalAccountingFacade);
 
-    Sale_DB * saleDB = new Sale_DB( sqlDB, QString("sales"));
-	SalesFacade * salesFacade = new SalesFacade(&managerDB, saleDB);
-    SalesPage salesPage(salesFacade);
+    Sale_DB saleDB( sqlDB, QString("sales"));
+	AccoutingPeriodDB periodDB( &sqlDB);
+	SalesFacade salesFacade(&managerDB, &saleDB, &periodDB);
+    SalesPage salesPage(&salesFacade);
 
-    MainWindow w( &authPage, &employeesPage, &salesPage);
+	SalaryPage salaryPage(&salesFacade, &personnalAccountingFacade);
+
+    MainWindow w( &authPage, &employeesPage, &salesPage, &salaryPage);
 	
 	w.show();
     

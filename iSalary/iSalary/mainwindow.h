@@ -14,6 +14,7 @@
 #include "AuthPage.h"
 #include "EmployeesPage.h"
 #include "SalesPage.h"
+#include "SalaryPage.h"
 
 #include "Product_DB.h"
 #include "Product.h"
@@ -45,7 +46,7 @@ class MainWindow : public QMainWindow
 	Q_OBJECT
 
 public:
-	MainWindow(AuthPage* authPage, EmployeesPage* employeesPage, SalesPage* salesPage, QWidget *parent = 0);
+	MainWindow(AuthPage* authPage, EmployeesPage* employeesPage, SalesPage* salesPage, SalaryPage* salaryPage, QWidget *parent = 0);
 	~MainWindow();
 
 private:
@@ -56,6 +57,7 @@ private:
 	AuthPage* authPage;
 	SalesPage* salesPage;
     EmployeesPage* employeesPage;
+	SalaryPage* salaryPage;
 
 	int current_user_id;
     ErrorMessageHandler* errorHandler;

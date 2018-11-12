@@ -1,3 +1,5 @@
+#pragma once
+
 #include <qsqldatabase.h>
 #include <qsqlquery.h>
 #include <qvariant.h>

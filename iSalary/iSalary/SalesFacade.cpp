@@ -1,9 +1,10 @@
 #include "SalesFacade.h"
 
-SalesFacade::SalesFacade( ManagerDB* manager, Sale_DB* sale) {
+SalesFacade::SalesFacade( ManagerDB* manager, Sale_DB* sale, AccoutingPeriodDB* period) {
 
 	this->m = manager;
 	this->s = sale;
+	this->ap = period;
 }
 
 void SalesFacade::confirmSale( const ActiveSaleDTO& sale) {
