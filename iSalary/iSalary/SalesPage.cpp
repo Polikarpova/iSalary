@@ -61,9 +61,7 @@ void SalesPage::initUnconfirmedSalesTable( QTableView* unconfirmedSalesTable) {
 	this->unconfirmedSalesTable->setSelectionMode( QAbstractItemView::SingleSelection);
 
 	//скрытие поля с id
-	//this->unconfirmedSalesTable->setColumnHidden( UnconfirmedSalesTableModel::COLUMN_ID, true);
-
-	//connect( this->unconfirmedSalesTable, &QTableView::clicked, this, &EmployeesPage::showDetails);
+	this->unconfirmedSalesTable->setColumnHidden( UnconfirmedSalesTableModel::COLUMN_ID, true);
 }
 
 void SalesPage::initConfirmedSalesTable( QTableView* confirmedSalesTable) {
@@ -78,8 +76,6 @@ void SalesPage::initConfirmedSalesTable( QTableView* confirmedSalesTable) {
 
 	//скрытие поля с id
 	this->confirmedSalesTable->setColumnHidden( ConfirmedSalesTableModel::COLUMN_ID, true);
-
-	//connect( this->confirmedSalesTable, &QTableView::clicked, this, &EmployeesPage::showDetails);
 }
 
 
@@ -247,6 +243,7 @@ void SalesPage::addActionButtonsToUnconfirmedTable(UnconfirmedSalesTableModel* m
 	for( int i = 0; i != rowCount; i++) {
 
 		QPushButton* btn = new QPushButton(QString::fromWCharArray( L"Подтверждаю"));
+		btn->setProperty("saleId", model->getRecordId(i));
 		connect( btn, &QPushButton::clicked, this, &SalesPage::confirmSale);
 		this->unconfirmedSalesTable->setIndexWidget(model->index(i,lastColumn), btn);
 	}
@@ -260,6 +257,7 @@ void SalesPage::addActionButtonsToConfirmedTable(ConfirmedSalesTableModel* model
 	for( int i = 0; i != rowCount; i++) {
 
 		QPushButton* btn = new QPushButton(QString::fromWCharArray( L"Отмена"));
+		btn->setProperty("saleId", model->getRecordId(i));
 		connect( btn, &QPushButton::clicked, this, &SalesPage::unconfirmSale);
 		this->confirmedSalesTable->setIndexWidget(model->index(i,lastColumn), btn);
 	}
@@ -359,14 +357,14 @@ void SalesPage::showManagersSales() {
 
 void SalesPage::confirmSale() {
 
-	int currentId = this->getSelectedUnconfirmedSalesId();
+	int currentId = sender()->property("saleId").toInt();
 	this->salesFacade->confirmSale(this->unconfirmedSales[currentId]);
 	this->refreshPage();
 }
 
 void SalesPage::unconfirmSale() {
 
-	int currentId = this->getSelectedConfirmedSalesId();
+	int currentId = sender()->property("saleId").toInt();
 	this->salesFacade->cancelConfirmSale(this->confirmedSales[currentId]);
 	this->refreshPage();
 }
