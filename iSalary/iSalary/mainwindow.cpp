@@ -75,6 +75,7 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
 	initProductWindow();
 
 	ui.productTable->setEditTriggers(0);
+	ui.productTable->horizontalHeader()->setStretchLastSection(true);
 	connect( ui.productTable->selectionModel(), SIGNAL( currentChanged ( const QModelIndex &, const QModelIndex & ) ), this, SLOT( showProduct() ) );
 
 	connect( ui.addProductButton, SIGNAL( clicked() ), this, SLOT( directAddProduct() ) );
@@ -89,15 +90,17 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
 
 	connect( ui.searchButton, SIGNAL( clicked() ), this, SLOT( searchProduct() ) );
 
-	current_user_id = 2;
+	this->current_user_id = -1;
 	sale_db = new Sale_DB( _db, "sales" );
-    sale_db->init();
 
 	initManagerWindow();
 
 	ui.managersProductTable->setEditTriggers(0);
 	ui.confirmedSales->setEditTriggers(0);
 	ui.unconfirmedSales->setEditTriggers(0);
+	ui.managersProductTable->horizontalHeader()->setStretchLastSection(true);
+	ui.confirmedSales->horizontalHeader()->setStretchLastSection(true);
+	ui.unconfirmedSales->horizontalHeader()->setStretchLastSection(true);
 
 	connect( ui.managerProductSearchButton, SIGNAL( clicked() ), this, SLOT( searchManagersProductTable() ) );
 	connect( ui.addSaleButton, SIGNAL( clicked() ), this, SLOT( addSale() ) );
@@ -112,6 +115,9 @@ void MainWindow::enterProgram( const UserDTO& user, UserType userType){
         this->refreshBossPage(0);
     }
     ui.auth_program_stackedWidget->setCurrentIndex( PROGRAM_WIDGET);
+
+	this->current_user_id = this->authPage->currentUserId();
+	this->updateManagerWindow();
 }
 
 void MainWindow::createHorizontalTabs() {
@@ -152,6 +158,10 @@ void MainWindow::refreshBossPage( int page){
 void MainWindow::initManagerWindow() {
 	unconfirmedSalesTableModel = new QStandardItemModel;
 	confirmedSalesTableModel = new QStandardItemModel;
+}
+
+void MainWindow::updateManagerWindow() {
+
 	fillManagersProductTable();
 	fillManagersConfirmedSalesTable();
 	fillManagersUnconfirmedSalesTable();
@@ -269,7 +279,6 @@ void MainWindow::addSale() {
 
 void MainWindow::fillSale( ActiveSale & sale ) {
 	Manager saler;
-	saler.setFirstName( "Dima" );
 	saler.setId( current_user_id );
 	sale.setSaler( saler );
 	QString nameProduct = ui.productComboBox->currentText();

@@ -3,6 +3,7 @@
 
 AuthPage::AuthPage( AuthorizationFacade * authFacade){
     this->authFacade = authFacade;
+	this->currentUser.success = false;
 }
 
 void AuthPage::setUI( QLineEdit* loginInput, QLineEdit* passwordInput, QPushButton* signInBtn, QLabel* errorOutput){
@@ -26,6 +27,7 @@ void AuthPage::userTryLogIn(){
     } else {
         SignInResultDTO signInRes = this->authFacade->signIn(login, password);
         if( signInRes.success) {
+			this->currentUser = signInRes;
             emit this->userLoggedIn( signInRes.user, signInRes.userType);
         } else {
             this->showLogInError( "Логин или пароль неверны");
@@ -40,4 +42,14 @@ void AuthPage::showLogInError( const QString& error){
 
 AuthPage::~AuthPage(void)
 {
+}
+
+int AuthPage::currentUserId() {
+
+	if( this->currentUser.success) {
+	
+		return this->currentUser.user.id;
+	}
+
+	return -1;
 }

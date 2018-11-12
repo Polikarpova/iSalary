@@ -92,6 +92,7 @@ private:
 	QHash <int, ActiveSale> sales;
 	QStandardItemModel *unconfirmedSalesTableModel, *confirmedSalesTableModel;
 	void initManagerWindow();
+	void updateManagerWindow();
 	void fillManagersProductTable();
 	void clearManagersProductsTable();
 	void fillSale( ActiveSale & sale );

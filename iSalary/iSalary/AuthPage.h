@@ -16,6 +16,8 @@ public:
     void setUI( QLineEdit* loginInput, QLineEdit* passwordInput, QPushButton* signInBtn, QLabel* errorOutput);
     ~AuthPage( void);
 
+	int currentUserId();
+
 signals:
     void userLoggedIn( const UserDTO& user, UserType userType);
 
@@ -29,6 +31,8 @@ private:
     QLineEdit* passwordInput; 
     QPushButton* signInBtn;
     QLabel* errorOutput;
+
+	SignInResultDTO currentUser;
 
     void showLogInError( const QString& error);
 };
