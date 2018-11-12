@@ -6,13 +6,15 @@ SalesFacade::SalesFacade( ManagerDB* manager, Sale_DB* sale) {
 	this->s = sale;
 }
 
-void SalesFacade::confirmSale( ActiveSaleDTO sale) {
+void SalesFacade::confirmSale( const ActiveSaleDTO& sale) {
 
+	this->s->confirmSale( sale.id);
 }
 
 
-void SalesFacade::cancelConfirmSale( ActiveSaleDTO sale) {
+void SalesFacade::cancelConfirmSale( const ActiveSaleDTO& sale) {
 
+	this->s->unconfirmSale ( sale.id);
 }
 
 QList<ActiveSaleDTO> SalesFacade::getActiveSales(){

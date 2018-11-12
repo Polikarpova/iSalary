@@ -18,13 +18,13 @@ public:
 	* Метод подтверждает определённую продажу
 	* sale - продажа, которая должна быть подтверждена
 	*/
-	void confirmSale( ActiveSaleDTO sale);
+	void confirmSale( const ActiveSaleDTO& sale);
 
 	/**
 	* Метод отменяет подтверждение определённой продажи
 	* sale - продажа, подтверждение которой отменяется
 	*/
-	void cancelConfirmSale( ActiveSaleDTO sale);
+	void cancelConfirmSale( const ActiveSaleDTO& sale);
 
 	/**
 	* Возращает активные продажи (подтвержденные и неподтвержденные) всех менеджеров

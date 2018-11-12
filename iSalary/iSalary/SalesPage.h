@@ -33,6 +33,8 @@ protected slots:
 
 	void dateChanged();
 	void showManagersSales();
+	void confirmSale();
+	void unconfirmSale();
 
 protected:
 
@@ -64,6 +66,9 @@ private:
 	QHash<int, ActiveSaleDTO> unconfirmedSales;
 	QHash<int, ActiveSaleDTO> confirmedSales;
 	QHash<int, ManagerActiveSalesStatisticDTO> managersSales;
+
+	void addActionButtonsToUnconfirmedTable(UnconfirmedSalesTableModel* model);
+	void addActionButtonsToConfirmedTable(ConfirmedSalesTableModel* model);
 
 	void deleteConfirmSalesFromList( QList<ActiveSaleDTO>& list);
 	void deleteUnconfirmSalesFromList( QList<ActiveSaleDTO>& list);

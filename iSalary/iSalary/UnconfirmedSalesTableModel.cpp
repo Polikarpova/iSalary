@@ -122,7 +122,7 @@ void UnconfirmedSalesTableModel::refreshData(const QList<ActiveSaleDTO>& sales) 
 			row << sale.count;
 			row << sale.price;
 			row << sale.product.commission;
-			row << "action";
+			row << "";
             
 			this->table.append( row);
         }

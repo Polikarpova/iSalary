@@ -35,6 +35,9 @@ public:
 	QList<ActiveSaleDTO> getActiveSalesForManager( int managerId);
 	QList<ManagerActiveSalesStatisticDTO> getManagerActiveSalesSatistic();
 
+	void confirmSale( int id);
+	void unconfirmSale( int id);
+
 protected:
 	QString TABLE_NAME;
 	ActiveSale read(const QSqlQuery * sqlQuery);

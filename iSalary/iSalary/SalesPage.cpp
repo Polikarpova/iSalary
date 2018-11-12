@@ -1,5 +1,6 @@
 #include "SalesPage.h"
 #include <qmessagebox.h>
+#include <qpushbutton.h>
 
 SalesPage::SalesPage( SalesFacade * salesFacade){
     this->salesFacade = salesFacade;
@@ -60,7 +61,7 @@ void SalesPage::initUnconfirmedSalesTable( QTableView* unconfirmedSalesTable) {
 	this->unconfirmedSalesTable->setSelectionMode( QAbstractItemView::SingleSelection);
 
 	//скрытие поля с id
-	this->unconfirmedSalesTable->setColumnHidden( UnconfirmedSalesTableModel::COLUMN_ID, true);
+	//this->unconfirmedSalesTable->setColumnHidden( UnconfirmedSalesTableModel::COLUMN_ID, true);
 
 	//connect( this->unconfirmedSalesTable, &QTableView::clicked, this, &EmployeesPage::showDetails);
 }
@@ -135,6 +136,7 @@ void SalesPage::updateUnconfirmedTable() {
 		this->errorHandler->handleError( error);
 	}
 
+	this->deleteConfirmSalesFromList( list);	//удаляем не нужные строки
 
 	//если это были изменены данные (1), то необходимо получить текущую строчку
 	//узнаем текущую строчку
@@ -150,8 +152,8 @@ void SalesPage::updateUnconfirmedTable() {
 
 	//инициализируем и заполняем модель
 	UnconfirmedSalesTableModel* model = static_cast<UnconfirmedSalesTableModel*>( this->unconfirmedSalesTable->model());
-	this->deleteConfirmSalesFromList(list);	//удаляем не нужные строки
 	model->refreshData( list);
+	this->addActionButtonsToUnconfirmedTable( model);
 
 	//если это (1) пытаемся установить его текущим
 	if( currentId != -1) {
@@ -191,6 +193,7 @@ void SalesPage::updateConfirmedTable() {
 		this->errorHandler->handleError( error);
 	}
 
+	this->deleteUnconfirmSalesFromList( list);	//удаляем не нужные строки
 
 	//если это были изменены данные (1), то необходимо получить текущую строчку
 	//узнаем текущую строчку
@@ -206,8 +209,8 @@ void SalesPage::updateConfirmedTable() {
 
 	//инициализируем и заполняем модель
 	ConfirmedSalesTableModel* model = static_cast<ConfirmedSalesTableModel*>( this->confirmedSalesTable->model());
-	this->deleteUnconfirmSalesFromList(list);	//удаляем не нужные строки
 	model->refreshData( list);
+	this->addActionButtonsToConfirmedTable( model);
 
 	//если это (1) пытаемся установить его текущим
 	if( currentId != -1) {
@@ -235,6 +238,33 @@ void SalesPage::deleteUnconfirmSalesFromList( QList<ActiveSaleDTO>& list) {
 }
 
 
+//===PRIVATE===//
+void SalesPage::addActionButtonsToUnconfirmedTable(UnconfirmedSalesTableModel* model) {
+
+	int rowCount = model->rowCount(QModelIndex());
+	int lastColumn = model->columnCount(QModelIndex()) - 1;
+
+	for( int i = 0; i != rowCount; i++) {
+
+		QPushButton* btn = new QPushButton(QString::fromWCharArray( L"Подтверждаю"));
+		connect( btn, &QPushButton::clicked, this, &SalesPage::confirmSale);
+		this->unconfirmedSalesTable->setIndexWidget(model->index(i,lastColumn), btn);
+	}
+}
+
+void SalesPage::addActionButtonsToConfirmedTable(ConfirmedSalesTableModel* model) {
+
+	int rowCount = model->rowCount(QModelIndex());
+	int lastColumn = model->columnCount(QModelIndex()) - 1;
+
+	for( int i = 0; i != rowCount; i++) {
+
+		QPushButton* btn = new QPushButton(QString::fromWCharArray( L"Отмена"));
+		connect( btn, &QPushButton::clicked, this, &SalesPage::unconfirmSale);
+		this->confirmedSalesTable->setIndexWidget(model->index(i,lastColumn), btn);
+	}
+}
+
 int SalesPage::getSelectedManagerSalesId() {
 
 	auto model = static_cast<ManagersSalesTableModel*>( this->managersSalesTable->model());
@@ -253,6 +283,64 @@ int SalesPage::getSelectedConfirmedSalesId() {
 	return model->getRecordId( this->confirmedSalesTable->currentIndex().row());
 }
 
+void SalesPage::viewSelectedManagerUnconfirmedSales(int id) {
+
+	//получаем нужную инфу из фасада(бд)
+	QList<ActiveSaleDTO> list;
+
+	try {
+	
+		list = this->salesFacade->getActiveSalesForManager(id);
+	} catch( QString* error) {
+	
+		this->errorHandler->handleError( error);
+	}
+
+	this->deleteConfirmSalesFromList(list);	//удаляем не нужные строки
+
+	//чистим Qhash
+	this->unconfirmedSales.clear();
+	//заполняем его новыми данными из бд
+	for ( auto i = list.begin(); i != list.end(); i++) {
+	
+		this->unconfirmedSales.insert( i->id, *i);
+	}
+
+	//инициализируем и заполняем модель
+	UnconfirmedSalesTableModel* model = static_cast<UnconfirmedSalesTableModel*>( this->unconfirmedSalesTable->model());
+	model->refreshData( list);
+	this->addActionButtonsToUnconfirmedTable( model);
+}
+
+void SalesPage::viewSelectedManagerConfirmedSales(int id) {
+
+	//получаем нужную инфу из фасада(бд)
+	QList<ActiveSaleDTO> list;
+
+	try {
+	
+		list = this->salesFacade->getActiveSalesForManager(id);
+	} catch( QString* error) {
+	
+		this->errorHandler->handleError( error);
+	}
+
+	this->deleteUnconfirmSalesFromList(list);	//удаляем не нужные строки
+
+	//чистим Qhash
+	this->confirmedSales.clear();
+	//заполняем его новыми данными из бд
+	for ( auto i = list.begin(); i != list.end(); i++) {
+	
+		this->confirmedSales.insert( i->id, *i);
+	}
+
+	//инициализируем и заполняем модель
+	ConfirmedSalesTableModel* model = static_cast<ConfirmedSalesTableModel*>( this->confirmedSalesTable->model());
+	model->refreshData( list);
+	this->addActionButtonsToConfirmedTable( model);
+}
+
 //===SLOTS===//
 void SalesPage::dateChanged() {
 
@@ -269,56 +357,16 @@ void SalesPage::showManagersSales() {
 	this->viewSelectedManagerConfirmedSales( currentId);
 }
 
-void SalesPage::viewSelectedManagerUnconfirmedSales(int id) {
+void SalesPage::confirmSale() {
 
-	//получаем нужную инфу из фасада(бд)
-	QList<ActiveSaleDTO> list;
-
-	try {
-	
-		list = this->salesFacade->getActiveSalesForManager(id);
-	} catch( QString* error) {
-	
-		this->errorHandler->handleError( error);
-	}
-
-	//чистим Qhash
-	this->unconfirmedSales.clear();
-	//заполняем его новыми данными из бд
-	for ( auto i = list.begin(); i != list.end(); i++) {
-	
-		this->unconfirmedSales.insert( i->id, *i);
-	}
-
-	//инициализируем и заполняем модель
-	UnconfirmedSalesTableModel* model = static_cast<UnconfirmedSalesTableModel*>( this->unconfirmedSalesTable->model());
-	this->deleteConfirmSalesFromList(list);	//удаляем не нужные строки
-	model->refreshData( list);
+	int currentId = this->getSelectedUnconfirmedSalesId();
+	this->salesFacade->confirmSale(this->unconfirmedSales[currentId]);
+	this->refreshPage();
 }
 
-void SalesPage::viewSelectedManagerConfirmedSales(int id) {
+void SalesPage::unconfirmSale() {
 
-	//получаем нужную инфу из фасада(бд)
-	QList<ActiveSaleDTO> list;
-
-	try {
-	
-		list = this->salesFacade->getActiveSalesForManager(id);
-	} catch( QString* error) {
-	
-		this->errorHandler->handleError( error);
-	}
-
-	//чистим Qhash
-	this->confirmedSales.clear();
-	//заполняем его новыми данными из бд
-	for ( auto i = list.begin(); i != list.end(); i++) {
-	
-		this->confirmedSales.insert( i->id, *i);
-	}
-
-	//инициализируем и заполняем модель
-	ConfirmedSalesTableModel* model = static_cast<ConfirmedSalesTableModel*>( this->confirmedSalesTable->model());
-	this->deleteUnconfirmSalesFromList(list);	//удаляем не нужные строки
-	model->refreshData( list);
+	int currentId = this->getSelectedConfirmedSalesId();
+	this->salesFacade->cancelConfirmSale(this->confirmedSales[currentId]);
+	this->refreshPage();
 }

@@ -83,7 +83,6 @@ int Sale_DB::getById(int id) {
 QList<ManagerActiveSalesStatisticDTO> Sale_DB::getManagerActiveSalesSatistic() {
 
 	//получаем id
-	//QString sql = "select users.id from users, sales where sales.manager_id = users.id AND sales.isActive = 1 group by users.id;";
 	QString sql = "select users.id, users.firstName, users.secondName, users.thirdName from users where	users.type = 0;";
 	QSqlQuery query( this->_db);
 	query.prepare(sql);
@@ -225,6 +224,29 @@ ActiveSaleDTO Sale_DB::readActiveSalesToDTO( const QSqlQuery& query) {
 	return result;
 }
 
+void Sale_DB::confirmSale( int id) {
+
+	QString sql = "update %0 set `%1` = 1 where %2 = :id;";
+	sql = sql.arg("sales", "isConfirmed", "sales.id");
+
+	QSqlQuery query( this->_db);
+	query.prepare(sql);
+	query.bindValue(":id", id);
+
+	this->execQuery( query);
+}
+
+void Sale_DB::unconfirmSale( int id) {
+
+	QString sql = "update %0 set `%1` = 0 where %2 = :id;";
+	sql = sql.arg("sales", "isConfirmed", "sales.id");
+
+	QSqlQuery query( this->_db);
+	query.prepare(sql);
+	query.bindValue(":id", id);
+
+	this->execQuery( query);
+}
 
 void Sale_DB::execQuery( QSqlQuery& query) const {
     bool isSuccess = query.exec();
