@@ -230,31 +230,43 @@
     <ClCompile Include="Codec.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ConfirmedSalesTableModel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EmployeesTableModel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ErrorMessageHandler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ManagersSalesTableModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ManagerValidator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SalesFacade.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SalesPage.cpp">
+    <ClCompile Include="UserValidator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="UnconfirmedSalesTableModel.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\View</Filter>
     </ClCompile>
-    <ClCompile Include="UserValidator.cpp">
+    <ClCompile Include="EmployeesTableModel.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfirmedSalesTableModel.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="SalesPage.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="SalesFacade.cpp">
+      <Filter>Source Files\Model\DomainModel\ModelFacade</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagersSalesTableModel.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_EmployeesPage.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_EmployeesPage.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="EmployeesPage.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="Employer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -286,17 +298,20 @@
     <CustomBuild Include="SalesPage.h">
       <Filter>Header Files\View</Filter>
     </CustomBuild>
+    <CustomBuild Include="ManagersSalesTableModel.h">
+      <Filter>Header Files\View</Filter>
+    </CustomBuild>
     <CustomBuild Include="ConfirmedSalesTableModel.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\View</Filter>
     </CustomBuild>
     <CustomBuild Include="EmployeesTableModel.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ManagersSalesTableModel.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\View</Filter>
     </CustomBuild>
     <CustomBuild Include="UnconfirmedSalesTableModel.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\View</Filter>
+    </CustomBuild>
+    <CustomBuild Include="EmployeesPage.h">
+      <Filter>Header Files\View</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -348,9 +363,6 @@
     <ClInclude Include="CloseAccoutingPeriod.h">
       <Filter>Header Files\Model\DomainModel\SalesModule</Filter>
     </ClInclude>
-    <ClInclude Include="Sale_DB.h">
-      <Filter>Header Files\Model\DB</Filter>
-    </ClInclude>
     <ClInclude Include="Product.h">
       <Filter>Header Files\Model\DomainModel\SalesModule</Filter>
     </ClInclude>
@@ -378,70 +390,46 @@
     <ClInclude Include="ProductFacade.h">
       <Filter>Header Files\Model\DomainModel\ModelFacade</Filter>
     </ClInclude>
-    <ClInclude Include="ProductDTO.h">
-      <Filter>Header Files\Model\DomainModel\ModelFacade</Filter>
-    </ClInclude>
     <ClInclude Include="SaleDTO.h">
       <Filter>Header Files\Model\DomainModel\ModelFacade</Filter>
     </ClInclude>
     <ClInclude Include="SaleFacade.h">
       <Filter>Header Files\Model\DomainModel\ModelFacade</Filter>
     </ClInclude>
-    <ClInclude Include="CloseAccoutingPeriod.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClosedSale.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_mainwindow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IUserRepository.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenAccoutingPeriod.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ProductDTO.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Product_DB.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Salary.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Sale.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SalesFacade.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Sale_DB.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SignResult.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SignResultDTO.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ActiveSaleDTO.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Codec.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ManagerActiveSalesStatisticDTO.h">
+    <ClInclude Include="UserValidator.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ActiveSaleDTO.h">
+      <Filter>Header Files\Model\DomainModel\ModelFacade</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagerActiveSalesStatisticDTO.h">
+      <Filter>Header Files\Model\DomainModel\ModelFacade</Filter>
     </ClInclude>
     <ClInclude Include="ManagerSalesStatisticDTO.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Model\DomainModel\ModelFacade</Filter>
+    </ClInclude>
+    <ClInclude Include="SignResult.h">
+      <Filter>Header Files\Model\DomainModel\ModelFacade</Filter>
+    </ClInclude>
+    <ClInclude Include="SalesFacade.h">
+      <Filter>Header Files\Model\DomainModel\ModelFacade</Filter>
     </ClInclude>
     <ClInclude Include="PersonnalAccountingFacade.h">
+      <Filter>Header Files\Model\DomainModel\ModelFacade</Filter>
+    </ClInclude>
+    <ClInclude Include="ErrorMessageHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UserValidator.h">
+    <ClInclude Include="ManagerValidator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagerDTO.h">
+      <Filter>Header Files\Model\DomainModel\ModelFacade</Filter>
+    </ClInclude>
+    <ClInclude Include="Employer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
