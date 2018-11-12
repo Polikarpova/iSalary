@@ -22,6 +22,10 @@ void Manager::setUserInfo( const User& user){
     this->password = user.getPassword();
 }
 
+void Manager::setId( int _id){
+    this->id = _id;
+}
+
 QString Manager::getFirstName() const{
     return this->firstName;
 };

@@ -24,6 +24,8 @@ public:
     Manager( int id);
     Manager( const User& user);
 
+    void setId(int _id);
+
     /**
     * Получить Имя менеджера
     * @return -Имя менеджера
@@ -68,13 +70,13 @@ public:
     
     /**
     * Изменить дату рождения менеджера
-    * @param dateOfBirth -новая дата рождения менеджера
+    * @param dateOfBirth -новая дата рождения менеджера длиной в 4 символа
     */
     void setDateOfBirth( const QDate& dateOfBirth);
     
     /**
-    * Получить Пол менеджера
-    * @return -Пол менеджера
+    * Получить пол менеджера
+    * @return - пол менеджера
     */
     Sex getSex() const;
     
@@ -120,15 +122,16 @@ public:
     */
     void setPassportDateIssue( const QDate& date);
     
+    
     /**
-    * Получить название учреждения, которое выдало паспорт менеджера
-    * @return -название учреждения, которое выдало паспорт менеджера
+    * Получить "кем выдан" паспорт
+    * @return - "кем выдан" паспорт менеджера
     */
     QString getPassportSource() const;
     
     /**
-    * Изменить название учреждения, которое выдало паспорт менеджера
-    * @param passportNumber - новое значение названия учреждения, которое выдало паспорт менеджера
+    * Уставновить "кем выдан" паспорт
+    * @param passportSource - "кем выдан" паспорт менеджера
     */
     void setPassportSource( const QString& passportSource);
     

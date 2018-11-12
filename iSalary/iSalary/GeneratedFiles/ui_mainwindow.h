@@ -284,9 +284,10 @@ public:
     QLabel *label_27;
     QComboBox *productComboBox;
     QLabel *label_28;
-    QSpinBox *priceInput;
     QLabel *label_29;
-    QSpinBox *countInput;
+    QSpinBox *countSaleProducts;
+    QPushButton *addSaleButton;
+    QDoubleSpinBox *priceSale;
     QLabel *label_30;
     QTableView *confirmedSales;
     QLabel *label_31;
@@ -294,8 +295,8 @@ public:
     QVBoxLayout *verticalLayout_9;
     QLabel *label_23;
     QHBoxLayout *horizontalLayout_22;
-    QLineEdit *productSearch_2;
-    QPushButton *pushButton;
+    QLineEdit *managerProductSearch;
+    QPushButton *managerProductSearchButton;
     QSpacerItem *horizontalSpacer_5;
     QTableView *managersProductTable;
     QHBoxLayout *horizontalLayout_13;
@@ -309,7 +310,7 @@ public:
     {
         if (MainWindowClass->objectName().isEmpty())
             MainWindowClass->setObjectName(QStringLiteral("MainWindowClass"));
-        MainWindowClass->resize(814, 620);
+        MainWindowClass->resize(1044, 611);
         MainWindowClass->setStyleSheet(QStringLiteral("QMainWindow {background-color: white}"));
         centralWidget = new QWidget(MainWindowClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
@@ -817,6 +818,7 @@ public:
 
         productTable = new QTableView(tabProducts);
         productTable->setObjectName(QStringLiteral("productTable"));
+        productTable->setEnabled(true);
 
         verticalLayout_4->addWidget(productTable);
 
@@ -1607,6 +1609,7 @@ public:
 
         currentSalary = new QLineEdit(manager);
         currentSalary->setObjectName(QStringLiteral("currentSalary"));
+        currentSalary->setEnabled(false);
         currentSalary->setClearButtonEnabled(false);
 
         horizontalLayout_23->addWidget(currentSalary);
@@ -1655,19 +1658,6 @@ public:
 
         gridLayout_6->addWidget(label_28, 0, 2, 1, 1);
 
-        priceInput = new QSpinBox(manager);
-        priceInput->setObjectName(QStringLiteral("priceInput"));
-        QSizePolicy sizePolicy4(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy4.setHorizontalStretch(0);
-        sizePolicy4.setVerticalStretch(0);
-        sizePolicy4.setHeightForWidth(priceInput->sizePolicy().hasHeightForWidth());
-        priceInput->setSizePolicy(sizePolicy4);
-        priceInput->setMinimumSize(QSize(100, 0));
-        priceInput->setMinimum(1);
-        priceInput->setMaximum(99999999);
-
-        gridLayout_6->addWidget(priceInput, 0, 3, 1, 1);
-
         label_29 = new QLabel(manager);
         label_29->setObjectName(QStringLiteral("label_29"));
         sizePolicy2.setHeightForWidth(label_29->sizePolicy().hasHeightForWidth());
@@ -1675,15 +1665,32 @@ public:
 
         gridLayout_6->addWidget(label_29, 0, 4, 1, 1);
 
-        countInput = new QSpinBox(manager);
-        countInput->setObjectName(QStringLiteral("countInput"));
-        sizePolicy4.setHeightForWidth(countInput->sizePolicy().hasHeightForWidth());
-        countInput->setSizePolicy(sizePolicy4);
-        countInput->setMinimumSize(QSize(20, 0));
-        countInput->setMinimum(1);
-        countInput->setMaximum(999);
+        countSaleProducts = new QSpinBox(manager);
+        countSaleProducts->setObjectName(QStringLiteral("countSaleProducts"));
+        QSizePolicy sizePolicy4(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(countSaleProducts->sizePolicy().hasHeightForWidth());
+        countSaleProducts->setSizePolicy(sizePolicy4);
+        countSaleProducts->setMinimumSize(QSize(20, 0));
+        countSaleProducts->setMinimum(1);
+        countSaleProducts->setMaximum(999);
 
-        gridLayout_6->addWidget(countInput, 0, 5, 1, 1);
+        gridLayout_6->addWidget(countSaleProducts, 0, 5, 1, 1);
+
+        addSaleButton = new QPushButton(manager);
+        addSaleButton->setObjectName(QStringLiteral("addSaleButton"));
+
+        gridLayout_6->addWidget(addSaleButton, 0, 6, 1, 1);
+
+        priceSale = new QDoubleSpinBox(manager);
+        priceSale->setObjectName(QStringLiteral("priceSale"));
+        priceSale->setMinimum(0.01);
+        priceSale->setMaximum(1e+08);
+        priceSale->setSingleStep(0.01);
+        priceSale->setValue(1);
+
+        gridLayout_6->addWidget(priceSale, 0, 3, 1, 1);
 
 
         verticalLayout_10->addLayout(gridLayout_6);
@@ -1725,17 +1732,17 @@ public:
         horizontalLayout_22 = new QHBoxLayout();
         horizontalLayout_22->setSpacing(6);
         horizontalLayout_22->setObjectName(QStringLiteral("horizontalLayout_22"));
-        productSearch_2 = new QLineEdit(manager);
-        productSearch_2->setObjectName(QStringLiteral("productSearch_2"));
-        productSearch_2->setClearButtonEnabled(false);
+        managerProductSearch = new QLineEdit(manager);
+        managerProductSearch->setObjectName(QStringLiteral("managerProductSearch"));
+        managerProductSearch->setClearButtonEnabled(false);
 
-        horizontalLayout_22->addWidget(productSearch_2);
+        horizontalLayout_22->addWidget(managerProductSearch);
 
-        pushButton = new QPushButton(manager);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setIcon(icon);
+        managerProductSearchButton = new QPushButton(manager);
+        managerProductSearchButton->setObjectName(QStringLiteral("managerProductSearchButton"));
+        managerProductSearchButton->setIcon(icon);
 
-        horizontalLayout_22->addWidget(pushButton);
+        horizontalLayout_22->addWidget(managerProductSearchButton);
 
         horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -1779,7 +1786,7 @@ public:
         MainWindowClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindowClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 814, 21));
+        menuBar->setGeometry(QRect(0, 0, 1044, 21));
         MainWindowClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindowClass);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -1859,20 +1866,16 @@ public:
         QWidget::setTabOrder(salesButton, dataButton);
         QWidget::setTabOrder(dataButton, currentSalary);
         QWidget::setTabOrder(currentSalary, productComboBox);
-        QWidget::setTabOrder(productComboBox, priceInput);
-        QWidget::setTabOrder(priceInput, countInput);
-        QWidget::setTabOrder(countInput, confirmedSales);
+        QWidget::setTabOrder(productComboBox, confirmedSales);
         QWidget::setTabOrder(confirmedSales, unconfirmedSales);
-        QWidget::setTabOrder(unconfirmedSales, productSearch_2);
-        QWidget::setTabOrder(productSearch_2, pushButton);
-        QWidget::setTabOrder(pushButton, managersProductTable);
+        QWidget::setTabOrder(unconfirmedSales, managersProductTable);
         QWidget::setTabOrder(managersProductTable, quitButton);
 
         retranslateUi(MainWindowClass);
 
         auth_program_stackedWidget->setCurrentIndex(0);
-        boss_manager_stackedWidget->setCurrentIndex(0);
-        tabWidget->setCurrentIndex(0);
+        boss_manager_stackedWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(2);
         managersDataTab->setCurrentIndex(0);
         managersButtonsStackedWidget->setCurrentIndex(0);
         productButtonsStackedWidget->setCurrentIndex(0);
@@ -1989,13 +1992,14 @@ public:
         label_27->setText(QApplication::translate("MainWindowClass", "\320\242\320\276\320\262\320\260\321\200", 0));
         label_28->setText(QApplication::translate("MainWindowClass", "\320\241\321\202\320\276\320\270\320\274\320\276\321\201\321\202\321\214", 0));
         label_29->setText(QApplication::translate("MainWindowClass", "\320\232\320\276\320\273\320\270\321\207\320\265\321\201\321\202\320\262\320\276", 0));
+        addSaleButton->setText(QApplication::translate("MainWindowClass", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214", 0));
         label_30->setText(QApplication::translate("MainWindowClass", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt;\">\320\237\320\276\320\264\321\202\320\262\320\265\321\200\320\266\320\264\321\221\320\275\320\275\321\213\320\265</span></p></body></html>", 0));
         label_31->setText(QApplication::translate("MainWindowClass", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt;\"> \320\235\320\265\320\277\320\276\320\264\321\202\320\262\320\265\321\200\320\266\320\264\321\221\320\275\320\275\321\213\320\265</span></p></body></html>", 0));
         label_23->setText(QApplication::translate("MainWindowClass", "<html><head/><body><p align=\"center\"><span style=\" font-size:24pt;\">\320\242\320\276\320\262\320\260\321\200\321\213</span></p></body></html>", 0));
-        productSearch_2->setInputMask(QString());
-        productSearch_2->setText(QString());
-        productSearch_2->setPlaceholderText(QApplication::translate("MainWindowClass", "\320\277\320\276\320\270\321\201\320\272 \320\277\320\276 \320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\216", 0));
-        pushButton->setText(QString());
+        managerProductSearch->setInputMask(QString());
+        managerProductSearch->setText(QString());
+        managerProductSearch->setPlaceholderText(QApplication::translate("MainWindowClass", "\320\277\320\276\320\270\321\201\320\272 \320\277\320\276 \320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\216", 0));
+        managerProductSearchButton->setText(QString());
         quitButton->setText(QApplication::translate("MainWindowClass", "\320\222\321\213\320\271\321\202\320\270", 0));
     } // retranslateUi
 

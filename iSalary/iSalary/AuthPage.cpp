@@ -35,7 +35,7 @@ void AuthPage::userTryLogIn(){
 }
     
 void AuthPage::showLogInError( const QString& error){
-    errorOutput->setText( error);
+    errorOutput->setText( toUnicode(error));
 }
 
 AuthPage::~AuthPage(void)

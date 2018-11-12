@@ -13,54 +13,54 @@ class ManagerDB : protected UserDB, public IManagerRepository
 public:
 
     /**
-    * Κξνρςπσκςξπ.
-    * @param database - ύκηεμολÿπ σζε νΰρςπξεννξι QSqlDatabase
+    * .
+    * @param database -    QSqlDatabase
     */
     ManagerDB( QSqlDatabase* database, UserDB* userDB);
     
     ~ManagerDB( void);
 
     /**
-    * Οξλσχενθε ηΰοθρθ ξ μενεδζεπε θη ΑΔ οξ εγξ ID
+    *         ID
     * @throws TODO: SQLException
-    * @throws Ηΰοθρό νε νΰιδενΰ
-    * @return ηΰοθρό Μενεδζεπΰ ρ ηΰδΰννϋμ id
+    * @throws   
+    * @return     id
     */ 
     Manager getById( int id);
 
     /**
-    * Οξλσχενθε ροθρκΰ ηΰοθρει ξ μενεδζεπΰυ θη ΑΔ οξ εγξ ID
+    *          ID
     * @throws TODO: SQLException
-    * @throws Ηΰοθρό νε νΰιδενΰ
-    * @return Ροθρξκ Ηΰοθρει μενεδζεπξβ ρ id θη ηΰδΰνξγξ ροθρκΰ
+    * @throws   
+    * @return     id   
     */ 
     QList<Manager> getAll();
 
     /**
-    * Ξανξβθςό ηΰοθρό ξ μενεδζεπε β ΑΔ
-    * @param manager - ξανξβλÿεμϋι μενεδζεπ
+    *      
+    * @param manager -  
     */
     void update( const Manager& manager) override;
     
     /**
-    * Νΰιςθ μενεδζεπΰ οξ ΘΝΝ
-    * @param INN - ΘΝΝ μενεδζεπΰ
-    * @param[out] manager - Σκΰηΰςελό, οξ κξςξπξμσ ασδες ηΰοθρΰν οεπεδΰννϋι μενεδζεπ, ερλθ ασδες νΰιδεν ( μξζνξ οεπεδΰςό NULL)
-    * @return σδΰλξρό λθ νΰιςθ μενεδζεπΰ ρ ςΰκθμ ΘΝΝ
+    *    
+    * @param INN -  
+    * @param[out] manager - ,      ,    (   NULL)
+    * @return       
     */
     bool findByINN( const QString& INN, Manager* manager) override;
 
     /**
-    * Νΰιςθ μενεδζεπΰ οξ ΘΝΝ
-    * @param passportSerial - ρεπθÿ οΰροξπςΰ Μενεδζεπΰ
-    * @param passportNumber - νξμεπ οΰροξπςΰ Μενεδζεπΰ
-    * @param[out] manager - Σκΰηΰςελό, οξ κξςξπξμσ ασδες ηΰοθρΰν οεπεδΰννϋι μενεδζεπ, ερλθ ασδες νΰιδεν ( μξζνξ οεπεδΰςό NULL)
-    * @return σδΰλξρό λθ νΰιςθ μενεδζεπΰ ρ ςΰκθμ ΘΝΝ
+    *    
+    * @param passportSerial -   
+    * @param passportNumber -   
+    * @param[out] manager - ,      ,    (   NULL)
+    * @return       
     */
     bool findByPassport( const QString& passportSerial, const QString passportNumber, Manager* manager) override;
 
 private:
-    QSqlDatabase* db;       /**< ύκηεμολÿπ ΑΔ κ κξςξπξι ασδσς οπθμενÿςόρÿ ηΰοπξρϋ */
+    QSqlDatabase* db;       /**<        */
     UserDB* userDB;
 
     QString tableName;

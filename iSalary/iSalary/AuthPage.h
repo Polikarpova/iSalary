@@ -7,6 +7,7 @@
 
 #include "AuthorizationFacade.h"
 #include "SignResultDTO.h"
+#include "Codec.h"
 
 class AuthPage : public QObject{
     Q_OBJECT

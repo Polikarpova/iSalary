@@ -1,16 +1,17 @@
 #pragma once
 
-#include <QAbstractTableModel>
 #include "Codec.h"
-#include "ManagerDTO.h"
+#include <QAbstractTableModel>
 
-class EmployeesTableModel : public QAbstractTableModel {
+#include "ManagerActiveSalesStatisticDTO.h"
+
+class ManagersSalesTableModel : public QAbstractTableModel {
     Q_OBJECT
 public:
-    EmployeesTableModel(QObject* parent = 0);
-    ~EmployeesTableModel(void);
+    ManagersSalesTableModel(QObject* parent = 0);
+    ~ManagersSalesTableModel(void);
 
-    void refreshData(const QList<ManagerDTO>& managers);
+	void refreshData(const QList<ManagerActiveSalesStatisticDTO>& managers);
     int getRecordId( int row);
     QModelIndex getIndexByRecordId( int id);
 
@@ -21,17 +22,15 @@ public:
 
     
     enum Column {
+		COLUMN_ID,
         COLUMN_FIO,
-        COLUMN_EMPLOY_DATE,
-        COLUMN_ID,
+        COLUMN_CONFIRM_COUNT,
+        COLUMN_UNCONFIRM_COUNT,
         COLUMN_LAST /*Обозначает кол-во столбцов, на самом деле не существует*/
     };
-signals:
-    void managerSelected( int managerId);
 
 private:
     int id;
     static int maxId;
-    QList<QList<QVariant>> managerTable;
+    QList<QList<QVariant>> table;
 };
-

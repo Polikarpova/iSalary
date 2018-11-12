@@ -5,11 +5,17 @@
 #include "AuthorizationFacade.h"
 #include "PersonnalAccountingFacade.h"
 
+#include "SalesFacade.h"
+
 #include "UserDB.h"
+#include "ManagerDB.h"
+
+#include "Sale_DB.h"
 #include "ManagerDB.h"
 
 #include "AuthPage.h"
 #include "EmployeesPage.h"
+#include "SalesPage.h"
 
 #include "test_userdb.h"
 
@@ -22,14 +28,18 @@ int main(int argc, char *argv[])
 	sqlDB= QSqlDatabase::addDatabase( "QMYSQL");
 	sqlDB.setHostName( "127.0.0.1");
     sqlDB.setPort( 3306);
-    sqlDB.setDatabaseName( "test");
+    sqlDB.setDatabaseName( "mdkp");
     sqlDB.setUserName( "root");
     sqlDB.setPassword( "root");
     bool isOpen = sqlDB.open();
 
-	freopen("testing.log", "w", stdout);
+    if( sqlDB.lastError().type() != QSqlError::NoError){
+        QMessageBox::critical( 0, "Nu epta", sqlDB.lastError().text());
+    }
+
+	/*freopen("testing.log", "w", stdout);
 	Test_UserDB test_userDB( &sqlDB );
-	QTest::qExec( &test_userDB );
+	QTest::qExec( &test_userDB );*/
     
 	UserDB userDB( &sqlDB);
     UserValidator userValidator( &userDB);
@@ -43,7 +53,12 @@ int main(int argc, char *argv[])
     PersonnalAccountingFacade personnalAccountingFacade( &employer, &managerDB, &managerValidator);
     EmployeesPage employeesPage( &personnalAccountingFacade);
 
-    MainWindow w( &authPage, &employeesPage);
+    Sale_DB * saleDB = new Sale_DB( sqlDB, QString("sales"));
+	SalesFacade * salesFacade = new SalesFacade(&managerDB, saleDB);
+    SalesPage salesPage(salesFacade);
+
+    MainWindow w( &authPage, &employeesPage, &salesPage);
+	
 	w.show();
     
     int stop = 2;

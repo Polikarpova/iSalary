@@ -4,6 +4,8 @@ ipch
 *.sdf
 *.opensdf
 iSalary/Win32/*
-iSalary/iSalary/Debug/
+iSalary/iSalary/Debug/*
 /GeneratedFiles
 iSalary/iSalary.suo
+iSalary/iSalary/*.vcxproj
+iSalary/iSalary/*.vcxproj.*

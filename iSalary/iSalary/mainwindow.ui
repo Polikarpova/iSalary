@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>814</width>
-    <height>620</height>
+    <width>1044</width>
+    <height>611</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -168,7 +168,7 @@
         <item>
          <widget class="QStackedWidget" name="boss_manager_stackedWidget">
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="owner">
            <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -181,7 +181,7 @@
                <enum>QTabWidget::Rounded</enum>
               </property>
               <property name="currentIndex">
-               <number>0</number>
+               <number>2</number>
               </property>
               <property name="elideMode">
                <enum>Qt::ElideMiddle</enum>
@@ -793,7 +793,11 @@
                    </layout>
                   </item>
                   <item>
-                   <widget class="QTableView" name="productTable"/>
+                   <widget class="QTableView" name="productTable">
+                    <property name="enabled">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
                   </item>
                   <item>
                    <widget class="QPushButton" name="addProductButton">
@@ -1956,6 +1960,9 @@
                 </item>
                 <item>
                  <widget class="QLineEdit" name="currentSalary">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
                   <property name="inputMask">
                    <string/>
                   </property>
@@ -2039,28 +2046,6 @@
                   </property>
                  </widget>
                 </item>
-                <item row="0" column="3">
-                 <widget class="QSpinBox" name="priceInput">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>100</width>
-                    <height>0</height>
-                   </size>
-                  </property>
-                  <property name="minimum">
-                   <number>1</number>
-                  </property>
-                  <property name="maximum">
-                   <number>99999999</number>
-                  </property>
-                 </widget>
-                </item>
                 <item row="0" column="4">
                  <widget class="QLabel" name="label_29">
                   <property name="sizePolicy">
@@ -2075,7 +2060,7 @@
                  </widget>
                 </item>
                 <item row="0" column="5">
-                 <widget class="QSpinBox" name="countInput">
+                 <widget class="QSpinBox" name="countSaleProducts">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -2093,6 +2078,29 @@
                   </property>
                   <property name="maximum">
                    <number>999</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="6">
+                 <widget class="QPushButton" name="addSaleButton">
+                  <property name="text">
+                   <string>Добавить</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="3">
+                 <widget class="QDoubleSpinBox" name="priceSale">
+                  <property name="minimum">
+                   <double>0.010000000000000</double>
+                  </property>
+                  <property name="maximum">
+                   <double>99999999.000000000000000</double>
+                  </property>
+                  <property name="singleStep">
+                   <double>0.010000000000000</double>
+                  </property>
+                  <property name="value">
+                   <double>1.000000000000000</double>
                   </property>
                  </widget>
                 </item>
@@ -2141,7 +2149,7 @@
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_22">
                 <item>
-                 <widget class="QLineEdit" name="productSearch_2">
+                 <widget class="QLineEdit" name="managerProductSearch">
                   <property name="inputMask">
                    <string/>
                   </property>
@@ -2157,7 +2165,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="pushButton">
+                 <widget class="QPushButton" name="managerProductSearchButton">
                   <property name="text">
                    <string/>
                   </property>
@@ -2232,7 +2240,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>814</width>
+     <width>1044</width>
      <height>21</height>
     </rect>
    </property>
