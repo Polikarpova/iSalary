@@ -229,6 +229,12 @@
     <CustomBuild Include="ManagerPage.h">
       <Filter>Header Files\View</Filter>
     </CustomBuild>
+    <CustomBuild Include="test_userdb.h">
+      <Filter>Header Files\Test</Filter>
+    </CustomBuild>
+    <CustomBuild Include="SalesPage.h">
+      <Filter>Header Files\View</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h">
@@ -317,6 +323,18 @@
     </ClInclude>
     <ClInclude Include="SaleFacade.h">
       <Filter>Header Files\Model\DomainModel\ModelFacade</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagerValidator.h">
+      <Filter>Header Files\Model\DomainModel\PersonnelAccountingModule</Filter>
+    </ClInclude>
+    <ClInclude Include="UserValidator.h">
+      <Filter>Header Files\Model\DomainModel\AuthorizationModule</Filter>
+    </ClInclude>
+    <ClInclude Include="PersonnalAccountingFacade.h">
+      <Filter>Header Files\Model\ModelFacade</Filter>
+    </ClInclude>
+    <ClInclude Include="Codec.h">
+      <Filter>Source Files\View</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

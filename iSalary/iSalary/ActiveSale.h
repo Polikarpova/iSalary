@@ -1,6 +1,7 @@
 #pragma once
-#include "sale.h"
-#include "product.h"
+#include "Sale.h"
+#include "Product.h"
+
 class ActiveSale : public Sale {
 private:
 	Product product;
@@ -13,10 +14,12 @@ public:
 
 	void confirm();
 	void cancelConfirm();
-	bool isConfirmed();
-	QString getProductName() override;
-	double getProductCommission() override;
-	void setProduct( Product product ) override;
-	Product getProduct() override;
-};
 
+	bool isConfirmed();
+	QString getProductName();
+	double getProductCommission();
+	Product getProduct();
+	QDate getConfirmDate();
+	
+	void setProduct( Product product );
+};

@@ -2,12 +2,12 @@
 
 
 ManagerDB:: ManagerDB( QSqlDatabase* database, UserDB* userDB) {
-    this->db = db;
+    this->db = database;
     this->userDB = userDB;
     init();
 }
 
-void ManagerDB::init(){
+void ManagerDB::init() {
     this->tableName = "users";
     this->firstNameField = "firstName";
     this->secondNameField = "secondName";
@@ -23,7 +23,7 @@ void ManagerDB::init(){
     this->dateOfEmploymentField = "dateOfEmployment";
 }
 
-Manager ManagerDB::getById( int id){
+Manager ManagerDB::getById( int id) {
     UserInfo user;
     try {
         UserInfo user = userDB->getById( id);
@@ -32,7 +32,7 @@ Manager ManagerDB::getById( int id){
     }
 
     if( user.type != MANAGER) {
-        throw "Запись не найдена";
+        throw new QString("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
     }
     QString sql = "SELECT `%1`, `%2`, `%3`, `%4`, `%5`, `%6`, `%7`, `%8`, `%9, `%10`, `%11`, `%12` FROM %0 WHERE %15 = :%15";
     sql = sql.arg(
@@ -68,14 +68,14 @@ Manager ManagerDB::getById( int id){
     if( query.next()) {
         manager = this->readOneRecord(query);
     } else { 
-        handleError("Запись не найдена");
+        handleError("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
     }
 
     return manager;
 }
 
-QList<Manager> ManagerDB::getAll(){
-    QString sql = "SELECT `%15`,`%1`, `%2`, `%3`, `%4`, `%5`, `%6`, `%7`, `%8`, `%9, `%10`, `%11`, `%12` FROM %0" ;
+QList<Manager> ManagerDB::getAll() {
+    QString sql = "SELECT `%15`,`%1`, `%2`, `%3`, `%4`, `%5`, `%6`, `%7`, `%8`, `%9`, `%10`, `%11`, `%12` FROM %0 " ;
     sql = sql.arg(
         this->tableName,
         this->firstNameField,
@@ -97,7 +97,9 @@ QList<Manager> ManagerDB::getAll(){
         UserDB::idField
     );
 
-    QSqlQuery query( *db);
+    sql += " WHERE " + this->userTypeField + " = " + QString::number( MANAGER) + " ";
+
+    QSqlQuery query( *this->db);
     query.prepare(sql);
     this->execQuery( query);
     
@@ -105,11 +107,11 @@ QList<Manager> ManagerDB::getAll(){
     QList<Manager> managers;
 
     while( query.next()){
-        userIds.append( query.value( ":" + this->idField).value<int>());
+        userIds.append( query.value( UserDB::idField).value<int>());
         managers.append( readOneRecord(query));
     }
 
-    QList<UserInfo> users = this->getByIds( userIds);
+    QList<UserInfo> users = this->userDB->getByIds( userIds);
     QHash<int, UserInfo> usersById;
 
     for( auto iUser = users.begin(); iUser != users.end(); iUser++) {
@@ -130,9 +132,9 @@ void ManagerDB::update( const Manager& manager) {
     
     QString sql = "UPDATE %0 SET `%1` = :%1, `%2` = :%2, `%3` = :%3, \
                   `%4` = :%4, `%5` = :%5, `%6` = :%6, `%7` = :%7, \
-                  `%8` = :%8, `%9` = :%9, `%10` = :%10, `%11` = :%11 , `%12` = :%12 \
+                  `%8` = :%8, `%9` = :%9, `%10` = :%10, `%11` = :%11 , `%12` = :%12, \
                   `%13` = :%13 \
-                  WHERE `%15` = :`%15` ";
+                  WHERE `%15` = :%15 ";
 
     sql = sql.arg(
         this->tableName,
@@ -157,7 +159,7 @@ void ManagerDB::update( const Manager& manager) {
     QSqlQuery query( *db);
     query.prepare( sql);
 
-	query.bindValue( ":" + UserDB::idField, manager.getId());
+    query.bindValue( ":" + UserDB::idField, manager.getId());
     query.bindValue( ":" + this->firstNameField, manager.getFirstName());
     query.bindValue( ":" + this->secondNameField, manager.getSecondName());
     query.bindValue( ":" + this->thirdNameField, manager.getThirdName());
@@ -176,7 +178,7 @@ void ManagerDB::update( const Manager& manager) {
     this->execQuery( query);
 }
 
-bool ManagerDB::findByINN( const QString& INN, Manager* manager){
+bool ManagerDB::findByINN( const QString& INN, Manager* manager) {
 
     QString sql = "SELECT `%15` FROM %0 WHERE `%1` = :%1";
     sql = sql.arg(
@@ -228,21 +230,21 @@ bool ManagerDB::findByPassport( const QString& passportSerial, const QString pas
 }
 
 
-Manager ManagerDB::readOneRecord( const QSqlQuery& query){
-    int id = query.value( ":" + this->idField).value<int>();
+Manager ManagerDB::readOneRecord( const QSqlQuery& query) {
+    int id = query.value( this->idField).value<int>();
     Manager manager( id);
-    manager.setAddress( query.value( ":" + this->addressField).value<QString>() );
-    manager.setDateOfEmployment( query.value( ":" + this->dateOfEmploymentField).value<QDate>());
-    manager.setEmail( query.value( ":" + this->emailField).value<QString>());
-    manager.setFirstName( query.value( ":" + this->firstNameField).value<QString>());
-    manager.setSecondName( query.value( ":" + this->secondNameField).value<QString>());
-    manager.setThirdName( query.value( ":" + this->thirdNameField).value<QString>());
-    manager.setINN( query.value( ":" + this->INNField).value<QString>());
-    manager.setMobileNumber( query.value( ":" + this->mobileNumberField).value<QString>());
-    manager.setPassportDateIssue( query.value( ":" + this->passportIssueDateField).value<QDate>());
-    manager.setPassportNumber( query.value( ":" + this->passportNumberField).value<QString>());
-    manager.setPassportSerial( query.value( ":" + this->passportSerialField).value<QString>());
-    Sex sex = static_cast<Sex>( query.value( ":" + this->sexField).value<int>());
+    manager.setAddress( query.value( this->addressField).value<QString>() );
+    manager.setDateOfEmployment( query.value( this->dateOfEmploymentField).value<QDate>());
+    manager.setEmail( query.value( this->emailField).value<QString>());
+    manager.setFirstName( query.value( this->firstNameField).value<QString>());
+    manager.setSecondName( query.value( this->secondNameField).value<QString>());
+    manager.setThirdName( query.value( this->thirdNameField).value<QString>());
+    manager.setINN( query.value( this->INNField).value<QString>());
+    manager.setMobileNumber( query.value( this->mobileNumberField).value<QString>());
+    manager.setPassportDateIssue( query.value( this->passportIssueDateField).value<QDate>());
+    manager.setPassportNumber( query.value( this->passportNumberField).value<QString>());
+    manager.setPassportSerial( query.value( this->passportSerialField).value<QString>());
+    Sex sex = static_cast<Sex>( query.value( this->sexField).value<int>());
     manager.setSex( sex);
 
     return manager;

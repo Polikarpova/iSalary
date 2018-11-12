@@ -7,6 +7,10 @@ UserDB::UserDB() {
 UserDB::UserDB( QSqlDatabase* database){
     this->init();
     this->db = database;
+
+	QSqlQuery query( *(this->db) );
+    query.prepare( "CREATE TABLE IF NOT EXISTS `users` (`id` int(11) NOT NULL AUTO_INCREMENT,`login` varchar(50) CHARACTER SET utf8 NOT NULL,`password` varchar(50) CHARACTER SET utf8 NOT NULL,`type` int(11) NOT NULL,`firstName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,`secondName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,`thirdName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,`sex` int(11) DEFAULT NULL,`passportSerial` varchar(6) CHARACTER SET utf8 DEFAULT NULL,`passportNumber` varchar(8) CHARACTER SET utf8 DEFAULT NULL,`passportIssueDate` date DEFAULT NULL,`address` varchar(100) CHARACTER SET utf8 DEFAULT NULL,`INN` varchar(40) CHARACTER SET utf8 DEFAULT NULL,`email` varchar(100) CHARACTER SET utf8 DEFAULT NULL,`mobileNumber` varchar(100) CHARACTER SET utf8 DEFAULT NULL,`dateOfEmployment` date DEFAULT NULL,PRIMARY KEY (`id`))" );
+    query.exec();
 }
 
 void UserDB::init(){
@@ -87,7 +91,7 @@ UserInfo UserDB::getById( int id) {
 QList<UserInfo> UserDB::getByIds( QList<int> ids) {
     QList<UserInfo> users;
     if( ids.size() > 0) { 
-        QSqlQuery query( *db);
+        QSqlQuery query( *this->db);
 
         QString sql = "SELECT `%1`,`%2`,`%3`,`%4` FROM %0 WHERE `%1` IN (%10)";
         sql = sql.arg(
@@ -173,7 +177,9 @@ UserInfo UserDB::findByLogin( const QString& login) {
 
 
 void UserDB::handleError( const QSqlError& error) const {
-    QSqlError err = error;
+
+    QSqlError * err = new QSqlError(error);
+    QString text = err->text() + db->lastError().text();
     throw err;
 }
 

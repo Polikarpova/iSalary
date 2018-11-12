@@ -21,7 +21,7 @@
     <item>
      <widget class="QStackedWidget" name="auth_program_stackedWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="enter">
        <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -110,6 +110,9 @@
                 </property>
                 <property name="text">
                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;errorText&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
                 </property>
                </widget>
               </item>
@@ -2259,6 +2262,89 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>loginInput</tabstop>
+  <tabstop>passwordInput</tabstop>
+  <tabstop>enterButton</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>managersTable</tabstop>
+  <tabstop>addManagerButton</tabstop>
+  <tabstop>managersDataTab</tabstop>
+  <tabstop>firstName</tabstop>
+  <tabstop>secondName</tabstop>
+  <tabstop>thirdName</tabstop>
+  <tabstop>dateOfBirth</tabstop>
+  <tabstop>maleRButton</tabstop>
+  <tabstop>femaleRButton</tabstop>
+  <tabstop>pasportSeries</tabstop>
+  <tabstop>pasportNumber</tabstop>
+  <tabstop>pasportSourse</tabstop>
+  <tabstop>dateOfReceipt</tabstop>
+  <tabstop>registration</tabstop>
+  <tabstop>INN</tabstop>
+  <tabstop>login</tabstop>
+  <tabstop>password</tabstop>
+  <tabstop>managerEditButton</tabstop>
+  <tabstop>cancelManagerButton</tabstop>
+  <tabstop>saveManagerButton</tabstop>
+  <tabstop>managerCancelAddButton</tabstop>
+  <tabstop>managerSubmitAddButton</tabstop>
+  <tabstop>productSearch</tabstop>
+  <tabstop>searchButton</tabstop>
+  <tabstop>productTable</tabstop>
+  <tabstop>addProductButton</tabstop>
+  <tabstop>productName</tabstop>
+  <tabstop>productPercent</tabstop>
+  <tabstop>deleteProductButton</tabstop>
+  <tabstop>editProductButton</tabstop>
+  <tabstop>cancelProductButton</tabstop>
+  <tabstop>saveProductButton</tabstop>
+  <tabstop>productCancelAddButton</tabstop>
+  <tabstop>productSubmitAddButton</tabstop>
+  <tabstop>accountingPeriodComboBox</tabstop>
+  <tabstop>saleForCorrectionTable</tabstop>
+  <tabstop>correctionSalerComboBox</tabstop>
+  <tabstop>correctionProductComboBox</tabstop>
+  <tabstop>correctionPrice</tabstop>
+  <tabstop>correctionProductsCount</tabstop>
+  <tabstop>correctionPercent</tabstop>
+  <tabstop>correctionDateOfSale</tabstop>
+  <tabstop>correctionDeleteOrRestoreButton</tabstop>
+  <tabstop>addCorrectionButton</tabstop>
+  <tabstop>correctionHistoryList</tabstop>
+  <tabstop>salesDateInput</tabstop>
+  <tabstop>managersSalesTable</tabstop>
+  <tabstop>unconfirmedSalesTable</tabstop>
+  <tabstop>confirmedSalesTable</tabstop>
+  <tabstop>statisticStartPeriod</tabstop>
+  <tabstop>statisticEndPeriod</tabstop>
+  <tabstop>statisticTable</tabstop>
+  <tabstop>statisticSalesTable</tabstop>
+  <tabstop>statisticCalendar</tabstop>
+  <tabstop>salaryAccountingPeriod</tabstop>
+  <tabstop>salaryTable</tabstop>
+  <tabstop>salaryTotalTable</tabstop>
+  <tabstop>closeAccountingPeriod</tabstop>
+  <tabstop>salaryPasportSeries</tabstop>
+  <tabstop>salaryPasportNumber</tabstop>
+  <tabstop>salaryPasportSourse</tabstop>
+  <tabstop>salaryDateOfReceipt</tabstop>
+  <tabstop>salaryMaleRButton</tabstop>
+  <tabstop>salaryFemaleRButton</tabstop>
+  <tabstop>salaryINN</tabstop>
+  <tabstop>salesButton</tabstop>
+  <tabstop>dataButton</tabstop>
+  <tabstop>currentSalary</tabstop>
+  <tabstop>productComboBox</tabstop>
+  <tabstop>priceInput</tabstop>
+  <tabstop>countInput</tabstop>
+  <tabstop>confirmedSales</tabstop>
+  <tabstop>unconfirmedSales</tabstop>
+  <tabstop>productSearch_2</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>managersProductTable</tabstop>
+  <tabstop>quitButton</tabstop>
+ </tabstops>
  <resources>
   <include location="mainwindow.qrc"/>
  </resources>

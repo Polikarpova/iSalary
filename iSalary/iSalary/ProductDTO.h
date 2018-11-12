@@ -6,4 +6,13 @@ struct ProductDTO {
 	QVector<Product>products;
 	bool isSuccess;
 	bool isEmpty;
+#pragma once
+
+#include <qstring.h>
+
+struct ProductDTO {
+
+	QString name;
+	double commission;
+	int id;
 };

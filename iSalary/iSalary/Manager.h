@@ -22,8 +22,9 @@ class Manager : public User
 public:
     Manager( void);
     Manager( int id);
+    Manager( const User& user);
 
-	void setId( int _id );
+    void setId(int _id);
 
     /**
     * �������� ��� ���������
@@ -61,6 +62,22 @@ public:
     */
     void setThirdName( const QString& thirdname);
     
+    /**
+    * �������� ���� �������� ���������
+    * @return - ���� �������� ���������
+    */
+    QDate getDateOfBirth() const;
+    
+    /**
+    * �������� ���� �������� ���������
+    * @param dateOfBirth -����� ���� �������� ��������� ������ � 4 �������
+    */
+    void setDateOfBirth( const QDate& dateOfBirth);
+    
+    /**
+    * �������� ��� ���������
+    * @return - ��� ���������
+    */
     Sex getSex() const;
     
     /**
@@ -104,6 +121,19 @@ public:
     * @param date -����� ���� ������ �������� ���������
     */
     void setPassportDateIssue( const QDate& date);
+    
+    
+    /**
+    * �������� "��� �����" �������
+    * @return - "��� �����" ������� ���������
+    */
+    QString getPassportSource() const;
+    
+    /**
+    * ����������� "��� �����" �������
+    * @param passportSource - "��� �����" ������� ���������
+    */
+    void setPassportSource( const QString& passportSource);
     
     /**
     * �������� ����� �������� ���������
@@ -168,17 +198,20 @@ public:
     */
     void setDateOfEmployment(const QDate& date);
 
+    void setUserInfo( const User& user);
     ~Manager( void);
 
 private:
 
     QString firstName;
     QString secondName;
+    QDate dateOfBirth;
     QString thirdName;
     Sex sex;
     QString passportSerial;
     QString passportNumber;
     QDate passportIssueDate;
+    QString passportSource;
     QString address;
     QString INN;
     QString email;

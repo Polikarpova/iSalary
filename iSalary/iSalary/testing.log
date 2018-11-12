@@ -1,0 +1,33 @@
+********* Start testing of Test_Product_DB *********
+Config: Using QtTest library 5.5.1, Qt 5.5.1 (i386-little_endian-ilp32 shared (dynamic) debug build; by MSVC 2010)
+PASS   : Test_Product_DB::initTestCase()
+PASS   : Test_Product_DB::create()
+PASS   : Test_Product_DB::update()
+QWARN  : Test_Product_DB::remove() QSqlQuery::value: not positioned on a valid record
+QWARN  : Test_Product_DB::remove() QSqlQuery::value: not positioned on a valid record
+QWARN  : Test_Product_DB::remove() QSqlQuery::value: not positioned on a valid record
+PASS   : Test_Product_DB::remove()
+PASS   : Test_Product_DB::getAll()
+PASS   : Test_Product_DB::cleanupTestCase()
+Totals: 6 passed, 0 failed, 0 skipped, 0 blacklisted
+********* Finished testing of Test_Product_DB *********
+********* Start testing of Test_User_DB *********
+Config: Using QtTest library 5.5.1, Qt 5.5.1 (i386-little_endian-ilp32 shared (dynamic) debug build; by MSVC 2010)
+PASS   : Test_User_DB::initTestCase()
+FAIL!  : Test_User_DB::insert() Compared values are not the same
+   Actual   (res_user.user.getId()): 85
+   Expected (exp_user.user.getId()): 311
+test_user_db.cpp(20) : failure location
+PASS   : Test_User_DB::getById()
+PASS   : Test_User_DB::getByIds()
+FAIL!  : Test_User_DB::findByLogin() Compared values are not the same
+   Actual   (res_user.user.getId()): 85
+   Expected (exp_user.user.getId()): 318
+test_user_db.cpp(20) : failure location
+FAIL!  : Test_User_DB::findByLoginPassword() Compared values are not the same
+   Actual   (res_user.user.getId()): 85
+   Expected (exp_user.user.getId()): 319
+test_user_db.cpp(20) : failure location
+PASS   : Test_User_DB::cleanupTestCase()
+Totals: 4 passed, 3 failed, 0 skipped, 0 blacklisted
+********* Finished testing of Test_User_DB *********
