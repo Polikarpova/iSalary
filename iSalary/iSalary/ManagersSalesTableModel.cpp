@@ -31,13 +31,13 @@ QVariant ManagersSalesTableModel::headerData( int section, Qt::Orientation orien
  
     switch( section ) {
     case COLUMN_ID:
-		return toUnicode( "id" );
+		return QString::fromWCharArray( L"id" );
     case COLUMN_FIO:
-        return toUnicode( "ФИО" );
+        return QString::fromWCharArray( L"ФИО" );
     case COLUMN_CONFIRM_COUNT:
-        return toUnicode( "Кол-во подтвержденных продаж" );
+        return QString::fromWCharArray( L"Кол-во подтвержденных продаж" );
 	case COLUMN_UNCONFIRM_COUNT:
-        return toUnicode( "Кол-во неподтвержденных продаж" );
+        return QString::fromWCharArray( L"Кол-во неподтвержденных продаж" );
     }
  
     return QVariant();

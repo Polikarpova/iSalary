@@ -20,15 +20,15 @@ bool UserValidator::isUserValid( const User& user, QString* errorOutput) {
 
     if( !isValid) {
         if( errorOutput) {
-            error += toUnicode("Пользователь с заданным логином уже существует\n");
+            error += QString::fromWCharArray( L"Пользователь с заданным логином уже существует\n");
         }
     } else {
         if( user.getLogin().size() < 3) {
-            error += toUnicode("Слишком короткий логин\n");
+            error += QString::fromWCharArray( L"Слишком короткий логин\n");
             isValid = false;
         }
         if( user.getPassword().size() < 3) { 
-            error += toUnicode("Слишком короткий пароль\n");
+            error += QString::fromWCharArray( L"Слишком короткий пароль\n");
             isValid = false;
         }
     }
@@ -39,7 +39,7 @@ bool UserValidator::isUserValid( const User& user, QString* errorOutput) {
       && onlyLatin.matchedLength() == user.getPassword().size()); 
         
     if( !isPasswordValid) {
-        error += toUnicode("Пароль должен состоять из символов латинского алфавита\n");
+        error += QString::fromWCharArray( L"Пароль должен состоять из символов латинского алфавита\n");
         isValid = false;
     }
 
@@ -47,7 +47,7 @@ bool UserValidator::isUserValid( const User& user, QString* errorOutput) {
       && onlyLatin.matchedLength() == user.getLogin().size(); 
         
     if( !isLoginValid) { 
-        error += toUnicode("Логин должен состоять из символов латинского алфавита\n");
+        error += QString::fromWCharArray( L"Логин должен состоять из символов латинского алфавита\n");
         isValid = false;
     }
 

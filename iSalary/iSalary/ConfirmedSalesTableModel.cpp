@@ -33,17 +33,17 @@ QVariant ConfirmedSalesTableModel::headerData( int section, Qt::Orientation orie
     case COLUMN_ID:
 		return toUnicode( "id" );
     case COLUMN_FIO:
-        return toUnicode( "ФИО" );
+		return QString::fromWCharArray( L"ФИО" );
     case COLUMN_DATE:
-        return toUnicode( "Дата" );
+        return QString::fromWCharArray( L"Дата" );
 	case COLUMN_NAME:
-        return toUnicode( "Название" );
+        return QString::fromWCharArray( L"Название" );
 	case COLUMN_COUNT:
-        return toUnicode( "Кол-во" );
+        return QString::fromWCharArray( L"Кол-во" );
 	case COLUMN_PRICE:
-        return toUnicode( "Цена" );
+        return QString::fromWCharArray( L"Цена" );
 	case COLUMN_COMMISION:
-        return toUnicode( "Продавцу, %" );
+        return QString::fromWCharArray( L"Продавцу, %" );
 	case COLUMN_ACTION:
 		return "";
     }
