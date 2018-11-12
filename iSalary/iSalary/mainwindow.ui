@@ -46,7 +46,7 @@
              <string notr="true"/>
             </property>
             <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:24pt;&quot;&gt;Аутенфикация&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:24pt;&quot;&gt;Аутентификация&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>
@@ -2330,12 +2330,8 @@
   <tabstop>dataButton</tabstop>
   <tabstop>currentSalary</tabstop>
   <tabstop>productComboBox</tabstop>
-  <tabstop>priceInput</tabstop>
-  <tabstop>countInput</tabstop>
   <tabstop>confirmedSales</tabstop>
   <tabstop>unconfirmedSales</tabstop>
-  <tabstop>productSearch_2</tabstop>
-  <tabstop>pushButton</tabstop>
   <tabstop>managersProductTable</tabstop>
   <tabstop>quitButton</tabstop>
  </tabstops>

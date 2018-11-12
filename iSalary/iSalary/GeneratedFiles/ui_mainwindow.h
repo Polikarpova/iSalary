@@ -1887,7 +1887,7 @@ public:
     void retranslateUi(QMainWindow *MainWindowClass)
     {
         MainWindowClass->setWindowTitle(QApplication::translate("MainWindowClass", "MainWindow", 0));
-        label_19->setText(QApplication::translate("MainWindowClass", "<html><head/><body><p align=\"center\"><span style=\" font-size:24pt;\">\320\220\321\203\321\202\320\265\320\275\321\204\320\270\320\272\320\260\321\206\320\270\321\217</span></p></body></html>", 0));
+        label_19->setText(QApplication::translate("MainWindowClass", "<html><head/><body><p align=\"center\"><span style=\" font-size:24pt;\">\320\220\321\203\321\202\320\265\320\275\321\202\320\270\321\204\320\270\320\272\320\260\321\206\320\270\321\217</span></p></body></html>", 0));
         label_20->setText(QApplication::translate("MainWindowClass", "\320\233\320\276\320\263\320\270\320\275", 0));
         label_21->setText(QApplication::translate("MainWindowClass", "\320\237\320\260\321\200\320\276\320\273\321\214", 0));
         errorLabel->setText(QApplication::translate("MainWindowClass", "<html><head/><body><p align=\"center\">errorText</p></body></html>", 0));
