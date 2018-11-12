@@ -106,14 +106,15 @@ void MainWindow::createHorizontalTabs() {
 	}
 }
 
-MainWindow::~MainWindow() {
+void MainWindow::refreshBossPage( int page){
 
-    switch( page ){
+    switch( page ) {
         case PAGE_EMPLOYEES: this->employeesPage->refreshList(); break;
 		case PAGE_SALES: this->salesPage->refreshPage(); break;
         default:;
     }
 }
+
 
 MainWindow::~MainWindow() {
     delete this->errorHandler;
