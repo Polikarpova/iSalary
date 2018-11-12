@@ -83,7 +83,8 @@ int Sale_DB::getById(int id) {
 QList<ManagerActiveSalesStatisticDTO> Sale_DB::getManagerActiveSalesSatistic() {
 
 	//получаем id
-	QString sql = "select users.id from users, sales where sales.manager_id = users.id AND sales.isActive = 1 group by users.id;";
+	//QString sql = "select users.id from users, sales where sales.manager_id = users.id AND sales.isActive = 1 group by users.id;";
+	QString sql = "select users.id, users.firstName, users.secondName, users.thirdName from users where	users.type = 0;";
 	QSqlQuery query( this->_db);
 	query.prepare(sql);
 
@@ -102,20 +103,25 @@ QList<ManagerActiveSalesStatisticDTO> Sale_DB::getManagerActiveSalesSatistic() {
 
 		this->execQuery( query2);
 		
-		query2.next();
-		result.append( this->readToDTO(query2) );
-
-		while ( query2.next() ) {
+		if	( query2.next()) {
 			
-			int i = query2.value("isConfirmed").value<int>();
+			result.append( this->readToDTO(query2, query) );
 
-			if( i == 0) {
-
-				result.last().unconfirmCount += 1;
-			} else {
+			while ( query2.next() ) {
 			
-				result.last().confirmCount += 1;
+				int i = query2.value("isConfirmed").value<int>();
+
+				if( i == 0) {
+
+					result.last().unconfirmCount += 1;
+				} else {
+			
+					result.last().confirmCount += 1;
+				}
 			}
+		} else {
+		
+			result.append( this->readEmptyResultToDTO(query));
 		}
 	}
 
@@ -161,14 +167,16 @@ QList<ActiveSaleDTO> Sale_DB::getActiveSalesForManager( int managerId) {
 	return result;
 }
 
-ManagerActiveSalesStatisticDTO Sale_DB::readToDTO( const QSqlQuery& query) {
+ManagerActiveSalesStatisticDTO Sale_DB::readToDTO( const QSqlQuery& query, const QSqlQuery& queryWithManagerData) {
 
 	struct ManagerActiveSalesStatisticDTO result;
 
-	result.managerId = query.value("id").value<int>();
-	result.managerName = query.value("secondName").value<QString>() + " " +
-						 query.value("firstName").value<QString>() + " " +
-						 query.value("thirdName").value<QString>();
+	result.managerId = queryWithManagerData.value("id").value<int>();
+	result.managerName = queryWithManagerData.value("secondName").value<QString>() + " " +
+						 queryWithManagerData.value("firstName").value<QString>() + " " +
+						 queryWithManagerData.value("thirdName").value<QString>();
+	
+	
 	int i = query.value("isConfirmed").value<int>();
 	if ( i == 0 ) {
 	
@@ -179,6 +187,20 @@ ManagerActiveSalesStatisticDTO Sale_DB::readToDTO( const QSqlQuery& query) {
 		result.confirmCount = 1;
 		result.unconfirmCount = 0;
 	}
+
+	return result;
+}
+
+ManagerActiveSalesStatisticDTO Sale_DB::readEmptyResultToDTO( const QSqlQuery& query) {
+
+	struct ManagerActiveSalesStatisticDTO result;
+
+	result.managerId = query.value("id").value<int>();
+	result.managerName = query.value("secondName").value<QString>() + " " +
+						 query.value("firstName").value<QString>() + " " +
+						 query.value("thirdName").value<QString>();
+	result.confirmCount = 0;
+	result.unconfirmCount = 0;
 
 	return result;
 }

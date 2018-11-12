@@ -54,5 +54,6 @@ protected:
 private:
 	QSqlDatabase _db;
 
-	ManagerActiveSalesStatisticDTO readToDTO( const QSqlQuery& query);
+	ManagerActiveSalesStatisticDTO readToDTO( const QSqlQuery& query, const QSqlQuery& queryWithManagerData);
+	ManagerActiveSalesStatisticDTO readEmptyResultToDTO( const QSqlQuery& query);
 };
