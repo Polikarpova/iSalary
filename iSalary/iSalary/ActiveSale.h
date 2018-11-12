@@ -20,6 +20,7 @@ public:
 	double getProductCommission();
 	Product getProduct();
 	QDate getConfirmDate();
-	
+	void setConfirmDate(const QDate& date);
+
 	void setProduct( Product product );
 };

@@ -38,3 +38,13 @@ void ActiveSale::setProduct( Product _product ) {
 Product ActiveSale::getProduct() {
 	return product;
 }
+
+void ActiveSale::setConfirmDate( const QDate& date) {
+
+	this->confirmDate = date;
+}
+
+QDate ActiveSale::getConfirmDate() {
+
+	return this->confirmDate;
+}

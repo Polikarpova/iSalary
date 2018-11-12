@@ -5,6 +5,7 @@
 Sale_DB::Sale_DB( QSqlDatabase &db, QString table_name ) {
 	_db = db;
 	TABLE_NAME = table_name;
+	this->init();
 }
 
 
@@ -15,8 +16,8 @@ Sale_DB::~Sale_DB(void) {
 void Sale_DB::init() {
     QSqlQuery query( _db );
     query.prepare( "CREATE TABLE  IF NOT EXISTS `" + TABLE_NAME + 
-		"` (`id` int NOT NULL PRIMARY KEY AUTO_INCREMENT, `manager_id` int NOT NULL, `product_id` int NOT NULL, `price` DOUBLE NOT NULL, `count` int NOT NULL, `isActive` INT(1) NOT NULL, `isConfirmed` INT(1) NOT NULL)" );
-    query.exec();
+		"` (`id` int NOT NULL PRIMARY KEY AUTO_INCREMENT, `manager_id` int NOT NULL, `product_id` int NOT NULL, `price` DOUBLE NOT NULL, `count` int NOT NULL, `isActive` INT(1) NOT NULL, `isConfirmed` INT(1) NOT NULL, `confirmDate` DATE NOT NULL DEFAULT \"1000-01-01\" ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;" );
+	this->execQuery(query);
 }
 
 void Sale_DB::create( ActiveSale sale ) {
@@ -55,6 +56,7 @@ void Sale_DB::fillSale( ActiveSale & sale, const QSqlQuery * sqlQuery ) {
 	} else {
 		sale.cancelConfirm();
 	}
+	sale.setConfirmDate( QDate::fromString( sqlQuery->value("confirmDate").value<QString>(), Qt::ISODate) );
 }
 
 QVector<ActiveSale> Sale_DB::getActiveAll( int manager_id ) {
@@ -226,13 +228,13 @@ ActiveSaleDTO Sale_DB::readActiveSalesToDTO( const QSqlQuery& query) {
 
 void Sale_DB::confirmSale( int id) {
 
-	QString sql = "update %0 set `%1` = 1 where %2 = :id;";
-	sql = sql.arg("sales", "isConfirmed", "sales.id");
+	QString sql = "update %0 set `%1` = 1, `%2` = \"%3\" where %4 = :id;";
+	sql = sql.arg("sales", "isConfirmed", "confirmDate", QDate::currentDate().toString(Qt::ISODate), "sales.id");
 
 	QSqlQuery query( this->_db);
 	query.prepare(sql);
 	query.bindValue(":id", id);
-
+	
 	this->execQuery( query);
 }
 
