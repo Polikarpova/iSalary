@@ -44,9 +44,9 @@ void SalesPage::initManagersTable( QTableView* managersSalesTable) {
 	this->managersSalesTable->setSelectionMode( QAbstractItemView::SingleSelection);
 
 	//скрытие пол€ с id
-	//this->managersSalesTable->setColumnHidden( ManagersSalesTableModel::COLUMN_ID, true);
+	this->managersSalesTable->setColumnHidden( ManagersSalesTableModel::COLUMN_ID, true);
 
-	//connect( this->managersSalesTable, &QTableView::clicked, this, &EmployeesPage::showDetails);
+	connect( this->managersSalesTable, &QTableView::clicked, this, &SalesPage::showManagersSales);
 }
 
 void SalesPage::initUnconfirmedSalesTable( QTableView* unconfirmedSalesTable) {
@@ -60,7 +60,7 @@ void SalesPage::initUnconfirmedSalesTable( QTableView* unconfirmedSalesTable) {
 	this->unconfirmedSalesTable->setSelectionMode( QAbstractItemView::SingleSelection);
 
 	//скрытие пол€ с id
-	//this->unconfirmedSalesTable->setColumnHidden( UnconfirmedSalesTableModel::COLUMN_ID, true);
+	this->unconfirmedSalesTable->setColumnHidden( UnconfirmedSalesTableModel::COLUMN_ID, true);
 
 	//connect( this->unconfirmedSalesTable, &QTableView::clicked, this, &EmployeesPage::showDetails);
 }
@@ -76,10 +76,11 @@ void SalesPage::initConfirmedSalesTable( QTableView* confirmedSalesTable) {
 	this->confirmedSalesTable->setSelectionMode( QAbstractItemView::SingleSelection);
 
 	//скрытие пол€ с id
-	//this->confirmedSalesTable->setColumnHidden( ConfirmedSalesTableModel::COLUMN_ID, true);
+	this->confirmedSalesTable->setColumnHidden( ConfirmedSalesTableModel::COLUMN_ID, true);
 
 	//connect( this->confirmedSalesTable, &QTableView::clicked, this, &EmployeesPage::showDetails);
 }
+
 
 void SalesPage::updateManagersTable() {
 
@@ -93,7 +94,6 @@ void SalesPage::updateManagersTable() {
 	
 		this->errorHandler->handleError( error);
 	}
-
 
 	//если это были изменены данные (1), то необходимо получить текущую строчку
 	//узнаем текущую строчку
@@ -257,7 +257,68 @@ int SalesPage::getSelectedConfirmedSalesId() {
 void SalesPage::dateChanged() {
 
 	//обновл€ем все таблицы в соответствии с датой
-	//QMessageBox::information( 0, toUnicode("ƒата изменилась"), toUnicode("¬ы выбрали эту дату: ") + this->salesDateInput->date().toString() ); //debug
+	this->refreshPage();
+}
 
-	this->updateManagersTable();
+void SalesPage::showManagersSales() {
+
+	//показываем в unconfirmed и confirmed только определенного пользовател€
+	int currentId = this->getSelectedManagerSalesId();
+
+	this->viewSelectedManagerUnconfirmedSales( currentId);
+	this->viewSelectedManagerConfirmedSales( currentId);
+}
+
+void SalesPage::viewSelectedManagerUnconfirmedSales(int id) {
+
+	//получаем нужную инфу из фасада(бд)
+	QList<ActiveSaleDTO> list;
+
+	try {
+	
+		list = this->salesFacade->getActiveSalesForManager(id);
+	} catch( QString* error) {
+	
+		this->errorHandler->handleError( error);
+	}
+
+	//чистим Qhash
+	this->unconfirmedSales.clear();
+	//заполн€ем его новыми данными из бд
+	for ( auto i = list.begin(); i != list.end(); i++) {
+	
+		this->unconfirmedSales.insert( i->id, *i);
+	}
+
+	//инициализируем и заполн€ем модель
+	UnconfirmedSalesTableModel* model = static_cast<UnconfirmedSalesTableModel*>( this->unconfirmedSalesTable->model());
+	this->deleteConfirmSalesFromList(list);	//удал€ем не нужные строки
+	model->refreshData( list);
+}
+
+void SalesPage::viewSelectedManagerConfirmedSales(int id) {
+
+	//получаем нужную инфу из фасада(бд)
+	QList<ActiveSaleDTO> list;
+
+	try {
+	
+		list = this->salesFacade->getActiveSalesForManager(id);
+	} catch( QString* error) {
+	
+		this->errorHandler->handleError( error);
+	}
+
+	//чистим Qhash
+	this->confirmedSales.clear();
+	//заполн€ем его новыми данными из бд
+	for ( auto i = list.begin(); i != list.end(); i++) {
+	
+		this->confirmedSales.insert( i->id, *i);
+	}
+
+	//инициализируем и заполн€ем модель
+	ConfirmedSalesTableModel* model = static_cast<ConfirmedSalesTableModel*>( this->confirmedSalesTable->model());
+	this->deleteUnconfirmSalesFromList(list);	//удал€ем не нужные строки
+	model->refreshData( list);
 }

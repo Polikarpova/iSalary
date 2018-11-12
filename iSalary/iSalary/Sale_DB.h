@@ -32,12 +32,12 @@ public:
     int getById( int id);
 
 	QList<ActiveSaleDTO> getActiveSales();
+	QList<ActiveSaleDTO> getActiveSalesForManager( int managerId);
 	QList<ManagerActiveSalesStatisticDTO> getManagerActiveSalesSatistic();
 
 protected:
 	QString TABLE_NAME;
 	ActiveSale read(const QSqlQuery * sqlQuery);
-	ManagerActiveSalesStatisticDTO readToDTO( const QSqlQuery& query);
 	ActiveSaleDTO readActiveSalesToDTO( const QSqlQuery& query);
 	void execQuery( QSqlQuery& query) const;
 	
@@ -53,4 +53,6 @@ protected:
 
 private:
 	QSqlDatabase _db;
+
+	ManagerActiveSalesStatisticDTO readToDTO( const QSqlQuery& query);
 };

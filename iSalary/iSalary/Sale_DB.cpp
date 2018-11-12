@@ -82,9 +82,8 @@ int Sale_DB::getById(int id) {
 
 QList<ManagerActiveSalesStatisticDTO> Sale_DB::getManagerActiveSalesSatistic() {
 
-	//создаем строку с sql-запросом
-	QString sql = "select users.id, users.firstName, users.secondName, users.thirdName,	( select count(sales.isConfirmed) from sales, users where sales.manager_id = users.id AND sales.isActive = 1 AND sales.isConfirmed = 1) as confrim, count(sales.isConfirmed) as unconfirm from users, sales where sales.manager_id = users.id AND sales.isActive = 1 AND sales.isConfirmed = 0;";
-
+	//получаем id
+	QString sql = "select users.id from users, sales where sales.manager_id = users.id AND sales.isActive = 1 group by users.id;";
 	QSqlQuery query( this->_db);
 	query.prepare(sql);
 
@@ -94,7 +93,30 @@ QList<ManagerActiveSalesStatisticDTO> Sale_DB::getManagerActiveSalesSatistic() {
 
 	while( query.next() ) {
 	
-		result.append( this->readToDTO(query) );
+		//получаем список всех
+		QString sql2 = "select users.id, users.firstName, users.secondName, users.thirdName, sales.isConfirmed from users, sales where sales.manager_id = users.id AND sales.isActive = 1 AND users.id = :id";
+
+		QSqlQuery query2( this->_db);
+		query2.prepare(sql2);
+		query2.bindValue(":id", query.value("id").value<int>());
+
+		this->execQuery( query2);
+		
+		query2.next();
+		result.append( this->readToDTO(query2) );
+
+		while ( query2.next() ) {
+			
+			int i = query2.value("isConfirmed").value<int>();
+
+			if( i == 0) {
+
+				result.last().unconfirmCount += 1;
+			} else {
+			
+				result.last().confirmCount += 1;
+			}
+		}
 	}
 
 	return result;
@@ -119,6 +141,26 @@ QList<ActiveSaleDTO> Sale_DB::getActiveSales() {
 	return result;
 }
 
+QList<ActiveSaleDTO> Sale_DB::getActiveSalesForManager( int managerId) {
+
+	//создаем строку с sql-запросом
+	QString sql = "select users.firstName, users.secondName, users.thirdName, sales.*, products.name, products.commission from sales, users, products where sales.manager_id = users.id AND sales.product_id = products.id AND sales.isActive = 1 AND users.id = :id";
+	QSqlQuery query( this->_db);
+	query.prepare(sql);
+	query.bindValue(":id", managerId);
+
+	this->execQuery( query);
+
+	QList<ActiveSaleDTO> result;
+
+	while( query.next() ) {
+	
+		result.append( this->readActiveSalesToDTO(query) );
+	}
+
+	return result;
+}
+
 ManagerActiveSalesStatisticDTO Sale_DB::readToDTO( const QSqlQuery& query) {
 
 	struct ManagerActiveSalesStatisticDTO result;
@@ -127,8 +169,16 @@ ManagerActiveSalesStatisticDTO Sale_DB::readToDTO( const QSqlQuery& query) {
 	result.managerName = query.value("secondName").value<QString>() + " " +
 						 query.value("firstName").value<QString>() + " " +
 						 query.value("thirdName").value<QString>();
-	result.confirmCount = query.value("confirm").value<int>();
-	result.unconfirmCount = query.value("unconfirm").value<int>();
+	int i = query.value("isConfirmed").value<int>();
+	if ( i == 0 ) {
+	
+		result.confirmCount = 0;
+		result.unconfirmCount = 1;
+	} else {
+	
+		result.confirmCount = 1;
+		result.unconfirmCount = 0;
+	}
 
 	return result;
 }

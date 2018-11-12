@@ -32,6 +32,7 @@ public:
 protected slots:
 
 	void dateChanged();
+	void showManagersSales();
 
 protected:
 
@@ -50,7 +51,6 @@ protected:
 	void updateUnconfirmedTable();
 	void updateConfirmedTable();
 	
-
 private:
 	ErrorMessageHandler* errorHandler;
 
@@ -67,4 +67,7 @@ private:
 
 	void deleteConfirmSalesFromList( QList<ActiveSaleDTO>& list);
 	void deleteUnconfirmSalesFromList( QList<ActiveSaleDTO>& list);
+
+	void viewSelectedManagerUnconfirmedSales(int id);
+	void viewSelectedManagerConfirmedSales(int id);
 };
