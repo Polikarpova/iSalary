@@ -19,7 +19,7 @@ void SalaryPage::setErrorHandler( ErrorMessageHandler* errorHandler) {
     this->errorHandler = errorHandler;
 }
 
- void SalaryPage::setUI( QComboBox* salaryAccountingPeriod, QTableView* salaryTable, QTableView* salaryTotalTable, QLabel* managerFIOLabel, QSpinBox* salaryPasportSeries,
+void SalaryPage::setUI( QComboBox* salaryAccountingPeriod, QTableView* salaryTable, QTableView* salaryTotalTable, QLabel* managerFIOLabel, QSpinBox* salaryPasportSeries,
 				QSpinBox* salaryPasportNumber, QLineEdit* salaryPasportSourse, QDateEdit* salaryDateOfReceipt, QRadioButton* salaryMaleRButton, QRadioButton* salaryFemaleRButton,
 				QLineEdit* salaryINN, QPushButton* closeAccountingPeriod, QPushButton* salesButton, QPushButton* dataButton) {
  
@@ -36,7 +36,7 @@ void SalaryPage::setErrorHandler( ErrorMessageHandler* errorHandler) {
 	this->salaryINN = salaryINN;
 	this->salesButton = salesButton;
 	this->dataButton = dataButton;
-	//инифиализировать форму
+	//инициализировать форму (кнопочки заблокируем)
 
 	this->closeAccountingPeriod = closeAccountingPeriod;
 	//инициализировать кнопку
@@ -46,36 +46,41 @@ void SalaryPage::setErrorHandler( ErrorMessageHandler* errorHandler) {
 	this->initSalaryTotalTable( salaryTotalTable); 
  }
 
- void SalaryPage::initSalaryTable (QTableView* salaryTable) {
+void SalaryPage::initSalaryTable (QTableView* salaryTable) {
 	
-	////настройки таблиц
-	//this->managersSalesTable = managersSalesTable;
-	//auto model = new ManagersSalesTableModel();
-	//this->managersSalesTable->setModel( model);
+	//настройки таблиц
+	this->salaryTable = salaryTable;
+	auto model = new SalaryTableModel();
+	this->salaryTable->setModel( model);
 
-	//this->managersSalesTable->horizontalHeader()->setStretchLastSection(true);
-	//this->managersSalesTable->setSelectionBehavior( QAbstractItemView::SelectRows);
-	//this->managersSalesTable->setSelectionMode( QAbstractItemView::SingleSelection);
+	this->salaryTable->horizontalHeader()->setStretchLastSection(true);
+	this->salaryTable->setSelectionBehavior( QAbstractItemView::SelectRows);
+	this->salaryTable->setSelectionMode( QAbstractItemView::SingleSelection);
 
-	////скрытие поля с id
-	//this->managersSalesTable->setColumnHidden( ManagersSalesTableModel::COLUMN_ID, true);
+	//скрытие поля с id
+	this->salaryTable->setColumnHidden( SalaryTableModel::COLUMN_ID, true);
 
-	//connect( this->managersSalesTable, &QTableView::clicked, this, &SalesPage::showManagersSales);
+	connect( this->salaryTable, &QTableView::clicked, this, &SalaryPage::showManager);
 }
 
- void SalaryPage::initSalaryTotalTable (QTableView* salaryTotalTable) {
+void SalaryPage::initSalaryTotalTable (QTableView* salaryTotalTable) {
 	
-	////настройки таблиц
-	//this->managersSalesTable = managersSalesTable;
-	//auto model = new ManagersSalesTableModel();
-	//this->managersSalesTable->setModel( model);
+	//настройки таблиц
+	this->salaryTotalTable = salaryTotalTable;
+	auto model = new SalaryTotalTableModel();
+	this->salaryTotalTable->setModel( model);
 
-	//this->managersSalesTable->horizontalHeader()->setStretchLastSection(true);
-	//this->managersSalesTable->setSelectionBehavior( QAbstractItemView::SelectRows);
-	//this->managersSalesTable->setSelectionMode( QAbstractItemView::SingleSelection);
+	this->salaryTotalTable->horizontalHeader()->setStretchLastSection(true);
+	this->salaryTotalTable->setSelectionBehavior( QAbstractItemView::SelectRows);
+	this->salaryTotalTable->setSelectionMode( QAbstractItemView::SingleSelection);
 
-	////скрытие поля с id
-	//this->managersSalesTable->setColumnHidden( ManagersSalesTableModel::COLUMN_ID, true);
+	//скрытие поля с id
+	this->salaryTotalTable->setColumnHidden( SalaryTotalTableModel::COLUMN_ID, true);
+}
 
-	//connect( this->managersSalesTable, &QTableView::clicked, this, &SalesPage::showManagersSales);
+//====SLOTS====//
+void SalaryPage::showManager() {
+
+	//заполнить поля в форме
+	//настроить кнопочкам property, чтоб перенаправляли, но на 1ый релиз их мы не делаем
 }

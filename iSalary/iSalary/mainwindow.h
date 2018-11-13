@@ -114,6 +114,8 @@ private slots:
 
 	void searchManagersProductTable();
 	void addSale();
+
+	void exit();
 };
 
 #endif // MAINWINDOW_H

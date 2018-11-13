@@ -5,6 +5,8 @@
 #include "AccoutingPeriodDB.h"
 #include "ActiveSaleDTO.h"
 #include "ManagerActiveSalesStatisticDTO.h"
+#include "ManagerSalaryDTO.h"
+#include <qdatetime.h>
 
 /**
 * Класс, предоставляющий доступ к функциям приложения, связанным с продажами
@@ -46,6 +48,13 @@ public:
 	* @return список со статистикой на каждого менеджера
 	*/
 	QList<ManagerActiveSalesStatisticDTO> getActiveSalesStatistic( QDate date);
+
+	/**
+	* Возвращает список всех за определенный период
+	* @param dateFrom - начала периода
+	* @param dateTo - конец периода
+	*/
+	QList<ManagerSalaryDTO> getManagersSalary( QDate dateFrom, QDate dateTo);
 
 private:
 

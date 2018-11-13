@@ -18,6 +18,8 @@
 #include "ActiveSaleDTO.h"
 #include "ManagerActiveSalesStatisticDTO.h"
 
+#include "SalaryTableModel.h"
+#include "SalaryTotalTableModel.h"
 #include <qheaderview.h>
 #include <qmodelindex>
 #include <qabstractitemview.h>
@@ -36,6 +38,8 @@ public:
 	void setErrorHandler( ErrorMessageHandler* errorHandler);
 
 protected slots:
+
+	void showManager();
 
 protected:
 

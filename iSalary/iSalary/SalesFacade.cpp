@@ -38,3 +38,17 @@ QList<ManagerActiveSalesStatisticDTO> SalesFacade::getActiveSalesStatistic( QDat
 
 	return this->s->getManagerActiveSalesSatistic();
 }
+
+QList<ManagerSalaryDTO> SalesFacade::getManagersSalary( QDate dateFrom, QDate dateTo) {
+
+	QList<ManagerSalaryDTO> result;
+
+	//от userDB получить все id менеджеров
+	//  V
+	//(Цикл)от salesDB получить по каждому юзеру список всех его подтвержденных продаж в данный рассчетный период (цена, количество, комиссия за товар) SaleDTO
+	//  V
+	//(Цикл)Посчитать для каждого юзера сумму прибыли и з/п (отдельно с комиссией) ManagerSalaryDTO
+	//  V
+
+	return result;
+}

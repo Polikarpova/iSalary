@@ -72,6 +72,8 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
 
     connect(this->authPage, &AuthPage::userLoggedIn, this, &MainWindow::enterProgram);
 
+	connect( ui.quitButton, &QPushButton::clicked, this, &MainWindow::exit);
+
 	auto drivers =  QSqlDatabase::drivers();
 	QString mes = "";
 
@@ -327,7 +329,8 @@ void MainWindow::clearManagersProductsTable() {
 
 void MainWindow::fillManagersProductTable() {
     clearManagersProductsTable();
-	
+	ui.productComboBox->clear();
+
 	auto _products = product_db -> getAll();
 
     for ( int idx = 0; idx < _products.size(); idx++) {
@@ -503,6 +506,11 @@ void MainWindow::searchProduct() {
 	} else {
 		fillProducts();
 	}
+}
+
+void MainWindow::exit(){
+	QMessageBox::critical(this, "Прощай","Был пацан - нет пацана");
+	ui.auth_program_stackedWidget->setCurrentIndex( AUTH_WIDGET);
 }
 
 MainWindow::~MainWindow() {

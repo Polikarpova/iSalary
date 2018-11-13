@@ -21,16 +21,16 @@ void AuthPage::userTryLogIn(){
     QString password = this->passwordInput->text();
 
     if( login.isEmpty()) {
-        this->showLogInError( "¬ведите логин");
+		this->showLogInError( QString::fromWCharArray( L"¬ведите логин"));
     } else if ( password.isEmpty()) {
-        this->showLogInError( "¬ведите пароль");
+        this->showLogInError( QString::fromWCharArray( L"¬ведите пароль"));
     } else {
         SignInResultDTO signInRes = this->authFacade->signIn(login, password);
         if( signInRes.success) {
 			this->currentUser = signInRes;
             emit this->userLoggedIn( signInRes.user, signInRes.userType);
         } else {
-            this->showLogInError( "Ћогин или пароль неверны");
+            this->showLogInError( QString::fromWCharArray( L"Ћогин или пароль неверны"));
         }
     }
     
