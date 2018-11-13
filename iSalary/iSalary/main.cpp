@@ -61,12 +61,12 @@ int main(int argc, char *argv[])
 
     Sale_DB * saleDB = new Sale_DB( sqlDB, QString("sales"));
 	SalesFacade * salesFacade = new SalesFacade(&managerDB, saleDB);
-    SalesPage salesPage(salesFacade);
+    //SalesPage salesPage(salesFacade);
 
     MainWindow w( 
 		&authPage, 
 		&employeesPage, 
-		&salesPage, 
+		NULL,//&salesPage, 
 		productPage,
 		managerPage
 	);

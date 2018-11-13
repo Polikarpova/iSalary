@@ -269,6 +269,15 @@
     <ClCompile Include="Employer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PersonalAccountingFacade.cpp">
+      <Filter>Source Files\Model\DomainModel\ModelFacade</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_SalesPage.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SalesPage.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -315,13 +324,7 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GeneratedFiles\ui_mainwindow.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
     <ClInclude Include="AuthorizationModule.h">
-      <Filter>Header Files\Model\DomainModel\AuthorizationModule</Filter>
-    </ClInclude>
-    <ClInclude Include="IUserRepository.h">
       <Filter>Header Files\Model\DomainModel\AuthorizationModule</Filter>
     </ClInclude>
     <ClInclude Include="SignResult.h">
@@ -342,25 +345,10 @@
     <ClInclude Include="UserDTO.h">
       <Filter>Header Files\Model\DomainModel\ModelFacade</Filter>
     </ClInclude>
-    <ClInclude Include="SignResultDTO.h">
-      <Filter>Header Files\Model\DomainModel\ModelFacade</Filter>
-    </ClInclude>
     <ClInclude Include="AccoutingPeriodDB.h">
       <Filter>Header Files\Model\DB</Filter>
     </ClInclude>
-    <ClInclude Include="Salary.h">
-      <Filter>Header Files\Model\DomainModel\SalesModule</Filter>
-    </ClInclude>
     <ClInclude Include="AccoutingPeriod.h">
-      <Filter>Header Files\Model\DomainModel\SalesModule</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenAccoutingPeriod.h">
-      <Filter>Header Files\Model\DomainModel\SalesModule</Filter>
-    </ClInclude>
-    <ClInclude Include="ClosedSale.h">
-      <Filter>Header Files\Model\DomainModel\SalesModule</Filter>
-    </ClInclude>
-    <ClInclude Include="CloseAccoutingPeriod.h">
       <Filter>Header Files\Model\DomainModel\SalesModule</Filter>
     </ClInclude>
     <ClInclude Include="Product.h">
@@ -371,12 +359,6 @@
     </ClInclude>
     <ClInclude Include="ActiveSale.h">
       <Filter>Header Files\Model\DomainModel\SalesModule</Filter>
-    </ClInclude>
-    <ClInclude Include="Sale.h">
-      <Filter>Header Files\Model\DomainModel\SalesModule</Filter>
-    </ClInclude>
-    <ClInclude Include="Product_DB.h">
-      <Filter>Header Files\Model\DB</Filter>
     </ClInclude>
     <ClInclude Include="ManagerDB.h">
       <Filter>Header Files\Model\DB</Filter>
@@ -431,6 +413,12 @@
     </ClInclude>
     <ClInclude Include="Employer.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SignResult.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClosedSale.h">
+      <Filter>Header Files\Model\DomainModel\SalesModule</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

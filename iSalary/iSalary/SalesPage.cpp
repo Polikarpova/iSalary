@@ -261,3 +261,4 @@ void SalesPage::dateChanged() {
 
 	this->updateManagersTable();
 }
+

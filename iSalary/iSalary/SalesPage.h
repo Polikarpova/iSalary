@@ -18,11 +18,16 @@
 #include <qmodelindex>
 #include <qabstractitemview.h>
 
-class SalesPage : public QObject{
+class SalesPage : public QObject {
     Q_OBJECT
 public:
     SalesPage( SalesFacade * salesFacade);
-    void setUI( QDateEdit* salesDateInput, QTableView* managersSalesTable, QTableView* unconfirmedSalesTable, QTableView* confirmedSalesTable);
+    void setUI( 
+		QDateEdit* salesDateInput, 
+		QTableView* managersSalesTable, 
+		QTableView* unconfirmedSalesTable, 
+		QTableView* confirmedSalesTable
+	);
     ~SalesPage( void);
 
 	void refreshPage();

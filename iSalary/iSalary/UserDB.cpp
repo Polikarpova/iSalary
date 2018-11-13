@@ -185,7 +185,7 @@ void UserDB::handleError( const QSqlError& error) const {
 
 void UserDB::handleError( const QString& error) const {
     QString err = error;
-    throw err;
+    throw new QString(err);
 }
 
 void UserDB::execQuery( QSqlQuery& query) const {

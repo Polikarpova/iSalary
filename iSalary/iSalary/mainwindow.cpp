@@ -67,9 +67,9 @@ MainWindow::MainWindow(
     for ( auto it = drivers.begin(); it != drivers.end(); it++ )
         mes += *it + "\n";
 
-	this->salesPage = salesPage;
-	this->salesPage->setUI(ui.salesDateInput, ui.managersSalesTable, ui.unconfirmedSalesTable, ui.confirmedSalesTable);
-	this->salesPage->setErrorHandler( errorHandler);
+	//this->salesPage = salesPage;
+	//this->salesPage->setUI(ui.salesDateInput, ui.managersSalesTable, ui.unconfirmedSalesTable, ui.confirmedSalesTable);
+	//this->salesPage->setErrorHandler( errorHandler);
 }
 
 void MainWindow::enterProgram( const UserDTO& user, UserType userType){
