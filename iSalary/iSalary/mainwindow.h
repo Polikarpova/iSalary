@@ -12,12 +12,17 @@
 #include "Codec.h"
 
 #include "AuthPage.h"
+#include "ProductPage.h"
+#include "ManagerPage.h"
 #include "EmployeesPage.h"
 #include "SalesPage.h"
 #include "SalaryPage.h"
 
 #include "Product_DB.h"
 #include "Product.h"
+#include "Sale_DB.h"
+#include "ActiveSale.h"
+#include "ClosedSale.h"
 #include "QStandardItemModel"
 #include "QStandardItem"
 
@@ -46,7 +51,15 @@ class MainWindow : public QMainWindow
 	Q_OBJECT
 
 public:
-	MainWindow(AuthPage* authPage, EmployeesPage* employeesPage, SalesPage* salesPage, SalaryPage* salaryPage, QWidget *parent = 0);
+	MainWindow(
+		AuthPage* authPage,
+		EmployeesPage* employeesPage,
+		SalesPage* salesPage,
+		SalaryPage* salaryPage,
+		ProductPage *productPage, 
+		ManagerPage *managerPage, 
+		QWidget *parent = 0
+	);
 	~MainWindow();
 
 private:
@@ -58,6 +71,8 @@ private:
 	SalesPage* salesPage;
     EmployeesPage* employeesPage;
 	SalaryPage* salaryPage;
+	ProductPage *productPage;
+	ManagerPage *managerPage;
 
 	int current_user_id;
     ErrorMessageHandler* errorHandler;
@@ -77,43 +92,7 @@ private:
 
     void refreshBossPage( int page);
 
-	Product_DB * product_db;
-	QHash <int, Product> products;
-	QStandardItemModel *productsTableModel;
-	enum StatusType {DEFAULT, ADD_PRODUCT, UPDATE_PRODUCT};
-	StatusType status;  
-
-	void initProductWindow();
-	void setInputsEnabledPageProducts( bool isEnabled );
-	void clearInputsPageProducts();
-	void fillProduct( Product & product );
-	void fillProducts();
-	void clearTable();
-
-	Sale_DB * sale_db;
-	QHash <int, ActiveSale> sales;
-	QStandardItemModel *unconfirmedSalesTableModel, *confirmedSalesTableModel;
-	void initManagerWindow();
-	void updateManagerWindow();
-	void fillManagersProductTable();
-	void clearManagersProductsTable();
-	void fillSale( ActiveSale & sale );
-	void fillManagersUnconfirmedSalesTable();
-	void clearManagersUnconfirmedSalesTable();
-	void fillManagersConfirmedSalesTable();
-	void clearManagersConfirmedSalesTable();
-
 private slots:
-	void directAddProduct();
-	void addProduct();
-	void directUpdateProduct();
-	void updateProduct();
-	void showProduct();
-	void removeProduct();
-	void searchProduct();
-
-	void searchManagersProductTable();
-	void addSale();
 
 	void exit();
 };

@@ -289,16 +289,16 @@ public:
     QPushButton *addSaleButton;
     QDoubleSpinBox *priceSale;
     QLabel *label_30;
-    QTableView *confirmedSales;
+    QTableView *managerConfirmedSalesTable;
     QLabel *label_31;
-    QTableView *unconfirmedSales;
+    QTableView *managerUnconfirmedSalesTable;
     QVBoxLayout *verticalLayout_9;
     QLabel *label_23;
     QHBoxLayout *horizontalLayout_22;
     QLineEdit *managerProductSearch;
     QPushButton *managerProductSearchButton;
     QSpacerItem *horizontalSpacer_5;
-    QTableView *managersProductTable;
+    QTableView *managerProductTable;
     QHBoxLayout *horizontalLayout_13;
     QPushButton *quitButton;
     QSpacerItem *horizontalSpacer;
@@ -1701,10 +1701,10 @@ public:
 
         verticalLayout_10->addWidget(label_30);
 
-        confirmedSales = new QTableView(manager);
-        confirmedSales->setObjectName(QStringLiteral("confirmedSales"));
+        managerConfirmedSalesTable = new QTableView(manager);
+        managerConfirmedSalesTable->setObjectName(QStringLiteral("managerConfirmedSalesTable"));
 
-        verticalLayout_10->addWidget(confirmedSales);
+        verticalLayout_10->addWidget(managerConfirmedSalesTable);
 
         label_31 = new QLabel(manager);
         label_31->setObjectName(QStringLiteral("label_31"));
@@ -1712,10 +1712,10 @@ public:
 
         verticalLayout_10->addWidget(label_31);
 
-        unconfirmedSales = new QTableView(manager);
-        unconfirmedSales->setObjectName(QStringLiteral("unconfirmedSales"));
+        managerUnconfirmedSalesTable = new QTableView(manager);
+        managerUnconfirmedSalesTable->setObjectName(QStringLiteral("managerUnconfirmedSalesTable"));
 
-        verticalLayout_10->addWidget(unconfirmedSales);
+        verticalLayout_10->addWidget(managerUnconfirmedSalesTable);
 
 
         horizontalLayout_24->addLayout(verticalLayout_10);
@@ -1751,10 +1751,10 @@ public:
 
         verticalLayout_9->addLayout(horizontalLayout_22);
 
-        managersProductTable = new QTableView(manager);
-        managersProductTable->setObjectName(QStringLiteral("managersProductTable"));
+        managerProductTable = new QTableView(manager);
+        managerProductTable->setObjectName(QStringLiteral("managerProductTable"));
 
-        verticalLayout_9->addWidget(managersProductTable);
+        verticalLayout_9->addWidget(managerProductTable);
 
 
         horizontalLayout_24->addLayout(verticalLayout_9);
@@ -1866,14 +1866,14 @@ public:
         QWidget::setTabOrder(salesButton, dataButton);
         QWidget::setTabOrder(dataButton, currentSalary);
         QWidget::setTabOrder(currentSalary, productComboBox);
-        QWidget::setTabOrder(productComboBox, confirmedSales);
-        QWidget::setTabOrder(confirmedSales, unconfirmedSales);
-        QWidget::setTabOrder(unconfirmedSales, managersProductTable);
-        QWidget::setTabOrder(managersProductTable, quitButton);
+        QWidget::setTabOrder(productComboBox, managerConfirmedSalesTable);
+        QWidget::setTabOrder(managerConfirmedSalesTable, managerUnconfirmedSalesTable);
+        QWidget::setTabOrder(managerUnconfirmedSalesTable, managerProductTable);
+        QWidget::setTabOrder(managerProductTable, quitButton);
 
         retranslateUi(MainWindowClass);
 
-        auth_program_stackedWidget->setCurrentIndex(0);
+        auth_program_stackedWidget->setCurrentIndex(1);
         boss_manager_stackedWidget->setCurrentIndex(1);
         tabWidget->setCurrentIndex(2);
         managersDataTab->setCurrentIndex(0);

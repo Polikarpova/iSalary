@@ -16,8 +16,10 @@
 #include "EmployeesPage.h"
 #include "SalesPage.h"
 #include "SalaryPage.h"
+#include "ProductPage.h"
+#include "ManagerPage.h"
 
-#include "test_userdb.h"
+#include "Test\Test.h"
 
 int main(int argc, char *argv[])
 {
@@ -28,6 +30,10 @@ int main(int argc, char *argv[])
 	sqlDB= QSqlDatabase::addDatabase( "QMYSQL");
 	sqlDB.setHostName( "127.0.0.1");
     sqlDB.setPort( 3306);
+
+	Test test = Test(sqlDB);
+	test.startTesting();
+
     sqlDB.setDatabaseName( "mdkp");
     sqlDB.setUserName( "root");
     sqlDB.setPassword( "root");
@@ -60,7 +66,21 @@ int main(int argc, char *argv[])
 
 	SalaryPage salaryPage(&salesFacade, &personnalAccountingFacade);
 
-    MainWindow w( &authPage, &employeesPage, &salesPage, &salaryPage);
+	Product_DB product_DB( sqlDB, "products" );
+	ProductFacade productFacade( &product_DB );
+	ProductPage productPage( &productFacade );
+
+	SaleFacade saleFacade( &saleDB );
+	ManagerPage managerPage( &productFacade, &saleFacade );
+
+    MainWindow w( 
+		&authPage,
+		&employeesPage,
+		&salesPage,
+		&salaryPage,
+		&productPage,
+		&managerPage
+	);
 	
 	w.show();
     

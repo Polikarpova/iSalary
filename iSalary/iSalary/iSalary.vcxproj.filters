@@ -188,15 +188,6 @@
     <ClCompile Include="PersonnalAccountingFacade.cpp">
       <Filter>Source Files\Model\DomainModel\ModelFacade</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_test_userdb.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_test_userdb.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="test_userdb.cpp">
-      <Filter>Source Files\Test</Filter>
-    </ClCompile>
     <ClCompile Include="SalesPage.cpp">
       <Filter>Source Files\View</Filter>
     </ClCompile>
@@ -208,6 +199,105 @@
     </ClCompile>
     <ClCompile Include="Codec.cpp">
       <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ManagersSalesTableModel.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ManagersSalesTableModel.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagersSalesTableModel.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_UnconfirmedSalesTableModel.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_UnconfirmedSalesTableModel.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="UnconfirmedSalesTableModel.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ConfirmedSalesTableModel.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ConfirmedSalesTableModel.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfirmedSalesTableModel.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_SalaryPage.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SalaryPage.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="SalaryPage.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="SalaryTableModel.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_SalaryTableModel.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SalaryTableModel.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="SalaryTotalTableModel.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_SalaryTotalTableModel.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SalaryTotalTableModel.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagerPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ManagerPage.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ManagerPage.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="ProductFacade.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProductPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ProductPage.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ProductPage.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="SaleFacade.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_test_product_db.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_test_product_db.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_test_user_db.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_test_user_db.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Test\Test.cpp">
+      <Filter>Source Files\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Test\test_product_db.cpp">
+      <Filter>Source Files\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Test\test_user_db.cpp">
+      <Filter>Source Files\Test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -229,11 +319,38 @@
     <CustomBuild Include="EmployeesTableModel.h">
       <Filter>Header Files\View</Filter>
     </CustomBuild>
-    <CustomBuild Include="test_userdb.h">
-      <Filter>Header Files\Test</Filter>
-    </CustomBuild>
     <CustomBuild Include="SalesPage.h">
       <Filter>Header Files\View</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ManagersSalesTableModel.h">
+      <Filter>Header Files\View</Filter>
+    </CustomBuild>
+    <CustomBuild Include="UnconfirmedSalesTableModel.h">
+      <Filter>Header Files\View</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ConfirmedSalesTableModel.h">
+      <Filter>Header Files\View</Filter>
+    </CustomBuild>
+    <CustomBuild Include="SalaryPage.h">
+      <Filter>Header Files\View</Filter>
+    </CustomBuild>
+    <CustomBuild Include="SalaryTableModel.h">
+      <Filter>Header Files\View</Filter>
+    </CustomBuild>
+    <CustomBuild Include="SalaryTotalTableModel.h">
+      <Filter>Header Files\View</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ManagerPage.h">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ProductPage.h">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Test\test_product_db.h">
+      <Filter>Header Files\Test</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Test\test_user_db.h">
+      <Filter>Header Files\Test</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -335,6 +452,36 @@
     </ClInclude>
     <ClInclude Include="Codec.h">
       <Filter>Source Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagerSalesStatisticDTO.h">
+      <Filter>Header Files\Model\ModelFacade</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagerActiveSalesStatisticDTO.h">
+      <Filter>Header Files\Model\ModelFacade</Filter>
+    </ClInclude>
+    <ClInclude Include="AccoutingPeriodDTO.h">
+      <Filter>Header Files\Model\ModelFacade</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagerSalaryDTO.h">
+      <Filter>Header Files\Model\ModelFacade</Filter>
+    </ClInclude>
+    <ClInclude Include="SaleInfoDTO.h">
+      <Filter>Header Files\Model\ModelFacade</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagerDTO.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ProductFacade.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SaleDTO.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SaleFacade.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\Test.h">
+      <Filter>Header Files\Test</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

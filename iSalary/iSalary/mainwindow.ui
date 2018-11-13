@@ -21,7 +21,7 @@
     <item>
      <widget class="QStackedWidget" name="auth_program_stackedWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="enter">
        <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -2117,7 +2117,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QTableView" name="confirmedSales"/>
+               <widget class="QTableView" name="managerConfirmedSalesTable"/>
               </item>
               <item>
                <widget class="QLabel" name="label_31">
@@ -2130,7 +2130,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QTableView" name="unconfirmedSales"/>
+               <widget class="QTableView" name="managerUnconfirmedSalesTable"/>
               </item>
              </layout>
             </item>
@@ -2191,7 +2191,7 @@
                </layout>
               </item>
               <item>
-               <widget class="QTableView" name="managersProductTable"/>
+               <widget class="QTableView" name="managerProductTable"/>
               </item>
              </layout>
             </item>
@@ -2330,9 +2330,9 @@
   <tabstop>dataButton</tabstop>
   <tabstop>currentSalary</tabstop>
   <tabstop>productComboBox</tabstop>
-  <tabstop>confirmedSales</tabstop>
-  <tabstop>unconfirmedSales</tabstop>
-  <tabstop>managersProductTable</tabstop>
+  <tabstop>managerConfirmedSalesTable</tabstop>
+  <tabstop>managerUnconfirmedSalesTable</tabstop>
+  <tabstop>managerProductTable</tabstop>
   <tabstop>quitButton</tabstop>
  </tabstops>
  <resources>

@@ -19,7 +19,8 @@ public:
 	Sale_DB( QSqlDatabase &db, QString table_name );
 	~Sale_DB(void);
 	void init();
-	void create( ActiveSale sale );
+	bool create( ActiveSale sale );
+	bool remove( int id );
 	void fillSale( ActiveSale & sale, const QSqlQuery * sqlQuery );
 	QVector<ActiveSale> getActiveAll( int manager_id );
 	
