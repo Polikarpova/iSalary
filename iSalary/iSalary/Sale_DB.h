@@ -12,6 +12,7 @@
 #include <qlist.h>
 #include "ManagerActiveSalesStatisticDTO.h"
 #include "ActiveSaleDTO.h"
+#include "SaleInfoDTO.h"
 
 class Sale_DB
 {
@@ -35,6 +36,15 @@ public:
 	QList<ActiveSaleDTO> getActiveSales();
 	QList<ActiveSaleDTO> getActiveSalesForManager( int managerId);
 	QList<ManagerActiveSalesStatisticDTO> getManagerActiveSalesSatistic();
+
+	/**
+	* Возвращает информацию о продажах, которые были подтверждены в определенный период времени
+	* @param id - идентификатор менеджера
+	* @param from - дата начала периода (включая её)
+	* @param to - дата окончания периода (включая её)
+	* @return список с продажами или пустой список, если ничего не найдено
+	*/
+	QList<SaleInfoDTO> getSalesConfimedFromPeriod( int id, QDate from, QDate to);
 
 	void confirmSale( int id);
 	void unconfirmSale( int id);

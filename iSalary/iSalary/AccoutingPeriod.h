@@ -22,9 +22,13 @@ public:
 
 	/**
     * Конструктор.
-    * @param database - экземпляр уже настроенной QSqlDatabase
     */
     AccoutingPeriod( void);
+
+	/**
+	* Деструктор
+	*/
+	virtual ~AccoutingPeriod() = 0 {}
 
 	/**
 	* Считает зарплату для одного менеджера
@@ -32,4 +36,9 @@ public:
 	* @return - объект с информацией о зарплате в за определённый расчетный период
 	*/
     Salary calcSalary( Manager& m);
+
+private:
+
+	int id;	/**< id расчетного периода */
+	QDate dateFrom;	/**< дата открытия */
 };

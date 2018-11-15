@@ -59,6 +59,12 @@ public:
     */
     bool findByPassport( const QString& passportSerial, const QString passportNumber, Manager* manager) override;
 
+	/**
+	* Возвращает список с id и именами всех нанятых менеджеров
+	* @return список менеджеров или пустой список если ни одно менеджера не найдено
+	*/
+	QList<QPair<int, QString> > getAllIdAndName();
+
 private:
     QSqlDatabase* db;       /**<        */
     UserDB* userDB;

@@ -24,7 +24,7 @@ void SalaryPage::setUI( QComboBox* salaryAccountingPeriod, QTableView* salaryTab
 				QLineEdit* salaryINN, QPushButton* closeAccountingPeriod, QPushButton* salesButton, QPushButton* dataButton) {
  
 	this->salaryAccountingPeriod = salaryAccountingPeriod; 
-	//инициализировать комбобокс
+	this->initComboBox();
 
 	this->managerFIOLabel = managerFIOLabel; 
 	this->salaryPasportSeries = salaryPasportSeries; 
@@ -39,12 +39,41 @@ void SalaryPage::setUI( QComboBox* salaryAccountingPeriod, QTableView* salaryTab
 	//инициализировать форму (кнопочки заблокируем)
 
 	this->closeAccountingPeriod = closeAccountingPeriod;
-	//инициализировать кнопку
+	this->closeAccountingPeriod->hide();
 
 	//инициализируем таблички
 	this->initSalaryTable( salaryTable); 
 	this->initSalaryTotalTable( salaryTotalTable); 
  }
+
+void SalaryPage::initComboBox() {
+
+	QList<AccoutingPeriodDTO> list = this->salesFacade->getAllAccoutingPeriods();
+
+	QMutableListIterator<AccoutingPeriodDTO> i(list);
+	i.toBack();
+	int k = 0;
+	while (i.hasPrevious()) {
+		i.previous();
+		QString str = "C " + i.value().dateFrom.toString(Qt::ISODate) + QString::fromWCharArray( L" по ");
+
+		if ( i.value().dateTo.isNull() ) {
+		
+			str += QDate::currentDate().toString(Qt::ISODate);
+		} else {
+		
+			str += i.value().dateTo.toString(Qt::ISODate);
+		}
+
+		this->salaryAccountingPeriod->addItem(str);
+		this->comboBoxMap.insert(k, i.value().id);
+		k++;
+	}
+
+	connect(this->salaryAccountingPeriod, SIGNAL(currentIndexChanged(int)), this, SLOT(showSelectedPeriod()));
+
+	this->salaryAccountingPeriod->setCurrentIndex(0);
+}
 
 void SalaryPage::initSalaryTable (QTableView* salaryTable) {
 	
@@ -58,7 +87,7 @@ void SalaryPage::initSalaryTable (QTableView* salaryTable) {
 	this->salaryTable->setSelectionMode( QAbstractItemView::SingleSelection);
 
 	//скрытие поля с id
-	this->salaryTable->setColumnHidden( SalaryTableModel::COLUMN_ID, true);
+	//this->salaryTable->setColumnHidden( SalaryTableModel::COLUMN_ID, true);
 
 	connect( this->salaryTable, &QTableView::clicked, this, &SalaryPage::showManager);
 }
@@ -83,4 +112,10 @@ void SalaryPage::showManager() {
 
 	//заполнить поля в форме
 	//настроить кнопочкам property, чтоб перенаправляли, но на 1ый релиз их мы не делаем
+	QMessageBox::information(0, QString::fromWCharArray(L"Менеджер"), QString::fromWCharArray(L"Показываю инфу о менеджере справа"));
+}
+
+void SalaryPage::showSelectedPeriod() {
+	
+	QMessageBox::information(0, QString::fromWCharArray(L"Таблица"), QString::fromWCharArray(L"Показываю таблицу для выбранного РП"));
 }

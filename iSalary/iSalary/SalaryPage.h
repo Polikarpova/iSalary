@@ -40,8 +40,14 @@ public:
 protected slots:
 
 	void showManager();
+	void showSelectedPeriod();
 
 protected:
+
+	/**
+	* Инициализация выпадающего списка всеми периодами
+	*/
+	void initComboBox();
 
 	void initSalaryTable (QTableView* salaryTable);
 	void initSalaryTotalTable( QTableView* salaryTotalTable);
@@ -79,6 +85,8 @@ private:
 	QPushButton* closeAccountingPeriod;
 	QPushButton* salesButton;
 	QPushButton* dataButton;
+
+	QMap<int, int> comboBoxMap;
 
 	/*QHash<int, ActiveSaleDTO> unconfirmedSales;
 	QHash<int, ActiveSaleDTO> confirmedSales;
