@@ -59,7 +59,7 @@ void SalaryPage::initComboBox() {
 
 		if ( i.value().dateTo.isNull() ) {
 		
-			str += QDate::currentDate().toString(Qt::ISODate);
+			str += QDate::currentDate().toString(Qt::ISODate) + QString::fromWCharArray( L" {текущий}");
 		} else {
 		
 			str += i.value().dateTo.toString(Qt::ISODate);
