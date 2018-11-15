@@ -17,7 +17,7 @@ public:
     * @param[out] manager - Указатель, по которому будет записан переданный менеджер, если будет найден ( можно передать NULL)
     * @return удалось ли найти менеджера с таким ИНН
     */
-    virtual bool findByINN( const QString& INN, Manager* manager) = 0;
+    virtual QLinkedList<Manager> findByINN( const QString& INN) = 0;
 
     /**
     * Найти менеджера по ИНН
@@ -26,7 +26,7 @@ public:
     * @param[out] manager - Указатель, по которому будет записан переданный менеджер, если будет найден ( можно передать NULL)
     * @return удалось ли найти менеджера с таким ИНН
     */
-    virtual bool findByPassport( const QString& passportSerial, const QString passportNumber, Manager* manager) = 0;
+    virtual QLinkedList<Manager> findByPassport( const QString& passportSerial, const QString passportNumber) = 0;
     
     /**
     * Обновить запись о менеджере в БД, необходимо наличие хотя бы Пользователь с таким же id 

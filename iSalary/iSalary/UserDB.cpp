@@ -150,7 +150,7 @@ UserInfo UserDB::findByLoginPassword( const QString& login, const QString& passw
 }
 
 
-UserInfo UserDB::findByLogin( const QString& login) {
+QLinkedList<UserInfo> UserDB::findByLogin( const QString& login) {
     QSqlQuery query( *db);
 
     QString sql = "SELECT `%1`,`%2`,`%3`,`%4` FROM %0 WHERE `%2` = :%2 ";
@@ -166,13 +166,11 @@ UserInfo UserDB::findByLogin( const QString& login) {
     query.bindValue(":" + this->loginField, login);
 
     this->execQuery( query);
-    UserInfo userInfo;
-    if( query.next()) {
-        userInfo = this->readOneRecord(query);
-    } else { 
-		handleError("Пользователь не найден");
+    QLinkedList<UserInfo> userInfos;
+    while( query.next()){
+        userInfos.append( this->readOneRecord( query));
     }
-    return userInfo;
+    return userInfos;
 }
 
 

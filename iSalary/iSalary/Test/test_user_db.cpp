@@ -31,7 +31,7 @@ void Test_User_DB::insert() {
 	exp_user.user.setPassword( str );
 	exp_user.type = type;
 	exp_user.user = user_DB->insert( exp_user.user, exp_user.type);
-	UserInfo res_user = user_DB->findByLogin( exp_user.user.getLogin() );
+    UserInfo res_user = user_DB->findByLogin( exp_user.user.getLogin() ).first();
 	compareUsers( res_user, exp_user );
 	removeUser( exp_user.user.getId() );
 }
@@ -108,7 +108,7 @@ void Test_User_DB::findByLogin() {
 	exp_user.user.setPassword( str );
 	exp_user.type = type;
 	exp_user.user = user_DB->insert( exp_user.user, exp_user.type);
-	UserInfo res_user = user_DB->findByLogin( exp_user.user.getLogin() );
+    UserInfo res_user = user_DB->findByLogin( exp_user.user.getLogin() ).first();
 	compareUsers( res_user, exp_user );
 	removeUser( exp_user.user.getId() );
 }

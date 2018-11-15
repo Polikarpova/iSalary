@@ -48,7 +48,7 @@ public:
     * @param[out] manager - ˜˜˜˜˜˜˜˜˜, ˜˜ ˜˜˜˜˜˜˜˜ ˜˜˜˜˜ ˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜, ˜˜˜˜ ˜˜˜˜˜ ˜˜˜˜˜˜ ( ˜˜˜˜˜ ˜˜˜˜˜˜˜˜ NULL)
     * @return ˜˜˜˜˜˜˜ ˜˜ ˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜ ˜ ˜˜˜˜˜ ˜˜˜
     */
-    bool findByINN( const QString& INN, Manager* manager) override;
+    QLinkedList<Manager> findByINN( const QString& INN) override;
 
     /**
     * ˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜ ˜˜ ˜˜˜
@@ -57,7 +57,7 @@ public:
     * @param[out] manager - ˜˜˜˜˜˜˜˜˜, ˜˜ ˜˜˜˜˜˜˜˜ ˜˜˜˜˜ ˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜, ˜˜˜˜ ˜˜˜˜˜ ˜˜˜˜˜˜ ( ˜˜˜˜˜ ˜˜˜˜˜˜˜˜ NULL)
     * @return ˜˜˜˜˜˜˜ ˜˜ ˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜ ˜ ˜˜˜˜˜ ˜˜˜
     */
-    bool findByPassport( const QString& passportSerial, const QString passportNumber, Manager* manager) override;
+    QLinkedList<Manager> findByPassport( const QString& passportSerial, const QString passportNumber) override;
 
 private:
     QSqlDatabase* db;       /**< ˜˜˜˜˜˜˜˜˜ ˜˜ ˜ ˜˜˜˜˜˜˜ ˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜ */

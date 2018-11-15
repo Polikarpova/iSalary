@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 	Test test = Test(sqlDB);
 	test.startTesting();
 
-    sqlDB.setDatabaseName( "mdkp");
+    sqlDB.setDatabaseName( "test");
     sqlDB.setUserName( "root");
     sqlDB.setPassword( "root");
     bool isOpen = sqlDB.open();

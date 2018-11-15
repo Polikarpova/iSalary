@@ -10,18 +10,17 @@ UserValidator::~UserValidator(void){
 }
 
 bool UserValidator::isUserValid( const User& user, QString* errorOutput) {
-    bool isValid = false;
     QString error("");
-    try {
-        this->userRepository->findByLogin( user.getLogin());
-    } catch( QString* findError) {
-        isValid = true;
-    }
+    QLinkedList<UserInfo> usersWithSameLogin = this->userRepository->findByLogin( user.getLogin());
+    bool isValid = true;
+    
 
-    if( !isValid) {
-        if( errorOutput) {
-            error += QString::fromWCharArray( L"ѕользователь с заданным логином уже существует\n");
-        }
+    if( usersWithSameLogin.size() > 1) {
+        error += QString::fromWCharArray( L"¬ системе уже зарегестрированно несколько пользователей с заданным логином\n");
+        isValid = false;
+    } else if (usersWithSameLogin.size() == 1 && usersWithSameLogin.first().user.getId() != user.getId()) {
+        error += QString::fromWCharArray( L"«аданный логин зан€т - выберите другой\n");
+        isValid = false;
     } else {
         if( user.getLogin().size() < 3) {
             error += QString::fromWCharArray( L"—лишком короткий логин\n");

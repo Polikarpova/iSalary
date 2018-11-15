@@ -9,15 +9,24 @@ bool ManagerValidator::isManagerValid( const Manager& manager, QString* errorOut
     QString error;
     bool isValid = this->isUserValid( manager, &error);
 
-    if( this->managerRepository->findByINN( manager.getINN(), NULL) ){
-        error += QString::fromWCharArray( L"Работник с таким ИНН уже существует\n");
+    QLinkedList<Manager> sameINNMangers = this->managerRepository->findByINN( manager.getINN()); 
+    if( sameINNMangers.size() > 1) {
+        error += QString::fromWCharArray( L"В системе уже зарегистрированно несколько сострудников с заданным ИНН\n");
+        isValid = false;
+    } else if ( sameINNMangers.size() == 1 && sameINNMangers.first().getId() != manager.getId()) {
+        error += QString::fromWCharArray( L"В системе уже зарегистрирован другой пользователь с заданным ИНН");
         isValid = false;
     }
     
-    if( this->managerRepository->findByPassport( manager.getPassportSerial(), manager.getPassportNumber(), NULL)) {
-        error += QString::fromWCharArray( L"Работник с такими паспортными данными (серией и номером) уже существует\n");
+    QLinkedList<Manager> samePassportManagers = this->managerRepository->findByPassport( manager.getPassportSerial(), manager.getPassportNumber());
+    if( samePassportManagers.size() > 1) {
+        error += QString::fromWCharArray( L"В системе уже зарегистрированно несколько сострудников с заданным серией-номером паспорта\n");
+        isValid = false;
+    } else if ( samePassportManagers.size() == 1 && samePassportManagers.first().getId() != manager.getId()) {
+        error += QString::fromWCharArray( L"В системе уже зарегистрирован другой пользователь с заданным серией-номером паспорта");
         isValid = false;
     }
+    
 
     if( manager.getFirstName().size() < 1){
         error += QString::fromWCharArray( L"Имя должно содержать хотя бы один символ\n");

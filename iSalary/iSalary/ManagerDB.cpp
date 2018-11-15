@@ -26,7 +26,7 @@ void ManagerDB::init() {
 Manager ManagerDB::getById( int id) {
     UserInfo user;
     try {
-        UserInfo user = userDB->getById( id);
+        user = userDB->getById( id);
     } catch ( QString except ) {
         throw except;
     }
@@ -34,7 +34,7 @@ Manager ManagerDB::getById( int id) {
     if( user.type != MANAGER) {
         throw new QString("Запись не найдена");
     }
-    QString sql = "SELECT `%1`, `%2`, `%3`, `%4`, `%5`, `%6`, `%7`, `%8`, `%9, `%10`, `%11`, `%12` FROM %0 WHERE %15 = :%15";
+    QString sql = "SELECT `%1`, `%2`, `%3`, `%4`, `%5`, `%6`, `%7`, `%8`, `%9`, `%10`, `%11`, `%12`,`%15` FROM %0 WHERE `%15` = :%15";
     sql = sql.arg(
         this->tableName,
         this->firstNameField,
@@ -178,7 +178,7 @@ void ManagerDB::update( const Manager& manager) {
     this->execQuery( query);
 }
 
-bool ManagerDB::findByINN( const QString& INN, Manager* manager) {
+QLinkedList<Manager> ManagerDB::findByINN( const QString& INN) {
 
     QString sql = "SELECT `%15` FROM %0 WHERE `%1` = :%1";
     sql = sql.arg(
@@ -191,21 +191,21 @@ bool ManagerDB::findByINN( const QString& INN, Manager* manager) {
 
     QSqlQuery query( *this->db);
     query.prepare( sql);
+    query.bindValue(":" + this->INNField, INN);
     this->execQuery( query);
-    bool found = query.next();
-    if( found) {
-        if ( manager != NULL) {
-            int id = query.value( ":" + UserDB::idField).value<int>();
-            *manager = getById( id);
-        }
+
+    QLinkedList<Manager> managers;
+    while( query.next()) {
+            int id = query.value( UserDB::idField).value<int>();
+            managers.append( this->getById( id));
     }
 
-    return found;
+    return managers;
 }
 
-bool ManagerDB::findByPassport( const QString& passportSerial, const QString passportNumber, Manager* manager) {
+QLinkedList<Manager> ManagerDB::findByPassport( const QString& passportSerial, const QString passportNumber) {
 
-    QString sql = "SELECT `%15` FROM %0 WHERE `%1` = :%1 AND `%2` = %2" ;
+    QString sql = "SELECT `%15` FROM %0 WHERE `%1` = :%1 AND `%2` = :%2" ;
     sql = sql.arg(
         this->tableName,          //0
         this->passportSerialField,//1
@@ -217,16 +217,17 @@ bool ManagerDB::findByPassport( const QString& passportSerial, const QString pas
 
     QSqlQuery query( *this->db);
     query.prepare( sql);
+    query.bindValue(":" + this->passportSerialField, passportSerial);
+    query.bindValue(":" + this->passportNumberField, passportNumber);
     this->execQuery( query);
-    bool found = query.next();
-    if( found) {
-        if ( manager != NULL) {
-            int id = query.value( ":" + UserDB::idField).value<int>();
-            *manager = getById( id);
-        }
+
+    QLinkedList<Manager> managers;
+    while( query.next()) {
+            int id = query.value( UserDB::idField).value<int>();
+            managers.append( this->getById( id));
     }
 
-    return found;
+    return managers;
 }
 
 

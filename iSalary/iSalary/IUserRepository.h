@@ -1,6 +1,7 @@
 #pragma once
 
 #include "UserInfo.h"
+#include <qlinkedlist.h>
 /**
 * Интерфейс, описывающий методы хранилища пользователей, необходимые модулю авторизации
 * @author Курносов
@@ -24,7 +25,7 @@ public:
     * @throws "Запись не найдена"
     * @return Структура, хранящая запись о пользователе и его тип
     */
-    virtual UserInfo findByLogin( const QString& login) = 0;
+    virtual QLinkedList<UserInfo> findByLogin( const QString& login) = 0;
     
     /**
     * Сохраняет запись о пользователе в БД
