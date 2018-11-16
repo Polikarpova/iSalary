@@ -33,6 +33,7 @@ SignInResult AuthorizationModule::signIn( const QString& login, const QString& p
     return result;
 }
 
+
 SignUpResult AuthorizationModule::signUp( const QString& login, const QString& password, UserType userType) {
     UserInfo user;
     
@@ -41,6 +42,25 @@ SignUpResult AuthorizationModule::signUp( const QString& login, const QString& p
     newUser.setPassword(password);
     SignUpResult result;
     if( this->userValidator->isUserValid(newUser, &result.failReason)) {
+        result.success = true;
+
+        result.user = userRepository->insert( newUser, userType);
+        result.type = MANAGER;
+    }
+
+    return result;
+}
+
+
+
+SignUpResult AuthorizationModule::signUp( const QString& login, UserType userType) {
+    UserInfo user;
+    
+    User newUser;
+    newUser.setLogin( login);
+    newUser.setPassword( generateRandomString());
+    SignUpResult result;
+    if( this->userValidator->isUserValid( newUser, &result.failReason)) {
         result.success = true;
 
         result.user = userRepository->insert( newUser, userType);

@@ -69,9 +69,6 @@
     <Filter Include="Source Files\Model\DomainModel\ModelFacade">
       <UniqueIdentifier>{34827d0e-3589-40d5-a815-be93014426e1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Model\DomainModel\SalesModule">
-      <UniqueIdentifier>{df9498c3-7e75-462d-8066-f3a8978e0abd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Model\DomainModel\PersonnelAccountingModule">
       <UniqueIdentifier>{6a7e4f6a-b0cb-4c35-b664-2a0089091dcb}</UniqueIdentifier>
     </Filter>
@@ -83,6 +80,15 @@
     </Filter>
     <Filter Include="Source Files\Test">
       <UniqueIdentifier>{0c2553cd-550e-42fe-a8e6-98f88f9f31ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Helpers">
+      <UniqueIdentifier>{6948a61f-4c61-4e38-be39-41ba97474dc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Helpers">
+      <UniqueIdentifier>{d34b66ec-1dfc-4271-b9ad-9c65cf0e660f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\DomainModel\PersonnelAccountingModule\SalesModule">
+      <UniqueIdentifier>{df9498c3-7e75-462d-8066-f3a8978e0abd}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Model\DomainModel\PersonnelAccountingModule\SalesModule">
       <UniqueIdentifier>{7bb601fc-1937-4b82-9506-d2937ab53234}</UniqueIdentifier>
@@ -397,34 +403,34 @@
       <Filter>Header Files\Model\DB</Filter>
     </ClInclude>
     <ClInclude Include="Salary.h">
-      <Filter>Header Files\Model\DomainModel\SalesModule</Filter>
+      <Filter>Header Files\Model\DomainModel\PersonnelAccountingModule\SalesModule</Filter>
     </ClInclude>
     <ClInclude Include="AccoutingPeriod.h">
-      <Filter>Header Files\Model\DomainModel\SalesModule</Filter>
+      <Filter>Header Files\Model\DomainModel\PersonnelAccountingModule\SalesModule</Filter>
     </ClInclude>
     <ClInclude Include="OpenAccoutingPeriod.h">
-      <Filter>Header Files\Model\DomainModel\SalesModule</Filter>
+      <Filter>Header Files\Model\DomainModel\PersonnelAccountingModule\SalesModule</Filter>
     </ClInclude>
     <ClInclude Include="ClosedSale.h">
-      <Filter>Header Files\Model\DomainModel\SalesModule</Filter>
+      <Filter>Header Files\Model\DomainModel\PersonnelAccountingModule\SalesModule</Filter>
     </ClInclude>
     <ClInclude Include="CloseAccoutingPeriod.h">
-      <Filter>Header Files\Model\DomainModel\SalesModule</Filter>
+      <Filter>Header Files\Model\DomainModel\PersonnelAccountingModule\SalesModule</Filter>
     </ClInclude>
     <ClInclude Include="Sale_DB.h">
       <Filter>Header Files\Model\DB</Filter>
     </ClInclude>
     <ClInclude Include="Product.h">
-      <Filter>Header Files\Model\DomainModel\SalesModule</Filter>
+      <Filter>Header Files\Model\DomainModel\PersonnelAccountingModule\SalesModule</Filter>
     </ClInclude>
     <ClInclude Include="Manager.h">
       <Filter>Header Files\Model\DomainModel\PersonnelAccountingModule</Filter>
     </ClInclude>
     <ClInclude Include="ActiveSale.h">
-      <Filter>Header Files\Model\DomainModel\SalesModule</Filter>
+      <Filter>Header Files\Model\DomainModel\PersonnelAccountingModule\SalesModule</Filter>
     </ClInclude>
     <ClInclude Include="Sale.h">
-      <Filter>Header Files\Model\DomainModel\SalesModule</Filter>
+      <Filter>Header Files\Model\DomainModel\PersonnelAccountingModule\SalesModule</Filter>
     </ClInclude>
     <ClInclude Include="Product_DB.h">
       <Filter>Header Files\Model\DB</Filter>
@@ -488,6 +494,9 @@
     </ClInclude>
     <ClInclude Include="Test\Test.h">
       <Filter>Header Files\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="Helpers.h">
+      <Filter>Header Files\Helpers</Filter>
     </ClInclude>
     <ClInclude Include="SaleDTO.h">
       <Filter>Source Files</Filter>

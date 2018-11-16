@@ -12,6 +12,8 @@ public:
 
     bool isManagerValid( const Manager& manager, QString* errorOutput);
 
+    bool isLoginExist( const QString& login);
+
 protected:
     IManagerRepository* managerRepository;
 };

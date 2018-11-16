@@ -6,7 +6,7 @@
 #include "SignResult.h"
 #include "IUserRepository.h"
 #include "UserValidator.h"
-
+#include "Helpers.h"
 
 
 /** 
@@ -26,7 +26,6 @@ public:
 	 */
 	SignInResult signIn( const QString& login, const QString& password);
 
-    
     /**
 	* Регистрация нового пользователя
     * @param login - логин пользователя
@@ -35,6 +34,15 @@ public:
     * @return SignUpResult - структура, содержащая информацю об успешности попытки регистрации и объект зарегистрированного пользователя
 	*/
 	SignUpResult signUp( const QString& login, const QString& password, UserType userType);
+
+    
+    /**
+	* Регистрация нового пользователя( пароль генерируется)
+    * @param login - логин пользователя
+    * @param userType - тип пользователя
+    * @return SignUpResult - структура, содержащая информацю об успешности попытки регистрации и объект зарегистрированного пользователя
+	*/
+	SignUpResult signUp( const QString& login, UserType userType);
 
 private:
     IUserRepository* userRepository;

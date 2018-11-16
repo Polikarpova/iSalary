@@ -16,17 +16,19 @@ void ManagerDB::init() {
     this->passportSerialField = "passportSerial";
     this->passportNumberField = "passportNumber";
     this->passportIssueDateField = "passportIssueDate";
+    this->passportSourceField = "passportSource";
     this->addressField = "address";
     this->INNField = "INN";
     this->emailField = "email";
     this->mobileNumberField = "mobileNumber";
     this->dateOfEmploymentField = "dateOfEmployment";
+    this->dateOfBitrthField = "dateOfBitrth";
 }
 
 Manager ManagerDB::getById( int id) {
     UserInfo user;
     try {
-        UserInfo user = userDB->getById( id);
+        user = userDB->getById( id);
     } catch ( QString except ) {
         throw except;
     }
@@ -34,7 +36,7 @@ Manager ManagerDB::getById( int id) {
     if( user.type != MANAGER) {
         throw new QString("Запись не найдена");
     }
-    QString sql = "SELECT `%1`, `%2`, `%3`, `%4`, `%5`, `%6`, `%7`, `%8`, `%9, `%10`, `%11`, `%12` FROM %0 WHERE %15 = :%15";
+    QString sql = "SELECT `%1`, `%2`, `%3`, `%4`, `%5`, `%6`, `%7`, `%8`, `%9`, `%10`, `%11`, `%12`, `%13`, `%14`,`%15`,`%21` FROM %0 WHERE `%21` = :%21";
     sql = sql.arg(
         this->tableName,
         this->firstNameField,
@@ -51,6 +53,11 @@ Manager ManagerDB::getById( int id) {
         this->emailField,
         this->mobileNumberField,
         this->dateOfEmploymentField
+    );
+    sql = sql.arg(
+        this->addressField,
+        this->passportSourceField,
+        this->dateOfBitrthField
     );
     sql = sql.arg(
         UserDB::idField
@@ -67,15 +74,17 @@ Manager ManagerDB::getById( int id) {
 
     if( query.next()) {
         manager = this->readOneRecord(query);
+        manager.setLogin( user.user.getLogin());
+        manager.setPassword( user.user.getPassword());
     } else { 
-        handleError("Запись не найдена");
+        handleError(QString::fromWCharArray(L"Запись не найдена"));
     }
 
     return manager;
 }
 
 QList<Manager> ManagerDB::getAll() {
-    QString sql = "SELECT `%15`,`%1`, `%2`, `%3`, `%4`, `%5`, `%6`, `%7`, `%8`, `%9`, `%10`, `%11`, `%12` FROM %0 " ;
+    QString sql = "SELECT `%15`,`%1`, `%2`, `%3`, `%4`, `%5`, `%6`, `%7`, `%8`, `%9`, `%10`, `%11`, `%12`, `%13`, `%14`, `%15`, `%16` FROM %0 " ;
     sql = sql.arg(
         this->tableName,
         this->firstNameField,
@@ -92,6 +101,11 @@ QList<Manager> ManagerDB::getAll() {
         this->emailField,
         this->mobileNumberField,
         this->dateOfEmploymentField
+    );
+    sql = sql.arg(
+        this->addressField,
+        this->passportSourceField,
+        this->dateOfBitrthField
     );
     sql = sql.arg(
         UserDB::idField
@@ -133,8 +147,9 @@ void ManagerDB::update( const Manager& manager) {
     QString sql = "UPDATE %0 SET `%1` = :%1, `%2` = :%2, `%3` = :%3, \
                   `%4` = :%4, `%5` = :%5, `%6` = :%6, `%7` = :%7, \
                   `%8` = :%8, `%9` = :%9, `%10` = :%10, `%11` = :%11 , `%12` = :%12, \
-                  `%13` = :%13 \
-                  WHERE `%15` = :%15 ";
+                  `%13` = :%13, `%14` = :%14, `%15` = :%15, \
+                  `%20` = :%20 \
+                  WHERE `%21` = :%21 ";
 
     sql = sql.arg(
         this->tableName,
@@ -153,6 +168,11 @@ void ManagerDB::update( const Manager& manager) {
         this->mobileNumberField,
         this->dateOfEmploymentField
     );
+    sql = sql.arg(
+        this->addressField,
+        this->passportSourceField,
+        this->dateOfBitrthField
+    );
     sql = sql.arg( UserDB::userTypeField); 
     sql = sql.arg( UserDB::idField);
     
@@ -167,18 +187,20 @@ void ManagerDB::update( const Manager& manager) {
     query.bindValue( ":" + this->passportSerialField, manager.getPassportSerial());
     query.bindValue( ":" + this->passportNumberField, manager.getPassportNumber());
     query.bindValue( ":" + this->passportIssueDateField, manager.getPassportDateIssue());
+    query.bindValue( ":" + this->passportSourceField, manager.getPassportSource());
     query.bindValue( ":" + this->addressField, manager.getAddress());
     query.bindValue( ":" + this->INNField, manager.getINN());
     query.bindValue( ":" + this->emailField, manager.getEmail());
     query.bindValue( ":" + this->mobileNumberField, manager.getMobileNumber());
     query.bindValue( ":" + this->dateOfEmploymentField, manager.getDateOfEmployment());
+    query.bindValue( ":" + this->dateOfBitrthField, manager.getDateOfBirth());
 
     query.bindValue( ":" + UserDB::userTypeField, MANAGER);
 
     this->execQuery( query);
 }
 
-bool ManagerDB::findByINN( const QString& INN, Manager* manager) {
+QLinkedList<Manager> ManagerDB::findByINN( const QString& INN) {
 
     QString sql = "SELECT `%15` FROM %0 WHERE `%1` = :%1";
     sql = sql.arg(
@@ -191,21 +213,21 @@ bool ManagerDB::findByINN( const QString& INN, Manager* manager) {
 
     QSqlQuery query( *this->db);
     query.prepare( sql);
+    query.bindValue(":" + this->INNField, INN);
     this->execQuery( query);
-    bool found = query.next();
-    if( found) {
-        if ( manager != NULL) {
-            int id = query.value( ":" + UserDB::idField).value<int>();
-            *manager = getById( id);
-        }
+
+    QLinkedList<Manager> managers;
+    while( query.next()) {
+            int id = query.value( UserDB::idField).value<int>();
+            managers.append( this->getById( id));
     }
 
-    return found;
+    return managers;
 }
 
-bool ManagerDB::findByPassport( const QString& passportSerial, const QString passportNumber, Manager* manager) {
+QLinkedList<Manager> ManagerDB::findByPassport( const QString& passportSerial, const QString passportNumber) {
 
-    QString sql = "SELECT `%15` FROM %0 WHERE `%1` = :%1 AND `%2` = %2" ;
+    QString sql = "SELECT `%15` FROM %0 WHERE `%1` = :%1 AND `%2` = :%2" ;
     sql = sql.arg(
         this->tableName,          //0
         this->passportSerialField,//1
@@ -217,16 +239,17 @@ bool ManagerDB::findByPassport( const QString& passportSerial, const QString pas
 
     QSqlQuery query( *this->db);
     query.prepare( sql);
+    query.bindValue(":" + this->passportSerialField, passportSerial);
+    query.bindValue(":" + this->passportNumberField, passportNumber);
     this->execQuery( query);
-    bool found = query.next();
-    if( found) {
-        if ( manager != NULL) {
-            int id = query.value( ":" + UserDB::idField).value<int>();
-            *manager = getById( id);
-        }
+
+    QLinkedList<Manager> managers;
+    while( query.next()) {
+            int id = query.value( UserDB::idField).value<int>();
+            managers.append( this->getById( id));
     }
 
-    return found;
+    return managers;
 }
 
 QList<QPair<int, QString> > ManagerDB::getAllIdAndName() {
@@ -267,6 +290,8 @@ Manager ManagerDB::readOneRecord( const QSqlQuery& query) {
     manager.setPassportDateIssue( query.value( this->passportIssueDateField).value<QDate>());
     manager.setPassportNumber( query.value( this->passportNumberField).value<QString>());
     manager.setPassportSerial( query.value( this->passportSerialField).value<QString>());
+    manager.setPassportSource( query.value( this->passportSourceField).value<QString>());
+    manager.setDateOfBirth( query.value( this->dateOfBitrthField).value<QDate>());
     Sex sex = static_cast<Sex>( query.value( this->sexField).value<int>());
     manager.setSex( sex);
 

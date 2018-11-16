@@ -48,7 +48,7 @@ public:
     * @param[out] manager - ,      ,    (   NULL)
     * @return       
     */
-    bool findByINN( const QString& INN, Manager* manager) override;
+    QLinkedList<Manager> findByINN( const QString& INN) override;
 
     /**
     *    
@@ -57,7 +57,7 @@ public:
     * @param[out] manager - ,      ,    (   NULL)
     * @return       
     */
-    bool findByPassport( const QString& passportSerial, const QString passportNumber, Manager* manager) override;
+    QLinkedList<Manager> findByPassport( const QString& passportSerial, const QString passportNumber) override;
 
 	/**
 	* Βξηβπΰωΰες ροθρξκ ρ id θ θμενΰμθ βρευ νΰνÿςϋυ μενεδζεπξβ
@@ -77,11 +77,13 @@ private:
     QString passportSerialField;
     QString passportNumberField;
     QString passportIssueDateField;
+    QString passportSourceField;
     QString addressField;
     QString INNField;
     QString emailField;
     QString mobileNumberField;
     QString dateOfEmploymentField;
+    QString dateOfBitrthField;
 
     void init();
 

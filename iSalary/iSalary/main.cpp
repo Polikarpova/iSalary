@@ -47,6 +47,9 @@ int main(int argc, char *argv[])
 	sqlDB= QSqlDatabase::addDatabase( "QMYSQL");
     sqlDB.setHostName( settings.databaseIP);
     sqlDB.setPort( settings.databasePort.toInt());
+    sqlDB.setDatabaseName( settings.databaseName);
+    sqlDB.setUserName( settings.databaseUser);
+    sqlDB.setPassword( settings.databasePassword);
 
 	Test test = Test(sqlDB);
 	test.startTesting();
@@ -109,7 +112,3 @@ int main(int argc, char *argv[])
     return exitCode;
     
 }
-
-    sqlDB.setDatabaseName( settings.databaseName);
-    sqlDB.setUserName( settings.databaseUser);
-    sqlDB.setPassword( settings.databasePassword);
