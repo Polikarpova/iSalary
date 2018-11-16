@@ -89,7 +89,7 @@ QModelIndex SalaryTableModel::getIndexByRecordId( int id) {
 	return index;
 }
 
-void SalaryTableModel::refreshData(const QList<ManagerSalaryDTO>& sales) {
+void SalaryTableModel::refreshData(const QList<ManagerSalaryDTO>& data) {
 
 	if( table.size() > 0) {
         this->beginRemoveRows( QModelIndex(), 0, table.size() - 1);
@@ -99,22 +99,18 @@ void SalaryTableModel::refreshData(const QList<ManagerSalaryDTO>& sales) {
         this->endRemoveRows();
     }
 
-    if( sales.size() > 0) { 
-        this->beginInsertRows( QModelIndex(), 0, sales.size() - 1);
+    if( data.size() > 0) { 
+        this->beginInsertRows( QModelIndex(), 0, data.size() - 1);
 
-        for( int i = 0; i < sales.size(); i++) {
+        for( int i = 0; i < data.size(); i++) {
             
-			const ManagerSalaryDTO& sale = sales[i];
+			const ManagerSalaryDTO& el = data[i];
 			QList<QVariant> row;
 
-			/*row << sale.id;
-			row << sale.managerName;
-			row << QDate::currentDate();
-			row << sale.product.name;
-			row << sale.count;
-			row << sale.price;
-			row << sale.product.commission;
-			row << "action";*/
+			row << el.managerId;
+			row << el.managerName;
+			row << el.income;
+			row << el.salary;
             
 			this->table.append( row);
         }

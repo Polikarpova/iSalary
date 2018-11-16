@@ -7,6 +7,9 @@
 #include <qdatetime.h>
 #include "OpenAccoutingPeriod.h"
 #include "AccoutingPeriod.h"
+#include "AccoutingPeriodDTO.h"
+
+#include <qmessagebox.h>
 
 /**
 * Класс доступа к БД для сущности AccoutingPeriod
@@ -34,7 +37,7 @@ public:
     * @throws Запись не найдена
 	* @return - объект с информацией об искомом РП (это либо OpenAccoutingPeriod или CloseAccoutingPeriod), или null если запись не найдена
 	*/
-	AccoutingPeriod getById( int id);
+	AccoutingPeriod* getById( int id);
 
 	/**
 	* Возвращает искомый РП (открытый или закрытый) по дате, которая входит в интервал искомого периода (включая дату начала/конца)
@@ -43,7 +46,7 @@ public:
     * @throws Запись не найдена
 	* @return - объект с информацией об искомом РП (это либо OpenAccoutingPeriod или CloseAccoutingPeriod), или null если запись не найдена
 	*/
-	AccoutingPeriod getByDate( QDateTime date);
+	AccoutingPeriod* getByDate( QDateTime date);
 
 	/**
     * Добавление записи о расчетном периоде в БД
@@ -51,7 +54,7 @@ public:
     * @throws Запись не найдена
     * @param ap - добавляемая сущность
     */
-	void insert( AccoutingPeriod ap);
+	void insert( AccoutingPeriod* ap);
 
 	/**
     * Обновление записи о расчетном периоде в БД
@@ -59,34 +62,48 @@ public:
     * @throws Запись не найдена
     * @param ap - обновляемая сущность
     */
-	void update( AccoutingPeriod ap);
+	void update( AccoutingPeriod* ap);
+
+	/**
+	* Возвращает список со всеми РП
+	* @return список со всеми РП. Список никогда не должен возвращаться пустым, так как всегда есть хотя бы один РП (он же будет текущим)
+	*/
+	QList<AccoutingPeriodDTO> getAllPeriods();
 
 protected:
 
-	/*
+	/**
     * Инициализация полей
     */
     void init();
 
-	/*
+	/**
     * Чтение одной записи из Запроса (QSqlQuery)
     */
-    //тут у нас? readOneRecord( const QSqlQuery& query) const;  
+    AccoutingPeriodDTO readOneRecord( const QSqlQuery& query) const;  
 
-    /*
+    /**
     * Выполнение Запроса (QSqlQuery) с обработкой ошибки
     */    
     void execQuery( QSqlQuery& query) const;
     
-    /*
+    /**
     * Обработка ошибки - выкидывает исключение с переданной ошибкой
     */
     void handleError( const QSqlError& error) const;
     
-    /*
+    /**
     * Обработка ошибки - выкидывает исключение с переданным текстом
     */
     void handleError( const QString& error) const;
+
+	/**
+	* Создает самый первый рассчетный период, если в БД нет ни одного периода
+	* Период инициализируется текущим месяцем
+	*/
+	void initFirstAccountingPeriod();
+
+private:
 
     QSqlDatabase* db;       /**< экземпляр БД к которой будут применяться запросы */
     QString idField;		/**< Название поля с id в БД */

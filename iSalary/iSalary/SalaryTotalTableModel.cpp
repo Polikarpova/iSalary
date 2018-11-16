@@ -89,7 +89,7 @@ QModelIndex SalaryTotalTableModel::getIndexByRecordId( int id) {
 	return index;
 }
 
-void SalaryTotalTableModel::refreshData(const QList<ManagerSalaryDTO>& sales) {
+void SalaryTotalTableModel::refreshData(const QList<ManagerSalaryDTO>& data) {
 
 	if( table.size() > 0) {
         this->beginRemoveRows( QModelIndex(), 0, table.size() - 1);
@@ -100,25 +100,26 @@ void SalaryTotalTableModel::refreshData(const QList<ManagerSalaryDTO>& sales) {
     }
 
 	//сложить в одну строчку
-    if( sales.size() > 0) { 
-        this->beginInsertRows( QModelIndex(), 0, sales.size() - 1);
+    if( data.size() > 0) { 
+        this->beginInsertRows( QModelIndex(), 0, 0);
+		QList<QVariant> row;
+		double allIncome = 0;
+		double allSalary = 0;
 
-        for( int i = 0; i < sales.size(); i++) {
+        for( int i = 0; i < data.size(); i++) {
             
-			const ManagerSalaryDTO& sale = sales[i];
-			QList<QVariant> row;
+			const ManagerSalaryDTO& el = data[i];
 
-			/*row << sale.id;
-			row << sale.managerName;
-			row << QDate::currentDate();
-			row << sale.product.name;
-			row << sale.count;
-			row << sale.price;
-			row << sale.product.commission;
-			row << "action";*/
-            
-			this->table.append( row);
+			allIncome += el.income;
+			allSalary += el.salary;
         }
+
+		row << 0;
+		row << QString::fromWCharArray( L"Итого:");
+		row << allIncome;
+		row << allSalary;
+        
+		this->table.append( row);
 
         this->endInsertRows();
     }

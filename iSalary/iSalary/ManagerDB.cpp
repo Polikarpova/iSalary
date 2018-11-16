@@ -229,6 +229,29 @@ bool ManagerDB::findByPassport( const QString& passportSerial, const QString pas
     return found;
 }
 
+QList<QPair<int, QString> > ManagerDB::getAllIdAndName() {
+
+	QList<QPair<int, QString> > result;
+
+	QString sql = "select users.id, users.firstName, users.secondName, users.thirdName from users where users.type = 0;";
+
+	QSqlQuery query( *this->db);
+	query.prepare( sql);
+
+	this->execQuery( query);
+
+	while( query.next() ) {
+	
+		int id = query.value("id").value<int>();
+		QString managerName = query.value("secondName").value<QString>() + " " +
+						 query.value("firstName").value<QString>() + " " +
+						 query.value("thirdName").value<QString>();
+		result.append( qMakePair( id, managerName));
+	}
+
+	return result;
+}
+
 
 Manager ManagerDB::readOneRecord( const QSqlQuery& query) {
     int id = query.value( this->idField).value<int>();

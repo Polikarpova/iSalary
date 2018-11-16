@@ -6,6 +6,6 @@ struct ManagerSalaryDTO {
 
 	int managerId;
 	QString managerName;
-	int income;
-	int salary;
+	double income;
+	double salary;
 };

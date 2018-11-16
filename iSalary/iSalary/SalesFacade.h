@@ -8,6 +8,10 @@
 #include "ManagerSalaryDTO.h"
 #include <qdatetime.h>
 
+#include "SaleInfoDTO.h"
+#include "ManagerSalaryDTO.h"
+#include "AccoutingPeriodDTO.h"
+
 /**
 * Класс, предоставляющий доступ к функциям приложения, связанным с продажами
 * @author Поликарпова
@@ -50,11 +54,18 @@ public:
 	QList<ManagerActiveSalesStatisticDTO> getActiveSalesStatistic( QDate date);
 
 	/**
-	* Возвращает список всех за определенный период
+	* Возвращает список всех зарплат за определенный период
 	* @param dateFrom - начала периода
 	* @param dateTo - конец периода
+	* @return список зарплат или пустой список
 	*/
 	QList<ManagerSalaryDTO> getManagersSalary( QDate dateFrom, QDate dateTo);
+
+	/**
+	* Возвращает список со всеми РП
+	* @return список со всеми РП. Список никогда не должен возвращаться пустым, так как всегда есть хотя бы один РП (он же будет текущим)
+	*/
+	QList<AccoutingPeriodDTO> getAllAccoutingPeriods();
 
 private:
 

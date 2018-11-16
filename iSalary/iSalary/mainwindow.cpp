@@ -158,7 +158,7 @@ void MainWindow::refreshBossPage( int page){
 }
 
 void MainWindow::exit(){
-	if( QMessageBox::Yes == QMessageBox::question(this, "Выход", "Вы уверены, что хотите выйти?", QMessageBox::Yes|QMessageBox::No) ) {
+	if( QMessageBox::Yes == QMessageBox::question(this, "Выход", "Вы уверены, что хотите выйти?", QMessageBox::StandardButton::Yes|QMessageBox::No) ) {
 
 		ui.auth_program_stackedWidget->setCurrentIndex( AUTH_WIDGET);
 	}

@@ -13,5 +13,5 @@ public:
 
 private:
 
-	QDateTime dateOfClose;	
+	QDateTime dateTo;	/**< дата закрытия */
 };

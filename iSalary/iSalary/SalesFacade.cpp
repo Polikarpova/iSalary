@@ -20,21 +20,15 @@ void SalesFacade::cancelConfirmSale( const ActiveSaleDTO& sale) {
 
 QList<ActiveSaleDTO> SalesFacade::getActiveSales(){
 
-	//QList<ManagerActiveSalesStatisticDTO> result;
-
 	return this->s->getActiveSales();
 }
 
 QList<ActiveSaleDTO> SalesFacade::getActiveSalesForManager( int managerId){
 
-	//QList<ManagerActiveSalesStatisticDTO> result;
-
 	return this->s->getActiveSalesForManager(managerId);
 }
 
 QList<ManagerActiveSalesStatisticDTO> SalesFacade::getActiveSalesStatistic( QDate date){
-
-	//QList<ManagerActiveSalesStatisticDTO> result;
 
 	return this->s->getManagerActiveSalesSatistic();
 }
@@ -43,12 +37,38 @@ QList<ManagerSalaryDTO> SalesFacade::getManagersSalary( QDate dateFrom, QDate da
 
 	QList<ManagerSalaryDTO> result;
 
-	//от userDB получить все id менеджеров
-	//  V
-	//(Цикл)от salesDB получить по каждому юзеру список всех его подтвержденных продаж в данный рассчетный период (цена, количество, комиссия за товар) SaleDTO
-	//  V
-	//(Цикл)Посчитать для каждого юзера сумму прибыли и з/п (отдельно с комиссией) ManagerSalaryDTO
-	//  V
+	QList<QPair<int, QString> > managers = this->m->getAllIdAndName();
+
+	//(Цикл)от salesDB получить по каждому юзеру список всех его подтвержденных продаж в данный рассчетный период (цена, количество, комиссия за товар) SaleInfoDTO
+	for ( auto i = managers.begin(); i != managers.end() ; i++){
+
+		ManagerSalaryDTO manager;
+		manager.managerId = i->first;
+		manager.managerName = i->second;
+		manager.income = 0;
+		manager.salary = 0;
+
+		if ( !dateTo.isValid()) {
+		
+			dateTo = QDate::currentDate();
+		}
+
+		QList<SaleInfoDTO> salesInfo = this->s->getSalesConfimedFromPeriod( manager.managerId, dateFrom, dateTo);
+	
+		//(Цикл)Посчитать для очередного юзера сумму прибыли и з/п (отдельно с комиссией) ManagerSalaryDTO
+		for( auto j = salesInfo.begin() ; j != salesInfo.end() ; j++) {
+		
+			manager.income += j->price;
+			manager.salary += j->price*j->commission/100.0;
+		}
+
+		result.append(manager); //добавляем очередного менеджера в список
+	}
 
 	return result;
+}
+
+QList<AccoutingPeriodDTO> SalesFacade::getAllAccoutingPeriods() {
+
+	return this->ap->getAllPeriods();
 }
