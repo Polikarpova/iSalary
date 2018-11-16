@@ -174,7 +174,7 @@ QLinkedList<UserInfo> UserDB::findByLogin( const QString& login) {
 }
 
 
-void UserDB::handleError( const QSqlError& error) const {
+void UserDB::handleError( QSqlError error) const {
 
     QSqlError * err = new QSqlError(error);
     QString text = err->text() + db->lastError().text();

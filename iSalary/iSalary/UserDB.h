@@ -93,7 +93,7 @@ protected:
     /*
     * Обработка ошибки - выкидывает исключение с переданной ошибкой
     */
-    void handleError( const QSqlError& error) const;
+    void handleError( QSqlError error) const;
     
     /*
     * Обработка ошибки - выкидывает исключение с переданным текстом

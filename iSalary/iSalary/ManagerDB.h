@@ -71,11 +71,13 @@ private:
     QString passportSerialField;
     QString passportNumberField;
     QString passportIssueDateField;
+    QString passportSourceField;
     QString addressField;
     QString INNField;
     QString emailField;
     QString mobileNumberField;
     QString dateOfEmploymentField;
+    QString dateOfBitrthField;
 
     void init();
 
