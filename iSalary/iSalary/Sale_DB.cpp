@@ -238,17 +238,22 @@ QList<SaleInfoDTO> Sale_DB::getSalesConfimedFromPeriod( int id, QDate from, QDat
 
 	QList<SaleInfoDTO> result;
 
-	QString sql = "select sales.price, sales.count, products.commission from sales, users, products where sales.manager_id = users.id AND sales.product_id = products.id AND sales.isConfirmed = 1 AND users.id = %0 AND sales.confirmDate >= \"%1\" AND sales.confirmDate <= \"%2\";";
-	sql.arg(QString(id), from.toString(Qt::ISODate), to.toString(Qt::ISODate));
+	QString sql = "select sales.price, sales.count, products.commission from sales, users, products where sales.manager_id = users.id AND sales.product_id = products.id AND sales.isConfirmed = 1 AND users.id = :id AND sales.confirmDate >= :dateFrom AND sales.confirmDate <= :dateTo;";
+	//sql.arg(QString(id)), from.toString(Qt::ISODate), to.toString(Qt::ISODate));
 	QSqlQuery query( this->_db);
 	query.prepare(sql);
+	query.bindValue(":id", id);
+	query.bindValue(":dateFrom", from);
+	query.bindValue(":dateTo", to);
+
+	this->execQuery( query);
 
 	while( query.next() ) {
 		
 		SaleInfoDTO el;
-		el.commission = query.value("commission").value<int>();
+		el.commission = query.value("commission").value<double>();
 		el.count = query.value("count").value<int>();
-		el.price = query.value("price").value<int>();
+		el.price = query.value("price").value<double>();
 		
 		result.append(el);
 	}

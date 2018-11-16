@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1044</width>
-    <height>611</height>
+    <height>628</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,7 +21,7 @@
     <item>
      <widget class="QStackedWidget" name="auth_program_stackedWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="enter">
        <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -84,7 +84,11 @@
             <item>
              <layout class="QGridLayout" name="gridLayout_3">
               <item row="3" column="0">
-               <widget class="QLineEdit" name="passwordInput"/>
+               <widget class="QLineEdit" name="passwordInput">
+                <property name="echoMode">
+                 <enum>QLineEdit::Password</enum>
+                </property>
+               </widget>
               </item>
               <item row="1" column="0">
                <widget class="QLineEdit" name="loginInput"/>
@@ -2203,6 +2207,13 @@
          <layout class="QHBoxLayout" name="horizontalLayout_13">
           <item>
            <widget class="QPushButton" name="quitButton">
+            <property name="font">
+             <font>
+              <pointsize>11</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="styleSheet">
              <string notr="true">QPushButton { background-color: rgb(255, 0, 0); color: rgb(255, 255, 255); }</string>
             </property>

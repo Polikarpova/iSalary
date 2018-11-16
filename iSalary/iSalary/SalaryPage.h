@@ -49,16 +49,29 @@ protected:
 	*/
 	void initComboBox();
 
-	void initSalaryTable (QTableView* salaryTable);
+	/**
+	* Инициализация формы с данными менеджера
+	*/
+	void initManagerForm();
+
+	/**
+	* Инициализация таблички со списоком менеджеров и зарплат
+	*/
+	void initSalaryTable ( QTableView* salaryTable);
+	
+	/**
+	* Инициализация таблички с итогом
+	*/
 	void initSalaryTotalTable( QTableView* salaryTotalTable);
+	
 	//
 	//int getSelectedManagerSalesId();
 	//int getSelectedUnconfirmedSalesId();
 	//int getSelectedConfirmedSalesId();
 
-	///**
- //   * Обновление таблицы со списком менежеров и инормацией об активных продажах
- //   */
+	/**
+    * Обновление таблицы со списком менежеров и инормацией об активных продажах
+    */
 	//void updateManagersTable();
 	//void updateUnconfirmedTable();
 	//void updateConfirmedTable();
@@ -86,7 +99,9 @@ private:
 	QPushButton* salesButton;
 	QPushButton* dataButton;
 
-	QMap<int, int> comboBoxMap;
+	QMap<int, AccoutingPeriodDTO> comboBoxMap;
+	QHash<int, ManagerSalaryDTO> salary;
+	QHash<int, ManagerSalaryDTO> salaryTotal;
 
 	/*QHash<int, ActiveSaleDTO> unconfirmedSales;
 	QHash<int, ActiveSaleDTO> confirmedSales;

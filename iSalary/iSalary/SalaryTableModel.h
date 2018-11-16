@@ -11,7 +11,7 @@ public:
     SalaryTableModel(QObject* parent = 0);
     ~SalaryTableModel(void);
 
-	void refreshData(const QList<ManagerSalaryDTO>& sales);
+	void refreshData(const QList<ManagerSalaryDTO>& data);
     int getRecordId( int row);
     QModelIndex getIndexByRecordId( int id);
 

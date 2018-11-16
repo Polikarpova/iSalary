@@ -310,7 +310,7 @@ public:
     {
         if (MainWindowClass->objectName().isEmpty())
             MainWindowClass->setObjectName(QStringLiteral("MainWindowClass"));
-        MainWindowClass->resize(1044, 611);
+        MainWindowClass->resize(1044, 628);
         MainWindowClass->setStyleSheet(QStringLiteral("QMainWindow {background-color: white}"));
         centralWidget = new QWidget(MainWindowClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
@@ -355,6 +355,7 @@ public:
         gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
         passwordInput = new QLineEdit(enter);
         passwordInput->setObjectName(QStringLiteral("passwordInput"));
+        passwordInput->setEchoMode(QLineEdit::Password);
 
         gridLayout_3->addWidget(passwordInput, 3, 0, 1, 1);
 
@@ -1768,6 +1769,11 @@ public:
         horizontalLayout_13->setObjectName(QStringLiteral("horizontalLayout_13"));
         quitButton = new QPushButton(main);
         quitButton->setObjectName(QStringLiteral("quitButton"));
+        QFont font;
+        font.setPointSize(11);
+        font.setBold(true);
+        font.setWeight(75);
+        quitButton->setFont(font);
         quitButton->setStyleSheet(QStringLiteral("QPushButton { background-color: rgb(255, 0, 0); color: rgb(255, 255, 255); }"));
 
         horizontalLayout_13->addWidget(quitButton);
@@ -1873,7 +1879,7 @@ public:
 
         retranslateUi(MainWindowClass);
 
-        auth_program_stackedWidget->setCurrentIndex(1);
+        auth_program_stackedWidget->setCurrentIndex(0);
         boss_manager_stackedWidget->setCurrentIndex(1);
         tabWidget->setCurrentIndex(2);
         managersDataTab->setCurrentIndex(0);

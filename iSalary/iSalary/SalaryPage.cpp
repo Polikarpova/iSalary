@@ -24,7 +24,6 @@ void SalaryPage::setUI( QComboBox* salaryAccountingPeriod, QTableView* salaryTab
 				QLineEdit* salaryINN, QPushButton* closeAccountingPeriod, QPushButton* salesButton, QPushButton* dataButton) {
  
 	this->salaryAccountingPeriod = salaryAccountingPeriod; 
-	this->initComboBox();
 
 	this->managerFIOLabel = managerFIOLabel; 
 	this->salaryPasportSeries = salaryPasportSeries; 
@@ -36,7 +35,7 @@ void SalaryPage::setUI( QComboBox* salaryAccountingPeriod, QTableView* salaryTab
 	this->salaryINN = salaryINN;
 	this->salesButton = salesButton;
 	this->dataButton = dataButton;
-	//инициализировать форму (кнопочки заблокируем)
+	this->initManagerForm();
 
 	this->closeAccountingPeriod = closeAccountingPeriod;
 	this->closeAccountingPeriod->hide();
@@ -44,6 +43,9 @@ void SalaryPage::setUI( QComboBox* salaryAccountingPeriod, QTableView* salaryTab
 	//инициализируем таблички
 	this->initSalaryTable( salaryTable); 
 	this->initSalaryTotalTable( salaryTotalTable); 
+
+	//инициализируем выпадающий список
+	this->initComboBox();
  }
 
 void SalaryPage::initComboBox() {
@@ -66,13 +68,24 @@ void SalaryPage::initComboBox() {
 		}
 
 		this->salaryAccountingPeriod->addItem(str);
-		this->comboBoxMap.insert(k, i.value().id);
+		this->comboBoxMap.insert(k, i.value());
 		k++;
 	}
 
 	connect(this->salaryAccountingPeriod, SIGNAL(currentIndexChanged(int)), this, SLOT(showSelectedPeriod()));
 
 	this->salaryAccountingPeriod->setCurrentIndex(0);
+
+	this->showSelectedPeriod();
+}
+
+void SalaryPage::initManagerForm() {
+
+	this->managerFIOLabel->setText("");
+
+	//Блокируем кнопки на 1ый релиз
+	this->salesButton->hide();
+	this->dataButton->hide();
 }
 
 void SalaryPage::initSalaryTable (QTableView* salaryTable) {
@@ -83,6 +96,7 @@ void SalaryPage::initSalaryTable (QTableView* salaryTable) {
 	this->salaryTable->setModel( model);
 
 	this->salaryTable->horizontalHeader()->setStretchLastSection(true);
+	this->salaryTable->horizontalHeader()->setSectionResizeMode( SalaryTableModel::COLUMN_FIO, QHeaderView::ResizeToContents);
 	this->salaryTable->setSelectionBehavior( QAbstractItemView::SelectRows);
 	this->salaryTable->setSelectionMode( QAbstractItemView::SingleSelection);
 
@@ -117,5 +131,34 @@ void SalaryPage::showManager() {
 
 void SalaryPage::showSelectedPeriod() {
 	
-	QMessageBox::information(0, QString::fromWCharArray(L"Таблица"), QString::fromWCharArray(L"Показываю таблицу для выбранного РП"));
+	//QMessageBox::information(0, QString::fromWCharArray(L"Таблица"), QString::fromWCharArray(L"Показываю таблицу для выбранного РП"));
+	//получаем нужную инфу из фасада(бд)
+	QList<ManagerSalaryDTO> list;
+
+	int currentPeriod = this->salaryAccountingPeriod->currentIndex();
+	QDate from = this->comboBoxMap[currentPeriod].dateFrom;
+	QDate to = this->comboBoxMap[currentPeriod].dateTo;
+
+	try {
+	
+		list = this->salesFacade->getManagersSalary( from, to);
+	} catch( QString* error) {
+	
+		this->errorHandler->handleError( error);
+	}
+
+	//чистим Qhash
+	this->salary.clear();
+	//заполняем его новыми данными из бд
+	for ( auto i = list.begin(); i != list.end(); i++) {
+	
+		this->salary.insert( i->managerId, *i);
+	}
+
+	//инициализируем и заполняем модели
+	SalaryTableModel* model = static_cast<SalaryTableModel*>( this->salaryTable->model());
+	model->refreshData( list);
+
+	SalaryTotalTableModel* modelTotal = static_cast<SalaryTotalTableModel*>( this->salaryTotalTable->model());
+	modelTotal->refreshData( list);
 }

@@ -36,7 +36,7 @@ void AccoutingPeriodDB::initFirstAccountingPeriod() {
 			this->execQuery( query);
 		} catch ( ... ) {
 			
-			QMessageBox::information(0, "Текущий РП", "Невозможно создать текущий РП. Обратитесь к разработчикам.");
+			//QMessageBox::information(0, "Текущий РП", "Невозможно создать текущий РП. Обратитесь к разработчикам.");
 		}
 	}
 }
