@@ -34,8 +34,6 @@ QVariant UnconfirmedSalesTableModel::headerData( int section, Qt::Orientation or
 		return QString::fromWCharArray( L"id" );
     case COLUMN_FIO:
         return QString::fromWCharArray( L"ФИО" );
-    case COLUMN_DATE:
-        return QString::fromWCharArray( L"Дата" );
 	case COLUMN_NAME:
         return QString::fromWCharArray( L"Название" );
 	case COLUMN_COUNT:
@@ -45,7 +43,7 @@ QVariant UnconfirmedSalesTableModel::headerData( int section, Qt::Orientation or
 	case COLUMN_COMMISION:
         return QString::fromWCharArray( L"Продавцу, %" );
 	case COLUMN_ACTION:
-		return "";
+        return QString::fromWCharArray( L"Действие" );
     }
  
     return QVariant();
@@ -117,7 +115,6 @@ void UnconfirmedSalesTableModel::refreshData(const QList<ActiveSaleDTO>& sales) 
         
 			row << sale.id;
 			row << sale.managerName;
-			row << QDate::currentDate();
 			row << sale.product.name;
 			row << sale.count;
 			row << sale.price;

@@ -229,6 +229,7 @@ ActiveSaleDTO Sale_DB::readActiveSalesToDTO( const QSqlQuery& query) {
 	result.price = query.value("price").value<double>();
 	result.count = query.value("count").value<int>();
 	result.isConfirm = query.value("isConfirmed").value<int>() ? true : false;
+	result.confirmDate = QDate::fromString( query.value("confirmDate").value<QString>(), Qt::ISODate);
 
 	return result;
 }
@@ -258,12 +259,14 @@ QList<SaleInfoDTO> Sale_DB::getSalesConfimedFromPeriod( int id, QDate from, QDat
 
 void Sale_DB::confirmSale( int id) {
 
-	QString sql = "update %0 set `%1` = 1, `%2` = \"%3\" where %4 = :id;";
-	sql = sql.arg("sales", "isConfirmed", "confirmDate", QDate::currentDate().toString(Qt::ISODate), "sales.id");
+	QString sql = "update %0 set `%1` = 1, `%2` = :%2 where %4 = :id;";
+	sql = sql.arg("sales", "isConfirmed", "confirmDate", "sales.id");
 
 	QSqlQuery query( this->_db);
 	query.prepare(sql);
+
 	query.bindValue(":id", id);
+	query.bindValue(":confirmDate", QDate::currentDate());
 	
 	this->execQuery( query);
 }

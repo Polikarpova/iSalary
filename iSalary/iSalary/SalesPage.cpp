@@ -40,7 +40,10 @@ void SalesPage::initManagersTable( QTableView* managersSalesTable) {
 	auto model = new ManagersSalesTableModel();
 	this->managersSalesTable->setModel( model);
 
-	this->managersSalesTable->horizontalHeader()->setStretchLastSection(true);
+	this->managersSalesTable->horizontalHeader()->setStretchLastSection( true);
+	this->managersSalesTable->horizontalHeader()->setSectionResizeMode( 1, QHeaderView::ResizeToContents);
+	this->managersSalesTable->horizontalHeader()->setSectionResizeMode(2, QHeaderView::ResizeToContents);
+	this->managersSalesTable->horizontalHeader()->setSectionResizeMode(3, QHeaderView::ResizeToContents);
 	this->managersSalesTable->setSelectionBehavior( QAbstractItemView::SelectRows);
 	this->managersSalesTable->setSelectionMode( QAbstractItemView::SingleSelection);
 
@@ -56,7 +59,8 @@ void SalesPage::initUnconfirmedSalesTable( QTableView* unconfirmedSalesTable) {
 	auto model = new UnconfirmedSalesTableModel();
 	this->unconfirmedSalesTable->setModel( model);
 
-	this->unconfirmedSalesTable->horizontalHeader()->setStretchLastSection(true);
+	this->unconfirmedSalesTable->horizontalHeader()->setStretchLastSection( true);
+	this->unconfirmedSalesTable->horizontalHeader()->setSectionResizeMode( UnconfirmedSalesTableModel::COLUMN_FIO, QHeaderView::ResizeToContents);
 	this->unconfirmedSalesTable->setSelectionBehavior( QAbstractItemView::SelectRows);
 	this->unconfirmedSalesTable->setSelectionMode( QAbstractItemView::SingleSelection);
 
@@ -70,7 +74,10 @@ void SalesPage::initConfirmedSalesTable( QTableView* confirmedSalesTable) {
 	auto model = new ConfirmedSalesTableModel();
 	this->confirmedSalesTable->setModel( model);
 
-	this->confirmedSalesTable->horizontalHeader()->setStretchLastSection(true);
+	this->confirmedSalesTable->horizontalHeader()->setStretchLastSection( true);
+	this->confirmedSalesTable->horizontalHeader()->setSectionResizeMode( ConfirmedSalesTableModel::COLUMN_FIO, QHeaderView::ResizeToContents);
+	this->confirmedSalesTable->horizontalHeader()->setSectionResizeMode( ConfirmedSalesTableModel::COLUMN_DATE, QHeaderView::ResizeToContents);
+	this->confirmedSalesTable->horizontalHeader()->setSectionResizeMode( ConfirmedSalesTableModel::COLUMN_ACTION, QHeaderView::ResizeToContents);
 	this->confirmedSalesTable->setSelectionBehavior( QAbstractItemView::SelectRows);
 	this->confirmedSalesTable->setSelectionMode( QAbstractItemView::SingleSelection);
 

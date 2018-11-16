@@ -24,7 +24,6 @@ public:
     enum Column {
 		COLUMN_ID,
         COLUMN_FIO,
-        COLUMN_DATE,
         COLUMN_NAME,
         COLUMN_COUNT,
         COLUMN_PRICE,

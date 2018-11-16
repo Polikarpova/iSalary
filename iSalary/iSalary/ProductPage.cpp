@@ -43,7 +43,11 @@ void ProductPage::setUI(
 	fillProducts();
 	status = DEFAULT;
 
-	productTable->setEditTriggers(0);
+	this->productTable->setEditTriggers(0);
+	this->productTable->setSelectionBehavior( QAbstractItemView::SelectRows);
+	this->productTable->setSelectionMode( QAbstractItemView::SingleSelection);
+	this->productTable->horizontalHeader()->setStretchLastSection(true);
+
 	connect( this->productTable->selectionModel(), SIGNAL( currentChanged ( const QModelIndex &, const QModelIndex & ) ), this, SLOT( showProduct() ) );
 	connect( this->addProductButton, SIGNAL( clicked() ), this, SLOT( directAddProduct() ) );
 	connect( this->productCancelAddButton, SIGNAL( clicked() ), this, SLOT( directAddProduct() ) );

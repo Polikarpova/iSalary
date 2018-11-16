@@ -8,6 +8,7 @@
 #include <qtableview.h>
 #include <qstandarditemmodel.h>
 #include <qtextcodec.h>
+#include <qheaderview.h>
 
 #include "ProductFacade.h"
 

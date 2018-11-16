@@ -35,9 +35,9 @@ QVariant ManagersSalesTableModel::headerData( int section, Qt::Orientation orien
     case COLUMN_FIO:
         return QString::fromWCharArray( L"ФИО" );
     case COLUMN_CONFIRM_COUNT:
-        return QString::fromWCharArray( L"Кол-во подтвержденных продаж" );
+        return QString::fromWCharArray( L"Кол-во подтвержденных" );
 	case COLUMN_UNCONFIRM_COUNT:
-        return QString::fromWCharArray( L"Кол-во неподтвержденных продаж" );
+        return QString::fromWCharArray( L"Кол-во неподтвержденных" );
     }
  
     return QVariant();
