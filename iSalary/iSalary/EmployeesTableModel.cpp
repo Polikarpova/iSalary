@@ -96,7 +96,7 @@ void EmployeesTableModel::refreshData(const QList<ManagerDTO>& managers){
             const ManagerDTO& manager = managers[i];
             QList<QVariant> row;
         
-            row << manager.secondName + " " + manager.firstName + " " + manager.secondName;
+            row << manager.secondName + " " + manager.firstName + " " + manager.thirdName;
             row << manager.dateOfEmplyment;
             row << manager.id;
             this->managerTable.append( row);
