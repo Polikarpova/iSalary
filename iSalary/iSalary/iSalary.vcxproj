@@ -206,6 +206,7 @@
     <ClCompile Include="SalesFacade.cpp" />
     <ClCompile Include="SalesPage.cpp" />
     <ClCompile Include="Sale_DB.cpp" />
+    <ClCompile Include="Settings.cpp" />
     <ClCompile Include="Test\Test.cpp" />
     <ClCompile Include="Test\test_product_db.cpp" />
     <ClCompile Include="Test\test_user_db.cpp" />
@@ -343,6 +344,22 @@
     <ClInclude Include="SaleDTO.h" />
     <ClInclude Include="SaleFacade.h" />
     <ClInclude Include="SaleInfoDTO.h" />
+    <CustomBuild Include="Settings.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+    </CustomBuild>
     <ClInclude Include="Test\Test.h" />
     <CustomBuild Include="Test\test_product_db.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>

@@ -20,27 +20,45 @@
 #include "ManagerPage.h"
 
 #include "Test\Test.h"
+#include "Settings.h"
+#include <qfile.h>
+#include <qfileinfo.h>
+#include <qdir.h>
 
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
+    QString settingsFilePath( "./Settings/settings.json");
+    QFileInfo settingsFileInfo( settingsFilePath);   
+    QString fullPath = settingsFileInfo.absoluteFilePath();
+    QFile settingsFile( fullPath);
+    Settings settings;
+    if ( settingsFileInfo.exists()) {
+        if ( settingsFileInfo.isFile() && settingsFileInfo.isReadable()) {
+            settings = Settings::read( &settingsFile);
+        } 
+    } else {
+        bool isCreate = QDir::current().mkdir(settingsFileInfo.dir().path());
+        Settings::writeDefault( &settingsFile);
+    }
 
     QSqlDatabase sqlDB;
     
 	sqlDB= QSqlDatabase::addDatabase( "QMYSQL");
-	sqlDB.setHostName( "127.0.0.1");
-    sqlDB.setPort( 3306);
+    sqlDB.setHostName( settings.databaseIP);
+    sqlDB.setPort( settings.databasePort.toInt());
 
 	Test test = Test(sqlDB);
 	test.startTesting();
 
-    sqlDB.setDatabaseName( "mdkp");
+    sqlDB.setDatabaseName( "test");
     sqlDB.setUserName( "root");
     sqlDB.setPassword( "root");
     bool isOpen = sqlDB.open();
 
     if( sqlDB.lastError().type() != QSqlError::NoError){
-        QMessageBox::critical( 0, "Nu epta", sqlDB.lastError().text());
+        QMessageBox::critical( 0, QString::fromWCharArray(L"������ ��� ����������� � ��"), sqlDB.lastError().text());
+        return 0;
     }
 
 	/*freopen("testing.log", "w", stdout);
@@ -91,3 +109,7 @@ int main(int argc, char *argv[])
     return exitCode;
     
 }
+
+    sqlDB.setDatabaseName( settings.databaseName);
+    sqlDB.setUserName( settings.databaseUser);
+    sqlDB.setPassword( settings.databasePassword);
