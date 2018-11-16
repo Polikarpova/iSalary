@@ -81,6 +81,9 @@ bool ManagerValidator::isManagerValid( const Manager& manager, QString* errorOut
     return isValid;
 }
 
+bool ManagerValidator::isLoginExist( const QString& login) {
+    return UserValidator::isLoginExist( login);
+}
 
 ManagerValidator::~ManagerValidator(void) {
 }

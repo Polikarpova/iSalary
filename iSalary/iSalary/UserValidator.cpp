@@ -9,37 +9,37 @@ UserValidator::UserValidator( IUserRepository* userRepository){
 UserValidator::~UserValidator(void){
 }
 
-bool UserValidator::isUserValid( const User& user, QString* errorOutput) {
+bool UserValidator::isUserValid( const User& user, QString* errorOutput, bool checkPassword) {
     QString error("");
     QLinkedList<UserInfo> usersWithSameLogin = this->userRepository->findByLogin( user.getLogin());
     bool isValid = true;
     
 
     if( usersWithSameLogin.size() > 1) {
-        error += QString::fromWCharArray( L"В системе уже зарегестрированно несколько пользователей с заданным логином\n");
+        error += QString::fromWCharArray( L"В системе уже зарегистрированно несколько пользователей с заданным логином\n");
         isValid = false;
     } else if (usersWithSameLogin.size() == 1 && usersWithSameLogin.first().user.getId() != user.getId()) {
         error += QString::fromWCharArray( L"Заданный логин занят - выберите другой\n");
         isValid = false;
     } else {
-        if( user.getLogin().size() < 3) {
-            error += QString::fromWCharArray( L"Слишком короткий логин\n");
-            isValid = false;
-        }
-        if( user.getPassword().size() < 3) { 
-            error += QString::fromWCharArray( L"Слишком короткий пароль\n");
-            isValid = false;
+        if( checkPassword) {
+            if( user.getPassword().size() < 3) { 
+                error += QString::fromWCharArray( L"Слишком короткий пароль\n");
+                isValid = false;
+            }
         }
     }
 
-    
     QRegExp onlyLatin("[a-z]+");
-    bool isPasswordValid = ( onlyLatin.indexIn( user.getPassword()) == 0 
-      && onlyLatin.matchedLength() == user.getPassword().size()); 
+
+    if( checkPassword) {
+        bool isPasswordValid = ( onlyLatin.indexIn( user.getPassword()) == 0 
+          && onlyLatin.matchedLength() == user.getPassword().size()); 
         
-    if( !isPasswordValid) {
-        error += QString::fromWCharArray( L"Пароль должен состоять из символов латинского алфавита\n");
-        isValid = false;
+        if( !isPasswordValid) {
+            error += QString::fromWCharArray( L"Пароль должен состоять из символов латинского алфавита\n");
+            isValid = false;
+        }
     }
 
     bool isLoginValid = onlyLatin.indexIn( user.getLogin()) == 0 
@@ -53,4 +53,10 @@ bool UserValidator::isUserValid( const User& user, QString* errorOutput) {
     *errorOutput = error;
     
     return isValid;
+}
+
+
+bool UserValidator::isLoginExist( const QString& login){
+    QLinkedList<UserInfo> usersWithSameLogin = this->userRepository->findByLogin( login);
+    return usersWithSameLogin.size() > 0;
 }

@@ -10,7 +10,9 @@ public:
     UserValidator(IUserRepository* userRepository);
     ~UserValidator(void);
 
-    bool isUserValid( const User& user, QString* errorOutput);
+    bool isUserValid( const User& user, QString* errorOutput, bool checkPassword = false);
+    
+    bool isLoginExist( const QString& login);
 
 protected:
     IUserRepository* userRepository;

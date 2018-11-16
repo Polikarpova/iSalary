@@ -160,6 +160,8 @@ void EmployeesPage::startAdd() {
     this->buttonStackedWidget->setCurrentIndex( PAGE_BTNS_ADD);
     this->clearInputs();
     this->enableInputs(true);
+    this->loginInput->setEnabled(false);
+    this->passwordInput->setEnabled(false);
 }
 
 void EmployeesPage::saveEdit() {
@@ -319,16 +321,6 @@ bool EmployeesPage::validateInputs() {
 
     if( manager.INN.size() == 0 ) {
         inputError( this->INNInput);
-        isOk = false;
-    }
-
-    if( manager.login.size() == 0 ) {
-        inputError( this->loginInput);
-        isOk = false;
-    }
-
-    if( manager.passwword.size() == 0 ) {
-        inputError( this->passwordInput);
         isOk = false;
     }
 
