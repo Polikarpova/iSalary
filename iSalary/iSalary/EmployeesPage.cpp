@@ -129,7 +129,7 @@ void EmployeesPage::showDetailsById( int managerId) {
     this->firstNameInput->setText( manager.firstName);
     this->secondNameInput->setText( manager.secondName);
     this->thirdNameInput->setText( manager.thirdName);
-    //this->birthdayInput->setDate( manager.dateOfBirth);
+    this->birthdayInput->setDate( manager.dateOfBirth);
     if( manager.sex == MALE) {
         this->maleInput->setChecked( true);
     } else if( manager.sex == FEMALE) {
@@ -139,6 +139,8 @@ void EmployeesPage::showDetailsById( int managerId) {
     this->passportIssueDate->setDate( manager.passportIssueDate);
     this->passportNumberInput->setValue( manager.passportNumber.toInt());
     this->passportSerialInput->setValue( manager.passportSerial.toInt());
+	this->passportSourceInput->setText( manager.passportSource);
+	this->addressInput->setText( manager.address);
 
     this->INNInput->setText( manager.INN);
 
