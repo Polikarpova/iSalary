@@ -84,7 +84,6 @@ private:
     enum BossPage {
         PAGE_EMPLOYEES = 0,
         PAGE_PRODUCTS,
-        PAGE_CORRECTIONS,
         PAGE_SALES,
         PAGE_STATISTIC,
         PAGE_SALARY

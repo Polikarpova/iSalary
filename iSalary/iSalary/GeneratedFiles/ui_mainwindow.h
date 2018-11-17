@@ -29,7 +29,6 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
-#include <QtWidgets/QScrollArea>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStackedWidget>
@@ -163,41 +162,6 @@ public:
     QHBoxLayout *horizontalLayout_8;
     QPushButton *productCancelAddButton;
     QPushButton *productSubmitAddButton;
-    QWidget *tabCorrection;
-    QHBoxLayout *horizontalLayout_7;
-    QVBoxLayout *verticalLayout_11;
-    QLabel *label_32;
-    QLabel *label_33;
-    QHBoxLayout *horizontalLayout_25;
-    QLabel *label_34;
-    QComboBox *accountingPeriodComboBox;
-    QSpacerItem *horizontalSpacer_6;
-    QTableView *saleForCorrectionTable;
-    QVBoxLayout *verticalLayout_12;
-    QLabel *label_35;
-    QFormLayout *formLayout_7;
-    QLabel *label_36;
-    QComboBox *correctionSalerComboBox;
-    QLabel *label_37;
-    QComboBox *correctionProductComboBox;
-    QLabel *label_38;
-    QHBoxLayout *horizontalLayout_5;
-    QSpinBox *correctionPrice;
-    QLabel *label_39;
-    QLabel *label_40;
-    QSpinBox *correctionProductsCount;
-    QLabel *label_41;
-    QHBoxLayout *horizontalLayout_6;
-    QDoubleSpinBox *correctionPercent;
-    QLabel *label_42;
-    QLabel *label_43;
-    QDateEdit *correctionDateOfSale;
-    QHBoxLayout *horizontalLayout_32;
-    QPushButton *correctionDeleteOrRestoreButton;
-    QPushButton *addCorrectionButton;
-    QLabel *label_44;
-    QScrollArea *correctionHistoryList;
-    QWidget *scrollAreaWidgetContents;
     QWidget *tabSales;
     QHBoxLayout *horizontalLayout_35;
     QVBoxLayout *verticalLayout_14;
@@ -938,207 +902,6 @@ public:
         horizontalLayout_4->addLayout(verticalLayout_23);
 
         tabWidget->addTab(tabProducts, QString());
-        tabCorrection = new QWidget();
-        tabCorrection->setObjectName(QStringLiteral("tabCorrection"));
-        horizontalLayout_7 = new QHBoxLayout(tabCorrection);
-        horizontalLayout_7->setSpacing(6);
-        horizontalLayout_7->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
-        verticalLayout_11 = new QVBoxLayout();
-        verticalLayout_11->setSpacing(6);
-        verticalLayout_11->setObjectName(QStringLiteral("verticalLayout_11"));
-        label_32 = new QLabel(tabCorrection);
-        label_32->setObjectName(QStringLiteral("label_32"));
-        label_32->setStyleSheet(QStringLiteral("QLabel { background-color: rgb(225, 225, 225) }"));
-
-        verticalLayout_11->addWidget(label_32);
-
-        label_33 = new QLabel(tabCorrection);
-        label_33->setObjectName(QStringLiteral("label_33"));
-        label_33->setStyleSheet(QStringLiteral("QLabel { background-color: rgb(225, 225, 225) }"));
-
-        verticalLayout_11->addWidget(label_33);
-
-        horizontalLayout_25 = new QHBoxLayout();
-        horizontalLayout_25->setSpacing(6);
-        horizontalLayout_25->setObjectName(QStringLiteral("horizontalLayout_25"));
-        label_34 = new QLabel(tabCorrection);
-        label_34->setObjectName(QStringLiteral("label_34"));
-
-        horizontalLayout_25->addWidget(label_34);
-
-        accountingPeriodComboBox = new QComboBox(tabCorrection);
-        accountingPeriodComboBox->setObjectName(QStringLiteral("accountingPeriodComboBox"));
-
-        horizontalLayout_25->addWidget(accountingPeriodComboBox);
-
-        horizontalSpacer_6 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_25->addItem(horizontalSpacer_6);
-
-
-        verticalLayout_11->addLayout(horizontalLayout_25);
-
-        saleForCorrectionTable = new QTableView(tabCorrection);
-        saleForCorrectionTable->setObjectName(QStringLiteral("saleForCorrectionTable"));
-        saleForCorrectionTable->setShowGrid(true);
-        saleForCorrectionTable->horizontalHeader()->setCascadingSectionResizes(false);
-
-        verticalLayout_11->addWidget(saleForCorrectionTable);
-
-
-        horizontalLayout_7->addLayout(verticalLayout_11);
-
-        verticalLayout_12 = new QVBoxLayout();
-        verticalLayout_12->setSpacing(6);
-        verticalLayout_12->setObjectName(QStringLiteral("verticalLayout_12"));
-        label_35 = new QLabel(tabCorrection);
-        label_35->setObjectName(QStringLiteral("label_35"));
-        label_35->setStyleSheet(QStringLiteral("QLabel { background-color: rgb(225, 225, 225) }"));
-
-        verticalLayout_12->addWidget(label_35);
-
-        formLayout_7 = new QFormLayout();
-        formLayout_7->setSpacing(6);
-        formLayout_7->setObjectName(QStringLiteral("formLayout_7"));
-        label_36 = new QLabel(tabCorrection);
-        label_36->setObjectName(QStringLiteral("label_36"));
-
-        formLayout_7->setWidget(0, QFormLayout::LabelRole, label_36);
-
-        correctionSalerComboBox = new QComboBox(tabCorrection);
-        correctionSalerComboBox->setObjectName(QStringLiteral("correctionSalerComboBox"));
-
-        formLayout_7->setWidget(0, QFormLayout::FieldRole, correctionSalerComboBox);
-
-        label_37 = new QLabel(tabCorrection);
-        label_37->setObjectName(QStringLiteral("label_37"));
-
-        formLayout_7->setWidget(1, QFormLayout::LabelRole, label_37);
-
-        correctionProductComboBox = new QComboBox(tabCorrection);
-        correctionProductComboBox->setObjectName(QStringLiteral("correctionProductComboBox"));
-
-        formLayout_7->setWidget(1, QFormLayout::FieldRole, correctionProductComboBox);
-
-        label_38 = new QLabel(tabCorrection);
-        label_38->setObjectName(QStringLiteral("label_38"));
-
-        formLayout_7->setWidget(2, QFormLayout::LabelRole, label_38);
-
-        horizontalLayout_5 = new QHBoxLayout();
-        horizontalLayout_5->setSpacing(6);
-        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
-        correctionPrice = new QSpinBox(tabCorrection);
-        correctionPrice->setObjectName(QStringLiteral("correctionPrice"));
-        correctionPrice->setMinimum(1);
-        correctionPrice->setMaximum(99999999);
-
-        horizontalLayout_5->addWidget(correctionPrice);
-
-        label_39 = new QLabel(tabCorrection);
-        label_39->setObjectName(QStringLiteral("label_39"));
-        label_39->setMinimumSize(QSize(21, 18));
-        label_39->setMaximumSize(QSize(21, 18));
-
-        horizontalLayout_5->addWidget(label_39);
-
-
-        formLayout_7->setLayout(2, QFormLayout::FieldRole, horizontalLayout_5);
-
-        label_40 = new QLabel(tabCorrection);
-        label_40->setObjectName(QStringLiteral("label_40"));
-
-        formLayout_7->setWidget(3, QFormLayout::LabelRole, label_40);
-
-        correctionProductsCount = new QSpinBox(tabCorrection);
-        correctionProductsCount->setObjectName(QStringLiteral("correctionProductsCount"));
-        correctionProductsCount->setMinimum(1);
-        correctionProductsCount->setMaximum(999);
-
-        formLayout_7->setWidget(3, QFormLayout::FieldRole, correctionProductsCount);
-
-        label_41 = new QLabel(tabCorrection);
-        label_41->setObjectName(QStringLiteral("label_41"));
-
-        formLayout_7->setWidget(4, QFormLayout::LabelRole, label_41);
-
-        horizontalLayout_6 = new QHBoxLayout();
-        horizontalLayout_6->setSpacing(6);
-        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
-        correctionPercent = new QDoubleSpinBox(tabCorrection);
-        correctionPercent->setObjectName(QStringLiteral("correctionPercent"));
-        correctionPercent->setMaximum(100);
-
-        horizontalLayout_6->addWidget(correctionPercent);
-
-        label_42 = new QLabel(tabCorrection);
-        label_42->setObjectName(QStringLiteral("label_42"));
-        label_42->setMinimumSize(QSize(21, 18));
-        label_42->setMaximumSize(QSize(21, 18));
-
-        horizontalLayout_6->addWidget(label_42);
-
-
-        formLayout_7->setLayout(4, QFormLayout::FieldRole, horizontalLayout_6);
-
-        label_43 = new QLabel(tabCorrection);
-        label_43->setObjectName(QStringLiteral("label_43"));
-
-        formLayout_7->setWidget(5, QFormLayout::LabelRole, label_43);
-
-        correctionDateOfSale = new QDateEdit(tabCorrection);
-        correctionDateOfSale->setObjectName(QStringLiteral("correctionDateOfSale"));
-        correctionDateOfSale->setEnabled(true);
-        correctionDateOfSale->setWrapping(false);
-        correctionDateOfSale->setFrame(true);
-        correctionDateOfSale->setButtonSymbols(QAbstractSpinBox::UpDownArrows);
-        correctionDateOfSale->setKeyboardTracking(true);
-        correctionDateOfSale->setProperty("showGroupSeparator", QVariant(false));
-        correctionDateOfSale->setMinimumDate(QDate(1900, 9, 14));
-        correctionDateOfSale->setCalendarPopup(true);
-
-        formLayout_7->setWidget(5, QFormLayout::FieldRole, correctionDateOfSale);
-
-
-        verticalLayout_12->addLayout(formLayout_7);
-
-        horizontalLayout_32 = new QHBoxLayout();
-        horizontalLayout_32->setSpacing(6);
-        horizontalLayout_32->setObjectName(QStringLiteral("horizontalLayout_32"));
-        correctionDeleteOrRestoreButton = new QPushButton(tabCorrection);
-        correctionDeleteOrRestoreButton->setObjectName(QStringLiteral("correctionDeleteOrRestoreButton"));
-
-        horizontalLayout_32->addWidget(correctionDeleteOrRestoreButton);
-
-        addCorrectionButton = new QPushButton(tabCorrection);
-        addCorrectionButton->setObjectName(QStringLiteral("addCorrectionButton"));
-
-        horizontalLayout_32->addWidget(addCorrectionButton);
-
-
-        verticalLayout_12->addLayout(horizontalLayout_32);
-
-        label_44 = new QLabel(tabCorrection);
-        label_44->setObjectName(QStringLiteral("label_44"));
-        label_44->setStyleSheet(QStringLiteral("QLabel { background-color: rgb(225, 225, 225) }"));
-
-        verticalLayout_12->addWidget(label_44);
-
-        correctionHistoryList = new QScrollArea(tabCorrection);
-        correctionHistoryList->setObjectName(QStringLiteral("correctionHistoryList"));
-        correctionHistoryList->setWidgetResizable(true);
-        scrollAreaWidgetContents = new QWidget();
-        scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 98, 28));
-        correctionHistoryList->setWidget(scrollAreaWidgetContents);
-
-        verticalLayout_12->addWidget(correctionHistoryList);
-
-
-        horizontalLayout_7->addLayout(verticalLayout_12);
-
-        tabWidget->addTab(tabCorrection, QString());
         tabSales = new QWidget();
         tabSales->setObjectName(QStringLiteral("tabSales"));
         horizontalLayout_35 = new QHBoxLayout(tabSales);
@@ -1837,18 +1600,7 @@ public:
         QWidget::setTabOrder(cancelProductButton, saveProductButton);
         QWidget::setTabOrder(saveProductButton, productCancelAddButton);
         QWidget::setTabOrder(productCancelAddButton, productSubmitAddButton);
-        QWidget::setTabOrder(productSubmitAddButton, accountingPeriodComboBox);
-        QWidget::setTabOrder(accountingPeriodComboBox, saleForCorrectionTable);
-        QWidget::setTabOrder(saleForCorrectionTable, correctionSalerComboBox);
-        QWidget::setTabOrder(correctionSalerComboBox, correctionProductComboBox);
-        QWidget::setTabOrder(correctionProductComboBox, correctionPrice);
-        QWidget::setTabOrder(correctionPrice, correctionProductsCount);
-        QWidget::setTabOrder(correctionProductsCount, correctionPercent);
-        QWidget::setTabOrder(correctionPercent, correctionDateOfSale);
-        QWidget::setTabOrder(correctionDateOfSale, correctionDeleteOrRestoreButton);
-        QWidget::setTabOrder(correctionDeleteOrRestoreButton, addCorrectionButton);
-        QWidget::setTabOrder(addCorrectionButton, correctionHistoryList);
-        QWidget::setTabOrder(correctionHistoryList, salesDateInput);
+        QWidget::setTabOrder(productSubmitAddButton, salesDateInput);
         QWidget::setTabOrder(salesDateInput, managersSalesTable);
         QWidget::setTabOrder(managersSalesTable, unconfirmedSalesTable);
         QWidget::setTabOrder(unconfirmedSalesTable, confirmedSalesTable);
@@ -1879,9 +1631,9 @@ public:
 
         retranslateUi(MainWindowClass);
 
-        auth_program_stackedWidget->setCurrentIndex(0);
-        boss_manager_stackedWidget->setCurrentIndex(1);
-        tabWidget->setCurrentIndex(2);
+        auth_program_stackedWidget->setCurrentIndex(1);
+        boss_manager_stackedWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(0);
         managersDataTab->setCurrentIndex(0);
         managersButtonsStackedWidget->setCurrentIndex(0);
         productButtonsStackedWidget->setCurrentIndex(0);
@@ -1942,22 +1694,6 @@ public:
         productCancelAddButton->setText(QApplication::translate("MainWindowClass", "\320\236\321\202\320\274\320\265\320\275\320\270\321\202\321\214 \320\264\320\276\320\261\320\260\320\262\320\273\320\265\320\275\320\270\320\265", 0));
         productSubmitAddButton->setText(QApplication::translate("MainWindowClass", "\320\237\320\276\320\264\321\202\320\262\320\265\321\200\320\264\320\270\321\202\321\214 \320\264\320\276\320\261\320\260\320\262\320\273\320\265\320\275\320\270\320\265", 0));
         tabWidget->setTabText(tabWidget->indexOf(tabProducts), QApplication::translate("MainWindowClass", "\320\242\320\276\320\262\320\260\321\200\321\213", 0));
-        label_32->setText(QApplication::translate("MainWindowClass", "<html><head/><body><p align=\"center\"><span style=\" font-size:24pt;\">\320\224\320\260\320\275\320\275\321\213\320\265</span></p></body></html>", 0));
-        label_33->setText(QApplication::translate("MainWindowClass", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt;\">\320\237\320\276\320\264\321\202\320\262\320\265\321\200\320\266\320\264\321\221\320\275\320\275\321\213\320\265 \320\277\321\200\320\276\320\264\320\260\320\266\320\270</span></p></body></html>", 0));
-        label_34->setText(QApplication::translate("MainWindowClass", "\320\240\320\260\321\201\321\207\320\265\321\202\320\275\321\213\320\271 \320\277\320\265\321\200\320\270\320\276\320\264:", 0));
-        label_35->setText(QApplication::translate("MainWindowClass", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt;\">\320\224\320\260\320\275\320\275\321\213\320\265 \320\276 \320\277\321\200\320\276\320\264\320\260\320\266\320\265</span></p></body></html>", 0));
-        label_36->setText(QApplication::translate("MainWindowClass", "\320\237\321\200\320\276\320\264\320\260\320\262\320\265\321\206", 0));
-        label_37->setText(QApplication::translate("MainWindowClass", "\320\242\320\276\320\262\320\260\321\200", 0));
-        label_38->setText(QApplication::translate("MainWindowClass", "\320\241\321\202\320\276\320\270\320\274\320\276\321\201\321\202\321\214", 0));
-        label_39->setText(QApplication::translate("MainWindowClass", "<html><head/><body><p><span style=\" font-size:10pt;\">\342\202\275</span></p></body></html>", 0));
-        label_40->setText(QApplication::translate("MainWindowClass", "\320\232\320\276\320\273\320\270\321\207\320\265\321\201\321\202\320\262\320\276", 0));
-        label_41->setText(QApplication::translate("MainWindowClass", "\320\237\321\200\320\276\321\206\320\265\320\275\321\202 \320\272\320\276\320\274\320\270\321\201\321\201\320\270\320\270", 0));
-        label_42->setText(QApplication::translate("MainWindowClass", "<html><head/><body><p><span style=\" font-size:10pt;\">%</span></p></body></html>", 0));
-        label_43->setText(QApplication::translate("MainWindowClass", "\320\224\320\260\321\202\320\260 \320\277\321\200\320\276\320\264\320\260\320\266\320\270", 0));
-        correctionDeleteOrRestoreButton->setText(QApplication::translate("MainWindowClass", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214", 0));
-        addCorrectionButton->setText(QApplication::translate("MainWindowClass", "\320\241\320\272\320\276\321\200\321\200\320\265\320\272\321\202\320\270\321\200\320\276\320\262\320\260\321\202\321\214", 0));
-        label_44->setText(QApplication::translate("MainWindowClass", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt;\">\320\230\321\201\321\202\320\276\321\200\320\270\321\217 \320\272\320\276\321\200\321\200\320\265\320\272\321\202\320\270\321\200\320\276\320\262\320\276\320\272</span></p></body></html>", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tabCorrection), QApplication::translate("MainWindowClass", "\320\232\320\276\321\200\321\200\320\265\320\272\321\202\320\270\321\200\320\276\320\262\320\272\320\270", 0));
         label_46->setText(QApplication::translate("MainWindowClass", "<html><head/><body><p align=\"center\"><span style=\" font-size:24pt;\">\320\241\320\276\321\202\321\200\321\203\320\264\320\275\320\270\320\272\320\270</span></p></body></html>", 0));
         label_45->setText(QApplication::translate("MainWindowClass", "\320\224\320\260\321\202\320\260", 0));
         label_48->setText(QApplication::translate("MainWindowClass", "<html><head/><body><p align=\"center\"><span style=\" font-size:24pt;\">\320\237\321\200\320\276\320\264\320\260\320\266\320\270</span></p></body></html>", 0));

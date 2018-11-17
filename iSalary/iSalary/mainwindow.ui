@@ -21,7 +21,7 @@
     <item>
      <widget class="QStackedWidget" name="auth_program_stackedWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="enter">
        <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -172,7 +172,7 @@
         <item>
          <widget class="QStackedWidget" name="boss_manager_stackedWidget">
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="owner">
            <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -185,7 +185,7 @@
                <enum>QTabWidget::Rounded</enum>
               </property>
               <property name="currentIndex">
-               <number>2</number>
+               <number>0</number>
               </property>
               <property name="elideMode">
                <enum>Qt::ElideMiddle</enum>
@@ -958,290 +958,6 @@
                        </widget>
                       </item>
                      </layout>
-                    </widget>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-               </layout>
-              </widget>
-              <widget class="QWidget" name="tabCorrection">
-               <attribute name="title">
-                <string>Корректировки</string>
-               </attribute>
-               <layout class="QHBoxLayout" name="horizontalLayout_7">
-                <item>
-                 <layout class="QVBoxLayout" name="verticalLayout_11">
-                  <item>
-                   <widget class="QLabel" name="label_32">
-                    <property name="styleSheet">
-                     <string notr="true">QLabel { background-color: rgb(225, 225, 225) }</string>
-                    </property>
-                    <property name="text">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:24pt;&quot;&gt;Данные&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLabel" name="label_33">
-                    <property name="styleSheet">
-                     <string notr="true">QLabel { background-color: rgb(225, 225, 225) }</string>
-                    </property>
-                    <property name="text">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Подтверждённые продажи&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <layout class="QHBoxLayout" name="horizontalLayout_25">
-                    <item>
-                     <widget class="QLabel" name="label_34">
-                      <property name="text">
-                       <string>Расчетный период:</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QComboBox" name="accountingPeriodComboBox"/>
-                    </item>
-                    <item>
-                     <spacer name="horizontalSpacer_6">
-                      <property name="orientation">
-                       <enum>Qt::Horizontal</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0">
-                       <size>
-                        <width>40</width>
-                        <height>20</height>
-                       </size>
-                      </property>
-                     </spacer>
-                    </item>
-                   </layout>
-                  </item>
-                  <item>
-                   <widget class="QTableView" name="saleForCorrectionTable">
-                    <property name="showGrid">
-                     <bool>true</bool>
-                    </property>
-                    <attribute name="horizontalHeaderCascadingSectionResizes">
-                     <bool>false</bool>
-                    </attribute>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QVBoxLayout" name="verticalLayout_12">
-                  <item>
-                   <widget class="QLabel" name="label_35">
-                    <property name="styleSheet">
-                     <string notr="true">QLabel { background-color: rgb(225, 225, 225) }</string>
-                    </property>
-                    <property name="text">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Данные о продаже&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <layout class="QFormLayout" name="formLayout_7">
-                    <item row="0" column="0">
-                     <widget class="QLabel" name="label_36">
-                      <property name="text">
-                       <string>Продавец</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="0" column="1">
-                     <widget class="QComboBox" name="correctionSalerComboBox"/>
-                    </item>
-                    <item row="1" column="0">
-                     <widget class="QLabel" name="label_37">
-                      <property name="text">
-                       <string>Товар</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="1" column="1">
-                     <widget class="QComboBox" name="correctionProductComboBox"/>
-                    </item>
-                    <item row="2" column="0">
-                     <widget class="QLabel" name="label_38">
-                      <property name="text">
-                       <string>Стоимость</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="2" column="1">
-                     <layout class="QHBoxLayout" name="horizontalLayout_5">
-                      <item>
-                       <widget class="QSpinBox" name="correctionPrice">
-                        <property name="minimum">
-                         <number>1</number>
-                        </property>
-                        <property name="maximum">
-                         <number>99999999</number>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QLabel" name="label_39">
-                        <property name="minimumSize">
-                         <size>
-                          <width>21</width>
-                          <height>18</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize">
-                         <size>
-                          <width>21</width>
-                          <height>18</height>
-                         </size>
-                        </property>
-                        <property name="text">
-                         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;₽&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </item>
-                    <item row="3" column="0">
-                     <widget class="QLabel" name="label_40">
-                      <property name="text">
-                       <string>Количество</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="3" column="1">
-                     <widget class="QSpinBox" name="correctionProductsCount">
-                      <property name="minimum">
-                       <number>1</number>
-                      </property>
-                      <property name="maximum">
-                       <number>999</number>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="4" column="0">
-                     <widget class="QLabel" name="label_41">
-                      <property name="text">
-                       <string>Процент комиссии</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="4" column="1">
-                     <layout class="QHBoxLayout" name="horizontalLayout_6">
-                      <item>
-                       <widget class="QDoubleSpinBox" name="correctionPercent">
-                        <property name="maximum">
-                         <double>100.000000000000000</double>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QLabel" name="label_42">
-                        <property name="minimumSize">
-                         <size>
-                          <width>21</width>
-                          <height>18</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize">
-                         <size>
-                          <width>21</width>
-                          <height>18</height>
-                         </size>
-                        </property>
-                        <property name="text">
-                         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;%&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </item>
-                    <item row="5" column="0">
-                     <widget class="QLabel" name="label_43">
-                      <property name="text">
-                       <string>Дата продажи</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="5" column="1">
-                     <widget class="QDateEdit" name="correctionDateOfSale">
-                      <property name="enabled">
-                       <bool>true</bool>
-                      </property>
-                      <property name="wrapping">
-                       <bool>false</bool>
-                      </property>
-                      <property name="frame">
-                       <bool>true</bool>
-                      </property>
-                      <property name="buttonSymbols">
-                       <enum>QAbstractSpinBox::UpDownArrows</enum>
-                      </property>
-                      <property name="keyboardTracking">
-                       <bool>true</bool>
-                      </property>
-                      <property name="showGroupSeparator" stdset="0">
-                       <bool>false</bool>
-                      </property>
-                      <property name="minimumDate">
-                       <date>
-                        <year>1900</year>
-                        <month>9</month>
-                        <day>14</day>
-                       </date>
-                      </property>
-                      <property name="calendarPopup">
-                       <bool>true</bool>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                  <item>
-                   <layout class="QHBoxLayout" name="horizontalLayout_32">
-                    <item>
-                     <widget class="QPushButton" name="correctionDeleteOrRestoreButton">
-                      <property name="text">
-                       <string>Удалить</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QPushButton" name="addCorrectionButton">
-                      <property name="text">
-                       <string>Скорректировать</string>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                  <item>
-                   <widget class="QLabel" name="label_44">
-                    <property name="styleSheet">
-                     <string notr="true">QLabel { background-color: rgb(225, 225, 225) }</string>
-                    </property>
-                    <property name="text">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;История корректировок&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QScrollArea" name="correctionHistoryList">
-                    <property name="widgetResizable">
-                     <bool>true</bool>
-                    </property>
-                    <widget class="QWidget" name="scrollAreaWidgetContents">
-                     <property name="geometry">
-                      <rect>
-                       <x>0</x>
-                       <y>0</y>
-                       <width>98</width>
-                       <height>28</height>
-                      </rect>
-                     </property>
                     </widget>
                    </widget>
                   </item>
@@ -2306,17 +2022,6 @@
   <tabstop>saveProductButton</tabstop>
   <tabstop>productCancelAddButton</tabstop>
   <tabstop>productSubmitAddButton</tabstop>
-  <tabstop>accountingPeriodComboBox</tabstop>
-  <tabstop>saleForCorrectionTable</tabstop>
-  <tabstop>correctionSalerComboBox</tabstop>
-  <tabstop>correctionProductComboBox</tabstop>
-  <tabstop>correctionPrice</tabstop>
-  <tabstop>correctionProductsCount</tabstop>
-  <tabstop>correctionPercent</tabstop>
-  <tabstop>correctionDateOfSale</tabstop>
-  <tabstop>correctionDeleteOrRestoreButton</tabstop>
-  <tabstop>addCorrectionButton</tabstop>
-  <tabstop>correctionHistoryList</tabstop>
   <tabstop>salesDateInput</tabstop>
   <tabstop>managersSalesTable</tabstop>
   <tabstop>unconfirmedSalesTable</tabstop>

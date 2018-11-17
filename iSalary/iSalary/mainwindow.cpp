@@ -3,10 +3,8 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
 	ui.setupUi(this);
 	
 	//блокировка вкладки корректировки
-	ui.tabWidget->setTabEnabled(2, false);
-	ui.tabWidget->setTabEnabled(4, false);
-	ui.tabWidget->setTabToolTip(2, "Реализация отменена");
-	ui.tabWidget->setTabToolTip(4, "Заблокировано до лучших времен");
+	ui.tabWidget->setTabEnabled(PAGE_STATISTIC, false);
+	ui.tabWidget->setTabToolTip(PAGE_STATISTIC, "Заблокировано до лучших времен");
 
     ui.auth_program_stackedWidget->setCurrentIndex( AUTH_WIDGET);
 
@@ -128,7 +126,6 @@ void MainWindow::createHorizontalTabs() {
 	QStringList tabs_text;
     tabs_text.push_back( toUnicode("Сотрудники"));
     tabs_text.push_back( toUnicode("Товары"));
-    tabs_text.push_back( toUnicode("Корректировки"));
     tabs_text.push_back( toUnicode("Продажи"));
     tabs_text.push_back( toUnicode("Статистика"));
     tabs_text.push_back( toUnicode("Зарплата"));
@@ -160,7 +157,7 @@ void MainWindow::refreshBossPage( int page){
 }
 
 void MainWindow::exit(){
-	if( QMessageBox::Yes == QMessageBox::question(this, "Выход", "Вы уверены, что хотите выйти?", QMessageBox::StandardButton::Yes|QMessageBox::No) ) {
+	if( QMessageBox::Yes == QMessageBox::question(this, "Выход", "Вы уверены, что хотите выйти?", QMessageBox::Yes|QMessageBox::No) ) {
 
 		ui.auth_program_stackedWidget->setCurrentIndex( AUTH_WIDGET);
 	}
