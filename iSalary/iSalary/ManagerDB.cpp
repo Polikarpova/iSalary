@@ -22,7 +22,7 @@ void ManagerDB::init() {
     this->emailField = "email";
     this->mobileNumberField = "mobileNumber";
     this->dateOfEmploymentField = "dateOfEmployment";
-    this->dateOfBitrthField = "dateOfBitrth";
+    this->dateOfBitrthField = "dateOfBirth";
 }
 
 Manager ManagerDB::getById( int id) {
@@ -76,6 +76,53 @@ Manager ManagerDB::getById( int id) {
         manager = this->readOneRecord(query);
         manager.setLogin( user.user.getLogin());
         manager.setPassword( user.user.getPassword());
+    } else { 
+        handleError(QString::fromWCharArray(L"Запись не найдена"));
+    }
+
+    return manager;
+}
+
+ManagerDTO ManagerDB::getManagerInfoById( int id) {
+
+	QString sql = "SELECT `%1`, `%2`, `%3`, `%4`, `%5`, `%6`, `%7`, `%8`, `%9`, `%10`, `%11`, `%12`, `%13`, `%14`,`%15`,`%21` FROM %0 WHERE `%21` = :%21";
+    sql = sql.arg(
+        this->tableName,
+        this->firstNameField,
+        this->secondNameField,
+        this->thirdNameField,
+        this->sexField,
+        this->passportSerialField,
+        this->passportNumberField
+    );
+    sql = sql.arg(
+        this->passportIssueDateField,
+        this->addressField,
+        this->INNField,
+        this->emailField,
+        this->mobileNumberField,
+        this->dateOfEmploymentField
+    );
+    sql = sql.arg(
+        this->addressField,
+        this->passportSourceField,
+        this->dateOfBitrthField
+    );
+    sql = sql.arg(
+        UserDB::idField
+    );
+
+    QSqlQuery query( *this->db);
+    query.prepare( sql);
+
+    query.bindValue( ":" + UserDB::idField, id);
+
+    this->execQuery( query);
+
+    ManagerDTO manager;
+
+    if( query.next()) {
+		manager = this->readRecordToDTO( query);
     } else { 
         handleError(QString::fromWCharArray(L"Запись не найдена"));
     }
@@ -294,6 +341,27 @@ Manager ManagerDB::readOneRecord( const QSqlQuery& query) {
     manager.setDateOfBirth( query.value( this->dateOfBitrthField).value<QDate>());
     Sex sex = static_cast<Sex>( query.value( this->sexField).value<int>());
     manager.setSex( sex);
+
+    return manager;
+}
+
+ManagerDTO ManagerDB::readRecordToDTO( const QSqlQuery& query) {
+
+    ManagerDTO manager;
+	manager.id = query.value( this->idField).value<int>();
+	manager.firstName = query.value( this->firstNameField).value<QString>();
+	manager.secondName = query.value( this->secondNameField).value<QString>();
+	manager.thirdName = query.value( this->thirdNameField).value<QString>();
+	manager.dateOfBirth = QDate::fromString( query.value( this->dateOfBitrthField).value<QString>(), Qt::ISODate);
+	manager.sex = static_cast<Sex>( query.value( this->sexField).value<int>());
+	manager.passportSerial = query.value( this->passportSerialField).value<QString>();
+	manager.passportNumber = query.value( this->passportNumberField).value<QString>();
+	manager.passportIssueDate = QDate::fromString( query.value( this->passportIssueDateField).value<QString>(), Qt::ISODate);
+	manager.address = query.value( this->addressField).value<QString>();
+	manager.address = query.value( this->addressField).value<QString>();
+	manager.INN = query.value( this->INNField).value<QString>();
+	manager.email = query.value( this->emailField).value<QString>();
+	manager.dateOfEmplyment = QDate::fromString( query.value( this->dateOfEmploymentField).value<QString>(), Qt::ISODate);
 
     return manager;
 }

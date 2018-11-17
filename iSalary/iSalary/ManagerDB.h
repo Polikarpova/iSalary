@@ -8,6 +8,8 @@
 #include "UserDB.h"
 #include "IManagerRepository.h"
 
+#include "ManagerDTO.h"
+
 class ManagerDB : protected UserDB, public IManagerRepository
 {
 public:
@@ -27,6 +29,14 @@ public:
     * @return ˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜ ˜ ˜˜˜˜˜˜˜˜ id
     */ 
     Manager getById( int id);
+
+	/**
+    * ˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜ ˜ ˜˜˜˜˜˜˜˜˜ ˜˜ ˜˜ ˜˜ ˜˜˜ ID
+    * @throws TODO: SQLException
+    * @throws ˜˜˜˜˜˜ ˜˜ ˜˜˜˜˜˜˜
+    * @return ˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜ ˜ ˜˜˜˜˜˜˜˜ id
+    */ 
+    ManagerDTO getManagerInfoById( int id);
 
     /**
     * ˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜ ˜˜˜˜˜˜˜ ˜ ˜˜˜˜˜˜˜˜˜˜ ˜˜ ˜˜ ˜˜ ˜˜˜ ID
@@ -88,5 +98,6 @@ private:
     void init();
 
     Manager readOneRecord( const QSqlQuery& query);
+    ManagerDTO readRecordToDTO( const QSqlQuery& query);
 };
 

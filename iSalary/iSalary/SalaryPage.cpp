@@ -6,13 +6,13 @@ SalaryPage::SalaryPage( SalesFacade * salesFacade, PersonnalAccountingFacade* pe
 }
 
 SalaryPage::~SalaryPage( void) {
-
 }
 
 void SalaryPage::refreshPage() {
 
 	//обновление таблиц
 	//очищение виджетов(?)
+	this->showSelectedPeriod();
 }
 
 void SalaryPage::setErrorHandler( ErrorMessageHandler* errorHandler) {
@@ -101,7 +101,7 @@ void SalaryPage::initSalaryTable (QTableView* salaryTable) {
 	this->salaryTable->setSelectionMode( QAbstractItemView::SingleSelection);
 
 	//скрытие поля с id
-	//this->salaryTable->setColumnHidden( SalaryTableModel::COLUMN_ID, true);
+	this->salaryTable->setColumnHidden( SalaryTableModel::COLUMN_ID, true);
 
 	connect( this->salaryTable, &QTableView::clicked, this, &SalaryPage::showManager);
 }
@@ -121,17 +121,43 @@ void SalaryPage::initSalaryTotalTable (QTableView* salaryTotalTable) {
 	this->salaryTotalTable->setColumnHidden( SalaryTotalTableModel::COLUMN_ID, true);
 }
 
+int SalaryPage::getSelectedManagerId() {
+
+	auto model = static_cast<SalaryTableModel*>( this->salaryTable->model());
+	return model->getRecordId( this->salaryTable->currentIndex().row());
+}
+
 //====SLOTS====//
 void SalaryPage::showManager() {
 
-	//заполнить поля в форме
+	ManagerDTO m;
+
+	try {
+	
+		int id = this->getSelectedManagerId();
+		m = this->salesFacade->getManagerInfo( id);
+	} catch( QString* error) {
+	
+		this->errorHandler->handleError( error);
+	}
+
+	this->managerFIOLabel->setText( m.secondName + " " + m.firstName + " " + m.thirdName );
+	this->salaryPasportSeries->setValue( m.passportSerial.toInt());
+	this->salaryPasportNumber->setValue( m.passportNumber.toInt());
+	this->salaryPasportSourse->setText( m.passportSource);
+	this->salaryDateOfReceipt->setDate( m.passportIssueDate);
+	if( m.sex == MALE) {
+        this->salaryMaleRButton->setChecked( true);
+    } else if( m.sex == FEMALE) {
+		this->salaryFemaleRButton->setChecked( true);
+    }
+	this->salaryINN->setText( m.INN);
+
 	//настроить кнопочкам property, чтоб перенаправляли, но на 1ый релиз их мы не делаем
-	QMessageBox::information(0, QString::fromWCharArray(L"Менеджер"), QString::fromWCharArray(L"Показываю инфу о менеджере справа"));
 }
 
 void SalaryPage::showSelectedPeriod() {
 	
-	//QMessageBox::information(0, QString::fromWCharArray(L"Таблица"), QString::fromWCharArray(L"Показываю таблицу для выбранного РП"));
 	//получаем нужную инфу из фасада(бд)
 	QList<ManagerSalaryDTO> list;
 

@@ -12,7 +12,6 @@ void SalesFacade::confirmSale( const ActiveSaleDTO& sale) {
 	this->s->confirmSale( sale.id);
 }
 
-
 void SalesFacade::cancelConfirmSale( const ActiveSaleDTO& sale) {
 
 	this->s->unconfirmSale ( sale.id);
@@ -71,4 +70,9 @@ QList<ManagerSalaryDTO> SalesFacade::getManagersSalary( QDate dateFrom, QDate da
 QList<AccoutingPeriodDTO> SalesFacade::getAllAccoutingPeriods() {
 
 	return this->ap->getAllPeriods();
+}
+
+ManagerDTO SalesFacade::getManagerInfo( int id) {
+
+	return this->m->getManagerInfoById( id);
 }

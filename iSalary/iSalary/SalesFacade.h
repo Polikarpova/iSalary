@@ -11,6 +11,7 @@
 #include "SaleInfoDTO.h"
 #include "ManagerSalaryDTO.h"
 #include "AccoutingPeriodDTO.h"
+#include "ManagerDTO.h"
 
 /**
 * Класс, предоставляющий доступ к функциям приложения, связанным с продажами
@@ -66,6 +67,13 @@ public:
 	* @return список со всеми РП. Список никогда не должен возвращаться пустым, так как всегда есть хотя бы один РП (он же будет текущим)
 	*/
 	QList<AccoutingPeriodDTO> getAllAccoutingPeriods();
+
+	/**
+	* Возвращает информация о менеджере по id
+	* @param id - идентификатор искомого менеджера
+	* @return информацией о менеджере, или null, если менеджер не найден
+	*/
+	ManagerDTO getManagerInfo( int id);
 
 private:
 

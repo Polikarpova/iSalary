@@ -24,6 +24,8 @@
 #include <qmodelindex>
 #include <qabstractitemview.h>
 
+#include "ManagerDTO.h"
+
 class SalaryPage : public QObject{
     Q_OBJECT
 public:
@@ -64,17 +66,11 @@ protected:
 	*/
 	void initSalaryTotalTable( QTableView* salaryTotalTable);
 	
-	//
-	//int getSelectedManagerSalesId();
-	//int getSelectedUnconfirmedSalesId();
-	//int getSelectedConfirmedSalesId();
-
 	/**
-    * Обновление таблицы со списком менежеров и инормацией об активных продажах
-    */
-	//void updateManagersTable();
-	//void updateUnconfirmedTable();
-	//void updateConfirmedTable();
+	* Возвращает id менеджера, выбранно в таблице со списком менеджеров и их зарплат
+	* @return идентификатор менеджера
+	*/
+	int getSelectedManagerId();
 	
 private:
 	ErrorMessageHandler* errorHandler;

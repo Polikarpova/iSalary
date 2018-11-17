@@ -59,6 +59,11 @@ void ProductPage::setUI(
 	connect( this->searchButton, SIGNAL( clicked() ), this, SLOT( searchProduct() ) );
 }
 
+void ProductPage::refreshPage() {
+
+	this->fillProducts();
+}
+
 void ProductPage::setInputsEnabledPageProducts( bool isEnabled ) {
 	productNameInput->setEnabled( isEnabled );
 	productPercentInput->setEnabled( isEnabled );

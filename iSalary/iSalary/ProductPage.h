@@ -32,6 +32,7 @@ public:
 		QPushButton *productCancelAddButton,
 		QPushButton *productSubmitAddButton
 	);
+	void refreshPage();
 
 private:
 	ProductFacade *productFacade;

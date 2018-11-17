@@ -1,0 +1,7 @@
+{
+    "databaseIP": "127.0.0.1",
+    "databaseName": "mdkp",
+    "databasePassword": "root",
+    "databasePort": "3306",
+    "databaseUser": "root"
+}

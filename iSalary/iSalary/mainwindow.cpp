@@ -117,7 +117,8 @@ void MainWindow::enterProgram( const UserDTO& user, UserType userType){
 		this->managerPage->refreshPage();
     } else if ( userType == BOSS ){
         ui.boss_manager_stackedWidget->setCurrentIndex( BOSS_WIDGET);
-        this->refreshBossPage(0);
+		ui.tabWidget->setCurrentIndex(PAGE_EMPLOYEES);
+        this->refreshBossPage(PAGE_EMPLOYEES);
     }
     ui.auth_program_stackedWidget->setCurrentIndex( PROGRAM_WIDGET);
 }
@@ -151,6 +152,7 @@ void MainWindow::refreshBossPage( int page){
 
     switch( page){
         case PAGE_EMPLOYEES: this->employeesPage->refreshList(); break;
+		case PAGE_PRODUCTS: this->productPage->refreshPage(); break;
 		case PAGE_SALES: this->salesPage->refreshPage(); break;
 		case PAGE_SALARY: this->salaryPage->refreshPage(); break;
         default:;

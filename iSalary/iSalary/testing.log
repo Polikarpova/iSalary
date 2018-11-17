@@ -14,11 +14,20 @@ Totals: 6 passed, 0 failed, 0 skipped, 0 blacklisted
 ********* Start testing of Test_User_DB *********
 Config: Using QtTest library 5.5.1, Qt 5.5.1 (i386-little_endian-ilp32 shared (dynamic) debug build; by MSVC 2010)
 PASS   : Test_User_DB::initTestCase()
-PASS   : Test_User_DB::insert()
+FAIL!  : Test_User_DB::insert() Compared values are not the same
+   Actual   (res_user.user.getId()): 972
+   Expected (exp_user.user.getId()): 1009
+Test\test_user_db.cpp(20) : failure location
 PASS   : Test_User_DB::getById()
 PASS   : Test_User_DB::getByIds()
-PASS   : Test_User_DB::findByLogin()
-PASS   : Test_User_DB::findByLoginPassword()
+FAIL!  : Test_User_DB::findByLogin() Compared values are not the same
+   Actual   (res_user.user.getId()): 972
+   Expected (exp_user.user.getId()): 1016
+Test\test_user_db.cpp(20) : failure location
+FAIL!  : Test_User_DB::findByLoginPassword() Compared values are not the same
+   Actual   (res_user.user.getId()): 972
+   Expected (exp_user.user.getId()): 1017
+Test\test_user_db.cpp(20) : failure location
 PASS   : Test_User_DB::cleanupTestCase()
-Totals: 7 passed, 0 failed, 0 skipped, 0 blacklisted
+Totals: 4 passed, 3 failed, 0 skipped, 0 blacklisted
 ********* Finished testing of Test_User_DB *********
