@@ -308,6 +308,12 @@
     <ClCompile Include="Settings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AccoutingPeriod.cpp">
+      <Filter>Source Files\Model\DomainModel\PersonnelAccountingModule\SalesModule</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenAccoutingPeriod.cpp">
+      <Filter>Source Files\Model\DomainModel\PersonnelAccountingModule\SalesModule</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">

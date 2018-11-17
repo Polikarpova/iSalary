@@ -83,7 +83,7 @@ void ManagerPage::clearManagersConfirmedSalesTable() {
 void ManagerPage::fillManagersConfirmedSalesTable() {
     clearManagersConfirmedSalesTable();
 	
-	SaleDTO result = saleFacade->getActiveSales( current_manager_id );
+	SaleDTO result = saleFacade->getActiveSalesInCurrentPeriod( current_manager_id );
 	if ( result.isSuccess == true ) {
 		int allCount = 0, lastRow = 0;
 		double allCost = 0, salary = 0;

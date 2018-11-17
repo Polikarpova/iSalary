@@ -16,10 +16,10 @@ void AccoutingPeriodDB::init() {
 	query.prepare( "CREATE TABLE  IF NOT EXISTS `" + this->tableName + "` ( `id` int(11) NOT NULL AUTO_INCREMENT, `dataFrom` date NOT NULL, `dataTo` date DEFAULT NULL, `status` int(11) NOT NULL, PRIMARY KEY (`id`) ) ENGINE=InnoDB DEFAULT CHARSET=latin1;" );
 	this->execQuery( query);
 
-	this->initFirstAccountingPeriod();
+	this->initAccountingPeriod();
 }
 
-void AccoutingPeriodDB::initFirstAccountingPeriod() {
+void AccoutingPeriodDB::initAccountingPeriod() {
 
 	QString sql = "select * from accouting_period";
 	QSqlQuery query( *db );
@@ -28,16 +28,22 @@ void AccoutingPeriodDB::initFirstAccountingPeriod() {
 
 	if ( !query.next()) {
 	
-		QString date = QDate(QDate::currentDate().year(), QDate::currentDate().month(), 1 ).toString(Qt::ISODate);
-		sql = "INSERT INTO `accouting_period` (`dateFrom`, `status`) VALUES (\"" + date + QString("\", 1);");
-		query.prepare( sql);
+		this->openAccountingPeriod();
+	}
+}
+
+void AccoutingPeriodDB::openAccountingPeriod() {
+
+	QString date = QDate(QDate::currentDate().year(), QDate::currentDate().month(), 1 ).toString(Qt::ISODate);
+	QString sql = "INSERT INTO `accouting_period` (`dateFrom`, `status`) VALUES (\"" + date + QString("\", 1);");
+	QSqlQuery query( *db);
+	query.prepare( sql);
 		
-		try {
-			this->execQuery( query);
-		} catch ( ... ) {
+	try {
+		this->execQuery( query);
+	} catch ( ... ) {
 			
-			//QMessageBox::information(0, "Текущий РП", "Невозможно создать текущий РП. Обратитесь к разработчикам.");
-		}
+		//QMessageBox::information(0, "Текущий РП", "Невозможно создать текущий РП. Обратитесь к разработчикам.");
 	}
 }
 
@@ -62,6 +68,39 @@ QList<AccoutingPeriodDTO> AccoutingPeriodDB::getAllPeriods() {
 	}
 
 	return result;
+}
+
+AccoutingPeriodDTO AccoutingPeriodDB::getCurrentPeriod() {
+
+	QString sql = "select * from accouting_period order by id desc limit 1";
+	QSqlQuery query( *db );
+	query.prepare( sql);
+	this->execQuery( query);
+
+	AccoutingPeriodDTO result;
+
+	while ( query.next() ) {
+
+		int id = query.value("id").value<int>();
+		QDate dateFrom = QDate::fromString( query.value("dateFrom").value<QString>(), Qt::ISODate);
+		
+		result.id = id;
+		result.dateFrom = dateFrom;
+	}
+
+	return result;
+}
+
+void AccoutingPeriodDB::closePeriod( int id, QDate dateFrom) {
+
+	QString sql = "UPDATE `accouting_period` SET `dateTo` = :date, `status` = 0 WHERE `id` = :id;";
+	QSqlQuery query( *db );
+	query.prepare( sql);
+
+	QDate date(dateFrom.year(), dateFrom.month(), dateFrom.daysInMonth());
+	query.bindValue(":date", date);
+	query.bindValue(":id", id);
+	this->execQuery( query);
 }
 
 void AccoutingPeriodDB::execQuery( QSqlQuery& query) const {

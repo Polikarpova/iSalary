@@ -36,6 +36,21 @@ SaleDTO SalesFacade::getActiveSales( int manager_id ) {
 	return result;
 }
 
+SaleDTO SalesFacade::getActiveSalesInCurrentPeriod( int manager_id ) {
+	
+	AccoutingPeriodDTO currentAP = this->ap->getCurrentPeriod();
+	
+	QVector<ActiveSale>activeSales = this->s->getActiveAllInPeriod( manager_id, currentAP.dateFrom);
+	SaleDTO result;
+	result.activeSales = activeSales;
+	result.isEmpty = false;
+	if ( activeSales.size() == 0 )
+		result.isEmpty = true;
+	bool isSuccess = true;
+	result.isSuccess = isSuccess;
+	return result;
+}
+
 void SalesFacade::confirmSale( const ActiveSaleDTO& sale) {
 
 	this->s->confirmSale( sale.id);

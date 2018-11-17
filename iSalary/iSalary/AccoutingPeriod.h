@@ -28,7 +28,7 @@ public:
 	/**
 	* Деструктор
 	*/
-	virtual ~AccoutingPeriod() = 0 {}
+	virtual ~AccoutingPeriod() = 0 {};
 
 	/**
 	* Считает зарплату для одного менеджера
@@ -36,6 +36,9 @@ public:
 	* @return - объект с информацией о зарплате в за определённый расчетный период
 	*/
     Salary calcSalary( Manager& m);
+
+	void setId( int id);
+	void setDateFrom( QDate dateFrom);
 
 private:
 

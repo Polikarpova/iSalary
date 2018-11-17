@@ -27,6 +27,8 @@ public:
 	SaleDTO removeActiveSale( int id );
 	SaleDTO getActiveSales( int manager_id );
 
+	SaleDTO getActiveSalesInCurrentPeriod( int manager_id );
+
 	/**
 	* Метод подтверждает определённую продажу
 	* sale - продажа, которая должна быть подтверждена

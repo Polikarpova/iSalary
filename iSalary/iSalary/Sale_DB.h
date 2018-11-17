@@ -23,7 +23,10 @@ public:
 	bool create( ActiveSale sale );
 	bool remove( int id );
 	void fillSale( ActiveSale & sale, const QSqlQuery * sqlQuery );
+	
 	QVector<ActiveSale> getActiveAll( int manager_id );
+
+	QVector<ActiveSale> getActiveAllInPeriod( int manager_id, QDate dateFrom );
 	
 	/**
     * ˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜ ˜ ˜˜˜˜˜˜˜ ˜˜ ˜˜ ˜˜ ˜˜˜ ID

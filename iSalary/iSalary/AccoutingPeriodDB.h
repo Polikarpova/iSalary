@@ -28,7 +28,7 @@ public:
 	* Возвращает объект с текущим открытым РП
 	* @return - объект с текущим РП
 	*/
-    OpenAccoutingPeriod getCurrentPeriod();
+    AccoutingPeriodDTO getCurrentPeriod();
 
 	/**
 	* Возвращает искомый РП (открытый или закрытый) по идентификатору
@@ -101,7 +101,11 @@ protected:
 	* Создает самый первый рассчетный период, если в БД нет ни одного периода
 	* Период инициализируется текущим месяцем
 	*/
-	void initFirstAccountingPeriod();
+	void initAccountingPeriod();
+
+	void openAccountingPeriod();
+
+	void closePeriod( int id, QDate dateFrom);
 
 private:
 

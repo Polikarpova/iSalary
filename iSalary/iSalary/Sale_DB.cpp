@@ -80,6 +80,28 @@ QVector<ActiveSale> Sale_DB::getActiveAll( int manager_id ) {
     return sales;
 }
 
+QVector<ActiveSale> Sale_DB::getActiveAllInPeriod( int manager_id, QDate dateFrom ) {
+    
+	QString sql = QString( "SELECT * FROM " ) + TABLE_NAME + QString(" WHERE confirmDate >= \"") + dateFrom.toString(Qt::ISODate) + QString("\"");
+	QSqlQuery query( _db );
+	query.prepare( sql);
+	query.bindValue(":id", manager_id);
+
+	this->execQuery( query);
+
+    QVector<ActiveSale> sales;
+    while ( query.next() ) {
+        if ( query.value( "isActive" ).value<int>() == 1 ) {
+			ActiveSale sale = read( &query );
+			if ( sale.getSalerId() == manager_id ) {
+				sales.append( sale );
+			}
+		}	
+    }
+
+    return sales;
+}
+
 int Sale_DB::getById(int id) {
 
     QString sql = "SELECT * FROM %1 WHERE id = %2";

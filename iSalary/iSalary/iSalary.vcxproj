@@ -78,6 +78,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AccoutingPeriod.cpp" />
     <ClCompile Include="ActiveSale.cpp" />
     <ClCompile Include="Codec.cpp" />
     <ClCompile Include="ConfirmedSalesTableModel.cpp" />
@@ -169,6 +170,7 @@
     <ClCompile Include="ManagerPage.cpp" />
     <ClCompile Include="ManagersSalesTableModel.cpp" />
     <ClCompile Include="ManagerValidator.cpp" />
+    <ClCompile Include="OpenAccoutingPeriod.cpp" />
     <ClCompile Include="PersonnalAccountingFacade.cpp" />
     <ClCompile Include="Product.cpp" />
     <ClCompile Include="ProductFacade.cpp" />
