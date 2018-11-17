@@ -281,9 +281,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_ProductPage.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="SaleFacade.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_test_product_db.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
@@ -487,9 +484,6 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="ProductFacade.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SaleFacade.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Test\Test.h">

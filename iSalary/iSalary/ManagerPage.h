@@ -11,12 +11,12 @@
 #include <qheaderview.h>
 
 #include "ProductFacade.h"
-#include "SaleFacade.h"
+#include "SalesFacade.h"
 
 class ManagerPage : public QObject {
 	Q_OBJECT
 public:
-	ManagerPage( ProductFacade *productFacade, SaleFacade *saleFacade );
+	ManagerPage( ProductFacade *productFacade, SalesFacade *saleFacade );
 	~ManagerPage(void);
 	void setUI(
 		QLineEdit *currentSalaryOutput,
@@ -35,7 +35,7 @@ public:
 
 private:
 	ProductFacade *productFacade;
-	SaleFacade *saleFacade;
+	SalesFacade *saleFacade;
 	QTextCodec *c;
 	int current_manager_id;
 

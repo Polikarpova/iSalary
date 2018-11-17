@@ -1,7 +1,7 @@
 #include "ManagerPage.h"
 
 
-ManagerPage::ManagerPage( ProductFacade *productFacade, SaleFacade *saleFacade ) {
+ManagerPage::ManagerPage( ProductFacade *productFacade, SalesFacade *saleFacade ) {
 	this->productFacade = productFacade;
 	this->saleFacade = saleFacade;
 }

@@ -12,6 +12,7 @@
 #include "ManagerSalaryDTO.h"
 #include "AccoutingPeriodDTO.h"
 #include "ManagerDTO.h"
+#include "SaleDTO.h"
 
 /**
 *  ласс, предоставл€ющий доступ к функци€м приложени€, св€занным с продажами
@@ -21,6 +22,10 @@ class SalesFacade {
 public:
 
 	SalesFacade( ManagerDB* manager, Sale_DB* sale, AccoutingPeriodDB* period);
+
+	SaleDTO addActiveSale( ActiveSale activeSale );
+	SaleDTO removeActiveSale( int id );
+	SaleDTO getActiveSales( int manager_id );
 
 	/**
 	* ћетод подтверждает определЄнную продажу

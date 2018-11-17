@@ -91,8 +91,8 @@ int main(int argc, char *argv[])
 	ProductFacade productFacade( &product_DB );
 	ProductPage productPage( &productFacade );
 
-	SaleFacade saleFacade( &saleDB );
-	ManagerPage managerPage( &productFacade, &saleFacade );
+	//SaleFacade saleFacade( &saleDB );
+	ManagerPage managerPage( &productFacade, &salesFacade );
 
     MainWindow w( 
 		&authPage,

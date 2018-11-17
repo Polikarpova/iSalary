@@ -203,7 +203,6 @@
     <ClCompile Include="SalaryTableModel.cpp" />
     <ClCompile Include="SalaryTotalTableModel.cpp" />
     <ClCompile Include="Sale.cpp" />
-    <ClCompile Include="SaleFacade.cpp" />
     <ClCompile Include="SalesFacade.cpp" />
     <ClCompile Include="SalesPage.cpp" />
     <ClCompile Include="Sale_DB.cpp" />
@@ -343,7 +342,6 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_TESTLIB_LIB -DQT_WIDGETS_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtSql" "-I$(QTDIR)\include\QtTest" "-I$(QTDIR)\include\QtWidgets"</Command>
     </CustomBuild>
     <ClInclude Include="SaleDTO.h" />
-    <ClInclude Include="SaleFacade.h" />
     <ClInclude Include="SaleInfoDTO.h" />
     <CustomBuild Include="Settings.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalInputs)</AdditionalInputs>

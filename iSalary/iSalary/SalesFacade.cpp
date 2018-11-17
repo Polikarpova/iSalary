@@ -7,6 +7,35 @@ SalesFacade::SalesFacade( ManagerDB* manager, Sale_DB* sale, AccoutingPeriodDB* 
 	this->ap = period;
 }
 
+SaleDTO SalesFacade::addActiveSale( ActiveSale activeSale ) {
+	bool isSuccess = this->s->create( activeSale );
+	SaleDTO result;
+	result.activeSale = activeSale;
+	result.isEmpty = false;
+	result.isSuccess = isSuccess;
+	return result;
+}
+
+SaleDTO SalesFacade::removeActiveSale( int id ) {
+	bool isSuccess = this->s->remove( id );
+	SaleDTO result;
+	result.isEmpty = true;
+	result.isSuccess = isSuccess;
+	return result;
+}
+
+SaleDTO SalesFacade::getActiveSales( int manager_id ) {
+	QVector<ActiveSale>activeSales = this->s->getActiveAll( manager_id );
+	SaleDTO result;
+	result.activeSales = activeSales;
+	result.isEmpty = false;
+	if ( activeSales.size() == 0 )
+		result.isEmpty = true;
+	bool isSuccess = true;
+	result.isSuccess = isSuccess;
+	return result;
+}
+
 void SalesFacade::confirmSale( const ActiveSaleDTO& sale) {
 
 	this->s->confirmSale( sale.id);
