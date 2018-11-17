@@ -71,6 +71,11 @@ protected:
 	* @return идентификатор менеджера
 	*/
 	int getSelectedManagerId();
+
+	/**
+	* Обновляет список расчетных периодов
+	*/
+	void updatePeriods();
 	
 private:
 	ErrorMessageHandler* errorHandler;
@@ -98,17 +103,4 @@ private:
 	QMap<int, AccoutingPeriodDTO> comboBoxMap;
 	QHash<int, ManagerSalaryDTO> salary;
 	QHash<int, ManagerSalaryDTO> salaryTotal;
-
-	/*QHash<int, ActiveSaleDTO> unconfirmedSales;
-	QHash<int, ActiveSaleDTO> confirmedSales;
-	QHash<int, ManagerActiveSalesStatisticDTO> managersSales;
-
-	void addActionButtonsToUnconfirmedTable(UnconfirmedSalesTableModel* model);
-	void addActionButtonsToConfirmedTable(ConfirmedSalesTableModel* model);
-
-	void deleteConfirmSalesFromList( QList<ActiveSaleDTO>& list);
-	void deleteUnconfirmSalesFromList( QList<ActiveSaleDTO>& list);
-
-	void viewSelectedManagerUnconfirmedSales(int id);
-	void viewSelectedManagerConfirmedSales(int id);*/
 };

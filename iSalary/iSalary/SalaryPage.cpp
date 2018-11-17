@@ -11,8 +11,9 @@ SalaryPage::~SalaryPage( void) {
 void SalaryPage::refreshPage() {
 
 	//обновление таблиц
+	this->updatePeriods();
+
 	//очищение виджетов(?)
-	this->showSelectedPeriod();
 }
 
 void SalaryPage::setErrorHandler( ErrorMessageHandler* errorHandler) {
@@ -49,34 +50,10 @@ void SalaryPage::setUI( QComboBox* salaryAccountingPeriod, QTableView* salaryTab
  }
 
 void SalaryPage::initComboBox() {
-
-	QList<AccoutingPeriodDTO> list = this->salesFacade->getAllAccoutingPeriods();
-
-	QMutableListIterator<AccoutingPeriodDTO> i(list);
-	i.toBack();
-	int k = 0;
-	while (i.hasPrevious()) {
-		i.previous();
-		QString str = "C " + i.value().dateFrom.toString(Qt::ISODate) + QString::fromWCharArray( L" по ");
-
-		if ( i.value().dateTo.isNull() ) {
-		
-			str += QDate::currentDate().toString(Qt::ISODate) + QString::fromWCharArray( L" {текущий}");
-		} else {
-		
-			str += i.value().dateTo.toString(Qt::ISODate);
-		}
-
-		this->salaryAccountingPeriod->addItem(str);
-		this->comboBoxMap.insert(k, i.value());
-		k++;
-	}
-
+	
 	connect(this->salaryAccountingPeriod, SIGNAL(currentIndexChanged(int)), this, SLOT(showSelectedPeriod()));
 
-	this->salaryAccountingPeriod->setCurrentIndex(0);
-
-	this->showSelectedPeriod();
+	this->updatePeriods();
 }
 
 void SalaryPage::initManagerForm() {
@@ -125,6 +102,38 @@ int SalaryPage::getSelectedManagerId() {
 
 	auto model = static_cast<SalaryTableModel*>( this->salaryTable->model());
 	return model->getRecordId( this->salaryTable->currentIndex().row());
+}
+
+void SalaryPage::updatePeriods() {
+
+	this->salaryAccountingPeriod->clear();
+	this->comboBoxMap.clear();
+
+	QList<AccoutingPeriodDTO> list = this->salesFacade->getAllAccoutingPeriods();
+
+	QMutableListIterator<AccoutingPeriodDTO> i(list);
+	i.toBack();
+	int k = 0;
+	while (i.hasPrevious()) {
+		i.previous();
+		QString str = "C " + i.value().dateFrom.toString(Qt::ISODate) + QString::fromWCharArray( L" по ");
+
+		if ( i.value().dateTo.isNull() ) {
+		
+			str += QDate::currentDate().toString(Qt::ISODate) + QString::fromWCharArray( L" {текущий}");
+		} else {
+		
+			str += i.value().dateTo.toString(Qt::ISODate);
+		}
+
+		this->salaryAccountingPeriod->addItem(str);
+		this->comboBoxMap.insert(k, i.value());
+		k++;
+	}
+
+	this->salaryAccountingPeriod->setCurrentIndex(0);
+
+	this->showSelectedPeriod();
 }
 
 //====SLOTS====//

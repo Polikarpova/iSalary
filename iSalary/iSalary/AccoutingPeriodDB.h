@@ -107,6 +107,11 @@ protected:
 
 	void closePeriod( int id, QDate dateFrom);
 
+	/**
+	* Проверяет, надо ли закрыть текущий период. Если да, то он закрывается и начинается новый.
+	*/
+	void checkCurrentPeriod();
+
 private:
 
     QSqlDatabase* db;       /**< экземпляр БД к которой будут применяться запросы */

@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
     bool isOpen = sqlDB.open();
 
     if( sqlDB.lastError().type() != QSqlError::NoError){
-        QMessageBox::critical( 0, QString::fromWCharArray(L"������ ��� ����������� � ��"), sqlDB.lastError().text());
+        QMessageBox::critical( 0, QString::fromWCharArray(L"Ошибка подключения к БД"), sqlDB.lastError().text());
         return 0;
     }
 

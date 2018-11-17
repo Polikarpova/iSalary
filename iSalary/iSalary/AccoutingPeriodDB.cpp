@@ -49,6 +49,8 @@ void AccoutingPeriodDB::openAccountingPeriod() {
 
 QList<AccoutingPeriodDTO> AccoutingPeriodDB::getAllPeriods() {
 
+	this->checkCurrentPeriod();
+
 	QString sql = "select * from accouting_period";
 	QSqlQuery query( *db );
 	query.prepare( sql);
@@ -71,6 +73,8 @@ QList<AccoutingPeriodDTO> AccoutingPeriodDB::getAllPeriods() {
 }
 
 AccoutingPeriodDTO AccoutingPeriodDB::getCurrentPeriod() {
+
+	this->checkCurrentPeriod();
 
 	QString sql = "select * from accouting_period order by id desc limit 1";
 	QSqlQuery query( *db );
@@ -101,6 +105,33 @@ void AccoutingPeriodDB::closePeriod( int id, QDate dateFrom) {
 	query.bindValue(":date", date);
 	query.bindValue(":id", id);
 	this->execQuery( query);
+}
+
+void AccoutingPeriodDB::checkCurrentPeriod() {
+
+	//берем последний РП
+	QString sql = "select * from accouting_period order by id desc limit 1";
+	QSqlQuery query( *db );
+	query.prepare( sql);
+	this->execQuery( query);
+
+	while( query.next() ) {
+
+		QDate nowDate = QDate::currentDate();
+
+		QDate dateFrom = QDate::fromString(query.value("dateFrom").value<QString>(), Qt::ISODate);
+		QDate closeDate(dateFrom.year(), dateFrom.month(), dateFrom.daysInMonth());
+		QDate newPeriodDateFrom = closeDate.addDays(1);
+	
+		//если текущая дата равна или зашла за дату начала нового периода
+		if ( nowDate >= newPeriodDateFrom ) {
+
+			//закрываем текущий период и начинаем новый
+			int id = query.value("id").value<int>();
+			this->closePeriod(id, dateFrom);
+			this->openAccountingPeriod();
+		}
+	}
 }
 
 void AccoutingPeriodDB::execQuery( QSqlQuery& query) const {
