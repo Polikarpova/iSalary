@@ -185,7 +185,7 @@
                <enum>QTabWidget::Rounded</enum>
               </property>
               <property name="currentIndex">
-               <number>0</number>
+               <number>1</number>
               </property>
               <property name="elideMode">
                <enum>Qt::ElideMiddle</enum>
@@ -767,17 +767,6 @@
                       </property>
                       <property name="clearButtonEnabled">
                        <bool>false</bool>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QPushButton" name="searchButton">
-                      <property name="text">
-                       <string/>
-                      </property>
-                      <property name="icon">
-                       <iconset resource="mainwindow.qrc">
-                        <normaloff>:/MainWindow/img/searchIcon.png</normaloff>:/MainWindow/img/searchIcon.png</iconset>
                       </property>
                      </widget>
                     </item>
@@ -2011,7 +2000,6 @@
   <tabstop>managerCancelAddButton</tabstop>
   <tabstop>managerSubmitAddButton</tabstop>
   <tabstop>productSearch</tabstop>
-  <tabstop>searchButton</tabstop>
   <tabstop>productTable</tabstop>
   <tabstop>addProductButton</tabstop>
   <tabstop>productName</tabstop>

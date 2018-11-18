@@ -72,7 +72,6 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
 	this->productPage = productPage;
 	this->productPage->setUI(
 		ui.productSearch, 
-		ui.searchButton,
 		ui.productTable,
 		ui.productName,
 		ui.productPercent,

@@ -11,7 +11,6 @@ ProductPage::~ProductPage() {
 
 void ProductPage::setUI(
 	QLineEdit *productSearchInput, 
-	QPushButton *searchButton,
 	QTableView *productTable,
 	QLineEdit *productNameInput,
 	QDoubleSpinBox *productPercentInput,
@@ -25,7 +24,6 @@ void ProductPage::setUI(
 	QPushButton *productSubmitAddButton
 ) {
 	this->productSearchInput = productSearchInput;
-	this->searchButton = searchButton;
 	this->productTable = productTable;
 	this->productNameInput = productNameInput;
 	this->productPercentInput = productPercentInput;
@@ -56,7 +54,8 @@ void ProductPage::setUI(
 	connect( this->cancelProductButton, SIGNAL( clicked() ), this, SLOT( directUpdateProduct() ) );
 	connect( this->saveProductButton, SIGNAL( clicked() ), this, SLOT( updateProduct() ) );
 	connect( this->deleteProductButton, SIGNAL( clicked() ), this, SLOT( removeProduct() ) );
-	connect( this->searchButton, SIGNAL( clicked() ), this, SLOT( searchProduct() ) );
+	connect( this->productSearchInput, SIGNAL( textChanged( const QString & ) ), this, SLOT( searchProduct() ) );
+	//connect( this->searchButton, SIGNAL( clicked() ), this, SLOT( searchProduct() ) );
 }
 
 void ProductPage::refreshPage() {
@@ -206,14 +205,21 @@ void ProductPage::searchProduct() {
 	QString nameProduct = productSearchInput->text();
 	if ( nameProduct != "" ) {
 		clearTable();
-		ProductDTO result = productFacade->findByName( nameProduct );
+		ProductDTO result = productFacade->getAll();
 		if ( result.isSuccess == true ) {
 			if ( result.isEmpty == false ) {
-				QStandardItem *item;
-				item = new QStandardItem( result.product.getName() );
-				productsTableModel->setItem( 0, 0, item );
-				item = new QStandardItem( QString::number( result.product.getCommission() ) + "%" );
-				productsTableModel->setItem( 0, 1, item );
+				QVector<Product>products = result.products;
+				int row = 0;
+				for ( int i = 0; i < products.size(); i++ ) {
+					if (products[i].getName().indexOf( nameProduct ) == 0) {
+						QStandardItem *item;
+						item = new QStandardItem( products[i].getName() );
+						productsTableModel->setItem( row, 0, item );
+						item = new QStandardItem( QString::number( products[i].getCommission() ) + "%" );
+						productsTableModel->setItem( row, 1, item );
+						row++;
+					}
+				}
 			}
 		}
 

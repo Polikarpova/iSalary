@@ -136,7 +136,6 @@ public:
     QLabel *label_15;
     QHBoxLayout *horizontalLayout_14;
     QLineEdit *productSearch;
-    QPushButton *searchButton;
     QSpacerItem *horizontalSpacer_2;
     QTableView *productTable;
     QPushButton *addProductButton;
@@ -765,14 +764,6 @@ public:
         productSearch->setClearButtonEnabled(false);
 
         horizontalLayout_14->addWidget(productSearch);
-
-        searchButton = new QPushButton(tabProducts);
-        searchButton->setObjectName(QStringLiteral("searchButton"));
-        QIcon icon;
-        icon.addFile(QStringLiteral(":/MainWindow/img/searchIcon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        searchButton->setIcon(icon);
-
-        horizontalLayout_14->addWidget(searchButton);
 
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -1504,6 +1495,8 @@ public:
 
         managerProductSearchButton = new QPushButton(manager);
         managerProductSearchButton->setObjectName(QStringLiteral("managerProductSearchButton"));
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/MainWindow/img/searchIcon.png"), QSize(), QIcon::Normal, QIcon::Off);
         managerProductSearchButton->setIcon(icon);
 
         horizontalLayout_22->addWidget(managerProductSearchButton);
@@ -1589,8 +1582,7 @@ public:
         QWidget::setTabOrder(saveManagerButton, managerCancelAddButton);
         QWidget::setTabOrder(managerCancelAddButton, managerSubmitAddButton);
         QWidget::setTabOrder(managerSubmitAddButton, productSearch);
-        QWidget::setTabOrder(productSearch, searchButton);
-        QWidget::setTabOrder(searchButton, productTable);
+        QWidget::setTabOrder(productSearch, productTable);
         QWidget::setTabOrder(productTable, addProductButton);
         QWidget::setTabOrder(addProductButton, productName);
         QWidget::setTabOrder(productName, productPercent);
@@ -1633,7 +1625,7 @@ public:
 
         auth_program_stackedWidget->setCurrentIndex(1);
         boss_manager_stackedWidget->setCurrentIndex(0);
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
         managersDataTab->setCurrentIndex(0);
         managersButtonsStackedWidget->setCurrentIndex(0);
         productButtonsStackedWidget->setCurrentIndex(0);
@@ -1680,7 +1672,6 @@ public:
         productSearch->setInputMask(QString());
         productSearch->setText(QString());
         productSearch->setPlaceholderText(QApplication::translate("MainWindowClass", "\320\277\320\276\320\270\321\201\320\272 \320\277\320\276 \320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\216", 0));
-        searchButton->setText(QString());
         addProductButton->setText(QApplication::translate("MainWindowClass", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214", 0));
         label_16->setText(QApplication::translate("MainWindowClass", "<html><head/><body><p align=\"center\"><span style=\" font-size:24pt;\">\320\224\320\260\320\275\320\275\321\213\320\265</span></p></body></html>", 0));
         label_17->setText(QApplication::translate("MainWindowClass", "\320\235\320\260\320\267\320\262\320\260\320\275\320\270\320\265", 0));

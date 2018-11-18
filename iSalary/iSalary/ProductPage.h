@@ -19,7 +19,6 @@ public:
 	~ProductPage(void);
 	void setUI( 
 		QLineEdit *productSearchInput, 
-		QPushButton *searchButton,
 		QTableView *productTable,
 		QLineEdit *productNameInput,
 		QDoubleSpinBox *productPercentInput,
@@ -39,7 +38,6 @@ private:
 	QTextCodec* c;
 
 	QLineEdit *productSearchInput; 
-	QPushButton *searchButton;
 	QTableView *productTable;
 	QStandardItemModel *productsTableModel;
 	QLineEdit *productNameInput;
