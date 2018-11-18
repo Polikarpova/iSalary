@@ -85,7 +85,7 @@ Manager ManagerDB::getById( int id) {
 
 ManagerDTO ManagerDB::getManagerInfoById( int id) {
 
-	QString sql = "SELECT `%1`, `%2`, `%3`, `%4`, `%5`, `%6`, `%7`, `%8`, `%9`, `%10`, `%11`, `%12`, `%13`, `%14`,`%15`,`%21` FROM %0 WHERE `%21` = :%21";
+	QString sql = "SELECT `%1`, `%2`, `%3`, `%4`, `%5`, `%6`, `%7`, `%8`, `%9`, `%10`, `%11`, `%12`, `%13`, `%14`,`%15`, `passportSource`,`id` FROM %0 WHERE `id` = :id";
     sql = sql.arg(
         this->tableName,
         this->firstNameField,
@@ -108,14 +108,11 @@ ManagerDTO ManagerDB::getManagerInfoById( int id) {
         this->passportSourceField,
         this->dateOfBitrthField
     );
-    sql = sql.arg(
-        UserDB::idField
-    );
 
     QSqlQuery query( *this->db);
     query.prepare( sql);
 
-    query.bindValue( ":" + UserDB::idField, id);
+    query.bindValue( ":id", id);
 
     this->execQuery( query);
 
@@ -358,12 +355,16 @@ ManagerDTO ManagerDB::readRecordToDTO( const QSqlQuery& query) {
 	manager.passportNumber = query.value( this->passportNumberField).value<QString>();
 	manager.passportIssueDate = QDate::fromString( query.value( this->passportIssueDateField).value<QString>(), Qt::ISODate);
 	manager.address = query.value( this->addressField).value<QString>();
-	manager.address = query.value( this->addressField).value<QString>();
+	manager.passportSource = query.value( this->passportSourceField).value<QString>();
 	manager.INN = query.value( this->INNField).value<QString>();
 	manager.email = query.value( this->emailField).value<QString>();
 	manager.dateOfEmplyment = QDate::fromString( query.value( this->dateOfEmploymentField).value<QString>(), Qt::ISODate);
 
     return manager;
+}
+
+void ManagerDB::createTable(){
+    // TODO: перенести сюда создание часть таблицы users, которая касаетеся менеджеров из UserDB
 }
 
 ManagerDB::~ManagerDB(void){

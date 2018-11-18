@@ -13,13 +13,16 @@
 #include "ManagerActiveSalesStatisticDTO.h"
 #include "ActiveSaleDTO.h"
 #include "SaleInfoDTO.h"
+#include "ISqlTable.h"
 
-class Sale_DB
+class Sale_DB : public ISqlTable
 {
 public:
 	Sale_DB( QSqlDatabase &db, QString table_name );
 	~Sale_DB(void);
 	void init();
+    void createTable() override;
+
 	bool create( ActiveSale sale );
 	bool remove( int id );
 	void fillSale( ActiveSale & sale, const QSqlQuery * sqlQuery );

@@ -9,12 +9,13 @@
 #include "User.h"
 #include "UserInfo.h"
 #include "IUserRepository.h"
+#include "ISqlTable.h"
 
 /**
 * Класс доступа к БД для сущности User
 *
 */
-class UserDB : public IUserRepository {
+class UserDB : public IUserRepository, public ISqlTable {
 
 public:
 
@@ -23,6 +24,8 @@ public:
     * @param database - экземпляр уже настроенной QSqlDatabase
     */
     UserDB( QSqlDatabase* database);
+
+    void createTable() override;
 
     /**
     * Добавление записи о пользователе в БД

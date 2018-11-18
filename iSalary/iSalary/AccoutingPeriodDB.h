@@ -8,14 +8,14 @@
 #include "OpenAccoutingPeriod.h"
 #include "AccoutingPeriod.h"
 #include "AccoutingPeriodDTO.h"
-
+#include "ISqlTable.h"
 #include <qmessagebox.h>
 
 /**
 * Класс доступа к БД для сущности AccoutingPeriod
 *
 */
-class AccoutingPeriodDB {
+class AccoutingPeriodDB : public ISqlTable {
 
 public:
 	/**
@@ -111,6 +111,8 @@ protected:
 	* Проверяет, надо ли закрыть текущий период. Если да, то он закрывается и начинается новый.
 	*/
 	void checkCurrentPeriod();
+
+    void createTable() override;
 
 private:
 

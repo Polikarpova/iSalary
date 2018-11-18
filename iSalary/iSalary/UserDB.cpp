@@ -8,9 +8,27 @@ UserDB::UserDB( QSqlDatabase* database){
     this->init();
     this->db = database;
 
-	QSqlQuery query( *(this->db) );
+}
+
+void UserDB::createTable(){
+    QSqlQuery query( *(this->db) );
+    //TODO: Вынести часть относящуюся к менеджерам в ManagerDB
+    //TODO: Формировать запрос динмачески
     query.prepare( "CREATE TABLE IF NOT EXISTS `users` (`id` int(11) NOT NULL AUTO_INCREMENT,`login` varchar(50) CHARACTER SET utf8 NOT NULL,`password` varchar(50) CHARACTER SET utf8 NOT NULL,`type` int(11) NOT NULL,`firstName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,`secondName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,`thirdName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,`sex` int(11) DEFAULT NULL,`passportSource` varchar(100) CHARACTER SET utf8 DEFAULT NULL,`passportSerial` varchar(6) CHARACTER SET utf8 DEFAULT NULL,`passportNumber` varchar(8) CHARACTER SET utf8 DEFAULT NULL,`passportIssueDate` date DEFAULT NULL,`address` varchar(100) CHARACTER SET utf8 DEFAULT NULL,`INN` varchar(40) CHARACTER SET utf8 DEFAULT NULL,`email` varchar(100) CHARACTER SET utf8 DEFAULT NULL,`mobileNumber` varchar(100) CHARACTER SET utf8 DEFAULT NULL,`dateOfEmployment` date DEFAULT NULL,`dateOfBirth` date DEFAULT NULL,PRIMARY KEY (`id`))" );
-    query.exec();
+    this->execQuery( query);
+    //TODO: вынести в отдельный метод
+    QString countBossesSQL = " SELECT COUNT(*) as bc FROM `" + this->tableName + "` WHERE `%1` = :%1 ";
+    countBossesSQL = countBossesSQL.arg( this->userTypeField);
+    query.prepare(countBossesSQL);
+    query.bindValue(":" + this->userTypeField, (int)BOSS);
+    this->execQuery(query);
+    query.next();
+    int bossesCount =query.value("bc").value<int>();
+
+    if( bossesCount == 0){
+        this->insert( User(0, "boss", "boss"), BOSS);
+    }
+
 }
 
 void UserDB::init(){

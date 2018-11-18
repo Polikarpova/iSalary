@@ -25,6 +25,7 @@ void SalesPage::setUI( QDateEdit* salesDateInput, QTableView* managersSalesTable
 	this->salesDateInput = salesDateInput;
 	this->salesDateInput->setDate(QDate::currentDate());
 	connect(this->salesDateInput, &QDateEdit::dateChanged, this, &SalesPage::dateChanged);
+	this->salesDateInput->hide();
 
 	this->initManagersTable( managersSalesTable);
 	this->initUnconfirmedSalesTable( unconfirmedSalesTable);
@@ -349,6 +350,7 @@ void SalesPage::viewSelectedManagerConfirmedSales(int id) {
 //===SLOTS===//
 void SalesPage::dateChanged() {
 
+	//показываются продажи сделанные в определенный день
 	//обновляем все таблицы в соответствии с датой
 	this->refreshPage();
 }

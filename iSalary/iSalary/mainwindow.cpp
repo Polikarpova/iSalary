@@ -5,6 +5,7 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
 	//блокировка вкладки корректировки
 	ui.tabWidget->setTabEnabled(PAGE_STATISTIC, false);
 	ui.tabWidget->setTabToolTip(PAGE_STATISTIC, "Заблокировано до лучших времен");
+	ui.label_45->hide();
 
     ui.auth_program_stackedWidget->setCurrentIndex( AUTH_WIDGET);
 

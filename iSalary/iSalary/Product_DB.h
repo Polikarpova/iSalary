@@ -6,7 +6,9 @@
 #include "Product.h"
 #include <QVector>
 #include <QSqlError>
-class Product_DB
+
+#include "ISqlTable.h"
+class Product_DB : public ISqlTable
 {
 public:
 	Product_DB( QSqlDatabase &db, QString table_name );
@@ -19,6 +21,8 @@ public:
 	Product findByName( QString productName );
 	Product findById( int id );
 	QVector<Product> getAll();
+    
+    void createTable() override;
 
 protected:
 	QString TABLE_NAME;
