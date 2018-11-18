@@ -259,7 +259,6 @@ public:
     QLabel *label_23;
     QHBoxLayout *horizontalLayout_22;
     QLineEdit *managerProductSearch;
-    QPushButton *managerProductSearchButton;
     QSpacerItem *horizontalSpacer_5;
     QTableView *managerProductTable;
     QHBoxLayout *horizontalLayout_13;
@@ -1493,14 +1492,6 @@ public:
 
         horizontalLayout_22->addWidget(managerProductSearch);
 
-        managerProductSearchButton = new QPushButton(manager);
-        managerProductSearchButton->setObjectName(QStringLiteral("managerProductSearchButton"));
-        QIcon icon;
-        icon.addFile(QStringLiteral(":/MainWindow/img/searchIcon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        managerProductSearchButton->setIcon(icon);
-
-        horizontalLayout_22->addWidget(managerProductSearchButton);
-
         horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_22->addItem(horizontalSpacer_5);
@@ -1732,7 +1723,6 @@ public:
         managerProductSearch->setInputMask(QString());
         managerProductSearch->setText(QString());
         managerProductSearch->setPlaceholderText(QApplication::translate("MainWindowClass", "\320\277\320\276\320\270\321\201\320\272 \320\277\320\276 \320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\216", 0));
-        managerProductSearchButton->setText(QString());
         quitButton->setText(QApplication::translate("MainWindowClass", "\320\222\321\213\320\271\321\202\320\270", 0));
     } // retranslateUi
 

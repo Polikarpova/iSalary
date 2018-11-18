@@ -93,7 +93,6 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
 		ui.countSaleProducts,
 		ui.addSaleButton,
 		ui.managerProductSearch,
-		ui.managerProductSearchButton,
 		ui.managerProductTable,
 		ui.managerConfirmedSalesTable,
 		ui.managerUnconfirmedSalesTable

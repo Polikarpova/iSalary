@@ -18,7 +18,6 @@ void ManagerPage::setUI(
 	QSpinBox *countSaleProductsInput,
 	QPushButton *addSaleButton,
 	QLineEdit *productSearchInput,
-	QPushButton *productSearchButton,
 	QTableView *productTable,
 	QTableView *confirmedSalesTable,
 	QTableView *unconfirmedSalesTable
@@ -29,7 +28,6 @@ void ManagerPage::setUI(
 	this->countSaleProductsInput = countSaleProductsInput;
 	this->addSaleButton = addSaleButton;
 	this->productSearchInput = productSearchInput;
-	this->productSearchButton = productSearchButton;
 	this->productTable = productTable;
 	this->confirmedSalesTable = confirmedSalesTable;
 	this->unconfirmedSalesTable = unconfirmedSalesTable;
@@ -54,7 +52,7 @@ void ManagerPage::setUI(
 	this->unconfirmedSalesTable->setSelectionMode( QAbstractItemView::SingleSelection);
 	this->unconfirmedSalesTable->horizontalHeader()->setStretchLastSection(true);
 
-	connect( productSearchButton, SIGNAL( clicked() ), this, SLOT( searchManagersProductTable() ) );
+	connect( this->productSearchInput, SIGNAL( textChanged( const QString & ) ), this, SLOT( searchManagersProductTable() ) );
 	connect( addSaleButton, SIGNAL( clicked() ), this, SLOT( addSale() ) );
 }
 
@@ -235,14 +233,22 @@ void ManagerPage::searchManagersProductTable() {
 	QString nameProduct = productSearchInput->text();
 	if ( nameProduct != "" ) {
 		clearManagersProductsTable();
-		ProductDTO result = productFacade->findByName( nameProduct );
+		ProductDTO result = productFacade->getAll();
 		if ( result.isSuccess == true ) {
 			if ( result.isEmpty == false ) {
-				QStandardItem *item;
-				item = new QStandardItem( result.product.getName() );
-				productsTableModel->setItem( 0, 0, item );
-				item = new QStandardItem( QString::number( result.product.getCommission() ) + "%" );
-				productsTableModel->setItem( 0, 1, item );
+				QVector<Product>products = result.products;
+				int row = 0;
+				for ( int i = 0; i < products.size(); i++ ) {
+					if (products[i].getName().indexOf( nameProduct ) == 0) {
+						QStandardItem *item;
+						item = new QStandardItem( products[i].getName() );
+						productsTableModel->setItem( row, 0, item );
+						item = new QStandardItem( QString::number( products[i].getCommission() ) + "%" );
+						productsTableModel->setItem( row, 1, item );
+						row++;
+					}
+				}
+
 			}
 		}
 

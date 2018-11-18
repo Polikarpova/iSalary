@@ -25,7 +25,6 @@ public:
 		QSpinBox *countSaleProductsInput,
 		QPushButton *addSaleButton,
 		QLineEdit *productSearchInput,
-		QPushButton *productSearchButton,
 		QTableView *productTable,
 		QTableView *confirmedSalesTable,
 		QTableView *unconfirmedSalesTable
