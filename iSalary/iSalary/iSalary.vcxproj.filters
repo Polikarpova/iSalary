@@ -501,5 +501,11 @@
     <ClInclude Include="SaleDTO.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="dbHelpers.h">
+      <Filter>Header Files\Model\DB</Filter>
+    </ClInclude>
+    <ClInclude Include="ISqlTable.h">
+      <Filter>Header Files\Model\DB</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -366,5 +366,9 @@ ManagerDTO ManagerDB::readRecordToDTO( const QSqlQuery& query) {
     return manager;
 }
 
+void ManagerDB::createTable(){
+    // TODO: перенести сюда создание часть таблицы users, которая касаетеся менеджеров из UserDB
+}
+
 ManagerDB::~ManagerDB(void){
 }

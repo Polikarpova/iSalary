@@ -24,15 +24,15 @@
 #include <qfile.h>
 #include <qfileinfo.h>
 #include <qdir.h>
+#include "dbHelpers.h"
 
-int main(int argc, char *argv[])
-{
-	QApplication a(argc, argv);
+Settings getSettings(){
+
     QString settingsFilePath( "./Settings/settings.json");
     QFileInfo settingsFileInfo( settingsFilePath);   
     QString fullPath = settingsFileInfo.absoluteFilePath();
     QFile settingsFile( fullPath);
-    Settings settings;
+    Settings settings; 
     if ( settingsFileInfo.exists()) {
         if ( settingsFileInfo.isFile() && settingsFileInfo.isReadable()) {
             settings = Settings::read( &settingsFile);
@@ -41,23 +41,42 @@ int main(int argc, char *argv[])
         bool isCreate = QDir::current().mkdir(settingsFileInfo.dir().path());
         Settings::writeDefault( &settingsFile);
     }
+    return settings;
+}
 
+int main(int argc, char *argv[])
+{
+	QApplication a(argc, argv);
+    
     QSqlDatabase sqlDB;
     
-	sqlDB= QSqlDatabase::addDatabase( "QMYSQL");
+    Settings settings = getSettings();
+
+	sqlDB = QSqlDatabase::addDatabase( "QMYSQL");
     sqlDB.setHostName( settings.databaseIP);
     sqlDB.setPort( settings.databasePort.toInt());
-    sqlDB.setDatabaseName( settings.databaseName);
+    
     sqlDB.setUserName( settings.databaseUser);
     sqlDB.setPassword( settings.databasePassword);
+    
+    bool isOpen = sqlDB.open();
+
+    UserDB userDB( &sqlDB);
+    ManagerDB managerDB( &sqlDB, &userDB);
+    Sale_DB saleDB( sqlDB, QString("sales"));
+	AccoutingPeriodDB periodDB( &sqlDB);
+	Product_DB product_DB( sqlDB, "products" );
+	
+    QList<ISqlTable*> tabels;
+    tabels << &userDB << &managerDB << &saleDB << &periodDB << &product_DB;
+    
+    sqlDB.setDatabaseName( settings.databaseName);
+    
+    createDbAndTables(&sqlDB, settings.databaseName, tabels);
 
 	Test test = Test(sqlDB);
 	test.startTesting();
 
-    sqlDB.setDatabaseName( "mdkp");
-    sqlDB.setUserName( "root");
-    sqlDB.setPassword( "root");
-    bool isOpen = sqlDB.open();
 
     if( sqlDB.lastError().type() != QSqlError::NoError){
         QMessageBox::critical( 0, QString::fromWCharArray(L"Ошибка подключения к БД"), sqlDB.lastError().text());
@@ -68,26 +87,22 @@ int main(int argc, char *argv[])
 	Test_UserDB test_userDB( &sqlDB );
 	QTest::qExec( &test_userDB );*/
     
-	UserDB userDB( &sqlDB);
+	
     UserValidator userValidator( &userDB);
     AuthorizationModule authModule( &userValidator, &userDB);
     AuthorizationFacade authFacade( &authModule);
     AuthPage authPage( &authFacade);
 
-    ManagerDB managerDB( &sqlDB, &userDB);
     ManagerValidator managerValidator( &userDB, &managerDB);
     Employer employer( &authModule, &managerDB, &managerValidator);
     PersonnalAccountingFacade personnalAccountingFacade( &employer, &managerDB, &managerValidator);
     EmployeesPage employeesPage( &personnalAccountingFacade);
 
-    Sale_DB saleDB( sqlDB, QString("sales"));
-	AccoutingPeriodDB periodDB( &sqlDB);
-	SalesFacade salesFacade(&managerDB, &saleDB, &periodDB);
+    SalesFacade salesFacade(&managerDB, &saleDB, &periodDB);
     SalesPage salesPage(&salesFacade);
 
 	SalaryPage salaryPage(&salesFacade, &personnalAccountingFacade);
 
-	Product_DB product_DB( sqlDB, "products" );
 	ProductFacade productFacade( &product_DB );
 	ProductPage productPage( &productFacade );
 
@@ -109,6 +124,7 @@ int main(int argc, char *argv[])
     
     int exitCode =-1;
     exitCode = a.exec();
+    sqlDB.close();
     return exitCode;
     
 }

@@ -10,7 +10,9 @@
 
 #include "ManagerDTO.h"
 
-class ManagerDB : protected UserDB, public IManagerRepository
+#include "ISqlTable.h"
+
+class ManagerDB : protected UserDB, public IManagerRepository, public ISqlTable
 {
 public:
 
@@ -74,6 +76,8 @@ public:
 	* @return список менеджеров или пустой список если ни одно менеджера не найдено
 	*/
 	QList<QPair<int, QString> > getAllIdAndName();
+
+    void createTable() override;
 
 private:
     QSqlDatabase* db;       /**<        */
