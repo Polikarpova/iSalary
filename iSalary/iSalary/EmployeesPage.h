@@ -83,6 +83,8 @@ protected:
 
     int getSelectedManagerId();
 
+    QDate getSelectedManagerDateOfEmployment();
+
     ManagerDTO readFromInputs();
     
     bool validateInputs();
