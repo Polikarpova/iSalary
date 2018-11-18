@@ -4,6 +4,7 @@
 Product_DB::Product_DB( QSqlDatabase &db, QString table_name ) {
 	_db = db;
 	TABLE_NAME = table_name;
+	this->init();
 }
 
 
