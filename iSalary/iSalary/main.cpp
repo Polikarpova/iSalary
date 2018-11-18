@@ -97,12 +97,9 @@ int main(int argc, char *argv[])
     PersonnalAccountingFacade personnalAccountingFacade( &employer, &managerDB, &managerValidator);
     EmployeesPage employeesPage( &personnalAccountingFacade);
 
-	Product_DB product_DB( sqlDB, "products" );
 	ProductFacade productFacade( &product_DB );
 	ProductPage productPage( &productFacade );
 
-    Sale_DB saleDB( sqlDB, QString("sales"));
-	AccoutingPeriodDB periodDB( &sqlDB);
 	SalesFacade salesFacade(&managerDB, &saleDB, &periodDB);
     SalesPage salesPage(&salesFacade);
 
