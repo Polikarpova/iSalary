@@ -69,6 +69,16 @@ int EmployeesTableModel::getRecordId( int row) {
     return id;
 }
 
+QDate EmployeesTableModel::getRecordDateOfEmployment( int row) {
+    QDate date;
+
+    if ( row >= 0 && row < this->managerTable.size() ){
+        date = this->managerTable.at(row).at(COLUMN_EMPLOY_DATE).value<QDate>();
+    }
+    return date;
+}
+
+
 QModelIndex EmployeesTableModel::getIndexByRecordId( int id) {
     QModelIndex index;
     for( int iRow = 0; iRow < this->managerTable.size(); iRow++) {

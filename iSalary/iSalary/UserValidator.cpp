@@ -30,7 +30,7 @@ bool UserValidator::isUserValid( const User& user, QString* errorOutput, bool ch
         }
     }
 
-    QRegExp onlyLatin("[a-z]+");
+    QRegExp onlyLatin("[a-z\_]+");
 
     if( checkPassword) {
         bool isPasswordValid = ( onlyLatin.indexIn( user.getPassword()) == 0 

@@ -115,6 +115,7 @@ void EmployeesPage::refreshList() {
         QModelIndex index = model->getIndexByRecordId( currentManagerId);
         if( index.isValid()){
             this->managersTable->setCurrentIndex( index);
+            this->showDetailsById( currentManagerId);
         }
     }
 }
@@ -171,6 +172,7 @@ void EmployeesPage::saveEdit() {
         if( validateInputs()){
             ManagerDTO manager = this->readFromInputs();
             manager.id = this->getSelectedManagerId();
+            manager.dateOfEmplyment = this->getSelectedManagerDateOfEmployment();
     
             this->personnalAccouting->updateManager( manager);
     
@@ -245,6 +247,13 @@ int EmployeesPage::getSelectedManagerId() {
     return model->getRecordId( this->managersTable->currentIndex().row()); 
 }
 
+
+QDate EmployeesPage::getSelectedManagerDateOfEmployment() {
+    auto model = static_cast<EmployeesTableModel*>( this->managersTable->model());
+    return model->getRecordDateOfEmployment( this->managersTable->currentIndex().row()); 
+}
+
+
 ManagerDTO EmployeesPage::readFromInputs() {
     ManagerDTO manager;
 
@@ -272,7 +281,7 @@ ManagerDTO EmployeesPage::readFromInputs() {
           + manager.passportSerial;
     }
     manager.passportSource = this->passportSourceInput->text();
-    manager.address = this->passportSourceInput->text();
+    manager.address = this->addressInput->text();
 
     manager.INN = this->INNInput->text();
 
