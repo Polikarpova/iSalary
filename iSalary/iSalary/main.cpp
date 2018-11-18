@@ -68,14 +68,14 @@ int main(int argc, char *argv[])
 	Product_DB product_DB( sqlDB, "products" );
 	
     QList<ISqlTable*> tabels;
-    tabels << &userDB << &managerDB << &saleDB << &periodDB << &product_DB;
+    tabels << &userDB << &managerDB <<  &product_DB << &saleDB << &periodDB;
     
     sqlDB.setDatabaseName( settings.databaseName);
     
     createDbAndTables(&sqlDB, settings.databaseName, tabels);
 
-	Test test = Test(sqlDB);
-	test.startTesting();
+	//Test test = Test(sqlDB);
+	//test.startTesting();
 
 
     if( sqlDB.lastError().type() != QSqlError::NoError){
