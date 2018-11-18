@@ -128,6 +128,7 @@ void ManagerPage::clearManagersUnconfirmedSalesTable() {
     horizontalHeader.append( c->toUnicode( "Количество" ) );
 	horizontalHeader.append( c->toUnicode( "Стоимость" ) );
 	horizontalHeader.append( c->toUnicode( "Процент комиссии" ) );
+	horizontalHeader.append( c->toUnicode( "Действие" ) );
 	unconfirmedSalesTableModel->setHorizontalHeaderLabels( horizontalHeader );
 	unconfirmedSalesTable->setModel( unconfirmedSalesTableModel );
     //unconfirmedSalesTable->resizeColumnsToContents();
@@ -156,6 +157,11 @@ void ManagerPage::fillManagersUnconfirmedSalesTable() {
 				item = new QStandardItem( QString::number( sale.getProductCommission() ) + "%" );
 				unconfirmedSalesTableModel->setItem( lastRow, 3, item );
 
+				QPushButton* btn = new QPushButton(QString::fromWCharArray( L"Удалить"));
+				btn->setProperty("saleId", sale.getId() );
+				connect( btn, SIGNAL( clicked() ), this, SLOT( removeSale() ) );
+				this->unconfirmedSalesTable->setIndexWidget( unconfirmedSalesTableModel->index( lastRow, 4, QModelIndex() ), btn);
+
 				allCount += sale.getCount();
 				allCost += sale.getCost();
 				salary += sale.getCost() / 100 * sale.getProductCommission();
@@ -172,6 +178,12 @@ void ManagerPage::fillManagersUnconfirmedSalesTable() {
 		item = new QStandardItem( QString::number( salary ) );
 		unconfirmedSalesTableModel->setItem( lastRow, 3, item );
 	}
+}
+
+void ManagerPage::removeSale() {
+	int currentId = sender()->property("saleId").toInt();
+	SaleDTO result = saleFacade->removeActiveSale( currentId );
+	fillManagersUnconfirmedSalesTable();
 }
 
 void ManagerPage::addSale() {

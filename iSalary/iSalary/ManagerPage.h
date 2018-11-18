@@ -63,5 +63,6 @@ private:
 private slots:
 	void searchManagersProductTable();
 	void addSale();
+	void removeSale();
 };
 
