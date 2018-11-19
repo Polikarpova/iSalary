@@ -9,6 +9,7 @@
 #include <qtextcodec.h>
 #include <qcombobox.h>
 #include <qheaderview.h>
+#include <qmessagebox.h>
 
 #include "ProductFacade.h"
 #include "SalesFacade.h"
@@ -31,12 +32,14 @@ public:
 	);
 	void setCurrentManagerId( int id );
 	void refreshPage();
+	void setWindow( QWidget *widget );
 
 private:
 	ProductFacade *productFacade;
 	SalesFacade *saleFacade;
 	QTextCodec *c;
 	int current_manager_id;
+	QWidget* widget;
 
 	QLineEdit *currentSalaryOutput;
 	QComboBox *productComboBox;
@@ -51,6 +54,8 @@ private:
 	QStandardItemModel *unconfirmedSalesTableModel; 
 	QStandardItemModel *confirmedSalesTableModel;
 	QStandardItemModel *productsTableModel;
+
+	bool validator();
 
 	void fillManagersProductTable();
 	void clearManagersProductsTable();

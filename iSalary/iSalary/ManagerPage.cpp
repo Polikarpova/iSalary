@@ -187,10 +187,35 @@ void ManagerPage::removeSale() {
 }
 
 void ManagerPage::addSale() {
-	ActiveSale sale;
-	fillSale( sale );
-	SaleDTO result = saleFacade->addActiveSale( sale );
-	fillManagersUnconfirmedSalesTable();
+	if ( validator() == true ) {
+		ActiveSale sale;
+		fillSale( sale );
+		SaleDTO result = saleFacade->addActiveSale( sale );
+		fillManagersUnconfirmedSalesTable();
+	}
+}
+
+bool ManagerPage::validator() {
+	bool isValidate = true;
+	QString emptyFieldNames = "";
+	if ( priceSaleInput->value() == 0 ) {
+		isValidate = false;
+		emptyFieldNames += QString::fromWCharArray( L"Стоимость" );
+	}
+	if ( countSaleProductsInput->value() == 0 ) {
+		isValidate = false;
+		if (emptyFieldNames != "") {
+			emptyFieldNames += ", ";
+		}
+		emptyFieldNames += QString::fromWCharArray( L"Количество" );
+	}
+	QString errorText = QString::fromWCharArray( L"Пустые поля: ");
+	errorText += emptyFieldNames;
+	if ( isValidate == false ) {
+		QMessageBox::warning( widget, QString::fromWCharArray( L"Ошибка" ), errorText );
+	}
+
+	return isValidate;
 }
 
 void ManagerPage::fillSale( ActiveSale & sale ) {
