@@ -75,6 +75,7 @@ void ProductPage::setInputsEnabledPageProducts( bool isEnabled ) {
 void ProductPage::clearInputsPageProducts() {
 	productNameInput->clear();
 	productPercentInput->clear();
+	productPercentInput->setValue(0.01);
 }
 
 void ProductPage::directAddProduct() {

@@ -821,7 +821,9 @@ public:
         productPercent = new QDoubleSpinBox(tabProducts);
         productPercent->setObjectName(QStringLiteral("productPercent"));
         productPercent->setEnabled(false);
+        productPercent->setMinimum(0.01);
         productPercent->setMaximum(100);
+        productPercent->setSingleStep(0.01);
 
         formLayout_6->setWidget(1, QFormLayout::FieldRole, productPercent);
 
