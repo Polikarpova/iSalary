@@ -26,13 +26,9 @@ ProductDTO ProductFacade::addProduct( Product product ) {
 ProductDTO ProductFacade::updateProduct( Product product ) {
 	bool isSuccess = true;
 	ProductDTO result;
-	if (product_DB->findByName( product.getName() ).getId() == 0) {
-		isSuccess = product_DB->update( product );
-		result.product = product;
-		result.isEmpty = false;
-	} else {
-		result.isEmpty = true;
-	}
+	isSuccess = product_DB->update( product );
+	result.product = product;
+	result.isEmpty = false;
 	result.isSuccess = isSuccess;
 	return result;
 }

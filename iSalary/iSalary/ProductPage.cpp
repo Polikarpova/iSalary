@@ -95,18 +95,20 @@ void ProductPage::directAddProduct() {
 }
 
 void ProductPage::addProduct() {
-	Product product;
-	fillProduct( product );
-	ProductDTO result = productFacade->addProduct( product );
-	if ( result.isSuccess == true ) {
-		if ( result.isEmpty == false ) {
-			fillProducts();
-			directAddProduct();
+	if ( validator() == true ) {
+		Product product;
+		fillProduct( product );
+		ProductDTO result = productFacade->addProduct( product );
+		if ( result.isSuccess == true ) {
+			if ( result.isEmpty == false ) {
+				fillProducts();
+				directAddProduct();
+			} else {
+				QMessageBox::warning(widget, QString::fromWCharArray( L"Ошибка"), QString::fromWCharArray( L"Товар с таким именем уже существует"));
+			}
 		} else {
-			QMessageBox::warning(widget, QString::fromWCharArray( L"Ошибка"), QString::fromWCharArray( L"Товар с таким именем уже существует"));
-		}
-	} else {
 		
+		}
 	}
 }
 
@@ -126,24 +128,27 @@ void ProductPage::directUpdateProduct() {
 }
 
 void ProductPage::updateProduct() {
-	QString productName = productsTableModel->data( productsTableModel->index( productTable->currentIndex().row(), 0 ) ).toString();
-	ProductDTO result = productFacade->findByName( productName );
-	if ( result.isSuccess == true ) {
-		Product product = result.product;
-		fillProduct( product );
-		result = productFacade->updateProduct( product );
-		if (result.isSuccess == true) {
-			if ( result.isEmpty == false ) {
-				fillProducts();
-				directUpdateProduct();
+	if ( validator() == true ) {
+		QString productName = productNameInput->text();
+		int id = productsTableModel->data( productsTableModel->index( productTable->currentIndex().row(), 2 ) ).toInt();
+		ProductDTO result = productFacade->findByName( productName );
+		if ( result.isSuccess == true ) {
+			if ( result.product.getId() == id ) {
+				Product product = result.product;
+				fillProduct( product );
+				result = productFacade->updateProduct( product );
+				if (result.isSuccess == true) {
+					fillProducts();
+					directUpdateProduct();
+				}
 			} else {
 				QMessageBox::warning(widget, QString::fromWCharArray( L"Ошибка"), QString::fromWCharArray( L"Товар с таким именем уже существует"));
 			}
 		}
-	}
 	
-	if ( result.isSuccess == false) {
+		if ( result.isSuccess == false) {
 		
+		}
 	}
 }
 
@@ -181,6 +186,29 @@ void ProductPage::showProduct() {
 	}
 }
 
+bool ProductPage::validator() {
+	bool isValidate = true;
+	QString emptyFieldNames = "";
+	if ( productNameInput->text() == "" ) {
+		isValidate = false;
+		emptyFieldNames += QString::fromWCharArray( L"Название" );
+	}
+	if ( productPercentInput->value() == 0 ) {
+		isValidate = false;
+		if (emptyFieldNames != "") {
+			emptyFieldNames += ", ";
+		}
+		emptyFieldNames += QString::fromWCharArray( L"Процент коммиссии" );
+	}
+	QString errorText = QString::fromWCharArray( L"Пустые поля: ");
+	errorText += emptyFieldNames;
+	if ( isValidate == false ) {
+		QMessageBox::warning( widget, QString::fromWCharArray( L"Ошибка" ), errorText );
+	}
+
+	return isValidate;
+}
+
 void ProductPage::fillProduct( Product & product ) {
 	product.setName( productNameInput->text() );
 	product.setCommission( productPercentInput->value() );
@@ -208,7 +236,10 @@ void ProductPage::fillProducts() {
 			productsTableModel->setItem( idx, 0, item );
 			item = new QStandardItem( QString::number( product.getCommission() ) + "%" );
 			productsTableModel->setItem( idx, 1, item );
+			item = new QStandardItem( QString::number( product.getId() ) );
+			productsTableModel->setItem( idx, 2, item );
 		}
+		productTable->setColumnHidden( 2, true);
 		deleteProductButton->setEnabled( !products.empty() );
 	}
 }

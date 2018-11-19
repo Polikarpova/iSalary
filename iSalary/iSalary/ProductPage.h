@@ -58,6 +58,8 @@ private:
 	enum StatusType {DEFAULT, ADD_PRODUCT, UPDATE_PRODUCT};
 	StatusType status; 
 
+	bool validator();
+
 	void setInputsEnabledPageProducts( bool isEnabled );
 	void clearInputsPageProducts();
 	void fillProduct( Product & product );
