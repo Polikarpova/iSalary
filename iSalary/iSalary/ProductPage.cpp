@@ -58,6 +58,10 @@ void ProductPage::setUI(
 	//connect( this->searchButton, SIGNAL( clicked() ), this, SLOT( searchProduct() ) );
 }
 
+void ProductPage::setWindow( QWidget *widget) {
+	this->widget = widget;
+}
+
 void ProductPage::refreshPage() {
 
 	this->fillProducts();
@@ -95,8 +99,12 @@ void ProductPage::addProduct() {
 	fillProduct( product );
 	ProductDTO result = productFacade->addProduct( product );
 	if ( result.isSuccess == true ) {
-		fillProducts();
-		directAddProduct();
+		if ( result.isEmpty == false ) {
+			fillProducts();
+			directAddProduct();
+		} else {
+			QMessageBox::warning(widget, QString::fromWCharArray( L"Ошибка"), QString::fromWCharArray( L"Товар с таким именем уже существует"));
+		}
 	} else {
 		
 	}
@@ -125,8 +133,12 @@ void ProductPage::updateProduct() {
 		fillProduct( product );
 		result = productFacade->updateProduct( product );
 		if (result.isSuccess == true) {
-			fillProducts();
-			directUpdateProduct();
+			if ( result.isEmpty == false ) {
+				fillProducts();
+				directUpdateProduct();
+			} else {
+				QMessageBox::warning(widget, QString::fromWCharArray( L"Ошибка"), QString::fromWCharArray( L"Товар с таким именем уже существует"));
+			}
 		}
 	}
 	

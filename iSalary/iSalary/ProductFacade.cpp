@@ -10,19 +10,29 @@ ProductFacade::~ProductFacade(void) {
 }
 
 ProductDTO ProductFacade::addProduct( Product product ) {
-	bool isSuccess = product_DB->create( product );
+	bool isSuccess = true;
 	ProductDTO result;
-	result.product = product;
-	result.isEmpty = false;
+	if (product_DB->findByName( product.getName() ).getId() == 0) {
+		isSuccess = product_DB->create( product );
+		result.product = product;
+		result.isEmpty = false;
+	} else {
+		result.isEmpty = true;
+	}
 	result.isSuccess = isSuccess;
 	return result;
 }
 
 ProductDTO ProductFacade::updateProduct( Product product ) {
-	bool isSuccess = product_DB->update( product );
+	bool isSuccess = true;
 	ProductDTO result;
-	result.product = product;
-	result.isEmpty = false;
+	if (product_DB->findByName( product.getName() ).getId() == 0) {
+		isSuccess = product_DB->update( product );
+		result.product = product;
+		result.isEmpty = false;
+	} else {
+		result.isEmpty = true;
+	}
 	result.isSuccess = isSuccess;
 	return result;
 }

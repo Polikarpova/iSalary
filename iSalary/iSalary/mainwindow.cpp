@@ -71,6 +71,7 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
 	this->salaryPage->setErrorHandler( errorHandler);
 
 	this->productPage = productPage;
+	this->productPage->setWindow( this );
 	this->productPage->setUI(
 		ui.productSearch, 
 		ui.productTable,

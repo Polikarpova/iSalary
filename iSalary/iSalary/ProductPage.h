@@ -9,6 +9,7 @@
 #include <qstandarditemmodel.h>
 #include <qtextcodec.h>
 #include <qheaderview.h>
+#include <qmessagebox.h>
 
 #include "ProductFacade.h"
 
@@ -32,10 +33,13 @@ public:
 		QPushButton *productSubmitAddButton
 	);
 	void refreshPage();
+	void setWindow( QWidget *widget );
 
 private:
 	ProductFacade *productFacade;
 	QTextCodec* c;
+
+	QWidget* widget;
 
 	QLineEdit *productSearchInput; 
 	QTableView *productTable;
