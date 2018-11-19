@@ -315,13 +315,16 @@ void Sale_DB::unconfirmSale( int id) {
 }
 
 void Sale_DB::execQuery( QSqlQuery& query) const {
-    bool isSuccess = query.exec();
-    if( !isSuccess ){
-        QString err = query.lastError().text();
+    
+	try {
+		bool isSuccess = query.exec();
+		if( !isSuccess ){
+			QString err = query.lastError().text();
         
-        QString dbname_ = _db.databaseName();
-        this->handleError( query.lastError());
-    }
+			QString dbname_ = _db.databaseName();
+			this->handleError( query.lastError());
+		}
+	} catch ( ... ) {}
 }
 
 void Sale_DB::handleError( const QSqlError& error) const {

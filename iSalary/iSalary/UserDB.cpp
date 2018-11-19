@@ -205,11 +205,14 @@ void UserDB::handleError( const QString& error) const {
 }
 
 void UserDB::execQuery( QSqlQuery& query) const {
-    bool isSuccess = query.exec();
-    if( !isSuccess ){
-        QString err = query.lastError().text();
-        this->handleError( query.lastError());
-    }
+    
+	try {
+		bool isSuccess = query.exec();
+		if( !isSuccess ){
+			QString err = query.lastError().text();
+			this->handleError( query.lastError());
+		}
+	} catch ( ... ) {}
 }
 
 UserInfo UserDB::readOneRecord( const QSqlQuery& query) const {
