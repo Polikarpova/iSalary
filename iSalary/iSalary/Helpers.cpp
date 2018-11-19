@@ -61,12 +61,8 @@ QString translite(const QString& str){
 			res += ("sh");
 		} else if (ich->toLower() == QChar(L'ù')) {
 			res += ("ch");
-		} else if (ich->toLower() == QChar(L'ú')) {
-			res += ("''");
 		} else if (ich->toLower() == QChar(L'û')) {
 			res += ("y");
-		} else if (ich->toLower() == QChar(L'ü')) {
-			res += ("''");
 		} else if (ich->toLower() == QChar(L'ý')) {
 			res += ("e");
 		} else if (ich->toLower() == QChar(L'þ')) {

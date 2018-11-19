@@ -1,0 +1,203 @@
+﻿Build started 19.11.2018 4:29:04.
+     1>Project "C:\Users\User\Desktop\iSalary\iSalary\iSalary\iSalary\iSalary.vcxproj" on node 2 (build target(s)).
+     1>PrepareForBuild:
+         Creating directory "C:\Users\User\Desktop\iSalary\iSalary\iSalary\Win32\Release\".
+       InitializeBuildStatus:
+         Creating "Release\iSalary.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       CustomBuild:
+         Moc'ing mainwindow.h...
+         Uic'ing mainwindow.ui...
+         Moc'ing ConfirmedSalesTableModel.h...
+         Moc'ing ManagerPage.h...
+         Moc'ing ManagersSalesTableModel.h...
+         Moc'ing SalesPage.h...
+         Moc'ing UnconfirmedSalesTableModel.h...
+         Moc'ing SalaryPage.h...
+         Moc'ing SalaryTableModel.h...
+         Moc'ing SalaryTotalTableModel.h...
+         Moc'ing ProductPage.h...
+         Moc'ing test_product_db.h...
+         Moc'ing test_user_db.h...
+         Moc'ing EmployeesPage.h...
+         Moc'ing EmployeesTableModel.h...
+         Moc'ing AuthPage.h...
+         Rcc'ing mainwindow.qrc...
+       ClCompile:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I.\GeneratedFiles /I. /I"C:\Program Files\Qt\5.5\msvc2010\include" /I.\GeneratedFiles\Release /I"C:\Program Files\Qt\5.5\msvc2010\include\QtCore" /I"C:\Program Files\Qt\5.5\msvc2010\include\QtGui" /I"C:\Program Files\Qt\5.5\msvc2010\include\QtSql" /I"C:\Program Files\Qt\5.5\msvc2010\include\QtTest" /I"C:\Program Files\Qt\5.5\msvc2010\include\QtWidgets" /nologo /W1 /WX- /O2 /Oy- /D UNICODE /D WIN32 /D WIN64 /D QT_DLL /D QT_NO_DEBUG /D NDEBUG /D QT_CORE_LIB /D QT_GUI_LIB /D QT_SQL_LIB /D QT_TESTLIB_LIB /D QT_WIDGETS_LIB /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt AccoutingPeriod.cpp ActiveSale.cpp Codec.cpp ConfirmedSalesTableModel.cpp EmployeesPage.cpp EmployeesTableModel.cpp Employer.cpp ErrorMessageHandler.cpp GeneratedFiles\Release\moc_ConfirmedSalesTableModel.cpp GeneratedFiles\Release\moc_EmployeesPage.cpp GeneratedFiles\Release\moc_EmployeesTableModel.cpp GeneratedFiles\Release\moc_ManagerPage.cpp GeneratedFiles\Release\moc_ManagersSalesTableModel.cpp GeneratedFiles\Release\moc_ProductPage.cpp GeneratedFiles\Release\moc_SalaryPage.cpp GeneratedFiles\Release\moc_SalaryTableModel.cpp GeneratedFiles\Release\moc_SalaryTotalTableModel.cpp GeneratedFiles\Release\moc_SalesPage.cpp GeneratedFiles\Release\moc_test_product_db.cpp GeneratedFiles\Release\moc_test_user_db.cpp GeneratedFiles\Release\moc_UnconfirmedSalesTableModel.cpp Helpers.cpp Manager.cpp ManagerDB.cpp ManagerPage.cpp ManagersSalesTableModel.cpp ManagerValidator.cpp OpenAccoutingPeriod.cpp PersonnalAccountingFacade.cpp Product.cpp ProductFacade.cpp ProductPage.cpp Product_DB.cpp AccoutingPeriodDB.cpp AuthorizationFacade.cpp AuthorizationModule.cpp AuthPage.cpp ClosedSale.cpp GeneratedFiles\Release\moc_AuthPage.cpp GeneratedFiles\Release\moc_mainwindow.cpp main.cpp mainwindow.cpp SalaryPage.cpp SalaryTableModel.cpp SalaryTotalTableModel.cpp Sale.cpp SalesFacade.cpp SalesPage.cpp Sale_DB.cpp Settings.cpp Test\Test.cpp Test\test_product_db.cpp Test\test_user_db.cpp UnconfirmedSalesTableModel.cpp User.cpp UserDB.cpp UserValidator.cpp
+         AccoutingPeriod.cpp
+         ActiveSale.cpp
+         Codec.cpp
+         ConfirmedSalesTableModel.cpp
+         EmployeesPage.cpp
+     1>c:\users\user\desktop\isalary\isalary\isalary\isalary\ManagerDB.h(16): warning C4584: 'ManagerDB' : base-class 'ISqlTable' is already a base-class of 'UserDB'
+                 c:\users\user\desktop\isalary\isalary\isalary\isalary\ISqlTable.h(7) : see declaration of 'ISqlTable'
+                 c:\users\user\desktop\isalary\isalary\isalary\isalary\UserDB.h(18) : see declaration of 'UserDB'
+         EmployeesTableModel.cpp
+         Employer.cpp
+         ErrorMessageHandler.cpp
+         moc_ConfirmedSalesTableModel.cpp
+         moc_EmployeesPage.cpp
+     1>c:\users\user\desktop\isalary\isalary\isalary\isalary\ManagerDB.h(16): warning C4584: 'ManagerDB' : base-class 'ISqlTable' is already a base-class of 'UserDB'
+                 c:\users\user\desktop\isalary\isalary\isalary\isalary\ISqlTable.h(7) : see declaration of 'ISqlTable'
+                 c:\users\user\desktop\isalary\isalary\isalary\isalary\UserDB.h(18) : see declaration of 'UserDB'
+         moc_EmployeesTableModel.cpp
+         moc_ManagerPage.cpp
+     1>c:\users\user\desktop\isalary\isalary\isalary\isalary\ManagerDB.h(16): warning C4584: 'ManagerDB' : base-class 'ISqlTable' is already a base-class of 'UserDB'
+                 c:\users\user\desktop\isalary\isalary\isalary\isalary\ISqlTable.h(7) : see declaration of 'ISqlTable'
+                 c:\users\user\desktop\isalary\isalary\isalary\isalary\UserDB.h(18) : see declaration of 'UserDB'
+         moc_ManagersSalesTableModel.cpp
+         moc_ProductPage.cpp
+         moc_SalaryPage.cpp
+     1>c:\users\user\desktop\isalary\isalary\isalary\isalary\ManagerDB.h(16): warning C4584: 'ManagerDB' : base-class 'ISqlTable' is already a base-class of 'UserDB'
+                 c:\users\user\desktop\isalary\isalary\isalary\isalary\ISqlTable.h(7) : see declaration of 'ISqlTable'
+                 c:\users\user\desktop\isalary\isalary\isalary\isalary\UserDB.h(18) : see declaration of 'UserDB'
+         moc_SalaryTableModel.cpp
+         moc_SalaryTotalTableModel.cpp
+         moc_SalesPage.cpp
+     1>c:\users\user\desktop\isalary\isalary\isalary\isalary\ManagerDB.h(16): warning C4584: 'ManagerDB' : base-class 'ISqlTable' is already a base-class of 'UserDB'
+                 c:\users\user\desktop\isalary\isalary\isalary\isalary\ISqlTable.h(7) : see declaration of 'ISqlTable'
+                 c:\users\user\desktop\isalary\isalary\isalary\isalary\UserDB.h(18) : see declaration of 'UserDB'
+         moc_test_product_db.cpp
+         moc_test_user_db.cpp
+         Generating Code...
+         Compiling...
+         moc_UnconfirmedSalesTableModel.cpp
+         Helpers.cpp
+         Manager.cpp
+         ManagerDB.cpp
+     1>c:\users\user\desktop\isalary\isalary\isalary\isalary\ManagerDB.h(16): warning C4584: 'ManagerDB' : base-class 'ISqlTable' is already a base-class of 'UserDB'
+                 c:\users\user\desktop\isalary\isalary\isalary\isalary\ISqlTable.h(7) : see declaration of 'ISqlTable'
+                 c:\users\user\desktop\isalary\isalary\isalary\isalary\UserDB.h(18) : see declaration of 'UserDB'
+         ManagerPage.cpp
+     1>c:\users\user\desktop\isalary\isalary\isalary\isalary\ManagerDB.h(16): warning C4584: 'ManagerDB' : base-class 'ISqlTable' is already a base-class of 'UserDB'
+                 c:\users\user\desktop\isalary\isalary\isalary\isalary\ISqlTable.h(7) : see declaration of 'ISqlTable'
+                 c:\users\user\desktop\isalary\isalary\isalary\isalary\UserDB.h(18) : see declaration of 'UserDB'
+         ManagersSalesTableModel.cpp
+         ManagerValidator.cpp
+         OpenAccoutingPeriod.cpp
+         PersonnalAccountingFacade.cpp
+     1>c:\users\user\desktop\isalary\isalary\isalary\isalary\ManagerDB.h(16): warning C4584: 'ManagerDB' : base-class 'ISqlTable' is already a base-class of 'UserDB'
+                 c:\users\user\desktop\isalary\isalary\isalary\isalary\ISqlTable.h(7) : see declaration of 'ISqlTable'
+                 c:\users\user\desktop\isalary\isalary\isalary\isalary\UserDB.h(18) : see declaration of 'UserDB'
+         Product.cpp
+         ProductFacade.cpp
+         ProductPage.cpp
+         Product_DB.cpp
+         AccoutingPeriodDB.cpp
+         AuthorizationFacade.cpp
+         AuthorizationModule.cpp
+         AuthPage.cpp
+         ClosedSale.cpp
+         moc_AuthPage.cpp
+         moc_mainwindow.cpp
+     1>c:\users\user\desktop\isalary\isalary\isalary\isalary\ManagerDB.h(16): warning C4584: 'ManagerDB' : base-class 'ISqlTable' is already a base-class of 'UserDB'
+                 c:\users\user\desktop\isalary\isalary\isalary\isalary\ISqlTable.h(7) : see declaration of 'ISqlTable'
+                 c:\users\user\desktop\isalary\isalary\isalary\isalary\UserDB.h(18) : see declaration of 'UserDB'
+         Generating Code...
+         Compiling...
+         main.cpp
+     1>c:\users\user\desktop\isalary\isalary\isalary\isalary\ManagerDB.h(16): warning C4584: 'ManagerDB' : base-class 'ISqlTable' is already a base-class of 'UserDB'
+                 c:\users\user\desktop\isalary\isalary\isalary\isalary\ISqlTable.h(7) : see declaration of 'ISqlTable'
+                 c:\users\user\desktop\isalary\isalary\isalary\isalary\UserDB.h(18) : see declaration of 'UserDB'
+         mainwindow.cpp
+     1>c:\users\user\desktop\isalary\isalary\isalary\isalary\ManagerDB.h(16): warning C4584: 'ManagerDB' : base-class 'ISqlTable' is already a base-class of 'UserDB'
+                 c:\users\user\desktop\isalary\isalary\isalary\isalary\ISqlTable.h(7) : see declaration of 'ISqlTable'
+                 c:\users\user\desktop\isalary\isalary\isalary\isalary\UserDB.h(18) : see declaration of 'UserDB'
+         SalaryPage.cpp
+     1>c:\users\user\desktop\isalary\isalary\isalary\isalary\ManagerDB.h(16): warning C4584: 'ManagerDB' : base-class 'ISqlTable' is already a base-class of 'UserDB'
+                 c:\users\user\desktop\isalary\isalary\isalary\isalary\ISqlTable.h(7) : see declaration of 'ISqlTable'
+                 c:\users\user\desktop\isalary\isalary\isalary\isalary\UserDB.h(18) : see declaration of 'UserDB'
+         SalaryTableModel.cpp
+         SalaryTotalTableModel.cpp
+         Sale.cpp
+         SalesFacade.cpp
+     1>c:\users\user\desktop\isalary\isalary\isalary\isalary\ManagerDB.h(16): warning C4584: 'ManagerDB' : base-class 'ISqlTable' is already a base-class of 'UserDB'
+                 c:\users\user\desktop\isalary\isalary\isalary\isalary\ISqlTable.h(7) : see declaration of 'ISqlTable'
+                 c:\users\user\desktop\isalary\isalary\isalary\isalary\UserDB.h(18) : see declaration of 'UserDB'
+         SalesPage.cpp
+     1>c:\users\user\desktop\isalary\isalary\isalary\isalary\ManagerDB.h(16): warning C4584: 'ManagerDB' : base-class 'ISqlTable' is already a base-class of 'UserDB'
+                 c:\users\user\desktop\isalary\isalary\isalary\isalary\ISqlTable.h(7) : see declaration of 'ISqlTable'
+                 c:\users\user\desktop\isalary\isalary\isalary\isalary\UserDB.h(18) : see declaration of 'UserDB'
+         Sale_DB.cpp
+         Settings.cpp
+         Test.cpp
+         test_product_db.cpp
+         test_user_db.cpp
+         UnconfirmedSalesTableModel.cpp
+         User.cpp
+         UserDB.cpp
+         UserValidator.cpp
+     1>UserValidator.cpp(33): warning C4129: '_' : unrecognized character escape sequence
+         Generating Code...
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I.\GeneratedFiles /I. /I"C:\Program Files\Qt\5.5\msvc2010\include" /I.\GeneratedFiles\Release /I"C:\Program Files\Qt\5.5\msvc2010\include\QtCore" /I"C:\Program Files\Qt\5.5\msvc2010\include\QtGui" /I"C:\Program Files\Qt\5.5\msvc2010\include\QtSql" /I"C:\Program Files\Qt\5.5\msvc2010\include\QtTest" /I"C:\Program Files\Qt\5.5\msvc2010\include\QtWidgets" /nologo /W1 /WX- /O2 /Oy- /D UNICODE /D WIN32 /D WIN64 /D QT_DLL /D QT_NO_DEBUG /D NDEBUG /D QT_CORE_LIB /D QT_GUI_LIB /D QT_SQL_LIB /D QT_TESTLIB_LIB /D QT_WIDGETS_LIB /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt GeneratedFiles\qrc_mainwindow.cpp
+         qrc_mainwindow.cpp
+       Link:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\User\Desktop\iSalary\iSalary\iSalary\Win32\Release\\iSalary.exe" /NOLOGO /LIBPATH:"C:\Program Files\Qt\5.5\msvc2010\lib" qtmain.lib Qt5Core.lib Qt5Gui.lib Qt5Sql.lib Qt5Test.lib Qt5Widgets.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\iSalary.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /PDB:"C:\Users\User\Desktop\iSalary\iSalary\iSalary\Win32\Release\iSalary.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\User\Desktop\iSalary\iSalary\iSalary\Win32\Release\iSalary.lib" /MACHINE:X86 Release\AccoutingPeriod.obj
+         Release\ActiveSale.obj
+         Release\Codec.obj
+         Release\ConfirmedSalesTableModel.obj
+         Release\EmployeesPage.obj
+         Release\EmployeesTableModel.obj
+         Release\Employer.obj
+         Release\ErrorMessageHandler.obj
+         Release\moc_ConfirmedSalesTableModel.obj
+         Release\moc_EmployeesPage.obj
+         Release\moc_EmployeesTableModel.obj
+         Release\moc_ManagerPage.obj
+         Release\moc_ManagersSalesTableModel.obj
+         Release\moc_ProductPage.obj
+         Release\moc_SalaryPage.obj
+         Release\moc_SalaryTableModel.obj
+         Release\moc_SalaryTotalTableModel.obj
+         Release\moc_SalesPage.obj
+         Release\moc_test_product_db.obj
+         Release\moc_test_user_db.obj
+         Release\moc_UnconfirmedSalesTableModel.obj
+         Release\Helpers.obj
+         Release\Manager.obj
+         Release\ManagerDB.obj
+         Release\ManagerPage.obj
+         Release\ManagersSalesTableModel.obj
+         Release\ManagerValidator.obj
+         Release\OpenAccoutingPeriod.obj
+         Release\PersonnalAccountingFacade.obj
+         Release\Product.obj
+         Release\ProductFacade.obj
+         Release\ProductPage.obj
+         Release\Product_DB.obj
+         Release\AccoutingPeriodDB.obj
+         Release\AuthorizationFacade.obj
+         Release\AuthorizationModule.obj
+         Release\AuthPage.obj
+         Release\ClosedSale.obj
+         Release\qrc_mainwindow.obj
+         Release\moc_AuthPage.obj
+         Release\moc_mainwindow.obj
+         Release\main.obj
+         Release\mainwindow.obj
+         Release\SalaryPage.obj
+         Release\SalaryTableModel.obj
+         Release\SalaryTotalTableModel.obj
+         Release\Sale.obj
+         Release\SalesFacade.obj
+         Release\SalesPage.obj
+         Release\Sale_DB.obj
+         Release\Settings.obj
+         Release\Test.obj
+         Release\test_product_db.obj
+         Release\test_user_db.obj
+         Release\UnconfirmedSalesTableModel.obj
+         Release\User.obj
+         Release\UserDB.obj
+         Release\UserValidator.obj
+         iSalary.vcxproj -> C:\Users\User\Desktop\iSalary\iSalary\iSalary\Win32\Release\iSalary.exe
+       Manifest:
+         c:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\User\Desktop\iSalary\iSalary\iSalary\Win32\Release\\iSalary.exe;#1" /manifest Release\iSalary.exe.intermediate.manifest
+       FinalizeBuildStatus:
+         Deleting file "Release\iSalary.unsuccessfulbuild".
+         Touching "Release\iSalary.lastbuildstate".
+     1>Done Building Project "C:\Users\User\Desktop\iSalary\iSalary\iSalary\iSalary\iSalary.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:01:34.03
