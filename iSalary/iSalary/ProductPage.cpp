@@ -58,6 +58,10 @@ void ProductPage::setUI(
 	//connect( this->searchButton, SIGNAL( clicked() ), this, SLOT( searchProduct() ) );
 }
 
+void ProductPage::setWindow( QWidget *widget) {
+	this->widget = widget;
+}
+
 void ProductPage::refreshPage() {
 
 	this->fillProducts();
@@ -95,8 +99,12 @@ void ProductPage::addProduct() {
 	fillProduct( product );
 	ProductDTO result = productFacade->addProduct( product );
 	if ( result.isSuccess == true ) {
-		fillProducts();
-		directAddProduct();
+		if ( result.isEmpty == false ) {
+			fillProducts();
+			directAddProduct();
+		} else {
+			QMessageBox::warning(widget, QString::fromWCharArray( L"Ошибка"), QString::fromWCharArray( L"Товар с таким именем уже существует"));
+		}
 	} else {
 		
 	}
@@ -125,8 +133,12 @@ void ProductPage::updateProduct() {
 		fillProduct( product );
 		result = productFacade->updateProduct( product );
 		if (result.isSuccess == true) {
-			fillProducts();
-			directUpdateProduct();
+			if ( result.isEmpty == false ) {
+				fillProducts();
+				directUpdateProduct();
+			} else {
+				QMessageBox::warning(widget, QString::fromWCharArray( L"Ошибка"), QString::fromWCharArray( L"Товар с таким именем уже существует"));
+			}
 		}
 	}
 	
@@ -202,7 +214,7 @@ void ProductPage::fillProducts() {
 }
 
 void ProductPage::searchProduct() {
-	QString nameProduct = productSearchInput->text();
+	QString nameProduct = productSearchInput->text().toLower();
 	if ( nameProduct != "" ) {
 		clearTable();
 		ProductDTO result = productFacade->getAll();
@@ -211,7 +223,8 @@ void ProductPage::searchProduct() {
 				QVector<Product>products = result.products;
 				int row = 0;
 				for ( int i = 0; i < products.size(); i++ ) {
-					if (products[i].getName().indexOf( nameProduct ) == 0) {
+					QString name = products[i].getName().toLower();
+					if (name.indexOf( nameProduct ) == 0) {
 						QStandardItem *item;
 						item = new QStandardItem( products[i].getName() );
 						productsTableModel->setItem( row, 0, item );

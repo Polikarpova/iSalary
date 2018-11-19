@@ -260,20 +260,11 @@
     <ClCompile Include="GeneratedFiles\Release\moc_SalaryTotalTableModel.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="ManagerPage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_ManagerPage.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_ManagerPage.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="ProductFacade.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ProductPage.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_ProductPage.cpp">
       <Filter>Generated Files\Debug</Filter>
@@ -313,6 +304,15 @@
     </ClCompile>
     <ClCompile Include="OpenAccoutingPeriod.cpp">
       <Filter>Source Files\Model\DomainModel\PersonnelAccountingModule\SalesModule</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagerPage.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="ProductPage.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="ProductFacade.cpp">
+      <Filter>Source Files\Model\DomainModel\ModelFacade</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -355,12 +355,6 @@
     <CustomBuild Include="SalaryTotalTableModel.h">
       <Filter>Header Files\View</Filter>
     </CustomBuild>
-    <CustomBuild Include="ManagerPage.h">
-      <Filter>Source Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ProductPage.h">
-      <Filter>Source Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="Test\test_product_db.h">
       <Filter>Header Files\Test</Filter>
     </CustomBuild>
@@ -369,6 +363,12 @@
     </CustomBuild>
     <CustomBuild Include="Settings.h">
       <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ManagerPage.h">
+      <Filter>Header Files\View</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ProductPage.h">
+      <Filter>Header Files\View</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -486,26 +486,26 @@
     <ClInclude Include="SaleInfoDTO.h">
       <Filter>Header Files\Model\ModelFacade</Filter>
     </ClInclude>
-    <ClInclude Include="ManagerDTO.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ProductFacade.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Test\Test.h">
       <Filter>Header Files\Test</Filter>
     </ClInclude>
     <ClInclude Include="Helpers.h">
       <Filter>Header Files\Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="SaleDTO.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="dbHelpers.h">
       <Filter>Header Files\Model\DB</Filter>
     </ClInclude>
     <ClInclude Include="ISqlTable.h">
       <Filter>Header Files\Model\DB</Filter>
+    </ClInclude>
+    <ClInclude Include="ProductFacade.h">
+      <Filter>Header Files\Model\ModelFacade</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagerDTO.h">
+      <Filter>Header Files\Model\ModelFacade</Filter>
+    </ClInclude>
+    <ClInclude Include="SaleDTO.h">
+      <Filter>Header Files\Model\ModelFacade</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
