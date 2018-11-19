@@ -56,6 +56,9 @@ int main(int argc, char *argv[])
     sqlDB.setHostName( settings.databaseIP);
     sqlDB.setPort( settings.databasePort.toInt());
     
+	//Test test = Test(sqlDB);
+	//test.startTesting();
+
     sqlDB.setUserName( settings.databaseUser);
     sqlDB.setPassword( settings.databasePassword);
     
@@ -74,18 +77,10 @@ int main(int argc, char *argv[])
     
     createDbAndTables(&sqlDB, settings.databaseName, tabels);
 
-	//Test test = Test(sqlDB);
-	//test.startTesting();
-
     if( sqlDB.lastError().type() != QSqlError::NoError){
         QMessageBox::critical( 0, QString::fromWCharArray(L"Ошибка подключения к БД"), sqlDB.lastError().text());
         return 0;
     }
-
-	/*freopen("testing.log", "w", stdout);
-	Test_UserDB test_userDB( &sqlDB );
-	QTest::qExec( &test_userDB );*/
-    
 	
     UserValidator userValidator( &userDB);
     AuthorizationModule authModule( &userValidator, &userDB);
@@ -105,7 +100,6 @@ int main(int argc, char *argv[])
 
 	SalaryPage salaryPage(&salesFacade, &personnalAccountingFacade);
 
-	//SaleFacade saleFacade( &saleDB );
 	ManagerPage managerPage( &productFacade, &salesFacade );
 
     MainWindow w( 
