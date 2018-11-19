@@ -202,7 +202,7 @@ void ProductPage::fillProducts() {
 }
 
 void ProductPage::searchProduct() {
-	QString nameProduct = productSearchInput->text();
+	QString nameProduct = productSearchInput->text().toLower();
 	if ( nameProduct != "" ) {
 		clearTable();
 		ProductDTO result = productFacade->getAll();
@@ -211,7 +211,8 @@ void ProductPage::searchProduct() {
 				QVector<Product>products = result.products;
 				int row = 0;
 				for ( int i = 0; i < products.size(); i++ ) {
-					if (products[i].getName().indexOf( nameProduct ) == 0) {
+					QString name = products[i].getName().toLower();
+					if (name.indexOf( nameProduct ) == 0) {
 						QStandardItem *item;
 						item = new QStandardItem( products[i].getName() );
 						productsTableModel->setItem( row, 0, item );
