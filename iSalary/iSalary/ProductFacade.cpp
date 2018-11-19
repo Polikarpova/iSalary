@@ -48,7 +48,7 @@ ProductDTO ProductFacade::findByName( QString productName ) {
 	result.isEmpty = false;
 	bool isSuccess = true;
 	if (product.getId() == 0)
-		isSuccess = false;
+		result.isEmpty = true;
 	result.isSuccess = isSuccess;
 	return result;
 }

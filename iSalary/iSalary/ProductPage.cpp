@@ -133,7 +133,9 @@ void ProductPage::updateProduct() {
 		int id = productsTableModel->data( productsTableModel->index( productTable->currentIndex().row(), 2 ) ).toInt();
 		ProductDTO result = productFacade->findByName( productName );
 		if ( result.isSuccess == true ) {
-			if ( result.product.getId() == id ) {
+			if ( result.product.getId() == id || result.isEmpty == true ) {
+				productName = productsTableModel->data( productsTableModel->index( productTable->currentIndex().row(), 0 ) ).toString();
+				result = productFacade->findByName( productName );
 				Product product = result.product;
 				fillProduct( product );
 				result = productFacade->updateProduct( product );
