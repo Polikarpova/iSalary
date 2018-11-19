@@ -18,7 +18,13 @@ void Product_DB::init() {
 void Product_DB::createTable() {
     QSqlQuery query( _db );
     query.prepare( "CREATE TABLE  IF NOT EXISTS `" + TABLE_NAME + "` (`id` int NOT NULL PRIMARY KEY AUTO_INCREMENT, `name` NVARCHAR(45) NOT NULL,`commission` DOUBLE NOT NULL)" );
-    query.exec();
+    try {
+		bool isSuccess = query.exec();
+		if ( !isSuccess ) {
+			QString s = _db.lastError().text();
+			int stop = 2;
+		}
+	} catch ( ... ) {}
 }
 
 bool Product_DB::create( Product product ) {
@@ -28,12 +34,15 @@ bool Product_DB::create( Product product ) {
     query.bindValue( ":name", product.getName() );
 	query.bindValue( ":commission",  product.getCommission() );
 
-    bool isSuccess = query.exec();
-    if ( !isSuccess ) {
-		QString s = _db.lastError().text();
-        int stop = 2;
-    }
-	return isSuccess;
+    try {
+		bool isSuccess = query.exec();
+		if ( !isSuccess ) {
+			QString s = _db.lastError().text();
+			int stop = 2;
+		}
+		return isSuccess;
+	} catch ( ... ) {}
+	
 }
 
 bool Product_DB::update( Product product ) {
@@ -43,18 +52,26 @@ bool Product_DB::update( Product product ) {
     query.bindValue( ":name", product.getName() );
 	query.bindValue( ":commission",  product.getCommission() );
 
-    bool isSuccess = query.exec();
-    if ( !isSuccess ) {
-		QString s = _db.lastError().text();
-        int stop = 2;
-    }
-	return isSuccess;
+    try {
+		bool isSuccess = query.exec();
+		if ( !isSuccess ) {
+			QString s = _db.lastError().text();
+			int stop = 2;
+		}
+		return isSuccess;
+	} catch ( ... ) {}
 }
 
 bool Product_DB::remove( int id ) {
 	QSqlQuery query("DELETE FROM " + TABLE_NAME + " WHERE id = " + QString::number(id), _db);
-    bool isSuccess = query.exec();
-	return isSuccess;
+	try {
+		bool isSuccess = query.exec();
+		if ( !isSuccess ) {
+			QString s = _db.lastError().text();
+			int stop = 2;
+		}
+		return isSuccess;
+	} catch ( ... ) {}
 }
 
 Product Product_DB::read( const QSqlQuery * sqlQuery ){
