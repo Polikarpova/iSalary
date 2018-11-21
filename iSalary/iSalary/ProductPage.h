@@ -59,7 +59,7 @@ private:
 	StatusType status; 
 
 	bool validator();
-
+	void setEnabledEditAndRemoveButtons( bool isEnabled );
 	void setInputsEnabledPageProducts( bool isEnabled );
 	void clearInputsPageProducts();
 	void fillProduct( Product & product );
@@ -67,6 +67,7 @@ private:
 	void clearTable();
 
 private slots:
+	void enableEditAndRemoveButtons();
 	void directAddProduct();
 	void addProduct();
 	void directUpdateProduct();

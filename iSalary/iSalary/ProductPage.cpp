@@ -47,6 +47,7 @@ void ProductPage::setUI(
 	this->productTable->horizontalHeader()->setStretchLastSection(true);
 
 	connect( this->productTable->selectionModel(), SIGNAL( currentChanged ( const QModelIndex &, const QModelIndex & ) ), this, SLOT( showProduct() ) );
+	connect( this->productTable->selectionModel(), SIGNAL( currentChanged ( const QModelIndex &, const QModelIndex & ) ), this, SLOT( enableEditAndRemoveButtons( ) ) );
 	connect( this->addProductButton, SIGNAL( clicked() ), this, SLOT( directAddProduct() ) );
 	connect( this->productCancelAddButton, SIGNAL( clicked() ), this, SLOT( directAddProduct() ) );
 	connect( this->productSubmitAddButton, SIGNAL( clicked() ), this, SLOT( addProduct() ) );
@@ -72,6 +73,15 @@ void ProductPage::setInputsEnabledPageProducts( bool isEnabled ) {
 	productPercentInput->setEnabled( isEnabled );
 }
 
+void ProductPage::enableEditAndRemoveButtons() {
+	setEnabledEditAndRemoveButtons( true );
+}
+
+void ProductPage::setEnabledEditAndRemoveButtons( bool isEnabled ) {
+	deleteProductButton->setEnabled( isEnabled );
+	editProductButton->setEnabled( isEnabled );
+}
+
 void ProductPage::clearInputsPageProducts() {
 	productNameInput->clear();
 	productPercentInput->clear();
@@ -81,15 +91,18 @@ void ProductPage::clearInputsPageProducts() {
 void ProductPage::directAddProduct() {
 	if ( status == DEFAULT ) {
 		productButtonsStackedWidget->setCurrentIndex( 2 );
-		addProductButton->setEnabled( false );
+		productSearchInput->setEnabled( false );
 		productTable->setEnabled( false );
+		addProductButton->setEnabled( false );
 		setInputsEnabledPageProducts( true );
 		clearInputsPageProducts();
 		status = ADD_PRODUCT;
 	} else {
 		productButtonsStackedWidget->setCurrentIndex( 0 );
-		addProductButton->setEnabled( true );
+		productSearchInput->setEnabled( true );
 		productTable->setEnabled( true );
+		fillProducts();
+		addProductButton->setEnabled( true );
 		setInputsEnabledPageProducts( false );
 		status = DEFAULT;
 	}
@@ -117,12 +130,17 @@ void ProductPage::directUpdateProduct() {
 	bool isSelected = !productTable->selectionModel()->selectedIndexes().empty();
 	if ( status == DEFAULT && isSelected == true ) {
 		productButtonsStackedWidget->setCurrentIndex( 1 );
+		productSearchInput->setEnabled( false );
+		addProductButton->setEnabled( false );
 		productTable->setEnabled( false );
 		setInputsEnabledPageProducts( true );
 		status = UPDATE_PRODUCT;
 	} else {
 		productButtonsStackedWidget->setCurrentIndex( 0 );
+		productSearchInput->setEnabled( true );
 		productTable->setEnabled( true );
+		fillProducts();
+		addProductButton->setEnabled( true );
 		setInputsEnabledPageProducts( false );
 		status = DEFAULT;
 	}
@@ -152,6 +170,7 @@ void ProductPage::updateProduct() {
 		if ( result.isSuccess == false) {
 		
 		}
+		setEnabledEditAndRemoveButtons( false );
 	}
 }
 
@@ -224,6 +243,7 @@ void ProductPage::clearTable() {
     horizontalHeader.append( c->toUnicode( "Комиссия" ) );
 	productsTableModel->setHorizontalHeaderLabels( horizontalHeader );
 	productTable->setModel( productsTableModel );
+	setEnabledEditAndRemoveButtons( false );
     //productTable->resizeColumnsToContents();
 }
 
@@ -243,7 +263,6 @@ void ProductPage::fillProducts() {
 			productsTableModel->setItem( idx, 2, item );
 		}
 		productTable->setColumnHidden( 2, true);
-		deleteProductButton->setEnabled( !products.empty() );
 	}
 }
 
