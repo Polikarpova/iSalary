@@ -10,6 +10,7 @@
 #include <qtextcodec.h>
 #include <qheaderview.h>
 #include <qmessagebox.h>
+#include <qregexp.h>
 
 #include "ProductFacade.h"
 
@@ -59,6 +60,7 @@ private:
 	StatusType status; 
 
 	bool validator();
+	bool validatorProductName( QString productName );
 	void setEnabledEditAndRemoveButtons( bool isEnabled );
 	void setInputsEnabledPageProducts( bool isEnabled );
 	void clearInputsPageProducts();

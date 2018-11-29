@@ -204,8 +204,14 @@ void ProductPage::showProduct() {
 	}
 
 	if ( result.isSuccess == false ) {
-	
+
 	}
+}
+
+bool ProductPage::validatorProductName( QString productName ) {
+	QString rusAlp = QString::fromWCharArray( L"а-яА-Я" );
+	QRegExp regexp("(([a-zA-Z" + rusAlp + "]\s*)+([0-9]\s*)*-?)+");
+	return regexp.exactMatch( productName );
 }
 
 bool ProductPage::validator() {
@@ -214,6 +220,10 @@ bool ProductPage::validator() {
 	if ( productNameInput->text() == "" ) {
 		isValidate = false;
 		emptyFieldNames += QString::fromWCharArray( L"Название" );
+	}
+	else if ( validatorProductName( productNameInput->text() ) == false ) {
+		isValidate = false;
+		emptyFieldNames += QString::fromWCharArray( L"Неверное Название" );
 	}
 	if ( productPercentInput->value() == 0 ) {
 		isValidate = false;
