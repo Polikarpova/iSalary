@@ -20,9 +20,11 @@ void SalesPage::setErrorHandler( ErrorMessageHandler* errorHandler) {
     this->errorHandler = errorHandler;
 }
 
-void SalesPage::setUI( QDateEdit* salesDateInput, QTableView* managersSalesTable, QTableView* unconfirmedSalesTable, QTableView* confirmedSalesTable)
+void SalesPage::setUI( QDateEdit* salesDateInput, QPushButton* salesForAllButton, QTableView* managersSalesTable, QTableView* unconfirmedSalesTable, QTableView* confirmedSalesTable)
 {
 	this->salesDateInput = salesDateInput;
+	this->salesForAllButton = salesForAllButton;
+	connect(this->salesForAllButton, &QPushButton::clicked, this, &SalesPage::buttonForAll);
 	this->salesDateInput->setDate(QDate::currentDate());
 	connect(this->salesDateInput, &QDateEdit::dateChanged, this, &SalesPage::dateChanged);
 	this->salesDateInput->hide();
@@ -357,6 +359,13 @@ void SalesPage::dateChanged() {
 
 	//показываются продажи сделанные в определенный день
 	//обновляем все таблицы в соответствии с датой
+	this->refreshPage();
+}
+
+void SalesPage::buttonForAll() {
+
+	//снять в таблицы выделение
+	this->managersSalesTable->clearSelection();
 	this->refreshPage();
 }
 

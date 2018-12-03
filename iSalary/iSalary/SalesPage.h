@@ -2,6 +2,7 @@
 
 #include "Codec.h"
 #include <QDateEdit>
+#include <qpushbutton.h>
 #include <QTableView>
 #include <qobject.h>
 
@@ -22,7 +23,7 @@ class SalesPage : public QObject{
     Q_OBJECT
 public:
     SalesPage( SalesFacade * salesFacade);
-    void setUI( QDateEdit* salesDateInput, QTableView* managersSalesTable, QTableView* unconfirmedSalesTable, QTableView* confirmedSalesTable);
+    void setUI( QDateEdit* salesDateInput, QPushButton* salesForAllButton, QTableView* managersSalesTable, QTableView* unconfirmedSalesTable, QTableView* confirmedSalesTable);
     ~SalesPage( void);
 
 	void refreshPage();
@@ -32,6 +33,7 @@ public:
 protected slots:
 
 	void dateChanged();
+	void buttonForAll();
 	void showManagersSales();
 	void confirmSale();
 	void unconfirmSale();
@@ -59,6 +61,7 @@ private:
     SalesFacade * salesFacade;
     
 	QDateEdit* salesDateInput;
+	QPushButton* salesForAllButton;
 	QTableView* managersSalesTable;
 	QTableView* unconfirmedSalesTable;
 	QTableView* confirmedSalesTable;

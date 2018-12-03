@@ -48,7 +48,7 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
     connect( ui.tabWidget, &QTabWidget::currentChanged, this, &MainWindow::refreshBossPage);
 
 	this->salesPage = salesPage;
-	this->salesPage->setUI(ui.salesDateInput, ui.managersSalesTable, ui.unconfirmedSalesTable, ui.confirmedSalesTable);
+	this->salesPage->setUI(ui.salesDateInput, ui.salesForAllButton, ui.managersSalesTable, ui.unconfirmedSalesTable, ui.confirmedSalesTable);
 	this->salesPage->setErrorHandler( errorHandler);
 
 	this->salaryPage = salaryPage;
