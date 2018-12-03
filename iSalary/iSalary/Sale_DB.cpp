@@ -20,7 +20,7 @@ void Sale_DB::createTable() {
     
     QSqlQuery query( _db );
     query.prepare( "CREATE TABLE  IF NOT EXISTS `" + TABLE_NAME + 
-		"` (`id` int NOT NULL PRIMARY KEY AUTO_INCREMENT, `manager_id` int NOT NULL, `product_id` int NOT NULL, `price` DOUBLE NOT NULL, `count` int NOT NULL, `isActive` INT(1) NOT NULL, `isConfirmed` INT(1) NOT NULL, `confirmDate` DATE NOT NULL DEFAULT \"1000-01-01\" ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;" );
+		"` (`id` int NOT NULL PRIMARY KEY AUTO_INCREMENT, `manager_id` int NOT NULL, `product_id` int NOT NULL, `productName` varchar(45) NOT NULL, `productCommission` double NOT NULL, `price` DOUBLE NOT NULL, `count` int NOT NULL, `isActive` INT(1) NOT NULL, `isConfirmed` INT(1) NOT NULL, `saleDate` date NOT NULL DEFAULT \"1000-01-01\", `confirmDate` DATE NOT NULL DEFAULT \"1000-01-01\" ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;" );
 	this->execQuery(query);
 }
 
