@@ -45,6 +45,7 @@ void ProductPage::setUI(
 	this->productTable->setSelectionBehavior( QAbstractItemView::SelectRows);
 	this->productTable->setSelectionMode( QAbstractItemView::SingleSelection);
 	this->productTable->horizontalHeader()->setStretchLastSection(true);
+	setEnabledEditAndRemoveButtons( false );
 
 	connect( this->productTable->selectionModel(), SIGNAL( currentChanged ( const QModelIndex &, const QModelIndex & ) ), this, SLOT( showProduct() ) );
 	connect( this->productTable->selectionModel(), SIGNAL( currentChanged ( const QModelIndex &, const QModelIndex & ) ), this, SLOT( enableEditAndRemoveButtons( ) ) );
@@ -74,6 +75,12 @@ void ProductPage::setInputsEnabledPageProducts( bool isEnabled ) {
 }
 
 void ProductPage::enableEditAndRemoveButtons() {
+	/*bool enabled = false;
+	QModelIndexList indexes = productTable->selectedIndexes();
+	QString productName = productsTableModel->data( index ).toString();
+	if (productName != "") {
+		enabled = true;
+	}*/
 	setEnabledEditAndRemoveButtons( true );
 }
 
@@ -108,6 +115,19 @@ void ProductPage::directAddProduct() {
 	}
 }
 
+void ProductPage::selectProduct( Product product ) {
+	int count = productTable->model()->rowCount();
+	for ( int i = 0; i < count; i++ ) {
+		QString productName = productsTableModel->data( productsTableModel->index( i, 0 ) ).toString();
+		if ( productName == product.getName() ) {
+			QModelIndex index = productTable->model()->index( i, 0 ); 
+			productTable->setFocus();
+			productTable->selectRow( i );
+		}
+	}
+	showProduct();
+}
+
 void ProductPage::addProduct() {
 	if ( validator() == true ) {
 		Product product;
@@ -117,6 +137,7 @@ void ProductPage::addProduct() {
 			if ( result.isEmpty == false ) {
 				fillProducts();
 				directAddProduct();
+				selectProduct( result.product );
 			} else {
 				QMessageBox::warning(widget, QString::fromWCharArray( L"Ошибка"), QString::fromWCharArray( L"Товар с таким именем уже существует"));
 			}
@@ -161,6 +182,7 @@ void ProductPage::updateProduct() {
 				if (result.isSuccess == true) {
 					fillProducts();
 					directUpdateProduct();
+					selectProduct( result.product );
 				}
 			} else {
 				QMessageBox::warning(widget, QString::fromWCharArray( L"Ошибка"), QString::fromWCharArray( L"Товар с таким именем уже существует"));
@@ -170,7 +192,7 @@ void ProductPage::updateProduct() {
 		if ( result.isSuccess == false) {
 		
 		}
-		setEnabledEditAndRemoveButtons( false );
+		//setEnabledEditAndRemoveButtons( false );
 	}
 }
 
@@ -185,6 +207,7 @@ void ProductPage::removeProduct() {
 			if ( result.isSuccess == true ) {
 				fillProducts();
 				clearInputsPageProducts();
+				setEnabledEditAndRemoveButtons( false );
 			}
 		}
 		
@@ -253,7 +276,7 @@ void ProductPage::clearTable() {
     horizontalHeader.append( c->toUnicode( "Комиссия" ) );
 	productsTableModel->setHorizontalHeaderLabels( horizontalHeader );
 	productTable->setModel( productsTableModel );
-	setEnabledEditAndRemoveButtons( false );
+	//setEnabledEditAndRemoveButtons( false );
     //productTable->resizeColumnsToContents();
 }
 
@@ -277,6 +300,7 @@ void ProductPage::fillProducts() {
 }
 
 void ProductPage::searchProduct() {
+	setEnabledEditAndRemoveButtons( false );
 	QString nameProduct = productSearchInput->text().toLower();
 	if ( nameProduct != "" ) {
 		clearTable();

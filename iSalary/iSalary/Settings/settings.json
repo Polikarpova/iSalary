@@ -1,7 +1,7 @@
 {
-    "databaseIP": "25.34.30.153",
-    "databaseName": "iSalary",
-    "databasePassword": "admin",
+    "databaseIP": "127.0.0.1",
+    "databaseName": "start",
+    "databasePassword": "root",
     "databasePort": "3306",
-    "databaseUser": "admin"
+    "databaseUser": "root"
 }
