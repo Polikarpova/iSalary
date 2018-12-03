@@ -27,10 +27,13 @@ void Sale_DB::createTable() {
 bool Sale_DB::create( ActiveSale sale ) {
 
     QSqlQuery query( _db );
-	query.prepare( QString( "INSERT INTO " + TABLE_NAME + 
-		" (`manager_id`, `product_id`, `price`, `count`, `isActive`, `isConfirmed`) VALUES(:manager_id, :product_id, :price, :count, :isActive, :isConfirmed)" ) );
+	QString sql = "INSERT INTO " + TABLE_NAME + 
+		" (`manager_id`, `product_id`, `productName`, `productCommission`, `price`, `count`, `isActive`, `isConfirmed`) VALUES(:manager_id, :product_id, :name, :productCommission, :price, :count, :isActive, :isConfirmed)";
+	query.prepare( sql );
 	query.bindValue( ":manager_id", sale.getSaler().getId() );
 	query.bindValue( ":product_id",  sale.getProduct().getId() );
+	query.bindValue( ":name",  sale.getProduct().getName().toLatin1() );
+	query.bindValue( ":productCommission",  sale.getProduct().getCommission() );
 	query.bindValue( ":price", sale.getCost() );
 	query.bindValue( ":count",  sale.getCount() );
 	query.bindValue( ":isActive", 1 );
@@ -38,9 +41,10 @@ bool Sale_DB::create( ActiveSale sale ) {
 
     bool isSuccess = query.exec();
     if ( !isSuccess ) {
-		QString s = _db.lastError().text();
+		QString s = query.lastError().text();
         int stop = 2;
     }
+
 	return isSuccess;
 }
 
