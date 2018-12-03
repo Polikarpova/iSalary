@@ -30,22 +30,22 @@ QVariant ConfirmedSalesTableModel::headerData( int section, Qt::Orientation orie
     }
  
     switch( section ) {
-    case COLUMN_ID:
-		return toUnicode( "id" );
-    case COLUMN_FIO:
-		return QString::fromWCharArray( L"ФИО" );
-    case COLUMN_DATE:
-        return QString::fromWCharArray( L"Дата подтверждения" );
-	case COLUMN_NAME:
-        return QString::fromWCharArray( L"Название" );
-	case COLUMN_COUNT:
-        return QString::fromWCharArray( L"Кол-во" );
-	case COLUMN_PRICE:
-        return QString::fromWCharArray( L"Цена" );
-	case COLUMN_COMMISION:
-        return QString::fromWCharArray( L"Продавцу, %" );
-	case COLUMN_ACTION:
-        return QString::fromWCharArray( L"Действие" );
+		case COLUMN_ID:
+			return toUnicode( "id" );
+		case COLUMN_ACTION:
+			return QString::fromWCharArray( L"Действие" );
+		case COLUMN_FIO:
+			return QString::fromWCharArray( L"ФИО" );
+		case COLUMN_DATE:
+			return QString::fromWCharArray( L"Дата подтверждения" );
+		case COLUMN_NAME:
+			return QString::fromWCharArray( L"Название" );
+		case COLUMN_COUNT:
+			return QString::fromWCharArray( L"Кол-во" );
+		case COLUMN_PRICE:
+			return QString::fromWCharArray( L"Цена" );
+		case COLUMN_COMMISION:
+			return QString::fromWCharArray( L"Продавцу, %" );
     }
  
     return QVariant();
@@ -116,13 +116,13 @@ void ConfirmedSalesTableModel::refreshData(const QList<ActiveSaleDTO>& sales) {
 			QList<QVariant> row;
         
 			row << sale.id;
+			row << "";
 			row << sale.managerName;
 			row << sale.confirmDate;
 			row << sale.product.name;
 			row << sale.count;
 			row << sale.price;
 			row << sale.product.commission;
-			row << "action";
             
 			this->table.append( row);
         }

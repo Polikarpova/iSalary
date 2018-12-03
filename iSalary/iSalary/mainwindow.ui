@@ -185,7 +185,7 @@
                <enum>QTabWidget::Rounded</enum>
               </property>
               <property name="currentIndex">
-               <number>1</number>
+               <number>2</number>
               </property>
               <property name="elideMode">
                <enum>Qt::ElideMiddle</enum>
@@ -964,9 +964,9 @@
                <attribute name="title">
                 <string>Продажи</string>
                </attribute>
-               <layout class="QHBoxLayout" name="horizontalLayout_35">
+               <layout class="QHBoxLayout" name="horizontalLayout_7">
                 <item>
-                 <layout class="QVBoxLayout" name="verticalLayout_14">
+                 <layout class="QVBoxLayout" name="verticalLayout_3">
                   <item>
                    <widget class="QLabel" name="label_46">
                     <property name="styleSheet">
@@ -1046,6 +1046,30 @@
                        <bool>true</bool>
                       </property>
                      </widget>
+                    </item>
+                   </layout>
+                  </item>
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_6">
+                    <item>
+                     <widget class="QPushButton" name="salesForAllButton">
+                      <property name="text">
+                       <string>Для всех</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <spacer name="horizontalSpacer_6">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
                     </item>
                    </layout>
                   </item>

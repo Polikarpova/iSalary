@@ -20,17 +20,20 @@ void Sale_DB::createTable() {
     
     QSqlQuery query( _db );
     query.prepare( "CREATE TABLE  IF NOT EXISTS `" + TABLE_NAME + 
-		"` (`id` int NOT NULL PRIMARY KEY AUTO_INCREMENT, `manager_id` int NOT NULL, `product_id` int NOT NULL, `price` DOUBLE NOT NULL, `count` int NOT NULL, `isActive` INT(1) NOT NULL, `isConfirmed` INT(1) NOT NULL, `confirmDate` DATE NOT NULL DEFAULT \"1000-01-01\" ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;" );
+		"` (`id` int NOT NULL PRIMARY KEY AUTO_INCREMENT, `manager_id` int NOT NULL, `product_id` int NOT NULL, `productName` varchar(45) NOT NULL, `productCommission` double NOT NULL, `price` DOUBLE NOT NULL, `count` int NOT NULL, `isActive` INT(1) NOT NULL, `isConfirmed` INT(1) NOT NULL, `saleDate` date NOT NULL DEFAULT \"1000-01-01\", `confirmDate` DATE NOT NULL DEFAULT \"1000-01-01\" ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;" );
 	this->execQuery(query);
 }
 
 bool Sale_DB::create( ActiveSale sale ) {
 
     QSqlQuery query( _db );
-	query.prepare( QString( "INSERT INTO " + TABLE_NAME + 
-		" (`manager_id`, `product_id`, `price`, `count`, `isActive`, `isConfirmed`) VALUES(:manager_id, :product_id, :price, :count, :isActive, :isConfirmed)" ) );
+	QString sql = "INSERT INTO " + TABLE_NAME + 
+		" (`manager_id`, `product_id`, `productName`, `productCommission`, `price`, `count`, `isActive`, `isConfirmed`) VALUES(:manager_id, :product_id, :name, :productCommission, :price, :count, :isActive, :isConfirmed)";
+	query.prepare( sql );
 	query.bindValue( ":manager_id", sale.getSaler().getId() );
 	query.bindValue( ":product_id",  sale.getProduct().getId() );
+	query.bindValue( ":name",  sale.getProduct().getName().toLatin1() );
+	query.bindValue( ":productCommission",  sale.getProduct().getCommission() );
 	query.bindValue( ":price", sale.getCost() );
 	query.bindValue( ":count",  sale.getCount() );
 	query.bindValue( ":isActive", 1 );
@@ -38,9 +41,10 @@ bool Sale_DB::create( ActiveSale sale ) {
 
     bool isSuccess = query.exec();
     if ( !isSuccess ) {
-		QString s = _db.lastError().text();
+		QString s = query.lastError().text();
         int stop = 2;
     }
+
 	return isSuccess;
 }
 

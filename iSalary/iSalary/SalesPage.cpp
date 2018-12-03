@@ -20,9 +20,11 @@ void SalesPage::setErrorHandler( ErrorMessageHandler* errorHandler) {
     this->errorHandler = errorHandler;
 }
 
-void SalesPage::setUI( QDateEdit* salesDateInput, QTableView* managersSalesTable, QTableView* unconfirmedSalesTable, QTableView* confirmedSalesTable)
+void SalesPage::setUI( QDateEdit* salesDateInput, QPushButton* salesForAllButton, QTableView* managersSalesTable, QTableView* unconfirmedSalesTable, QTableView* confirmedSalesTable)
 {
 	this->salesDateInput = salesDateInput;
+	this->salesForAllButton = salesForAllButton;
+	connect(this->salesForAllButton, &QPushButton::clicked, this, &SalesPage::buttonForAll);
 	this->salesDateInput->setDate(QDate::currentDate());
 	connect(this->salesDateInput, &QDateEdit::dateChanged, this, &SalesPage::dateChanged);
 	this->salesDateInput->hide();
@@ -61,7 +63,14 @@ void SalesPage::initUnconfirmedSalesTable( QTableView* unconfirmedSalesTable) {
 	this->unconfirmedSalesTable->setModel( model);
 
 	this->unconfirmedSalesTable->horizontalHeader()->setStretchLastSection( true);
+	
 	this->unconfirmedSalesTable->horizontalHeader()->setSectionResizeMode( UnconfirmedSalesTableModel::COLUMN_FIO, QHeaderView::ResizeToContents);
+	this->unconfirmedSalesTable->horizontalHeader()->setSectionResizeMode( UnconfirmedSalesTableModel::COLUMN_NAME, QHeaderView::ResizeToContents);
+	this->unconfirmedSalesTable->horizontalHeader()->setSectionResizeMode( UnconfirmedSalesTableModel::COLUMN_COUNT, QHeaderView::ResizeToContents);
+	this->unconfirmedSalesTable->horizontalHeader()->setSectionResizeMode( UnconfirmedSalesTableModel::COLUMN_PRICE, QHeaderView::ResizeToContents);
+	this->unconfirmedSalesTable->horizontalHeader()->setSectionResizeMode( UnconfirmedSalesTableModel::COLUMN_COMMISION, QHeaderView::ResizeToContents);
+	this->unconfirmedSalesTable->horizontalHeader()->setSectionResizeMode( UnconfirmedSalesTableModel::COLUMN_ACTION, QHeaderView::ResizeToContents);
+	
 	this->unconfirmedSalesTable->setSelectionBehavior( QAbstractItemView::SelectRows);
 	this->unconfirmedSalesTable->setSelectionMode( QAbstractItemView::SingleSelection);
 
@@ -246,28 +255,26 @@ void SalesPage::deleteUnconfirmSalesFromList( QList<ActiveSaleDTO>& list) {
 void SalesPage::addActionButtonsToUnconfirmedTable(UnconfirmedSalesTableModel* model) {
 
 	int rowCount = model->rowCount(QModelIndex());
-	int lastColumn = model->columnCount(QModelIndex()) - 1;
 
 	for( int i = 0; i != rowCount; i++) {
 
-		QPushButton* btn = new QPushButton(QString::fromWCharArray( L"ѕодтверждаю"));
+		QPushButton* btn = new QPushButton(QString::fromWCharArray( L"+"));
 		btn->setProperty("saleId", model->getRecordId(i));
 		connect( btn, &QPushButton::clicked, this, &SalesPage::confirmSale);
-		this->unconfirmedSalesTable->setIndexWidget(model->index(i,lastColumn), btn);
+		this->unconfirmedSalesTable->setIndexWidget(model->index(i,UnconfirmedSalesTableModel::COLUMN_ACTION), btn);
 	}
 }
 
 void SalesPage::addActionButtonsToConfirmedTable(ConfirmedSalesTableModel* model) {
 
 	int rowCount = model->rowCount(QModelIndex());
-	int lastColumn = model->columnCount(QModelIndex()) - 1;
 
 	for( int i = 0; i != rowCount; i++) {
 
-		QPushButton* btn = new QPushButton(QString::fromWCharArray( L"ќтмена"));
+		QPushButton* btn = new QPushButton(QString::fromWCharArray( L"-"));
 		btn->setProperty("saleId", model->getRecordId(i));
 		connect( btn, &QPushButton::clicked, this, &SalesPage::unconfirmSale);
-		this->confirmedSalesTable->setIndexWidget(model->index(i,lastColumn), btn);
+		this->confirmedSalesTable->setIndexWidget(model->index(i,ConfirmedSalesTableModel::COLUMN_ACTION), btn);
 	}
 }
 
@@ -352,6 +359,13 @@ void SalesPage::dateChanged() {
 
 	//показываютс€ продажи сделанные в определенный день
 	//обновл€ем все таблицы в соответствии с датой
+	this->refreshPage();
+}
+
+void SalesPage::buttonForAll() {
+
+	//сн€ть в таблицы выделение
+	this->managersSalesTable->clearSelection();
 	this->refreshPage();
 }
 
