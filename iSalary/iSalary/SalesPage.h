@@ -78,4 +78,6 @@ private:
 
 	void viewSelectedManagerUnconfirmedSales(int id);
 	void viewSelectedManagerConfirmedSales(int id);
+
+	void setEnable(bool flag);
 };

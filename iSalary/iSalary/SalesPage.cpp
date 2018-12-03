@@ -354,6 +354,14 @@ void SalesPage::viewSelectedManagerConfirmedSales(int id) {
 	this->addActionButtonsToConfirmedTable( model);
 }
 
+void SalesPage::setEnable(bool flag) {
+
+	this->salesForAllButton->setEnabled(flag);
+	this->managersSalesTable->setEnabled(flag);
+	this->confirmedSalesTable->setEnabled(flag);
+	this->unconfirmedSalesTable->setEnabled(flag);
+}
+
 //===SLOTS===//
 void SalesPage::dateChanged() {
 
@@ -365,29 +373,45 @@ void SalesPage::dateChanged() {
 void SalesPage::buttonForAll() {
 
 	//снять в таблицы выделение
+	this->setEnable(false);
+	
 	this->managersSalesTable->clearSelection();
 	this->refreshPage();
+	
+	this->setEnable(true);
 }
 
 void SalesPage::showManagersSales() {
+
+	this->setEnable(false);
 
 	//показываем в unconfirmed и confirmed только определенного пользователя
 	int currentId = this->getSelectedManagerSalesId();
 
 	this->viewSelectedManagerUnconfirmedSales( currentId);
 	this->viewSelectedManagerConfirmedSales( currentId);
+
+	this->setEnable(true);
 }
 
 void SalesPage::confirmSale() {
 
+	this->setEnable(false);
+
 	int currentId = sender()->property("saleId").toInt();
 	this->salesFacade->confirmSale(this->unconfirmedSales[currentId]);
 	this->refreshPage();
+
+	this->setEnable(true);
 }
 
 void SalesPage::unconfirmSale() {
 
+	this->setEnable(false);
+
 	int currentId = sender()->property("saleId").toInt();
 	this->salesFacade->cancelConfirmSale(this->confirmedSales[currentId]);
 	this->refreshPage();
+
+	this->setEnable(true);
 }
