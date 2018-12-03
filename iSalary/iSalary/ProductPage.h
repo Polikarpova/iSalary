@@ -68,6 +68,7 @@ private:
 	void fillProducts();
 	void clearTable();
 	void selectProduct( Product product );
+	void setEnabledWindow( bool enabled );
 
 private slots:
 	void enableEditAndRemoveButtons();
