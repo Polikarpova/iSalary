@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_ProductPage_t {
-    QByteArrayData data[9];
-    char stringdata0[115];
+    QByteArrayData data[10];
+    char stringdata0[142];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -30,17 +30,19 @@ struct qt_meta_stringdata_ProductPage_t {
 static const qt_meta_stringdata_ProductPage_t qt_meta_stringdata_ProductPage = {
     {
 QT_MOC_LITERAL(0, 0, 11), // "ProductPage"
-QT_MOC_LITERAL(1, 12, 16), // "directAddProduct"
-QT_MOC_LITERAL(2, 29, 0), // ""
-QT_MOC_LITERAL(3, 30, 10), // "addProduct"
-QT_MOC_LITERAL(4, 41, 19), // "directUpdateProduct"
-QT_MOC_LITERAL(5, 61, 13), // "updateProduct"
-QT_MOC_LITERAL(6, 75, 11), // "showProduct"
-QT_MOC_LITERAL(7, 87, 13), // "removeProduct"
-QT_MOC_LITERAL(8, 101, 13) // "searchProduct"
+QT_MOC_LITERAL(1, 12, 26), // "enableEditAndRemoveButtons"
+QT_MOC_LITERAL(2, 39, 0), // ""
+QT_MOC_LITERAL(3, 40, 16), // "directAddProduct"
+QT_MOC_LITERAL(4, 57, 10), // "addProduct"
+QT_MOC_LITERAL(5, 68, 19), // "directUpdateProduct"
+QT_MOC_LITERAL(6, 88, 13), // "updateProduct"
+QT_MOC_LITERAL(7, 102, 11), // "showProduct"
+QT_MOC_LITERAL(8, 114, 13), // "removeProduct"
+QT_MOC_LITERAL(9, 128, 13) // "searchProduct"
 
     },
-    "ProductPage\0directAddProduct\0\0addProduct\0"
+    "ProductPage\0enableEditAndRemoveButtons\0"
+    "\0directAddProduct\0addProduct\0"
     "directUpdateProduct\0updateProduct\0"
     "showProduct\0removeProduct\0searchProduct"
 };
@@ -52,7 +54,7 @@ static const uint qt_meta_data_ProductPage[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -60,15 +62,17 @@ static const uint qt_meta_data_ProductPage[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   49,    2, 0x08 /* Private */,
-       3,    0,   50,    2, 0x08 /* Private */,
-       4,    0,   51,    2, 0x08 /* Private */,
-       5,    0,   52,    2, 0x08 /* Private */,
-       6,    0,   53,    2, 0x08 /* Private */,
-       7,    0,   54,    2, 0x08 /* Private */,
-       8,    0,   55,    2, 0x08 /* Private */,
+       1,    0,   54,    2, 0x08 /* Private */,
+       3,    0,   55,    2, 0x08 /* Private */,
+       4,    0,   56,    2, 0x08 /* Private */,
+       5,    0,   57,    2, 0x08 /* Private */,
+       6,    0,   58,    2, 0x08 /* Private */,
+       7,    0,   59,    2, 0x08 /* Private */,
+       8,    0,   60,    2, 0x08 /* Private */,
+       9,    0,   61,    2, 0x08 /* Private */,
 
  // slots: parameters
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -86,13 +90,14 @@ void ProductPage::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         ProductPage *_t = static_cast<ProductPage *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->directAddProduct(); break;
-        case 1: _t->addProduct(); break;
-        case 2: _t->directUpdateProduct(); break;
-        case 3: _t->updateProduct(); break;
-        case 4: _t->showProduct(); break;
-        case 5: _t->removeProduct(); break;
-        case 6: _t->searchProduct(); break;
+        case 0: _t->enableEditAndRemoveButtons(); break;
+        case 1: _t->directAddProduct(); break;
+        case 2: _t->addProduct(); break;
+        case 3: _t->directUpdateProduct(); break;
+        case 4: _t->updateProduct(); break;
+        case 5: _t->showProduct(); break;
+        case 6: _t->removeProduct(); break;
+        case 7: _t->searchProduct(); break;
         default: ;
         }
     }
@@ -124,13 +129,13 @@ int ProductPage::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 8)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 7;
+        _id -= 8;
     }
     return _id;
 }

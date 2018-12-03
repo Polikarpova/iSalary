@@ -23,12 +23,12 @@ public:
     
     enum Column {
 		COLUMN_ID,
+		COLUMN_ACTION,
         COLUMN_FIO,
         COLUMN_NAME,
         COLUMN_COUNT,
         COLUMN_PRICE,
         COLUMN_COMMISION,
-        COLUMN_ACTION,
         COLUMN_LAST /*Обозначает кол-во столбцов, на самом деле не существует*/
     };
 
