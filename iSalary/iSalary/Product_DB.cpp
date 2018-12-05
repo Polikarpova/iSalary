@@ -64,7 +64,10 @@ bool Product_DB::update( Product product ) {
 }
 
 bool Product_DB::remove( int id ) {
-	QSqlQuery query("DELETE FROM " + TABLE_NAME + " WHERE id = " + QString::number(id), _db);
+	//QSqlQuery query("DELETE FROM " + TABLE_NAME + " WHERE id = " + QString::number(id), _db);
+	QSqlQuery query( _db );
+	query.prepare(QString( "UPDATE " + TABLE_NAME + " SET `isDeleted` = :isDeleted WHERE id = ") + QString::number( id ) );
+	query.bindValue( ":isDeleted",  true );
 	try {
 		bool isSuccess = query.exec();
 		if ( !isSuccess ) {
