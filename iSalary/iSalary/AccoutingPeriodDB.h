@@ -5,17 +5,18 @@
 #include <qvariant.h>
 #include <qsqlerror.h>
 #include <qdatetime.h>
+#include <qmessagebox.h>
+
 #include "OpenAccoutingPeriod.h"
 #include "AccoutingPeriod.h"
 #include "AccoutingPeriodDTO.h"
-#include "ISqlTable.h"
-#include <qmessagebox.h>
+#include "ASqlTable.h"
 
 /**
 * Класс доступа к БД для сущности AccoutingPeriod
 *
 */
-class AccoutingPeriodDB : public ISqlTable {
+class AccoutingPeriodDB : public ASqlTable {
 
 public:
 	/**
@@ -82,21 +83,6 @@ protected:
     */
     AccoutingPeriodDTO readOneRecord( const QSqlQuery& query) const;  
 
-    /**
-    * Выполнение Запроса (QSqlQuery) с обработкой ошибки
-    */    
-    void execQuery( QSqlQuery& query) const;
-    
-    /**
-    * Обработка ошибки - выкидывает исключение с переданной ошибкой
-    */
-    void handleError( const QSqlError& error) const;
-    
-    /**
-    * Обработка ошибки - выкидывает исключение с переданным текстом
-    */
-    void handleError( const QString& error) const;
-
 	/**
 	* Создает самый первый рассчетный период, если в БД нет ни одного периода
 	* Период инициализируется текущим месяцем
@@ -116,7 +102,6 @@ protected:
 
 private:
 
-    QSqlDatabase* db;       /**< экземпляр БД к которой будут применяться запросы */
     QString idField;		/**< Название поля с id в БД */
 	QString dateFromField;  /**< Название поля с датой начала в БД */
     QString dateToField;    /**< Название поля с датой конца в БД */
