@@ -20,6 +20,10 @@ void AuthPage::userTryLogIn(){
     QString login = this->loginInput->text();
     QString password = this->passwordInput->text();
 
+    this->loginInput->setEnabled( false);
+    this->passwordInput->setEnabled( false);
+    this->signInBtn->setEnabled( false);
+
     if( login.isEmpty()) {
 		this->showLogInError( QString::fromWCharArray( L"¬ведите логин"));
     } else if ( password.isEmpty()) {
@@ -38,6 +42,9 @@ void AuthPage::userTryLogIn(){
         }
     }
     
+    this->loginInput->setEnabled( true);
+    this->passwordInput->setEnabled( true);
+    this->signInBtn->setEnabled( true);
 }
     
 void AuthPage::showLogInError( const QString& error){
