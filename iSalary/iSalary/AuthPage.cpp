@@ -28,6 +28,10 @@ void AuthPage::userTryLogIn(){
         SignInResultDTO signInRes = this->authFacade->signIn(login, password);
         if( signInRes.success) {
 			this->currentUser = signInRes;
+
+            this->loginInput->setText("");
+            this->passwordInput->setText("");
+
             emit this->userLoggedIn( signInRes.user, signInRes.userType);
         } else {
             this->showLogInError( QString::fromWCharArray( L"Логин или пароль неверны"));
