@@ -4,6 +4,7 @@
 Product::Product(void)
 {
 	id = 0;
+	isDeleted = false;
 }
 
 
@@ -33,4 +34,12 @@ void Product::setCommission( double _commission) {
 
 double Product::getCommission() {
 	return commission;
+}
+
+void Product::setIsDeleted( bool value ) {
+	isDeleted = value;
+}
+
+bool Product::getIsDeleted() {
+	return isDeleted;
 }
