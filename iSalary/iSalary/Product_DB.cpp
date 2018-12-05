@@ -17,7 +17,7 @@ void Product_DB::init() {
 
 void Product_DB::createTable() {
     QSqlQuery query( _db );
-    query.prepare( "CREATE TABLE  IF NOT EXISTS `" + TABLE_NAME + "` (`id` int NOT NULL PRIMARY KEY AUTO_INCREMENT, `name` NVARCHAR(45) NOT NULL,`commission` DOUBLE NOT NULL)" );
+    query.prepare( "CREATE TABLE  IF NOT EXISTS `" + TABLE_NAME + "` (`id` int NOT NULL PRIMARY KEY AUTO_INCREMENT, `name` NVARCHAR(45) NOT NULL,`commission` DOUBLE NOT NULL, `isDeleted` INT(1) NOT NULL DEFAULT '0')" );
     try {
 		bool isSuccess = query.exec();
 		if ( !isSuccess ) {
