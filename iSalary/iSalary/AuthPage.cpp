@@ -14,6 +14,7 @@ void AuthPage::setUI( QLineEdit* loginInput, QLineEdit* passwordInput, QPushButt
     this->errorOutput->setText("");
 
     connect( this->signInBtn, &QPushButton::clicked, this, &AuthPage::userTryLogIn);
+    connect( this->passwordInput, &QLineEdit::returnPressed, this, &AuthPage::userTryLogIn);
 }
 
 void AuthPage::userTryLogIn(){
@@ -50,6 +51,7 @@ void AuthPage::userTryLogIn(){
 void AuthPage::showLogInError( const QString& error){
     errorOutput->setText( toUnicode(error));
 }
+
 
 AuthPage::~AuthPage(void)
 {
