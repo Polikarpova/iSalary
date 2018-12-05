@@ -9,13 +9,14 @@
 #include "User.h"
 #include "UserInfo.h"
 #include "IUserRepository.h"
-#include "ISqlTable.h"
+#include "ASqlTable.h"
+
 
 /**
 * Класс доступа к БД для сущности User
 *
 */
-class UserDB : public IUserRepository, public ISqlTable {
+class UserDB : public IUserRepository, public ASqlTable {
 
 public:
 
@@ -88,22 +89,7 @@ protected:
     */
     UserInfo readOneRecord( const QSqlQuery& query) const;  
 
-    /*
-    * Выполнение Запроса (QSqlQuery) с обработкой ошибки
-    */    
-    void execQuery( QSqlQuery& query) const;
     
-    /*
-    * Обработка ошибки - выкидывает исключение с переданной ошибкой
-    */
-    void handleError( QSqlError error) const;
-    
-    /*
-    * Обработка ошибки - выкидывает исключение с переданным текстом
-    */
-    void handleError( const QString& error) const;
-    
-
     QSqlDatabase* db;       /**< экземпляр БД к которой будут применяться запросы */
     QString loginField;    /**< Название поля с логином в БД */
     QString passwordField; /**< Название поля с паролем в БД */

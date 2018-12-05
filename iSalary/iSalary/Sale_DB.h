@@ -13,18 +13,19 @@
 #include "ManagerActiveSalesStatisticDTO.h"
 #include "ActiveSaleDTO.h"
 #include "SaleInfoDTO.h"
-#include "ISqlTable.h"
 
-class Sale_DB : public ISqlTable
+#include "ASqlTable.h"
+
+class Sale_DB : public ASqlTable
 {
 public:
-	Sale_DB( QSqlDatabase &db, QString table_name );
+	Sale_DB( QSqlDatabase* db, QString table_name );
 	~Sale_DB(void);
 	void init();
     void createTable() override;
 
-	bool create( ActiveSale sale );
-	bool remove( int id );
+	void create( ActiveSale sale );
+	void remove( int id );
 	void fillSale( ActiveSale & sale, const QSqlQuery * sqlQuery );
 	
 	QVector<ActiveSale> getActiveAll( int manager_id );
@@ -59,20 +60,8 @@ protected:
 	QString TABLE_NAME;
 	ActiveSale read(const QSqlQuery * sqlQuery);
 	ActiveSaleDTO readActiveSalesToDTO( const QSqlQuery& query);
-	void execQuery( QSqlQuery& query) const;
-	
-	/*
-    * Обработка ошибки - выкидывает исключение с переданной ошибкой
-    */
-    void handleError( const QSqlError& error) const;
-    
-    /*
-    * Обработка ошибки - выкидывает исключение с переданным текстом
-    */
-    void handleError( const QString& error) const;
 
 private:
-	QSqlDatabase _db;
 
 	ManagerActiveSalesStatisticDTO readToDTO( const QSqlQuery& query, const QSqlQuery& queryWithManagerData);
 	ManagerActiveSalesStatisticDTO readEmptyResultToDTO( const QSqlQuery& query);

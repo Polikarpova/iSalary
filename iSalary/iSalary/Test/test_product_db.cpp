@@ -2,7 +2,7 @@
 
 Test_Product_DB::Test_Product_DB( QSqlDatabase _sql ) {
 	sql = _sql;
-	product_DB = new Product_DB( _sql, "products" );
+	product_DB = new Product_DB( &_sql, "products" );
 	product_DB->init();
 	c = QTextCodec::codecForName("CP1251");
 }

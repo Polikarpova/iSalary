@@ -192,29 +192,6 @@ QLinkedList<UserInfo> UserDB::findByLogin( const QString& login) {
 }
 
 
-void UserDB::handleError( QSqlError error) const {
-
-    QSqlError * err = new QSqlError(error);
-    QString text = err->text() + db->lastError().text();
-    throw err;
-}
-
-void UserDB::handleError( const QString& error) const {
-    QString * err = new QString(error);
-    throw err;
-}
-
-void UserDB::execQuery( QSqlQuery& query) const {
-    
-	try {
-		bool isSuccess = query.exec();
-		if( !isSuccess ){
-			QString err = query.lastError().text();
-			this->handleError( query.lastError());
-		}
-	} catch ( ... ) {}
-}
-
 UserInfo UserDB::readOneRecord( const QSqlQuery& query) const {
     UserInfo userInfo;
 
