@@ -5,6 +5,7 @@ private:
 	QString name;
 	double commission;
 	int id;
+	bool isDeleted;
 
 public:
 	Product(void);
@@ -18,5 +19,8 @@ public:
 
 	void setCommission( double _commission );
 	double getCommission();
+
+	void setIsDeleted( bool value );
+	bool getIsDeleted();
 };
 

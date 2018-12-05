@@ -17,12 +17,12 @@ void Product_DB::init() {
 
 void Product_DB::createTable() {
     QSqlQuery query( *db );
-    query.prepare( "CREATE TABLE  IF NOT EXISTS `" + TABLE_NAME + "` (`id` int NOT NULL PRIMARY KEY AUTO_INCREMENT, `name` NVARCHAR(45) NOT NULL,`commission` DOUBLE NOT NULL)" );
+    query.prepare( "CREATE TABLE  IF NOT EXISTS `" + TABLE_NAME + "` (`id` int NOT NULL PRIMARY KEY AUTO_INCREMENT, `name` NVARCHAR(45) NOT NULL,`commission` DOUBLE NOT NULL, `isDeleted` INT(1) NOT NULL DEFAULT '0')" );
     
-    this->execQuery( query);
+	this->execQuery( query);
 }
 
-void Product_DB::create( Product product ) {
+bool Product_DB::create( Product product ) {
 
     QSqlQuery query( *db );
 	query.prepare( QString( "INSERT INTO " + TABLE_NAME + " (`name`, `commission`) VALUES(:name, :commission)" ) );
@@ -30,22 +30,29 @@ void Product_DB::create( Product product ) {
 	query.bindValue( ":commission",  product.getCommission() );
 
     this->execQuery( query);
+	return true;
 }
 
-void Product_DB::update( Product product ) {
+bool Product_DB::update( Product product ) {
 
     QSqlQuery query( *db );
-	query.prepare(QString( "UPDATE " + TABLE_NAME + " SET `name` = :name, `commission` = :commission WHERE id = ") + QString::number( product.getId() ) );
+	query.prepare(QString( "UPDATE " + TABLE_NAME + " SET `name` = :name, `commission` = :commission, `isDeleted` = :isDeleted WHERE id = ") + QString::number( product.getId() ) );
     query.bindValue( ":name", product.getName() );
 	query.bindValue( ":commission",  product.getCommission() );
+	query.bindValue( ":isDeleted",  product.getIsDeleted() );
 
     this->execQuery( query);
+	return true;
 }
 
-void Product_DB::remove( int id ) {
-	QSqlQuery query( *db);
-    query.prepare( "DELETE FROM " + TABLE_NAME + " WHERE id = " + QString::number(id));
-    this->execQuery( query);
+bool Product_DB::remove( int id ) {
+	//QSqlQuery query("DELETE FROM " + TABLE_NAME + " WHERE id = " + QString::number(id), _db);
+	QSqlQuery query( *db );
+	query.prepare(QString( "UPDATE " + TABLE_NAME + " SET `isDeleted` = :isDeleted WHERE id = ") + QString::number( id ) );
+	query.bindValue( ":isDeleted",  true );
+
+	this->execQuery( query);
+	return true;
 }
 
 Product Product_DB::read( const QSqlQuery * sqlQuery ){
@@ -58,6 +65,7 @@ void Product_DB::fillProduct( Product & product, const QSqlQuery * sqlQuery ) {
 	product.setId( sqlQuery->value( "id" ).value<int>() );
 	product.setName( sqlQuery->value( "name" ).value<QString>() );
 	product.setCommission( sqlQuery->value( "commission" ).value<double>() );
+	product.setIsDeleted( sqlQuery->value( "isDeleted" ).value<bool>() );
 }
 
 QVector<Product> Product_DB::getAll() {

@@ -12,5 +12,6 @@ struct ActiveSaleDTO {
 	double price;
 	int count;
 	bool isConfirm;
-	QDate confirmDate; /*???*/
+	QDate confirmDate;
+	QDate saleDate;
 };
