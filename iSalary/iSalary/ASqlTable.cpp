@@ -12,11 +12,16 @@ void ASqlTable::execQuery( QSqlQuery& query) const {
 void ASqlTable::handleError( QSqlError error) const {
 
     QSqlError * err = new QSqlError(error);
-    QString text = err->text() + db->lastError().text();
-    throw err;
+    //QString text = err->text() + db->lastError().text();
+    //throw err;
+    this->errorHandler->handleSqlError( err);
 }
 
 void ASqlTable::handleError( const QString& error) const {
     QString * err = new QString(error);
     throw err;
+}
+
+void ASqlTable::setErrorHandler( SqlErrorHandler* sqlErrorHandler) {
+    this->errorHandler = sqlErrorHandler;
 }
