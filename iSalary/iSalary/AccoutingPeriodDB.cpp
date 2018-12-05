@@ -105,7 +105,11 @@ void AccoutingPeriodDB::closePeriod( int id, QDate dateFrom) {
 
 
 	//все активные и подтвержденные в этом периоде продажи сделать неактивными
-
+	//все продажи подтвержденные включая до date поменять isActive = 0
+	sql = "UPDATE `sales` SET `isActive` = 0 WHERE `confirmDate` <= :date AND `isActive` = 1;";
+	query.prepare( sql);
+	query.bindValue(":date", date);
+	this->execQuery( query);
 }
 
 void AccoutingPeriodDB::checkCurrentPeriod() {
