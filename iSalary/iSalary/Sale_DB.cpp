@@ -187,8 +187,6 @@ QList<ActiveSaleDTO> Sale_DB::getActiveSales() {
 QList<ActiveSaleDTO> Sale_DB::getActiveSalesForManager( int managerId) {
 
 	//создаем строку с sql-запросом
-	QString sql = "select users.firstName, users.secondName, users.thirdName, sales.*, products.name, products.commission from sales, users, products where sales.manager_id = users.id AND sales.product_id = products.id AND sales.isActive = 1 AND users.id = :id";
-	QSqlQuery query( *db);
 	QString sql = "select users.firstName, users.secondName, users.thirdName, sales.* from sales, users where sales.manager_id = users.id AND sales.isActive = 1 AND users.id = :id";
 	QSqlQuery query( *db);
 	query.prepare(sql);

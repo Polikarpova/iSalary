@@ -107,6 +107,10 @@ void AccoutingPeriodDB::closePeriod( int id, QDate dateFrom) {
 	query.bindValue(":date", date);
 	query.bindValue(":id", id);
 	this->execQuery( query);
+
+
+	//все активные и подтвержденные в этом периоде продажи сделать неактивными
+
 }
 
 void AccoutingPeriodDB::checkCurrentPeriod() {
