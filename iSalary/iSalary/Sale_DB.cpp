@@ -2,8 +2,8 @@
 #include "ActiveSale.h"
 #include "Manager.h"
 
-Sale_DB::Sale_DB( QSqlDatabase &db, QString table_name ) {
-	_db = db;
+Sale_DB::Sale_DB( QSqlDatabase* db, QString table_name ) {
+	this->db = db;
 	TABLE_NAME = table_name;
 	this->init();
 }
@@ -18,15 +18,15 @@ void Sale_DB::init() {
 
 void Sale_DB::createTable() {
     
-    QSqlQuery query( _db );
+    QSqlQuery query( *db );
     query.prepare( "CREATE TABLE  IF NOT EXISTS `" + TABLE_NAME + 
 		"` (`id` int NOT NULL PRIMARY KEY AUTO_INCREMENT, `manager_id` int NOT NULL, `product_id` int NOT NULL, `productName` varchar(45) CHARACTER SET utf8 NOT NULL, `productCommission` double NOT NULL, `price` DOUBLE NOT NULL, `count` int NOT NULL, `isActive` INT(1) NOT NULL, `isConfirmed` INT(1) NOT NULL, `saleDate` date NOT NULL DEFAULT \"1000-01-01\", `confirmDate` DATE NOT NULL DEFAULT \"1000-01-01\" ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;" );
 	this->execQuery(query);
 }
 
-bool Sale_DB::create( ActiveSale sale ) {
+void Sale_DB::create( ActiveSale sale ) {
 
-    QSqlQuery query( _db );
+    QSqlQuery query( *db );
 	QString sql = "INSERT INTO " + TABLE_NAME + 
 		" (`manager_id`, `product_id`, `productName`, `productCommission`, `price`, `count`, `isActive`, `isConfirmed`) VALUES(:manager_id, :product_id, :name, :productCommission, :price, :count, :isActive, :isConfirmed)";
 	query.prepare( sql );
@@ -39,19 +39,15 @@ bool Sale_DB::create( ActiveSale sale ) {
 	query.bindValue( ":isActive", 1 );
 	query.bindValue( ":isConfirmed",  0 );
 
-    bool isSuccess = query.exec();
-    if ( !isSuccess ) {
-		QString s = query.lastError().text();
-        int stop = 2;
-    }
+    this->execQuery( query);
 
-	return isSuccess;
 }
 
-bool Sale_DB::remove( int id ) {
-	QSqlQuery query("DELETE FROM " + TABLE_NAME + " WHERE id = " + QString::number(id), _db);
-    bool isSuccess = query.exec();
-	return isSuccess;
+void Sale_DB::remove( int id ) {
+	QSqlQuery query(*db);
+    query.prepare( "DELETE FROM " + TABLE_NAME + " WHERE id = " + QString::number(id));
+
+    this->execQuery( query);
 }
 
 ActiveSale Sale_DB::read( const QSqlQuery * sqlQuery ){
@@ -75,7 +71,10 @@ void Sale_DB::fillSale( ActiveSale & sale, const QSqlQuery * sqlQuery ) {
 }
 
 QVector<ActiveSale> Sale_DB::getActiveAll( int manager_id ) {
-    QSqlQuery query( QString( "SELECT * FROM " ) + TABLE_NAME, _db );
+    QSqlQuery query( *db );
+    QString sql = QString( "SELECT * FROM " ) + TABLE_NAME;
+    query.prepare( sql);
+    this->execQuery( query);
     QVector<ActiveSale> sales;
     while ( query.next() ) {
         if ( query.value( "isActive" ).value<int>() == 1 ) {
@@ -91,7 +90,7 @@ QVector<ActiveSale> Sale_DB::getActiveAll( int manager_id ) {
 QVector<ActiveSale> Sale_DB::getActiveAllInPeriod( int manager_id, QDate dateFrom ) {
     
 	QString sql = QString( "SELECT * FROM " ) + TABLE_NAME + QString(" WHERE confirmDate >= \"") + dateFrom.toString(Qt::ISODate) + QString("\"");
-	QSqlQuery query( _db );
+	QSqlQuery query( *db );
 	query.prepare( sql);
 	query.bindValue(":id", manager_id);
 
@@ -123,7 +122,7 @@ QList<ManagerActiveSalesStatisticDTO> Sale_DB::getManagerActiveSalesSatistic() {
 
 	//получаем id
 	QString sql = "select users.id, users.firstName, users.secondName, users.thirdName from users where	users.type = 0;";
-	QSqlQuery query( this->_db);
+	QSqlQuery query( *db);
 	query.prepare(sql);
 
 	this->execQuery( query);
@@ -135,7 +134,7 @@ QList<ManagerActiveSalesStatisticDTO> Sale_DB::getManagerActiveSalesSatistic() {
 		//получаем список всех
 		QString sql2 = "select users.id, users.firstName, users.secondName, users.thirdName, sales.isConfirmed from users, sales where sales.manager_id = users.id AND sales.isActive = 1 AND users.id = :id";
 
-		QSqlQuery query2( this->_db);
+		QSqlQuery query2( *this->db);
 		query2.prepare(sql2);
 		query2.bindValue(":id", query.value("id").value<int>());
 
@@ -170,7 +169,7 @@ QList<ActiveSaleDTO> Sale_DB::getActiveSales() {
 
 	//создаем строку с sql-запросом
 	QString sql = "select users.firstName, users.secondName, users.thirdName, sales.*, products.name, products.commission from sales, users, products where sales.manager_id = users.id AND sales.product_id = products.id AND sales.isActive = 1";
-	QSqlQuery query( this->_db);
+	QSqlQuery query( *db);
 	query.prepare(sql);
 
 	this->execQuery( query);
@@ -189,7 +188,7 @@ QList<ActiveSaleDTO> Sale_DB::getActiveSalesForManager( int managerId) {
 
 	//создаем строку с sql-запросом
 	QString sql = "select users.firstName, users.secondName, users.thirdName, sales.*, products.name, products.commission from sales, users, products where sales.manager_id = users.id AND sales.product_id = products.id AND sales.isActive = 1 AND users.id = :id";
-	QSqlQuery query( this->_db);
+	QSqlQuery query( *db);
 	query.prepare(sql);
 	query.bindValue(":id", managerId);
 
@@ -270,7 +269,7 @@ QList<SaleInfoDTO> Sale_DB::getSalesConfimedFromPeriod( int id, QDate from, QDat
 
 	QString sql = "select sales.price, sales.count, products.commission from sales, users, products where sales.manager_id = users.id AND sales.product_id = products.id AND sales.isConfirmed = 1 AND users.id = :id AND sales.confirmDate >= :dateFrom AND sales.confirmDate <= :dateTo;";
 	//sql.arg(QString(id)), from.toString(Qt::ISODate), to.toString(Qt::ISODate));
-	QSqlQuery query( this->_db);
+	QSqlQuery query( *db);
 	query.prepare(sql);
 	query.bindValue(":id", id);
 	query.bindValue(":dateFrom", from);
@@ -297,7 +296,7 @@ void Sale_DB::confirmSale( int id) {
 	QString sql = "update %0 set `%1` = 1, `%2` = :%2 where %4 = :id;";
 	sql = sql.arg("sales", "isConfirmed", "confirmDate", "sales.id");
 
-	QSqlQuery query( this->_db);
+	QSqlQuery query( *db);
 	query.prepare(sql);
 
 	query.bindValue(":id", id);
@@ -311,34 +310,9 @@ void Sale_DB::unconfirmSale( int id) {
 	QString sql = "update %0 set `%1` = 0 where %2 = :id;";
 	sql = sql.arg("sales", "isConfirmed", "sales.id");
 
-	QSqlQuery query( this->_db);
+	QSqlQuery query( *db);
 	query.prepare(sql);
 	query.bindValue(":id", id);
 
 	this->execQuery( query);
-}
-
-void Sale_DB::execQuery( QSqlQuery& query) const {
-    
-	try {
-		bool isSuccess = query.exec();
-		if( !isSuccess ){
-			QString err = query.lastError().text();
-        
-			QString dbname_ = _db.databaseName();
-			this->handleError( query.lastError());
-		}
-	} catch ( ... ) {}
-}
-
-void Sale_DB::handleError( const QSqlError& error) const {
-
-    QSqlError * err = new QSqlError(error);
-	QString text = err->text() + this->_db.lastError().text();
-    throw err;
-}
-
-void Sale_DB::handleError( const QString& error) const {
-    QString * err = new QString(error);
-    throw err;
 }

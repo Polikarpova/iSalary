@@ -8,18 +8,28 @@ SalesFacade::SalesFacade( ManagerDB* manager, Sale_DB* sale, AccoutingPeriodDB* 
 }
 
 SaleDTO SalesFacade::addActiveSale( ActiveSale activeSale ) {
-	bool isSuccess = this->s->create( activeSale );
+	bool isSuccess = true;
 	SaleDTO result;
-	result.activeSale = activeSale;
-	result.isEmpty = false;
+    try { 
+        this->s->create( activeSale );
+	    result.activeSale = activeSale;
+	    result.isEmpty = false;
+    } catch ( QString* error) {
+        isSuccess = false;
+    }
 	result.isSuccess = isSuccess;
 	return result;
 }
 
 SaleDTO SalesFacade::removeActiveSale( int id ) {
-	bool isSuccess = this->s->remove( id );
+	bool isSuccess = true;
 	SaleDTO result;
-	result.isEmpty = true;
+    try { 
+        this->s->remove( id );
+	    result.isEmpty = true;
+    } catch ( QString* error) {
+        isSuccess = false;
+    }
 	result.isSuccess = isSuccess;
 	return result;
 }

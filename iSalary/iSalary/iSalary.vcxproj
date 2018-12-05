@@ -80,6 +80,7 @@
   <ItemGroup>
     <ClCompile Include="AccoutingPeriod.cpp" />
     <ClCompile Include="ActiveSale.cpp" />
+    <ClCompile Include="ASqlTable.cpp" />
     <ClCompile Include="Codec.cpp" />
     <ClCompile Include="ConfirmedSalesTableModel.cpp" />
     <ClCompile Include="EmployeesPage.cpp" />
@@ -246,6 +247,7 @@
     <ClInclude Include="AccoutingPeriodDTO.h" />
     <ClInclude Include="ActiveSale.h" />
     <ClInclude Include="ActiveSaleDTO.h" />
+    <ClInclude Include="ASqlTable.h" />
     <ClInclude Include="Codec.h" />
     <CustomBuild Include="ConfirmedSalesTableModel.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>

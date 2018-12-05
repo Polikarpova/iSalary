@@ -66,9 +66,9 @@ int main(int argc, char *argv[])
 
     UserDB userDB( &sqlDB);
     ManagerDB managerDB( &sqlDB, &userDB);
-    Sale_DB saleDB( sqlDB, QString("sales"));
+    Sale_DB saleDB( &sqlDB, QString("sales"));
 	AccoutingPeriodDB periodDB( &sqlDB);
-	Product_DB product_DB( sqlDB, "products" );
+	Product_DB product_DB( &sqlDB, "products" );
 	
     QList<ISqlTable*> tabels;
     tabels << &userDB << &managerDB <<  &product_DB << &saleDB << &periodDB;

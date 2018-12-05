@@ -12,8 +12,7 @@
 
 #include "ISqlTable.h"
 
-class ManagerDB : protected UserDB, public IManagerRepository, public ISqlTable
-{
+class ManagerDB : public UserDB, public IManagerRepository {
 public:
 
     /**
@@ -80,7 +79,6 @@ public:
     void createTable() override;
 
 private:
-    QSqlDatabase* db;       /**< ˜˜˜˜˜˜˜˜˜ ˜˜ ˜ ˜˜˜˜˜˜˜ ˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜ */
     UserDB* userDB;
 
     QString tableName;

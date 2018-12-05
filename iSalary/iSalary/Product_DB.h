@@ -7,16 +7,17 @@
 #include <QVector>
 #include <QSqlError>
 
-#include "ISqlTable.h"
-class Product_DB : public ISqlTable
+#include "ASqlTable.h"
+
+class Product_DB : public ASqlTable
 {
 public:
-	Product_DB( QSqlDatabase &db, QString table_name );
+	Product_DB( QSqlDatabase *db, QString table_name );
 	~Product_DB(void);
 	void init();
-	bool create(Product product);
-	bool update(Product product);
-	bool remove(int id);
+	void create(Product product);
+	void update(Product product);
+	void remove(int id);
 	void fillProduct( Product & product, const QSqlQuery * sqlQuery );
 	Product findByName( QString productName );
 	Product findById( int id );
@@ -29,6 +30,5 @@ protected:
 	Product read(const QSqlQuery * sqlQuery);
 
 private:
-	QSqlDatabase _db;
 };
 
