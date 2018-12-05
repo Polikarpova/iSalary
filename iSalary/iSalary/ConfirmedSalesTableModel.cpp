@@ -38,6 +38,8 @@ QVariant ConfirmedSalesTableModel::headerData( int section, Qt::Orientation orie
 			return QString::fromWCharArray( L"ФИО" );
 		case COLUMN_DATE:
 			return QString::fromWCharArray( L"Дата подтверждения" );
+		case COLUMN_SALE_DATE:
+			return QString::fromWCharArray( L"Дата продажи" );
 		case COLUMN_NAME:
 			return QString::fromWCharArray( L"Название" );
 		case COLUMN_COUNT:
@@ -119,6 +121,7 @@ void ConfirmedSalesTableModel::refreshData(const QList<ActiveSaleDTO>& sales) {
 			row << "";
 			row << sale.managerName;
 			row << sale.confirmDate;
+			row << sale.saleDate;
 			row << sale.product.name;
 			row << sale.count;
 			row << sale.price;

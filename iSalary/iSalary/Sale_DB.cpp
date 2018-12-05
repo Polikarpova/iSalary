@@ -168,7 +168,7 @@ QList<ManagerActiveSalesStatisticDTO> Sale_DB::getManagerActiveSalesSatistic() {
 QList<ActiveSaleDTO> Sale_DB::getActiveSales() {
 
 	//создаем строку с sql-запросом
-	QString sql = "select users.firstName, users.secondName, users.thirdName, sales.*, products.name, products.commission from sales, users, products where sales.manager_id = users.id AND sales.product_id = products.id AND sales.isActive = 1";
+	QString sql = "select users.firstName, users.secondName, users.thirdName, sales.* from sales, users where sales.manager_id = users.id AND sales.isActive = 1";
 	QSqlQuery query( *db);
 	query.prepare(sql);
 
@@ -188,6 +188,8 @@ QList<ActiveSaleDTO> Sale_DB::getActiveSalesForManager( int managerId) {
 
 	//создаем строку с sql-запросом
 	QString sql = "select users.firstName, users.secondName, users.thirdName, sales.*, products.name, products.commission from sales, users, products where sales.manager_id = users.id AND sales.product_id = products.id AND sales.isActive = 1 AND users.id = :id";
+	QSqlQuery query( *db);
+	QString sql = "select users.firstName, users.secondName, users.thirdName, sales.* from sales, users where sales.manager_id = users.id AND sales.isActive = 1 AND users.id = :id";
 	QSqlQuery query( *db);
 	query.prepare(sql);
 	query.bindValue(":id", managerId);
@@ -252,13 +254,14 @@ ActiveSaleDTO Sale_DB::readActiveSalesToDTO( const QSqlQuery& query) {
 						 query.value("thirdName").value<QString>();
 	
 	result.product.id = query.value("product_id").value<int>();
-	result.product.name = query.value("name").value<QString>();
-	result.product.commission = query.value("commission").value<double>();
+	result.product.name = query.value("productName").value<QString>();
+	result.product.commission = query.value("productCommission").value<double>();
 
 	result.price = query.value("price").value<double>();
 	result.count = query.value("count").value<int>();
 	result.isConfirm = query.value("isConfirmed").value<int>() ? true : false;
 	result.confirmDate = QDate::fromString( query.value("confirmDate").value<QString>(), Qt::ISODate);
+	result.saleDate = QDate::fromString( query.value("saleDate").value<QString>(), Qt::ISODate);
 
 	return result;
 }
