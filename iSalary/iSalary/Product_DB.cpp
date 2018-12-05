@@ -48,9 +48,10 @@ bool Product_DB::create( Product product ) {
 bool Product_DB::update( Product product ) {
 
     QSqlQuery query( _db );
-	query.prepare(QString( "UPDATE " + TABLE_NAME + " SET `name` = :name, `commission` = :commission WHERE id = ") + QString::number( product.getId() ) );
+	query.prepare(QString( "UPDATE " + TABLE_NAME + " SET `name` = :name, `commission` = :commission, `isDeleted` = :isDeleted WHERE id = ") + QString::number( product.getId() ) );
     query.bindValue( ":name", product.getName() );
 	query.bindValue( ":commission",  product.getCommission() );
+	query.bindValue( ":isDeleted",  product.getIsDeleted() );
 
     try {
 		bool isSuccess = query.exec();
