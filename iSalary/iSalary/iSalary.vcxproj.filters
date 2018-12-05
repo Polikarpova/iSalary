@@ -266,9 +266,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_ManagerPage.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ProductPage.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_ProductPage.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
@@ -313,6 +310,9 @@
     </ClCompile>
     <ClCompile Include="ProductFacade.cpp">
       <Filter>Source Files\Model\DomainModel\ModelFacade</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ProductPage.cpp">
+      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -361,14 +361,14 @@
     <CustomBuild Include="Test\test_user_db.h">
       <Filter>Header Files\Test</Filter>
     </CustomBuild>
-    <CustomBuild Include="Settings.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="ManagerPage.h">
       <Filter>Header Files\View</Filter>
     </CustomBuild>
     <CustomBuild Include="ProductPage.h">
       <Filter>Header Files\View</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Settings.h">
+      <Filter>Resource Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
