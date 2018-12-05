@@ -1,8 +1,9 @@
 #pragma once
 #include "isqltable.h"
-#include "qsqldatabase.h"
-#include "qsqlerror.h"
-#include "qsqlquery.h"
+#include <qsqldatabase.h>
+#include <qsqlerror.h>
+#include <qsqlquery.h>
+#include "SqlErrorHandler.h"
 
 class ASqlTable :
     public ISqlTable
@@ -25,7 +26,10 @@ public:
     */
     virtual void handleError( const QString& error) const;
 
+    virtual void setErrorHandler( SqlErrorHandler* );
+
 protected:
-    QSqlDatabase* db;       /**< ˜˜˜˜˜˜˜˜˜ ˜˜ ˜ ˜˜˜˜˜˜˜ ˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜ */
+    QSqlDatabase* db;       /**< ýêçåìïëÿð ÁÄ ê êîòîðîé áóäóò ïðèìåíÿòüñÿ çàïðîñû */
+    SqlErrorHandler* errorHandler;
 };
 

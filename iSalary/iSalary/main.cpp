@@ -70,18 +70,23 @@ int main(int argc, char *argv[])
 	AccoutingPeriodDB periodDB( &sqlDB);
 	Product_DB product_DB( &sqlDB, "products" );
 	
-    QList<ISqlTable*> tabels;
+    QList<ASqlTable*> tabels;
     tabels << &userDB << &managerDB <<  &product_DB << &saleDB << &periodDB;
     
     sqlDB.setDatabaseName( settings.databaseName);
     
-    createDbAndTables(&sqlDB, settings.databaseName, tabels);
+    createDbAndTables(&sqlDB, settings.databaseName, (tabels));
 
     if( sqlDB.lastError().type() != QSqlError::NoError){
         QMessageBox::critical( 0, QString::fromWCharArray(L"Ошибка подключения к БД"), sqlDB.lastError().text());
         return 0;
     }
 	
+    SqlErrorHandler sqlErrorHandler;
+    for( auto itable = tabels.begin(); itable != tabels.end(); itable++){
+        (*itable)->setErrorHandler(&sqlErrorHandler);
+    }
+
     UserValidator userValidator( &userDB);
     AuthorizationModule authModule( &userValidator, &userDB);
     AuthorizationFacade authFacade( &authModule);
@@ -111,8 +116,11 @@ int main(int argc, char *argv[])
 		&managerPage
 	);
 	
-	w.show();
-    
+    try {
+        w.show();
+    } catch (...) {
+        QMessageBox::critical(0,"Что-то пошло", "не так");
+    } 
     int stop = 2;
     
     int exitCode =-1;

@@ -87,6 +87,7 @@ void SalesPage::initConfirmedSalesTable( QTableView* confirmedSalesTable) {
 	this->confirmedSalesTable->horizontalHeader()->setStretchLastSection( true);
 	this->confirmedSalesTable->horizontalHeader()->setSectionResizeMode( ConfirmedSalesTableModel::COLUMN_FIO, QHeaderView::ResizeToContents);
 	this->confirmedSalesTable->horizontalHeader()->setSectionResizeMode( ConfirmedSalesTableModel::COLUMN_DATE, QHeaderView::ResizeToContents);
+	this->confirmedSalesTable->horizontalHeader()->setSectionResizeMode( ConfirmedSalesTableModel::COLUMN_SALE_DATE, QHeaderView::ResizeToContents);
 	this->confirmedSalesTable->horizontalHeader()->setSectionResizeMode( ConfirmedSalesTableModel::COLUMN_ACTION, QHeaderView::ResizeToContents);
 	this->confirmedSalesTable->setSelectionBehavior( QAbstractItemView::SelectRows);
 	this->confirmedSalesTable->setSelectionMode( QAbstractItemView::SingleSelection);

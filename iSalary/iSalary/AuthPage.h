@@ -17,7 +17,6 @@ public:
     ~AuthPage( void);
 
 	int currentUserId();
-
 signals:
     void userLoggedIn( const UserDTO& user, UserType userType);
 

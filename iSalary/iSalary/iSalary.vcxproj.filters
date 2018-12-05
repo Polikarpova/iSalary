@@ -314,6 +314,9 @@
     <ClCompile Include="ASqlTable.cpp">
       <Filter>Source Files\Model\DB</Filter>
     </ClCompile>
+    <ClCompile Include="SqlErrorHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -507,8 +510,11 @@
     <ClInclude Include="SaleDTO.h">
       <Filter>Header Files\Model\ModelFacade</Filter>
     </ClInclude>
-    <ClInclude Include="ASqlTable.h">
+    <ClInclude Include="SqlErrorHandler.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ASqlTable.h">
+      <Filter>Header Files\Model\DB</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

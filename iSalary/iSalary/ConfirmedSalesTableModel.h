@@ -26,6 +26,7 @@ public:
         COLUMN_ACTION,
         COLUMN_FIO,
         COLUMN_DATE,
+        COLUMN_SALE_DATE,
         COLUMN_NAME,
         COLUMN_COUNT,
         COLUMN_PRICE,

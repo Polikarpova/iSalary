@@ -40,13 +40,8 @@ void AccoutingPeriodDB::openAccountingPeriod() {
 	QString sql = "INSERT INTO `accouting_period` (`dateFrom`, `status`) VALUES (\"" + date + QString("\", 1);");
 	QSqlQuery query( *db);
 	query.prepare( sql);
-		
-	try {
-		this->execQuery( query);
-	} catch ( ... ) {
-			
-		//QMessageBox::information(0, "Текущий РП", "Невозможно создать текущий РП. Обратитесь к разработчикам.");
-	}
+	
+	this->execQuery( query);
 }
 
 QList<AccoutingPeriodDTO> AccoutingPeriodDB::getAllPeriods() {
@@ -107,6 +102,14 @@ void AccoutingPeriodDB::closePeriod( int id, QDate dateFrom) {
 	query.bindValue(":date", date);
 	query.bindValue(":id", id);
 	this->execQuery( query);
+
+
+	//все активные и подтвержденные в этом периоде продажи сделать неактивными
+	//все продажи подтвержденные включая до date поменять isActive = 0
+	sql = "UPDATE `sales` SET `isActive` = 0 WHERE `confirmDate` <= :date AND `isActive` = 1;";
+	query.prepare( sql);
+	query.bindValue(":date", date);
+	this->execQuery( query);
 }
 
 void AccoutingPeriodDB::checkCurrentPeriod() {
@@ -134,27 +137,4 @@ void AccoutingPeriodDB::checkCurrentPeriod() {
 			this->openAccountingPeriod();
 		}
 	}
-}
-
-void AccoutingPeriodDB::execQuery( QSqlQuery& query) const {
-	
-	try {
-		bool isSuccess = query.exec();
-		if( !isSuccess ){
-			QString err = query.lastError().text();
-			this->handleError( query.lastError());
-		}
-	} catch ( ... ) {}
-}
-
-void AccoutingPeriodDB::handleError( const QSqlError& error) const {
-
-    QSqlError * err = new QSqlError(error);
-	QString text = err->text() + this->db->lastError().text();
-    throw err;
-}
-
-void AccoutingPeriodDB::handleError( const QString& error) const {
-    QString * err = new QString(error);
-    throw err;
 }

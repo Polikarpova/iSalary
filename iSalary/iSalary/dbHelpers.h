@@ -36,7 +36,11 @@ bool createDbIfNotExist(QSqlDatabase* db, QString dbName) {
     return isSuccess;
 }
 
-bool createDbAndTables(QSqlDatabase* db, QString dbName, QList<ISqlTable*> tables) {
+/**
+* @param tables - QList наследников ISqlTable
+*/
+template <class TISqlTable>
+bool createDbAndTables(QSqlDatabase* db, QString dbName, QList<TISqlTable*> tables) {
     
     bool created = createDbIfNotExist(db, dbName);
     db->setDatabaseName(dbName);
