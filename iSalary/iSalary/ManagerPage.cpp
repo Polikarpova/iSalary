@@ -13,7 +13,7 @@ ManagerPage::~ManagerPage(void)
 
 void ManagerPage::setUI(
 	QLineEdit *currentSalaryOutput,
-	QComboBox *productComboBox,
+	QLineEdit *productNameOutput,
 	QDoubleSpinBox *priceSaleInput,
 	QSpinBox *countSaleProductsInput,
 	QPushButton *addSaleButton,
@@ -23,7 +23,7 @@ void ManagerPage::setUI(
 	QTableView *unconfirmedSalesTable
 ) {
 	this->currentSalaryOutput = currentSalaryOutput;
-	this->productComboBox = productComboBox;
+	this->productNameOutput = productNameOutput;
 	this->priceSaleInput = priceSaleInput;
 	this->countSaleProductsInput = countSaleProductsInput;
 	this->addSaleButton = addSaleButton;
@@ -36,6 +36,8 @@ void ManagerPage::setUI(
 	unconfirmedSalesTableModel = new QStandardItemModel;
 	confirmedSalesTableModel = new QStandardItemModel;
 	productsTableModel = new QStandardItemModel;
+	
+	fillManagersProductTable();
 
 	this->productTable->setEditTriggers(0);
 	this->productTable->setSelectionBehavior( QAbstractItemView::SelectRows);
@@ -54,6 +56,7 @@ void ManagerPage::setUI(
 
 	connect( this->productSearchInput, SIGNAL( textChanged( const QString & ) ), this, SLOT( searchManagersProductTable() ) );
 	connect( addSaleButton, SIGNAL( clicked() ), this, SLOT( addSale() ) );
+	connect( this->productTable->selectionModel(), SIGNAL( currentChanged ( const QModelIndex &, const QModelIndex & ) ), this, SLOT( showProduct() ) );
 }
 
 void ManagerPage::setCurrentManagerId( int id ) {
@@ -223,7 +226,7 @@ void ManagerPage::fillSale( ActiveSale & sale ) {
 	saler.setFirstName( "Dima" );
 	saler.setId( current_manager_id );
 	sale.setSaler( saler );
-	QString nameProduct = productComboBox->currentText();
+	QString nameProduct = productNameOutput->text();
 	ProductDTO result = productFacade->findByName( nameProduct );
 	sale.setProduct( result.product );
 	sale.setCost( priceSaleInput->value() );
@@ -238,12 +241,13 @@ void ManagerPage::clearManagersProductsTable() {
     horizontalHeader.append( c->toUnicode( "Комиссия" ) );
 	productsTableModel->setHorizontalHeaderLabels( horizontalHeader );
 	productTable->setModel( productsTableModel );
+	addSaleButton->setEnabled(false);
     //productTable->resizeColumnsToContents();
 }
 
 void ManagerPage::fillManagersProductTable() {
     clearManagersProductsTable();
-	this->productComboBox->clear();
+	productNameOutput->clear();
 
 	ProductDTO result = productFacade->getAll();
 	if ( result.isSuccess == true ) {
@@ -255,10 +259,8 @@ void ManagerPage::fillManagersProductTable() {
 			productsTableModel->setItem( idx, 0, item );
 			item = new QStandardItem( QString::number( product.getCommission() ) + "%" );
 			productsTableModel->setItem( idx, 1, item );
-			productComboBox->addItem( product.getName() );
 		}
-		addSaleButton->setEnabled( !products.empty() );
-		productComboBox->setEnabled( !products.empty() );
+		//addSaleButton->setEnabled( !products.empty() );
 	}
 
 	if ( result.isSuccess == false ) {
@@ -298,3 +300,8 @@ void ManagerPage::searchManagersProductTable() {
 	}
 }
 
+void ManagerPage::showProduct() {
+	addSaleButton->setEnabled( true );
+	QString productName = productsTableModel->data( productsTableModel->index( productTable->currentIndex().row(), 0 ) ).toString();
+	productNameOutput->setText( productName );
+}

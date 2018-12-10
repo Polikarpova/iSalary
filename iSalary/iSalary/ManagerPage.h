@@ -21,7 +21,7 @@ public:
 	~ManagerPage(void);
 	void setUI(
 		QLineEdit *currentSalaryOutput,
-		QComboBox *productComboBox,
+		QLineEdit *productNameOutput,
 		QDoubleSpinBox *priceSaleInput,
 		QSpinBox *countSaleProductsInput,
 		QPushButton *addSaleButton,
@@ -42,12 +42,11 @@ private:
 	QWidget* widget;
 
 	QLineEdit *currentSalaryOutput;
-	QComboBox *productComboBox;
+	QLineEdit *productNameOutput;
 	QDoubleSpinBox *priceSaleInput;
 	QSpinBox *countSaleProductsInput;
 	QPushButton *addSaleButton;
 	QLineEdit *productSearchInput;
-	QPushButton *productSearchButton;
 	QTableView *productTable;
 	QTableView *confirmedSalesTable;
 	QTableView *unconfirmedSalesTable;
@@ -69,5 +68,6 @@ private slots:
 	void searchManagersProductTable();
 	void addSale();
 	void removeSale();
+	void showProduct();
 };
 
