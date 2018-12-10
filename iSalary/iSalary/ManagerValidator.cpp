@@ -76,6 +76,32 @@ bool ManagerValidator::isManagerValid( const Manager& manager, QString* errorOut
         error += QString::fromWCharArray( L"ИНН должен состоять из 12 цифр\n");
         isValid = false;
     }
+    
+    QRegExp anyLangChar(QString::fromWCharArray(L"[a-zA-Zа-яА-Я]"));
+    QRegExp ruLatDots(QString::fromWCharArray(L"[a-zA-Zа-яА-Я\,\.\- 0-9]*"));
+
+    if( anyLangChar.indexIn( manager.getAddress()) < 0) {
+        error += QString::fromWCharArray( L"Адрес должен содержать хотя бы одну букву\n");
+        isValid = false;
+    }
+
+    ruLatDots.indexIn( manager.getAddress());
+    if( ruLatDots.matchedLength() != manager.getAddress().size() )  {
+        error += QString::fromWCharArray( L"Адрес должен состоять только из букв, цифр, точек, запятых и тире\n");
+        isValid = false;
+    }
+
+    auto passportSource = manager.getPassportSource();
+    if( anyLangChar.indexIn( passportSource) < 0  ) {
+        error += QString::fromWCharArray( L" Поле \"Паспорт выдан\" должно содержать хотя бы одну букву\n");
+        isValid = false;
+    }
+
+    ruLatDots.indexIn( passportSource);
+    if(  ruLatDots.matchedLength() != passportSource.size()) {
+        error += QString::fromWCharArray( L"Поле \"Паспорт выдан\" должено состоять только из букв, цифр, точек, запятых и тире\n");
+        isValid = false;
+    }
 
     *errorOutput = error;
     return isValid;
