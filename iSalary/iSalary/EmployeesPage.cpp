@@ -9,6 +9,7 @@ EmployeesPage::~EmployeesPage(void) {
 }
 
 void EmployeesPage::setUI(
+  QWidget* tabWidget,
   QTableView* managersTable,
   QLineEdit* loginInput,
   QLineEdit* passwordInput,
@@ -86,6 +87,9 @@ void EmployeesPage::setUI(
     connect( this->cancelAddBtn, &QPushButton::clicked, this, &EmployeesPage::cancel);
 
     this->fillInputDefaultStyles();
+
+    this->tabWidget = tabWidget;
+
 }
 
 void EmployeesPage::setErrorHandler( ErrorMessageHandler* errorHandler) {
@@ -93,6 +97,7 @@ void EmployeesPage::setErrorHandler( ErrorMessageHandler* errorHandler) {
 }
 
 void EmployeesPage::refreshList() {
+    this->startBlockForRequest();
     QList<ManagerDTO> managersList;
     
     try {
@@ -118,9 +123,13 @@ void EmployeesPage::refreshList() {
             this->showDetailsById( currentManagerId);
         }
     }
+
+    this->endBlockForRequest();
 }
 
 void EmployeesPage::showDetailsById( int managerId) {
+    this->startBlockForRequest();
+
     this->enableInputs( false);
     this->buttonStackedWidget->setCurrentIndex( PAGE_BTNS_SHOW);
     this->clearErrors();
@@ -147,6 +156,8 @@ void EmployeesPage::showDetailsById( int managerId) {
 
     this->loginInput->setText( manager.login);
     this->passwordInput->setText( manager.passwword);
+
+    this->endBlockForRequest();
 }
 
 void EmployeesPage::showDetails( const QModelIndex& index) {
@@ -168,6 +179,8 @@ void EmployeesPage::startAdd() {
 }
 
 void EmployeesPage::saveEdit() {
+    this->startBlockForRequest();
+
     try {
         if( validateInputs()){
             ManagerDTO manager = this->readFromInputs();
@@ -181,9 +194,12 @@ void EmployeesPage::saveEdit() {
     } catch( QString* error) {
         this->errorHandler->handleError( error);
     }
+    this->endBlockForRequest();
 }
 
 void EmployeesPage::saveAdd() {
+    this->startBlockForRequest();
+
     try {
         if( validateInputs()) {
             ManagerDTO manager = this->readFromInputs();
@@ -195,6 +211,8 @@ void EmployeesPage::saveAdd() {
     } catch( QString* error) {
         this->errorHandler->handleError( error);
     }
+
+    this->endBlockForRequest();
 }
 
 void EmployeesPage::cancel() {
@@ -323,6 +341,13 @@ bool EmployeesPage::validateInputs() {
         inputError( this->passportNumberInput);
         isOk = false;
     }
+
+    
+    if( manager.passportSource.size() == 0 ){
+        inputError( this->passportSourceInput);
+        isOk = false;
+    }
+
     /*
     if( manager.address.size() ){
         inputError( this->addressInput);
@@ -371,4 +396,13 @@ void EmployeesPage::clearErrors() {
     for( auto iWidgetStyle = this->widgetDefaultStyles.begin(); iWidgetStyle != this->widgetDefaultStyles.end(); iWidgetStyle++){
         iWidgetStyle.key()->setStyleSheet( iWidgetStyle.value());
     }
+}
+
+
+void EmployeesPage::startBlockForRequest(){
+    this->tabWidget->setEnabled( false);
+}
+
+void EmployeesPage::endBlockForRequest(){
+    this->tabWidget->setEnabled(true);
 }

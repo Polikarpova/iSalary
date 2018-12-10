@@ -20,6 +20,7 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
 	
     this->employeesPage = employeesPage;
     this->employeesPage->setUI(
+        ui.tabManagers,
         ui.managersTable,
         ui.login,
         ui.password,
