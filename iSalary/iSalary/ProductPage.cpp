@@ -46,7 +46,6 @@ void ProductPage::setUI(
 	this->productTable->setSelectionMode( QAbstractItemView::SingleSelection);
 	this->productTable->horizontalHeader()->setStretchLastSection(true);
 	setEnabledEditAndRemoveButtons( false );
-	productTable->setFocus();
 
 	connect( this->productTable->selectionModel(), SIGNAL( currentChanged ( const QModelIndex &, const QModelIndex & ) ), this, SLOT( showProduct() ) );
 	connect( this->productTable->selectionModel(), SIGNAL( currentChanged ( const QModelIndex &, const QModelIndex & ) ), this, SLOT( enableEditAndRemoveButtons( ) ) );
@@ -137,7 +136,7 @@ void ProductPage::selectProduct( Product product ) {
 		QString productName = productsTableModel->data( productsTableModel->index( i, 0 ) ).toString();
 		if ( productName == product.getName() ) {
 			QModelIndex index = productTable->model()->index( i, 0 ); 
-			productTable->setFocus();
+			//productTable->setFocus();
 			productTable->selectRow( i );
 		}
 	}
@@ -212,7 +211,6 @@ void ProductPage::updateProduct() {
 		if ( result.isSuccess == false) {
 		
 		}
-		//setEnabledEditAndRemoveButtons( false );
 	}
 }
 
@@ -301,7 +299,6 @@ void ProductPage::clearTable() {
     horizontalHeader.append( c->toUnicode( "Комиссия" ) );
 	productsTableModel->setHorizontalHeaderLabels( horizontalHeader );
 	productTable->setModel( productsTableModel );
-	productTable->setFocus();
 	//setEnabledEditAndRemoveButtons( false );
     //productTable->resizeColumnsToContents();
 }
@@ -325,10 +322,11 @@ void ProductPage::fillProducts() {
 		}
 		productTable->setColumnHidden( 2, true);
 	}
+	productTable->setFocus();
+	setEnabledEditAndRemoveButtons( false );
 }
 
 void ProductPage::searchProduct() {
-	setEnabledEditAndRemoveButtons( false );
 	QString nameProduct = productSearchInput->text().toLower();
 	if ( nameProduct != "" ) {
 		clearTable();
@@ -359,5 +357,7 @@ void ProductPage::searchProduct() {
 	} else {
 		fillProducts();
 	}
+	setEnabledEditAndRemoveButtons( false );
+	productSearchInput->setFocus();
 }
 

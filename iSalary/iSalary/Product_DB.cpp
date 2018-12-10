@@ -75,7 +75,9 @@ QVector<Product> Product_DB::getAll() {
     QVector<Product> products;
     while ( query.next() ) {
         Product product = read( &query );
-        products.append( product );
+		if ( product.getIsDeleted() == false ) {
+			products.append( product );
+		}  
     }
     return products;
 }
