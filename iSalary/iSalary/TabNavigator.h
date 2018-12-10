@@ -1,0 +1,31 @@
+#pragma once
+#include <qtabwidget.h>
+#include "enums.h"
+
+class EmployeesPage;
+class ProductPage;
+class SalesPage;
+class SalaryPage;
+
+class TabNavigator
+
+{
+
+public:
+	TabNavigator(QTabWidget* tabs);
+	~TabNavigator(void);
+
+	QTabWidget* tabs;
+	EmployeesPage* employeesPage;
+	ProductPage* productPage;
+	SalesPage* salesPage;
+	SalaryPage* salaryPage;
+
+	void setEmployeesPage(EmployeesPage* employeesPage);
+	void setProductPage(ProductPage* productPage);
+	void setSalesPage(SalesPage* salesPage);
+	void setSalaryPage(SalaryPage* salaryPage);
+	//setEmployeesPage(EmployeesPage* employeesPage);
+
+	void openEmployeesPage( int employId);
+};
