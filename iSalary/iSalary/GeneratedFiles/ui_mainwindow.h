@@ -248,12 +248,12 @@ public:
     QLabel *label_26;
     QGridLayout *gridLayout_6;
     QLabel *label_27;
-    QComboBox *productComboBox;
     QLabel *label_28;
     QLabel *label_29;
     QSpinBox *countSaleProducts;
     QPushButton *addSaleButton;
     QDoubleSpinBox *priceSale;
+    QLineEdit *nameProductOutput;
     QLabel *label_30;
     QTableView *managerConfirmedSalesTable;
     QLabel *label_31;
@@ -275,7 +275,7 @@ public:
     {
         if (MainWindowClass->objectName().isEmpty())
             MainWindowClass->setObjectName(QStringLiteral("MainWindowClass"));
-        MainWindowClass->resize(1044, 628);
+        MainWindowClass->resize(814, 602);
         MainWindowClass->setStyleSheet(QStringLiteral("QMainWindow {background-color: white}"));
         centralWidget = new QWidget(MainWindowClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
@@ -348,6 +348,8 @@ public:
 
         enterButton = new QPushButton(enter);
         enterButton->setObjectName(QStringLiteral("enterButton"));
+        enterButton->setAutoDefault(true);
+        enterButton->setFlat(false);
 
         gridLayout_3->addWidget(enterButton, 5, 0, 1, 1);
 
@@ -1420,11 +1422,6 @@ public:
 
         gridLayout_6->addWidget(label_27, 0, 0, 1, 1);
 
-        productComboBox = new QComboBox(manager);
-        productComboBox->setObjectName(QStringLiteral("productComboBox"));
-
-        gridLayout_6->addWidget(productComboBox, 0, 1, 1, 1);
-
         label_28 = new QLabel(manager);
         label_28->setObjectName(QStringLiteral("label_28"));
         sizePolicy2.setHeightForWidth(label_28->sizePolicy().hasHeightForWidth());
@@ -1465,6 +1462,12 @@ public:
         priceSale->setValue(1);
 
         gridLayout_6->addWidget(priceSale, 0, 3, 1, 1);
+
+        nameProductOutput = new QLineEdit(manager);
+        nameProductOutput->setObjectName(QStringLiteral("nameProductOutput"));
+        nameProductOutput->setEnabled(false);
+
+        gridLayout_6->addWidget(nameProductOutput, 0, 1, 1, 1);
 
 
         verticalLayout_10->addLayout(gridLayout_6);
@@ -1559,7 +1562,7 @@ public:
         MainWindowClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindowClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1044, 21));
+        menuBar->setGeometry(QRect(0, 0, 814, 21));
         MainWindowClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindowClass);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -1626,8 +1629,7 @@ public:
         QWidget::setTabOrder(salaryINN, salesButton);
         QWidget::setTabOrder(salesButton, dataButton);
         QWidget::setTabOrder(dataButton, currentSalary);
-        QWidget::setTabOrder(currentSalary, productComboBox);
-        QWidget::setTabOrder(productComboBox, managerConfirmedSalesTable);
+        QWidget::setTabOrder(currentSalary, managerConfirmedSalesTable);
         QWidget::setTabOrder(managerConfirmedSalesTable, managerUnconfirmedSalesTable);
         QWidget::setTabOrder(managerUnconfirmedSalesTable, managerProductTable);
         QWidget::setTabOrder(managerProductTable, quitButton);
@@ -1635,7 +1637,8 @@ public:
         retranslateUi(MainWindowClass);
 
         auth_program_stackedWidget->setCurrentIndex(1);
-        boss_manager_stackedWidget->setCurrentIndex(0);
+        enterButton->setDefault(true);
+        boss_manager_stackedWidget->setCurrentIndex(1);
         tabWidget->setCurrentIndex(2);
         managersDataTab->setCurrentIndex(0);
         managersButtonsStackedWidget->setCurrentIndex(0);

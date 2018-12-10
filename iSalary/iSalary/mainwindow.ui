@@ -21,7 +21,7 @@
     <item>
      <widget class="QStackedWidget" name="auth_program_stackedWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="enter">
        <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -181,7 +181,7 @@
         <item>
          <widget class="QStackedWidget" name="boss_manager_stackedWidget">
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="owner">
            <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -1778,9 +1778,6 @@
                   </property>
                  </widget>
                 </item>
-                <item row="0" column="1">
-                 <widget class="QComboBox" name="productComboBox"/>
-                </item>
                 <item row="0" column="2">
                  <widget class="QLabel" name="label_28">
                   <property name="sizePolicy">
@@ -1849,6 +1846,13 @@
                   </property>
                   <property name="value">
                    <double>1.000000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QLineEdit" name="nameProductOutput">
+                  <property name="enabled">
+                   <bool>false</bool>
                   </property>
                  </widget>
                 </item>
@@ -2061,7 +2065,6 @@
   <tabstop>salesButton</tabstop>
   <tabstop>dataButton</tabstop>
   <tabstop>currentSalary</tabstop>
-  <tabstop>productComboBox</tabstop>
   <tabstop>managerConfirmedSalesTable</tabstop>
   <tabstop>managerUnconfirmedSalesTable</tabstop>
   <tabstop>managerProductTable</tabstop>
