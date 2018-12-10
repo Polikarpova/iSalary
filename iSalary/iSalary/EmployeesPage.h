@@ -60,6 +60,8 @@ public:
 
     void refreshList();
 
+	void showDetailsById( int managerId);
+
 protected slots:
 
     void showDetails( const QModelIndex& index);
@@ -76,8 +78,7 @@ protected slots:
     
 
 protected:    
-    void showDetailsById( int managerId);
-
+    
     void enableInputs( bool isEnable);
 
     void clearInputs();
