@@ -194,7 +194,7 @@
                <enum>QTabWidget::Rounded</enum>
               </property>
               <property name="currentIndex">
-               <number>2</number>
+               <number>1</number>
               </property>
               <property name="elideMode">
                <enum>Qt::ElideMiddle</enum>
@@ -1787,7 +1787,7 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string>Стоимость</string>
+                   <string>Стоимость, руб.</string>
                   </property>
                  </widget>
                 </item>
@@ -1800,7 +1800,7 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string>Количество</string>
+                   <string>Количество, шт.</string>
                   </property>
                  </widget>
                 </item>
