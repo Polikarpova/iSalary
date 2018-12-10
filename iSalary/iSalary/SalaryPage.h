@@ -25,6 +25,7 @@
 #include <qabstractitemview.h>
 
 #include "ManagerDTO.h"
+#include "TabNavigator.h"
 
 class SalaryPage : public QObject{
     Q_OBJECT
@@ -39,10 +40,13 @@ public:
 
 	void setErrorHandler( ErrorMessageHandler* errorHandler);
 
+	void setTabNavigator(TabNavigator* tabNavigator);
+
 protected slots:
 
 	void showManager();
 	void showSelectedPeriod();
+	void showManagerInformation();
 
 protected:
 
@@ -83,6 +87,8 @@ private:
     SalesFacade* salesFacade;
     PersonnalAccountingFacade* personnalAccountingFacade;
 	
+	TabNavigator* tabNav;
+
 	QComboBox* salaryAccountingPeriod;
 	QTableView* salaryTable;
 	QTableView* salaryTotalTable;

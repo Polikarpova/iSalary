@@ -1,4 +1,6 @@
 #include "mainwindow.h"
+#include "TabNavigator.h"
+
 MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesPage* salesPage, SalaryPage* salaryPage, ProductPage *productPage, ManagerPage *managerPage, QWidget *parent ) : QMainWindow(parent) {
 	ui.setupUi(this);
 	
@@ -102,6 +104,11 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
 		ui.managerUnconfirmedSalesTable
 	);
 	
+	TabNavigator* tabNavigator = new TabNavigator(ui.tabWidget);
+	tabNavigator->setEmployeesPage(this->employeesPage);
+	tabNavigator->setProductPage(this->productPage);
+	tabNavigator->setSalesPage(this->salesPage);
+	tabNavigator->setSalaryPage(this->salaryPage);
 
 	auto drivers =  QSqlDatabase::drivers();
 	QString mes = "";

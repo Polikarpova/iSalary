@@ -20,6 +20,10 @@ void SalaryPage::setErrorHandler( ErrorMessageHandler* errorHandler) {
     this->errorHandler = errorHandler;
 }
 
+void SalaryPage::setTabNavigator(TabNavigator* tabNavigator) {
+	this->tabNav = tabNavigator;
+}
+
 void SalaryPage::setUI( QComboBox* salaryAccountingPeriod, QTableView* salaryTable, QTableView* salaryTotalTable, QLabel* managerFIOLabel, QSpinBox* salaryPasportSeries,
 				QSpinBox* salaryPasportNumber, QLineEdit* salaryPasportSourse, QDateEdit* salaryDateOfReceipt, QRadioButton* salaryMaleRButton, QRadioButton* salaryFemaleRButton,
 				QLineEdit* salaryINN, QPushButton* closeAccountingPeriod, QPushButton* salesButton, QPushButton* dataButton) {
@@ -60,9 +64,8 @@ void SalaryPage::initManagerForm() {
 
 	this->managerFIOLabel->setText("");
 
-	//Ѕлокируем кнопки на 1ый релиз
-	this->salesButton->hide();
-	this->dataButton->hide();
+	connect(this->dataButton, SIGNAL(clicked(bool)), this, SLOT(showManagerInformation()));
+	//connect дл€ salesButton
 }
 
 void SalaryPage::initSalaryTable (QTableView* salaryTable) {
@@ -163,6 +166,8 @@ void SalaryPage::showManager() {
 	this->salaryINN->setText( m.INN);
 
 	//настроить кнопочкам property, чтоб перенаправл€ли, но на 1ый релиз их мы не делаем
+	this->dataButton->setProperty("id", m.id);
+	this->salesButton->setProperty("id", m.id);
 }
 
 void SalaryPage::showSelectedPeriod() {
@@ -196,4 +201,10 @@ void SalaryPage::showSelectedPeriod() {
 
 	SalaryTotalTableModel* modelTotal = static_cast<SalaryTotalTableModel*>( this->salaryTotalTable->model());
 	modelTotal->refreshData( list);
+}
+
+void SalaryPage::showManagerInformation() {
+
+	int id = this->dataButton->property("id").toInt();
+	this->tabNav->openEmployeesPage( id);
 }

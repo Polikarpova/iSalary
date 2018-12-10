@@ -359,10 +359,6 @@ void SalesPage::viewSelectedManagerConfirmedSales(int id) {
 void SalesPage::setEnable(bool flag) {
 
 	this->tabWidget->setEnabled(flag);
-	/*this->salesForAllButton->setEnabled(flag);
-	this->managersSalesTable->setEnabled(flag);
-	this->confirmedSalesTable->setEnabled(flag);
-	this->unconfirmedSalesTable->setEnabled(flag);*/
 }
 
 //===SLOTS===//
