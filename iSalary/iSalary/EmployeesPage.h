@@ -30,6 +30,7 @@ public:
     ~EmployeesPage(void);
 
     void setUI(
+      QWidget* tabWidget,
       QTableView* managersTable,
       QLineEdit* loginInput,
       QLineEdit* passwordInput,
@@ -105,12 +106,17 @@ protected:
         PAGE_BTNS_ADD,
     };
 
+    void startBlockForRequest();
+    void endBlockForRequest();
+
 private:
     PersonnalAccountingFacade* personnalAccouting;
 
     QHash<int, ManagerDTO> managers;
 
     ErrorMessageHandler* errorHandler;
+
+    QWidget* tabWidget;
 
     QTableView* managersTable;
 
