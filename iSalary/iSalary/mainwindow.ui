@@ -181,7 +181,7 @@
         <item>
          <widget class="QStackedWidget" name="boss_manager_stackedWidget">
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="owner">
            <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -866,7 +866,7 @@
                     <item row="1" column="0">
                      <widget class="QLabel" name="label_18">
                       <property name="text">
-                       <string>Процент комиссии</string>
+                       <string>Процент комиссии, %</string>
                       </property>
                      </widget>
                     </item>
