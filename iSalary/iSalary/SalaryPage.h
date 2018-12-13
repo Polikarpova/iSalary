@@ -31,7 +31,7 @@ class SalaryPage : public QObject{
     Q_OBJECT
 public:
     SalaryPage( SalesFacade * salesFacade, PersonnalAccountingFacade* personnalAccountingFacade);
-    void setUI( QComboBox* salaryAccountingPeriod, QTableView* salaryTable, QTableView* salaryTotalTable, QLabel* managerFIOLabel, QSpinBox* salaryPasportSeries,
+    void setUI( QTabWidget* tabWidget, QComboBox* salaryAccountingPeriod, QTableView* salaryTable, QTableView* salaryTotalTable, QLabel* managerFIOLabel, QSpinBox* salaryPasportSeries,
 				QSpinBox* salaryPasportNumber, QLineEdit* salaryPasportSourse, QDateEdit* salaryDateOfReceipt, QRadioButton* salaryMaleRButton, QRadioButton* salaryFemaleRButton,
 				QLineEdit* salaryINN, QPushButton* closeAccountingPeriod, QPushButton* salesButton, QPushButton* dataButton);
     ~SalaryPage( void);
@@ -89,6 +89,7 @@ private:
 	
 	TabNavigator* tabNav;
 
+	QTabWidget* tabWidget;
 	QComboBox* salaryAccountingPeriod;
 	QTableView* salaryTable;
 	QTableView* salaryTotalTable;
@@ -109,4 +110,6 @@ private:
 	QMap<int, AccoutingPeriodDTO> comboBoxMap;
 	QHash<int, ManagerSalaryDTO> salary;
 	QHash<int, ManagerSalaryDTO> salaryTotal;
+
+	void setEnable(bool flag);
 };

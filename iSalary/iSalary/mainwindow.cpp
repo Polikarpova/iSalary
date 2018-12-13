@@ -56,6 +56,7 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
 
 	this->salaryPage = salaryPage;
 	this->salaryPage->setUI(
+		ui.tabWidget,
 		ui.salaryAccountingPeriod, 
 		ui.salaryTable, 
 		ui.salaryTotalTable, 

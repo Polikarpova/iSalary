@@ -24,10 +24,11 @@ void SalaryPage::setTabNavigator(TabNavigator* tabNavigator) {
 	this->tabNav = tabNavigator;
 }
 
-void SalaryPage::setUI( QComboBox* salaryAccountingPeriod, QTableView* salaryTable, QTableView* salaryTotalTable, QLabel* managerFIOLabel, QSpinBox* salaryPasportSeries,
+void SalaryPage::setUI( QTabWidget* tabWidget, QComboBox* salaryAccountingPeriod, QTableView* salaryTable, QTableView* salaryTotalTable, QLabel* managerFIOLabel, QSpinBox* salaryPasportSeries,
 				QSpinBox* salaryPasportNumber, QLineEdit* salaryPasportSourse, QDateEdit* salaryDateOfReceipt, QRadioButton* salaryMaleRButton, QRadioButton* salaryFemaleRButton,
 				QLineEdit* salaryINN, QPushButton* closeAccountingPeriod, QPushButton* salesButton, QPushButton* dataButton) {
  
+	this->tabWidget = tabWidget;
 	this->salaryAccountingPeriod = salaryAccountingPeriod; 
 
 	this->managerFIOLabel = managerFIOLabel; 
@@ -63,6 +64,8 @@ void SalaryPage::initComboBox() {
 void SalaryPage::initManagerForm() {
 
 	this->managerFIOLabel->setText("");
+	this->dataButton->setEnabled(false);
+	this->salesButton->setEnabled(false);
 
 	connect(this->dataButton, SIGNAL(clicked(bool)), this, SLOT(showManagerInformation()));
 	//connect для salesButton
@@ -139,8 +142,15 @@ void SalaryPage::updatePeriods() {
 	this->showSelectedPeriod();
 }
 
+void SalaryPage::setEnable(bool flag){
+
+	this->tabWidget->setEnabled(flag);
+}
+
 //====SLOTS====//
 void SalaryPage::showManager() {
+
+	this->setEnable(false);
 
 	ManagerDTO m;
 
@@ -165,13 +175,18 @@ void SalaryPage::showManager() {
     }
 	this->salaryINN->setText( m.INN);
 
-	//настроить кнопочкам property, чтоб перенаправляли, но на 1ый релиз их мы не делаем
+	this->dataButton->setEnabled(true);
+	this->salesButton->setEnabled(true);
 	this->dataButton->setProperty("id", m.id);
 	this->salesButton->setProperty("id", m.id);
+
+	this->setEnable(true);
 }
 
 void SalaryPage::showSelectedPeriod() {
 	
+	this->setEnable(false);
+
 	//получаем нужную инфу из фасада(бд)
 	QList<ManagerSalaryDTO> list;
 
@@ -201,10 +216,16 @@ void SalaryPage::showSelectedPeriod() {
 
 	SalaryTotalTableModel* modelTotal = static_cast<SalaryTotalTableModel*>( this->salaryTotalTable->model());
 	modelTotal->refreshData( list);
+
+	this->setEnable(true);
 }
 
 void SalaryPage::showManagerInformation() {
 
+	this->setEnable(false);
+
 	int id = this->dataButton->property("id").toInt();
 	this->tabNav->openEmployeesPage( id);
+
+	this->setEnable(true);
 }
