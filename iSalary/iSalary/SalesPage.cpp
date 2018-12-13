@@ -389,7 +389,7 @@ void SalesPage::buttonForAll() {
 
 void SalesPage::showManagersSales() {
 
-	//this->setEnable(false);
+	this->setEnable(false);
 
 	//показываем в unconfirmed и confirmed только определенного пользователя
 	int currentId = this->getSelectedManagerSalesId();
