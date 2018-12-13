@@ -41,6 +41,7 @@ void EmployeesPage::setUI(
     this->managersTable->setColumnHidden( EmployeesTableModel::COLUMN_ID, true);
     //Расстягивать столбцы
     this->managersTable->horizontalHeader()->setStretchLastSection(true);
+    this->managersTable->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeMode::ResizeToContents);
     //Выбирать только строки
     this->managersTable->setSelectionBehavior( QAbstractItemView::SelectRows);
     this->managersTable->setSelectionMode(QAbstractItemView::SingleSelection);
