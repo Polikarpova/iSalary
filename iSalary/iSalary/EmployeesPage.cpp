@@ -32,7 +32,8 @@ void EmployeesPage::setUI(
   QPushButton* confirmUpdateBtn,
   QPushButton* cancelUpdateBtn,
   QPushButton* confirmAddBtn,
-  QPushButton* cancelAddBtn
+  QPushButton* cancelAddBtn,
+  QLabel* dataHeader
 ) {
     this->managersTable = managersTable;
     auto model = new EmployeesTableModel();
@@ -68,6 +69,10 @@ void EmployeesPage::setUI(
 
     this->buttonStackedWidget = buttonStackedWidget;
     this->buttonStackedWidget->setCurrentIndex( PAGE_BTNS_SHOW);
+
+    this->dataHeader = dataHeader;
+    this->dataHeaderStyle = this->dataHeader->styleSheet();
+
 
     this->editBtn = editBtn;
     connect( this->editBtn, &QPushButton::clicked, this, &EmployeesPage::startEdit);
@@ -172,6 +177,7 @@ void EmployeesPage::showDetailsById( int managerId) {
 
         this->endBlockForRequest();
         this->buttonStackedWidget->setEnabled( true);
+        this->dataHeader->setText("");
     }
 }
 
@@ -184,6 +190,8 @@ void EmployeesPage::startEdit() {
     this->buttonStackedWidget->setCurrentIndex( PAGE_BTNS_EDIT);
     this->enableInputs(true);
     this->buttonStackedWidget->setEnabled(true);
+    this->dataHeader->setText( QString::fromWCharArray( L"Изменение данных о менеджере"));
+    this->dataHeader->setStyleSheet( this->dataHeaderStyle);
 }
 
 void EmployeesPage::startAdd() {
@@ -193,6 +201,8 @@ void EmployeesPage::startAdd() {
     this->loginInput->setEnabled(false);
     this->passwordInput->setEnabled(false);
     this->buttonStackedWidget->setEnabled(true);
+    this->dataHeader->setText( QString::fromWCharArray(L"Добавление нового менеджера"));
+    this->dataHeader->setStyleSheet( this->dataHeaderStyle);
 }
 
 void EmployeesPage::saveEdit() {
@@ -212,6 +222,9 @@ void EmployeesPage::saveEdit() {
         this->errorHandler->handleError( error);
     }
     this->endBlockForRequest();
+    
+    this->dataHeader->setText(QString::fromWCharArray(L""));
+    this->dataHeader->setStyleSheet( this->dataHeaderStyle);
 }
 
 void EmployeesPage::saveAdd() {
@@ -231,11 +244,15 @@ void EmployeesPage::saveAdd() {
     }
 
     this->endBlockForRequest();
+    this->dataHeader->setText(QString::fromWCharArray(L""));
+    this->dataHeader->setStyleSheet( this->dataHeaderStyle);
 }
 
 void EmployeesPage::cancel() {
     this->showDetails( this->managersTable->currentIndex());
     this->buttonStackedWidget->setCurrentIndex( Btns_Page::PAGE_BTNS_SHOW);
+    this->dataHeader->setText(QString::fromWCharArray(L""));
+    this->dataHeader->setStyleSheet( this->dataHeaderStyle);
 }
 
 void EmployeesPage::enableInputs( bool isEnable) {

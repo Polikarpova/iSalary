@@ -45,7 +45,8 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
         ui.saveManagerButton,
         ui.cancelManagerButton,
         ui.managerSubmitAddButton,
-        ui.managerCancelAddButton
+        ui.managerCancelAddButton,
+        ui.employDataHeaderLabel
     );
     this->employeesPage->setErrorHandler( errorHandler);
     connect( ui.tabWidget, &QTabWidget::currentChanged, this, &MainWindow::refreshBossPage);

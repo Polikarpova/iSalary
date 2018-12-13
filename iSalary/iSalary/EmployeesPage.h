@@ -12,8 +12,11 @@
 #include <qpushbutton.h>
 #include <qstackedwidget.h>
 #include <qgroupbox.h>
+#include <qlabel.h>
 
 #include <qtableview.h>
+
+#include <qstyle.h>s
 
 #include <qheaderview.h>
 #include <qmodelindex>
@@ -53,7 +56,8 @@ public:
       QPushButton* confirmUpdateBtn,
       QPushButton* cancelUpdateBtn,
       QPushButton* confirmAddBtn,
-      QPushButton* cancelAddBtn
+      QPushButton* cancelAddBtn,
+      QLabel* dataHeader
     );
 
     void setErrorHandler( ErrorMessageHandler* errorHandler);
@@ -110,6 +114,8 @@ protected:
     void startBlockForRequest();
     void endBlockForRequest();
 
+    QString dataHeaderStyle;
+
 private:
     PersonnalAccountingFacade* personnalAccouting;
 
@@ -151,5 +157,7 @@ private:
     QPushButton* cancelUpdateBtn;
     QPushButton* confirmAddBtn;
     QPushButton* cancelAddBtn;
+
+    QLabel* dataHeader;
 };
 
