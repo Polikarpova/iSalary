@@ -68,7 +68,7 @@ void SalaryPage::initManagerForm() {
 	this->salesButton->setEnabled(false);
 
 	connect(this->dataButton, SIGNAL(clicked(bool)), this, SLOT(showManagerInformation()));
-	//connect для salesButton
+	connect(this->salesButton, SIGNAL(clicked(bool)), this, SLOT(showManagerSales()));
 }
 
 void SalaryPage::initSalaryTable (QTableView* salaryTable) {
@@ -226,6 +226,16 @@ void SalaryPage::showManagerInformation() {
 
 	int id = this->dataButton->property("id").toInt();
 	this->tabNav->openEmployeesPage( id);
+
+	this->setEnable(true);
+}
+
+void SalaryPage::showManagerSales() {
+
+	this->setEnable(false);
+
+	int id = this->salesButton->property("id").toInt();
+	this->tabNav->openSalesPage( id);
 
 	this->setEnable(true);
 }

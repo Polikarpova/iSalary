@@ -361,6 +361,13 @@ void SalesPage::setEnable(bool flag) {
 	this->tabWidget->setEnabled(flag);
 }
 
+void SalesPage::showManagerSales( int id) {
+	
+	QModelIndex index = static_cast<ManagersSalesTableModel*>(this->managersSalesTable->model())->getIndexByRecordId(id);
+	this->managersSalesTable->setCurrentIndex( index);
+	this->managersSalesTable->clicked( index);
+}
+
 //===SLOTS===//
 void SalesPage::dateChanged() {
 
@@ -382,7 +389,7 @@ void SalesPage::buttonForAll() {
 
 void SalesPage::showManagersSales() {
 
-	this->setEnable(false);
+	//this->setEnable(false);
 
 	//показываем в unconfirmed и confirmed только определенного пользователя
 	int currentId = this->getSelectedManagerSalesId();

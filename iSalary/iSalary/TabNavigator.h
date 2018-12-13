@@ -28,4 +28,5 @@ public:
 	//setEmployeesPage(EmployeesPage* employeesPage);
 
 	void openEmployeesPage( int employId);
+	void openSalesPage( int id);
 };

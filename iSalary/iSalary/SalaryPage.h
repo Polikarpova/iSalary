@@ -47,6 +47,7 @@ protected slots:
 	void showManager();
 	void showSelectedPeriod();
 	void showManagerInformation();
+	void showManagerSales();
 
 protected:
 

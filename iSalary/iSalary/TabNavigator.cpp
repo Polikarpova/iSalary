@@ -39,3 +39,8 @@ void TabNavigator::openEmployeesPage( int employId) {
 		tabs->setCurrentIndex( PAGE_EMPLOYEES);
 		this->employeesPage->showDetailsById( employId);
 }
+
+void TabNavigator::openSalesPage( int id) {
+		tabs->setCurrentIndex( PAGE_SALES);
+		this->salesPage->showManagerSales( id);
+}

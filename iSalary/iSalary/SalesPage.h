@@ -30,6 +30,8 @@ public:
 
 	void setErrorHandler( ErrorMessageHandler* errorHandler);
 
+	void showManagerSales(int id);
+
 protected slots:
 
 	void dateChanged();
