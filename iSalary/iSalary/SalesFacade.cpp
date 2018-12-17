@@ -111,8 +111,8 @@ QList<ManagerSalaryDTO> SalesFacade::getManagersSalary( QDate dateFrom, QDate da
 		//(Цикл)Посчитать для очередного юзера сумму прибыли и з/п (отдельно с комиссией) ManagerSalaryDTO
 		for( auto j = salesInfo.begin() ; j != salesInfo.end() ; j++) {
 		
-			manager.income += j->price;
-			manager.salary += j->price*j->commission/100.0;
+			manager.income += j->price * j->count;
+			manager.salary += j->price * j->commission/100.0 * j->count;
 		}
 
 		result.append(manager); //добавляем очередного менеджера в список
