@@ -26,8 +26,8 @@ void StatisticPage::setUI( QTabWidget* tabWidget, QDateEdit* statisticStartPerio
 	this->statisticSalesTable = statisticSalesTable;
 	this->statisticCalendar = statisticCalendar;
 
-	connect(this->statisticStartPeriod,  &QDateEdit::dateChanged, this, &StatisticPage::startDateChanged);
-	connect(this->statisticEndPeriod,  &QDateEdit::dateChanged, this, &StatisticPage::endDateChanged);
+	connect(this->statisticStartPeriod, &QDateEdit::dateChanged, this, &StatisticPage::startDateChanged);
+	connect(this->statisticEndPeriod, &QDateEdit::dateChanged, this, &StatisticPage::endDateChanged);
 
 	this->initStatisticTable(this->statisticTable);
 	this->initStatisticSalesTable(this->statisticSalesTable);
