@@ -18,6 +18,7 @@
 #include "SalaryPage.h"
 #include "ProductPage.h"
 #include "ManagerPage.h"
+#include "StatisticPage.h"
 
 #include "Test\Test.h"
 #include "Settings.h"
@@ -107,13 +108,16 @@ int main(int argc, char *argv[])
 
 	ManagerPage managerPage( &productFacade, &salesFacade );
 
+	StatisticPage statisticPage( &salesFacade );
+
     MainWindow w( 
 		&authPage,
 		&employeesPage,
 		&salesPage,
 		&salaryPage,
 		&productPage,
-		&managerPage
+		&managerPage,
+		&statisticPage
 	);
 	
     try {

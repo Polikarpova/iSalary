@@ -17,6 +17,7 @@
 #include "EmployeesPage.h"
 #include "SalesPage.h"
 #include "SalaryPage.h"
+#include "StatisticPage.h"
 
 #include "Product_DB.h"
 #include "Product.h"
@@ -42,7 +43,8 @@ public:
 		SalesPage* salesPage,
 		SalaryPage* salaryPage,
 		ProductPage *productPage, 
-		ManagerPage *managerPage, 
+		ManagerPage *managerPage,
+		StatisticPage *statisticPage,
 		QWidget *parent = 0
 	);
 	~MainWindow();
@@ -58,6 +60,7 @@ private:
 	SalaryPage* salaryPage;
 	ProductPage *productPage;
 	ManagerPage *managerPage;
+	StatisticPage *statisticPage;
 
 	int current_user_id;
     ErrorMessageHandler* errorHandler;

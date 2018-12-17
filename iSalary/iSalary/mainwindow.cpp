@@ -1,12 +1,9 @@
 #include "mainwindow.h"
 #include "TabNavigator.h"
 
-MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesPage* salesPage, SalaryPage* salaryPage, ProductPage *productPage, ManagerPage *managerPage, QWidget *parent ) : QMainWindow(parent) {
+MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesPage* salesPage, SalaryPage* salaryPage, ProductPage *productPage, ManagerPage *managerPage, StatisticPage *statisticPage, QWidget *parent ) : QMainWindow(parent) {
 	ui.setupUi(this);
 	
-	//блокировка вкладки корректировки
-	ui.tabWidget->setTabEnabled(PAGE_STATISTIC, false);
-	ui.tabWidget->setTabToolTip(PAGE_STATISTIC, "Заблокировано до лучших времен");
 	ui.label_45->hide();
 
     ui.auth_program_stackedWidget->setCurrentIndex( AUTH_WIDGET);
@@ -93,7 +90,7 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
 	);
 
 	this->managerPage = managerPage;
-	this->productPage->setWindow( this );
+	//this->productPage->setWindow( this );
 	this->managerPage->setUI(
 		ui.currentSalary,
 		ui.nameProductOutput,
@@ -104,6 +101,16 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
 		ui.managerProductTable,
 		ui.managerConfirmedSalesTable,
 		ui.managerUnconfirmedSalesTable
+	);
+
+	this->statisticPage = statisticPage;
+	this->statisticPage->setUI(
+		ui.tabWidget,
+		ui.statisticStartPeriod,
+		ui.statisticEndPeriod,
+		ui.statisticTable,
+		ui.statisticSalesTable,
+		ui.statisticCalendar
 	);
 	
 	TabNavigator* tabNavigator = new TabNavigator(ui.tabWidget);
