@@ -22,21 +22,37 @@ void StatisticPage::setUI( QTabWidget* tabWidget, QDateEdit* statisticStartPerio
 	this->tabWidget = tabWidget;
 	this->statisticStartPeriod = statisticStartPeriod;
 	this->statisticEndPeriod = statisticEndPeriod;
-	this->statisticTable = statisticTable;
 	this->statisticSalesTable = statisticSalesTable;
 	this->statisticCalendar = statisticCalendar;
 
-	connect(this->statisticStartPeriod, &QDateEdit::dateChanged, this, &StatisticPage::startDateChanged);
-	connect(this->statisticEndPeriod, &QDateEdit::dateChanged, this, &StatisticPage::endDateChanged);
-
 	this->initStatisticTable(this->statisticTable);
 	this->initStatisticSalesTable(this->statisticSalesTable);
+
+	connect(this->statisticStartPeriod, &QDateEdit::dateChanged, this, &StatisticPage::startDateChanged);
+	connect(this->statisticEndPeriod, &QDateEdit::dateChanged, this, &StatisticPage::endDateChanged);
 
 	this->refreshPage();
 }
 
 void StatisticPage::initStatisticTable (QTableView* statisticTable) {
 
+	this->statisticTable = statisticTable;
+	auto model = new StatisticTableModel();
+	this->statisticTable->setModel( model);
+
+	this->statisticTable->horizontalHeader()->setStretchLastSection( true);
+	this->statisticTable->horizontalHeader()->setSectionResizeMode( StatisticTableModel::COLUMN_FIO, QHeaderView::ResizeToContents);
+	this->statisticTable->horizontalHeader()->setSectionResizeMode( StatisticTableModel::COLUMN_SALES_COUNT, QHeaderView::ResizeToContents);
+	this->statisticTable->horizontalHeader()->setSectionResizeMode( StatisticTableModel::COLUMN_INCOME, QHeaderView::ResizeToContents);
+	this->statisticTable->horizontalHeader()->setSectionResizeMode( StatisticTableModel::COLUMN_LET, QHeaderView::ResizeToContents);
+	this->statisticTable->horizontalHeader()->setSectionResizeMode( StatisticTableModel::COLUMN_OET, QHeaderView::ResizeToContents);
+	this->statisticTable->setSelectionBehavior( QAbstractItemView::SelectRows);
+	this->statisticTable->setSelectionMode( QAbstractItemView::SingleSelection);
+
+	//скрытие поля с id
+	//this->statisticTable->setColumnHidden( StatisticTableModel::COLUMN_ID, true);
+
+	connect( this->statisticTable, &QTableView::clicked, this, &StatisticPage::showManagersStatistic);
 }
 
 void StatisticPage::initStatisticSalesTable( QTableView* statisticSalesTable) {
@@ -60,4 +76,8 @@ void StatisticPage::endDateChanged() {
 
 	//проверка на то, чтобы дата не была раньше или равна дате, установленной в statisticStartPeriod
 	//в противном случае устанавливаем на дату statisticStartPeriod + 1 день
+}
+
+void showManagersStatistic() {
+
 }

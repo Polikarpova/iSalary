@@ -11,6 +11,10 @@
 #include "SalesFacade.h"
 
 #include "ActiveSaleDTO.h"
+#include "ManagerStatisticDTO.h"
+
+#include "StatisticTableModel.h"
+
 #include <qheaderview.h>
 #include <qmodelindex>
 #include <qabstractitemview.h>
@@ -30,6 +34,8 @@ protected slots:
 
 	void startDateChanged();
 	void endDateChanged();
+
+	void showManagersStatistic();
 
 protected:
 
@@ -51,5 +57,6 @@ private:
 	QTableView* statisticSalesTable;
 	QCalendarWidget* statisticCalendar;
 
+	QHash<int, ManagerStatisticDTO> managerStatistic;
 	QHash<int, ActiveSaleDTO> confirmedSales;
 };
