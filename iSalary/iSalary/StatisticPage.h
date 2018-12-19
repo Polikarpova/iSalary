@@ -14,6 +14,7 @@
 #include "ManagerStatisticDTO.h"
 
 #include "StatisticTableModel.h"
+#include "StatisticSalesTableModel.h"
 
 #include <qheaderview.h>
 #include <qmodelindex>
