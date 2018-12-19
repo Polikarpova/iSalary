@@ -341,6 +341,15 @@
     <ClCompile Include="GeneratedFiles\Release\moc_StatisticTableModel.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="StatisticSalesTableModel.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_StatisticSalesTableModel.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_StatisticSalesTableModel.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -401,6 +410,9 @@
       <Filter>Header Files\View</Filter>
     </CustomBuild>
     <CustomBuild Include="StatisticTableModel.h">
+      <Filter>Header Files\View</Filter>
+    </CustomBuild>
+    <CustomBuild Include="StatisticSalesTableModel.h">
       <Filter>Header Files\View</Filter>
     </CustomBuild>
   </ItemGroup>
