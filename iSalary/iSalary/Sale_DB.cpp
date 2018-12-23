@@ -59,7 +59,14 @@ ActiveSale Sale_DB::read( const QSqlQuery * sqlQuery ){
 void Sale_DB::fillSale( ActiveSale & sale, const QSqlQuery * sqlQuery ) {
 	sale.setId( sqlQuery->value( "id" ).value<int>() );
 	sale.setSalerId( sqlQuery->value( "manager_id" ).value<int>() );
-	sale.setProductId( sqlQuery->value( "product_id" ).value<int>() );
+	
+	Product product;
+	product.setId( sqlQuery->value( "product_id" ).value<int>() );
+	product.setName( sqlQuery->value( "productName" ).value<QString>() );
+	product.setCommission( sqlQuery->value( "productCommission" ).value<double>() );
+	sale.setProduct( product );
+	sale.setProductId( product.getId() );
+
 	sale.setCost( sqlQuery->value( "price" ).value<double>() );
 	sale.setCount( sqlQuery->value( "count" ).value<int>() );
 	if ( sqlQuery->value( "isConfirmed" ).value<int>() == 1 ) {
