@@ -28,7 +28,7 @@ void Sale_DB::create( ActiveSale sale ) {
 
     QSqlQuery query( *db );
 	QString sql = "INSERT INTO " + TABLE_NAME + 
-		" (`manager_id`, `product_id`, `productName`, `productCommission`, `price`, `count`, `isActive`, `isConfirmed`) VALUES(:manager_id, :product_id, :name, :productCommission, :price, :count, :isActive, :isConfirmed)";
+		" (`manager_id`, `product_id`, `productName`, `productCommission`, `price`, `count`, `isActive`, `isConfirmed`, `saleDate`, `confirmDate`) VALUES(:manager_id, :product_id, :name, :productCommission, :price, :count, :isActive, :isConfirmed, :saleDate, :confirmDate)";
 	query.prepare( sql );
 	query.bindValue( ":manager_id", sale.getSaler().getId() );
 	query.bindValue( ":product_id",  sale.getProduct().getId() );
@@ -38,6 +38,8 @@ void Sale_DB::create( ActiveSale sale ) {
 	query.bindValue( ":count",  sale.getCount() );
 	query.bindValue( ":isActive", 1 );
 	query.bindValue( ":isConfirmed",  0 );
+	query.bindValue( ":saleDate", sale.getSaleDate() );
+	query.bindValue( ":confirmDate", sale.getConfirmDate() );
 
     this->execQuery( query);
 
@@ -75,6 +77,7 @@ void Sale_DB::fillSale( ActiveSale & sale, const QSqlQuery * sqlQuery ) {
 		sale.cancelConfirm();
 	}
 	sale.setConfirmDate( QDate::fromString( sqlQuery->value("confirmDate").value<QString>(), Qt::ISODate) );
+	sale.setSaleDate( QDate::fromString( sqlQuery->value("saleDate").value<QString>(), Qt::ISODate) );
 }
 
 QVector<ActiveSale> Sale_DB::getActiveAll( int manager_id ) {
