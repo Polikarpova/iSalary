@@ -94,6 +94,7 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
 	this->managerPage->setUI(
 		ui.currentSalary,
 		ui.nameProductOutput,
+		ui.dateSale,
 		ui.priceSale,
 		ui.countSaleProducts,
 		ui.addSaleButton,

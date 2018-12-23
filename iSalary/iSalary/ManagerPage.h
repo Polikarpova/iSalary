@@ -2,6 +2,7 @@
 
 #include <qobject.h>
 #include <qlineedit.h>
+#include <QDateEdit>
 #include <qpushbutton.h>
 #include <qspinbox.h>
 #include <qtableview.h>
@@ -22,6 +23,7 @@ public:
 	void setUI(
 		QLineEdit *currentSalaryOutput,
 		QLineEdit *productNameOutput,
+		QDateEdit *dateSaleInput,
 		QDoubleSpinBox *priceSaleInput,
 		QSpinBox *countSaleProductsInput,
 		QPushButton *addSaleButton,
@@ -43,6 +45,7 @@ private:
 
 	QLineEdit *currentSalaryOutput;
 	QLineEdit *productNameOutput;
+	QDateEdit *dateSaleInput;
 	QDoubleSpinBox *priceSaleInput;
 	QSpinBox *countSaleProductsInput;
 	QPushButton *addSaleButton;

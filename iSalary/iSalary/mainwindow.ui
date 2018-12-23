@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>814</width>
-    <height>602</height>
+    <height>619</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -181,7 +181,7 @@
         <item>
          <widget class="QStackedWidget" name="boss_manager_stackedWidget">
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="owner">
            <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -1764,6 +1764,46 @@
               </item>
               <item>
                <layout class="QGridLayout" name="gridLayout_6">
+                <item row="1" column="0">
+                 <widget class="QLabel" name="label_28">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string>Цена, руб.</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="2">
+                 <widget class="QLabel" name="label_2">
+                  <property name="text">
+                   <string>Количество, шт.</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="2">
+                 <widget class="QLabel" name="label_29">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string>Дата продажи</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QLineEdit" name="nameProductOutput">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                 </widget>
+                </item>
                 <item row="0" column="0">
                  <widget class="QLabel" name="label_27">
                   <property name="sizePolicy">
@@ -1777,33 +1817,26 @@
                   </property>
                  </widget>
                 </item>
-                <item row="0" column="2">
-                 <widget class="QLabel" name="label_28">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
+                <item row="1" column="1">
+                 <widget class="QDoubleSpinBox" name="priceSale">
+                  <property name="minimum">
+                   <double>0.010000000000000</double>
                   </property>
-                  <property name="text">
-                   <string>Стоимость, руб.</string>
+                  <property name="maximum">
+                   <double>99999999.000000000000000</double>
                   </property>
-                 </widget>
-                </item>
-                <item row="0" column="4">
-                 <widget class="QLabel" name="label_29">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
+                  <property name="singleStep">
+                   <double>0.010000000000000</double>
                   </property>
-                  <property name="text">
-                   <string>Количество, шт.</string>
+                  <property name="value">
+                   <double>1.000000000000000</double>
                   </property>
                  </widget>
                 </item>
-                <item row="0" column="5">
+                <item row="0" column="3">
+                 <widget class="QDateEdit" name="dateSale"/>
+                </item>
+                <item row="1" column="3">
                  <widget class="QSpinBox" name="countSaleProducts">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -1825,33 +1858,10 @@
                   </property>
                  </widget>
                 </item>
-                <item row="0" column="6">
+                <item row="0" column="6" rowspan="2">
                  <widget class="QPushButton" name="addSaleButton">
                   <property name="text">
                    <string>Добавить</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="3">
-                 <widget class="QDoubleSpinBox" name="priceSale">
-                  <property name="minimum">
-                   <double>0.010000000000000</double>
-                  </property>
-                  <property name="maximum">
-                   <double>99999999.000000000000000</double>
-                  </property>
-                  <property name="singleStep">
-                   <double>0.010000000000000</double>
-                  </property>
-                  <property name="value">
-                   <double>1.000000000000000</double>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="1">
-                 <widget class="QLineEdit" name="nameProductOutput">
-                  <property name="enabled">
-                   <bool>false</bool>
                   </property>
                  </widget>
                 </item>

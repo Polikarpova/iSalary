@@ -14,6 +14,7 @@ ManagerPage::~ManagerPage(void)
 void ManagerPage::setUI(
 	QLineEdit *currentSalaryOutput,
 	QLineEdit *productNameOutput,
+	QDateEdit *dateSaleInput,
 	QDoubleSpinBox *priceSaleInput,
 	QSpinBox *countSaleProductsInput,
 	QPushButton *addSaleButton,
@@ -24,6 +25,7 @@ void ManagerPage::setUI(
 ) {
 	this->currentSalaryOutput = currentSalaryOutput;
 	this->productNameOutput = productNameOutput;
+	this->dateSaleInput = dateSaleInput;
 	this->priceSaleInput = priceSaleInput;
 	this->countSaleProductsInput = countSaleProductsInput;
 	this->addSaleButton = addSaleButton;
@@ -53,6 +55,9 @@ void ManagerPage::setUI(
 	this->unconfirmedSalesTable->setSelectionBehavior( QAbstractItemView::SelectRows);
 	this->unconfirmedSalesTable->setSelectionMode( QAbstractItemView::SingleSelection);
 	this->unconfirmedSalesTable->horizontalHeader()->setStretchLastSection(true);
+
+	this->dateSaleInput->setDate( QDate::currentDate() );
+	this->dateSaleInput->setMaximumDate( QDate::currentDate() );
 
 	connect( this->productSearchInput, SIGNAL( textChanged( const QString & ) ), this, SLOT( searchManagersProductTable() ) );
 	connect( addSaleButton, SIGNAL( clicked() ), this, SLOT( addSale() ) );
