@@ -317,9 +317,6 @@
     <ClCompile Include="SqlErrorHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ProductPage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TabNavigator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -349,6 +346,9 @@
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_StatisticSalesTableModel.cpp">
       <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ProductPage.cpp">
+      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
