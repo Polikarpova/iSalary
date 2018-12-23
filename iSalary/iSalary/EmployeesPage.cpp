@@ -32,7 +32,8 @@ void EmployeesPage::setUI(
   QPushButton* confirmUpdateBtn,
   QPushButton* cancelUpdateBtn,
   QPushButton* confirmAddBtn,
-  QPushButton* cancelAddBtn
+  QPushButton* cancelAddBtn,
+  QLabel* dataHeader
 ) {
     this->managersTable = managersTable;
     auto model = new EmployeesTableModel();
@@ -41,6 +42,7 @@ void EmployeesPage::setUI(
     this->managersTable->setColumnHidden( EmployeesTableModel::COLUMN_ID, true);
     //Расстягивать столбцы
     this->managersTable->horizontalHeader()->setStretchLastSection(true);
+    this->managersTable->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeMode::ResizeToContents);
     //Выбирать только строки
     this->managersTable->setSelectionBehavior( QAbstractItemView::SelectRows);
     this->managersTable->setSelectionMode(QAbstractItemView::SingleSelection);
@@ -68,6 +70,10 @@ void EmployeesPage::setUI(
     this->buttonStackedWidget = buttonStackedWidget;
     this->buttonStackedWidget->setCurrentIndex( PAGE_BTNS_SHOW);
 
+    this->dataHeader = dataHeader;
+    this->dataHeaderStyle = this->dataHeader->styleSheet();
+
+
     this->editBtn = editBtn;
     connect( this->editBtn, &QPushButton::clicked, this, &EmployeesPage::startEdit);
 
@@ -90,6 +96,7 @@ void EmployeesPage::setUI(
 
     this->tabWidget = tabWidget;
 
+
 }
 
 void EmployeesPage::setErrorHandler( ErrorMessageHandler* errorHandler) {
@@ -107,7 +114,7 @@ void EmployeesPage::refreshList() {
     }
     
     int currentManagerId = this->getSelectedManagerId();
-        
+    
     this->managers.clear();
         for ( auto iManager = managersList.begin(); iManager != managersList.end(); iManager++){
             managers.insert( iManager->id, *iManager);
@@ -122,42 +129,56 @@ void EmployeesPage::refreshList() {
             this->managersTable->setCurrentIndex( index);
             this->showDetailsById( currentManagerId);
         }
+        
+        this->buttonStackedWidget->setEnabled( true);
+    } else {
+        this->buttonStackedWidget->setEnabled( false);
     }
 
     this->endBlockForRequest();
 }
-
 void EmployeesPage::showDetailsById( int managerId) {
-    this->startBlockForRequest();
+    if( managerId < 0) {
+        this->buttonStackedWidget->setEnabled( false);
+    } else {
 
-    this->enableInputs( false);
-    this->buttonStackedWidget->setCurrentIndex( PAGE_BTNS_SHOW);
-    this->clearErrors();
+        if( this->getSelectedManagerId() != managerId){
+            auto index = static_cast<EmployeesTableModel*>( this->managersTable->model())->getIndexByRecordId( managerId);
+            this->managersTable->setCurrentIndex( index);
+        }
+        this->startBlockForRequest();
 
-    const ManagerDTO& manager = this->managers[ managerId];
+        this->enableInputs( false);
+        this->buttonStackedWidget->setCurrentIndex( PAGE_BTNS_SHOW);
+        this->clearErrors();
 
-    this->firstNameInput->setText( manager.firstName);
-    this->secondNameInput->setText( manager.secondName);
-    this->thirdNameInput->setText( manager.thirdName);
-    this->birthdayInput->setDate( manager.dateOfBirth);
-    if( manager.sex == MALE) {
-        this->maleInput->setChecked( true);
-    } else if( manager.sex == FEMALE) {
-        this->femaleInput->setChecked( true);
+        const ManagerDTO& manager = this->managers[ managerId];
+
+        this->firstNameInput->setText( manager.firstName);
+        this->secondNameInput->setText( manager.secondName);
+        this->thirdNameInput->setText( manager.thirdName);
+        this->birthdayInput->setDate( manager.dateOfBirth);
+        if( manager.sex == MALE) {
+            this->maleInput->setChecked( true);
+        } else if( manager.sex == FEMALE) {
+            this->femaleInput->setChecked( true);
+        }
+
+        this->passportIssueDate->setDate( manager.passportIssueDate);
+        this->passportNumberInput->setValue( manager.passportNumber.toInt());
+        this->passportSerialInput->setValue( manager.passportSerial.toInt());
+        this->passportSourceInput->setText( manager.passportSource);
+        this->addressInput->setText( manager.address);
+
+        this->INNInput->setText( manager.INN);
+
+        this->loginInput->setText( manager.login);
+        this->passwordInput->setText( manager.passwword);
+
+        this->endBlockForRequest();
+        this->buttonStackedWidget->setEnabled( true);
+        this->dataHeader->setText("");
     }
-
-    this->passportIssueDate->setDate( manager.passportIssueDate);
-    this->passportNumberInput->setValue( manager.passportNumber.toInt());
-    this->passportSerialInput->setValue( manager.passportSerial.toInt());
-	this->passportSourceInput->setText( manager.passportSource);
-	this->addressInput->setText( manager.address);
-
-    this->INNInput->setText( manager.INN);
-
-    this->loginInput->setText( manager.login);
-    this->passwordInput->setText( manager.passwword);
-
-    this->endBlockForRequest();
 }
 
 void EmployeesPage::showDetails( const QModelIndex& index) {
@@ -168,6 +189,9 @@ void EmployeesPage::showDetails( const QModelIndex& index) {
 void EmployeesPage::startEdit() {
     this->buttonStackedWidget->setCurrentIndex( PAGE_BTNS_EDIT);
     this->enableInputs(true);
+    this->buttonStackedWidget->setEnabled(true);
+    this->dataHeader->setText( QString::fromWCharArray( L"Изменение данных о менеджере"));
+    this->dataHeader->setStyleSheet( this->dataHeaderStyle);
 }
 
 void EmployeesPage::startAdd() {
@@ -176,6 +200,9 @@ void EmployeesPage::startAdd() {
     this->enableInputs(true);
     this->loginInput->setEnabled(false);
     this->passwordInput->setEnabled(false);
+    this->buttonStackedWidget->setEnabled(true);
+    this->dataHeader->setText( QString::fromWCharArray(L"Добавление нового менеджера"));
+    this->dataHeader->setStyleSheet( this->dataHeaderStyle);
 }
 
 void EmployeesPage::saveEdit() {
@@ -195,6 +222,9 @@ void EmployeesPage::saveEdit() {
         this->errorHandler->handleError( error);
     }
     this->endBlockForRequest();
+    
+    this->dataHeader->setText(QString::fromWCharArray(L""));
+    this->dataHeader->setStyleSheet( this->dataHeaderStyle);
 }
 
 void EmployeesPage::saveAdd() {
@@ -204,19 +234,25 @@ void EmployeesPage::saveAdd() {
         if( validateInputs()) {
             ManagerDTO manager = this->readFromInputs();
     
-            this->personnalAccouting->hireManager( manager);
+            manager = this->personnalAccouting->hireManager( manager);
     
             this->refreshList();
+            showDetailsById( manager.id);
         }
     } catch( QString* error) {
         this->errorHandler->handleError( error);
     }
 
     this->endBlockForRequest();
+    this->dataHeader->setText(QString::fromWCharArray(L""));
+    this->dataHeader->setStyleSheet( this->dataHeaderStyle);
 }
 
 void EmployeesPage::cancel() {
     this->showDetails( this->managersTable->currentIndex());
+    this->buttonStackedWidget->setCurrentIndex( Btns_Page::PAGE_BTNS_SHOW);
+    this->dataHeader->setText(QString::fromWCharArray(L""));
+    this->dataHeader->setStyleSheet( this->dataHeaderStyle);
 }
 
 void EmployeesPage::enableInputs( bool isEnable) {

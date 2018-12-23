@@ -44,7 +44,13 @@ bool ManagerValidator::isManagerValid( const Manager& manager, QString* errorOut
     }
 
     if( manager.getDateOfBirth().addYears(14) > manager.getPassportDateIssue()) {
-        error += QString::fromWCharArray( L"—отрудник должен был получить паспорт только после испольнени€ 14 лет\n");
+        error += QString::fromWCharArray( L"—отрудник должен был получить паспорт только после исполнени€ 14 лет\n");
+        isValid = false;
+    }
+
+    
+    if( manager.getPassportDateIssue() > QDate::currentDate() ) {
+        error += QString::fromWCharArray( L"ƒата выдачи паспорта не может быть больше текущей\n");
         isValid = false;
     }
 

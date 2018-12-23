@@ -20,8 +20,9 @@ void SalesPage::setErrorHandler( ErrorMessageHandler* errorHandler) {
     this->errorHandler = errorHandler;
 }
 
-void SalesPage::setUI( QDateEdit* salesDateInput, QPushButton* salesForAllButton, QTableView* managersSalesTable, QTableView* unconfirmedSalesTable, QTableView* confirmedSalesTable)
+void SalesPage::setUI( QTabWidget* tabWidget, QDateEdit* salesDateInput, QPushButton* salesForAllButton, QTableView* managersSalesTable, QTableView* unconfirmedSalesTable, QTableView* confirmedSalesTable)
 {
+	this->tabWidget = tabWidget;
 	this->salesDateInput = salesDateInput;
 	this->salesForAllButton = salesForAllButton;
 	connect(this->salesForAllButton, &QPushButton::clicked, this, &SalesPage::buttonForAll);
@@ -357,10 +358,14 @@ void SalesPage::viewSelectedManagerConfirmedSales(int id) {
 
 void SalesPage::setEnable(bool flag) {
 
-	this->salesForAllButton->setEnabled(flag);
-	this->managersSalesTable->setEnabled(flag);
-	this->confirmedSalesTable->setEnabled(flag);
-	this->unconfirmedSalesTable->setEnabled(flag);
+	this->tabWidget->setEnabled(flag);
+}
+
+void SalesPage::showManagerSales( int id) {
+	
+	QModelIndex index = static_cast<ManagersSalesTableModel*>(this->managersSalesTable->model())->getIndexByRecordId(id);
+	this->managersSalesTable->setCurrentIndex( index);
+	this->managersSalesTable->clicked( index);
 }
 
 //===SLOTS===//

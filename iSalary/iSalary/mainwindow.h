@@ -17,6 +17,7 @@
 #include "EmployeesPage.h"
 #include "SalesPage.h"
 #include "SalaryPage.h"
+#include "StatisticPage.h"
 
 #include "Product_DB.h"
 #include "Product.h"
@@ -29,22 +30,7 @@
 #include "Sale_DB.h"
 #include "ActiveSale.h"
 #include "ClosedSale.h"
-
-/**
-* Перечисление основных виджетов программы
-*/
-enum ProgramWidgets {
-    AUTH_WIDGET = 0,
-    PROGRAM_WIDGET = 1
-};
-
-/**
-* Перечисление основных виджетов по ролям
-*/
-enum UserRoleWidgets {
-    BOSS_WIDGET = 0,
-    MANAGER_WIDGET = 1
-};
+#include "enums.h"
 
 class MainWindow : public QMainWindow
 {
@@ -57,7 +43,8 @@ public:
 		SalesPage* salesPage,
 		SalaryPage* salaryPage,
 		ProductPage *productPage, 
-		ManagerPage *managerPage, 
+		ManagerPage *managerPage,
+		StatisticPage *statisticPage,
 		QWidget *parent = 0
 	);
 	~MainWindow();
@@ -73,6 +60,7 @@ private:
 	SalaryPage* salaryPage;
 	ProductPage *productPage;
 	ManagerPage *managerPage;
+	StatisticPage *statisticPage;
 
 	int current_user_id;
     ErrorMessageHandler* errorHandler;
@@ -81,13 +69,7 @@ private:
 
     void enterProgram( const UserDTO& user, UserType userType);
     
-    enum BossPage {
-        PAGE_EMPLOYEES = 0,
-        PAGE_PRODUCTS,
-        PAGE_SALES,
-        PAGE_STATISTIC,
-        PAGE_SALARY
-    };
+
 
     void refreshBossPage( int page);
 

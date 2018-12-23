@@ -194,7 +194,7 @@
                <enum>QTabWidget::Rounded</enum>
               </property>
               <property name="currentIndex">
-               <number>1</number>
+               <number>0</number>
               </property>
               <property name="elideMode">
                <enum>Qt::ElideMiddle</enum>
@@ -262,7 +262,7 @@
                 <item>
                  <layout class="QVBoxLayout" name="verticalLayout_21">
                   <item>
-                   <widget class="QLabel" name="label_2">
+                   <widget class="QLabel" name="lable_2">
                     <property name="styleSheet">
                      <string notr="true">QLabel { background-color: rgb(225, 225, 225) }</string>
                     </property>
@@ -642,6 +642,22 @@
                    </spacer>
                   </item>
                   <item>
+                   <widget class="QLabel" name="employDataHeaderLabel">
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="scaledContents">
+                     <bool>true</bool>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                    <property name="textInteractionFlags">
+                     <set>Qt::NoTextInteraction</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
                    <widget class="QStackedWidget" name="managersButtonsStackedWidget">
                     <property name="enabled">
                      <bool>true</bool>
@@ -989,6 +1005,13 @@
                   <item>
                    <layout class="QHBoxLayout" name="horizontalLayout_34">
                     <item>
+                     <widget class="QPushButton" name="salesForAllButton">
+                      <property name="text">
+                       <string>Для всех</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
                      <widget class="QLabel" name="label_45">
                       <property name="text">
                        <string>Дата</string>
@@ -1055,30 +1078,6 @@
                        <bool>true</bool>
                       </property>
                      </widget>
-                    </item>
-                   </layout>
-                  </item>
-                  <item>
-                   <layout class="QHBoxLayout" name="horizontalLayout_6">
-                    <item>
-                     <widget class="QPushButton" name="salesForAllButton">
-                      <property name="text">
-                       <string>Для всех</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <spacer name="horizontalSpacer_6">
-                      <property name="orientation">
-                       <enum>Qt::Horizontal</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0">
-                       <size>
-                        <width>40</width>
-                        <height>20</height>
-                       </size>
-                      </property>
-                     </spacer>
                     </item>
                    </layout>
                   </item>

@@ -1,10 +1,9 @@
 #include "mainwindow.h"
-MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesPage* salesPage, SalaryPage* salaryPage, ProductPage *productPage, ManagerPage *managerPage, QWidget *parent ) : QMainWindow(parent) {
+#include "TabNavigator.h"
+
+MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesPage* salesPage, SalaryPage* salaryPage, ProductPage *productPage, ManagerPage *managerPage, StatisticPage *statisticPage, QWidget *parent ) : QMainWindow(parent) {
 	ui.setupUi(this);
 	
-	//блокировка вкладки корректировки
-	ui.tabWidget->setTabEnabled(PAGE_STATISTIC, false);
-	ui.tabWidget->setTabToolTip(PAGE_STATISTIC, "Заблокировано до лучших времен");
 	ui.label_45->hide();
 
     ui.auth_program_stackedWidget->setCurrentIndex( AUTH_WIDGET);
@@ -43,17 +42,19 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
         ui.saveManagerButton,
         ui.cancelManagerButton,
         ui.managerSubmitAddButton,
-        ui.managerCancelAddButton
+        ui.managerCancelAddButton,
+        ui.employDataHeaderLabel
     );
     this->employeesPage->setErrorHandler( errorHandler);
     connect( ui.tabWidget, &QTabWidget::currentChanged, this, &MainWindow::refreshBossPage);
 
 	this->salesPage = salesPage;
-	this->salesPage->setUI(ui.salesDateInput, ui.salesForAllButton, ui.managersSalesTable, ui.unconfirmedSalesTable, ui.confirmedSalesTable);
+	this->salesPage->setUI(ui.tabWidget, ui.salesDateInput, ui.salesForAllButton, ui.managersSalesTable, ui.unconfirmedSalesTable, ui.confirmedSalesTable);
 	this->salesPage->setErrorHandler( errorHandler);
 
 	this->salaryPage = salaryPage;
 	this->salaryPage->setUI(
+		ui.tabWidget,
 		ui.salaryAccountingPeriod, 
 		ui.salaryTable, 
 		ui.salaryTotalTable, 
@@ -89,7 +90,7 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
 	);
 
 	this->managerPage = managerPage;
-	this->productPage->setWindow( this );
+	//this->productPage->setWindow( this );
 	this->managerPage->setUI(
 		ui.currentSalary,
 		ui.nameProductOutput,
@@ -101,7 +102,22 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
 		ui.managerConfirmedSalesTable,
 		ui.managerUnconfirmedSalesTable
 	);
+
+	this->statisticPage = statisticPage;
+	this->statisticPage->setUI(
+		ui.tabWidget,
+		ui.statisticStartPeriod,
+		ui.statisticEndPeriod,
+		ui.statisticTable,
+		ui.statisticSalesTable,
+		ui.statisticCalendar
+	);
 	
+	TabNavigator* tabNavigator = new TabNavigator(ui.tabWidget);
+	tabNavigator->setEmployeesPage(this->employeesPage);
+	tabNavigator->setProductPage(this->productPage);
+	tabNavigator->setSalesPage(this->salesPage);
+	tabNavigator->setSalaryPage(this->salaryPage);
 
 	auto drivers =  QSqlDatabase::drivers();
 	QString mes = "";

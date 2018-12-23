@@ -12,8 +12,11 @@
 #include <qpushbutton.h>
 #include <qstackedwidget.h>
 #include <qgroupbox.h>
+#include <qlabel.h>
 
 #include <qtableview.h>
+
+#include <qstyle.h>s
 
 #include <qheaderview.h>
 #include <qmodelindex>
@@ -53,12 +56,15 @@ public:
       QPushButton* confirmUpdateBtn,
       QPushButton* cancelUpdateBtn,
       QPushButton* confirmAddBtn,
-      QPushButton* cancelAddBtn
+      QPushButton* cancelAddBtn,
+      QLabel* dataHeader
     );
 
     void setErrorHandler( ErrorMessageHandler* errorHandler);
 
     void refreshList();
+
+	void showDetailsById( int managerId);
 
 protected slots:
 
@@ -76,8 +82,7 @@ protected slots:
     
 
 protected:    
-    void showDetailsById( int managerId);
-
+    
     void enableInputs( bool isEnable);
 
     void clearInputs();
@@ -108,6 +113,8 @@ protected:
 
     void startBlockForRequest();
     void endBlockForRequest();
+
+    QString dataHeaderStyle;
 
 private:
     PersonnalAccountingFacade* personnalAccouting;
@@ -150,5 +157,7 @@ private:
     QPushButton* cancelUpdateBtn;
     QPushButton* confirmAddBtn;
     QPushButton* cancelAddBtn;
+
+    QLabel* dataHeader;
 };
 
