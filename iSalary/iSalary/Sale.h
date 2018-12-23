@@ -27,6 +27,9 @@ public:
 	void setId( int _id );
 	int getId();
 
+	void setSaleDate( QDate _saleDate );
+	QDate getSaleDate();
+
 	void setCost( double _cost );
 	double getCost();
 

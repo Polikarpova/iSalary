@@ -10,11 +10,19 @@ Sale::~Sale(void)
 {
 }
 
-void Sale::setId( int _id) {
+void Sale::setId( int _id ) {
 	id = _id;
 }
 int Sale::getId() {
 	return id;
+}
+
+
+void Sale::setSaleDate( QDate _saleDate ) {
+	saleDate = _saleDate;
+}
+QDate Sale::getSaleDate() {
+	return saleDate;
 }
 
 
@@ -34,7 +42,7 @@ int Sale::getCount() {
 }
 
 
-void Sale::setSalerId( int _id) {
+void Sale::setSalerId( int _id ) {
 	saler_id = _id;
 }
 int Sale::getSalerId() {
@@ -50,7 +58,7 @@ Manager Sale::getSaler() {
 }
 
 
-void Sale::setProductId( int _id) {
+void Sale::setProductId( int _id ) {
 	product_id = _id;
 }
 int Sale::getProductId() {
