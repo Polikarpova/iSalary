@@ -86,7 +86,7 @@ Product Product_DB::findByName( QString productName ) {
 	productName.insert( 0, "'");
 	productName += "'";
 	QSqlQuery query( *db );
-    query.prepare(  "SELECT * FROM products WHERE name = " + productName);
+    query.prepare( "SELECT * FROM " + TABLE_NAME + " WHERE name = " + productName);
     this->execQuery( query);
 
 	bool isOk = query.next();
@@ -96,9 +96,16 @@ Product Product_DB::findByName( QString productName ) {
 }
 
 Product Product_DB::findById( int id ) {
-	QSqlQuery query(*db);
-    query.prepare( "SELECT * FROM " + TABLE_NAME + " WHERE id = " + QString::number(id));
+	/*QSqlQuery query( *db );
+    query.prepare( "SELECT * FROM " + TABLE_NAME + " WHERE id = " + QString::number(id) );
     this->execQuery( query);
-	Product product = read( &query );
+	Product product = read( &query );*/
+	
+	Product product;
+	QVector<Product>products = getAll();
+	for (int i = 0; i < products.size(); i++) {
+		if (products[i].getId() == id)
+			product = products[i];
+	}
 	return product;
 }
