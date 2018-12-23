@@ -78,12 +78,13 @@ void ManagerPage::clearManagersConfirmedSalesTable() {
 	confirmedSalesTableModel->clear();
 	QStringList horizontalHeader;
     horizontalHeader.append( c->toUnicode( "Название" ) );
-    horizontalHeader.append( c->toUnicode( "Количество" ) );
-	horizontalHeader.append( c->toUnicode( "Стоимость" ) );
-	horizontalHeader.append( c->toUnicode( "Процент комиссии" ) );
+    horizontalHeader.append( c->toUnicode( "Количество, шт." ) );
+	horizontalHeader.append( c->toUnicode( "Цена, руб." ) );
+	horizontalHeader.append( c->toUnicode( "Стоимость, руб." ) );
+	horizontalHeader.append( c->toUnicode( "Процент комиссии, %" ) );
 	confirmedSalesTableModel->setHorizontalHeaderLabels( horizontalHeader );
 	confirmedSalesTable->setModel( confirmedSalesTableModel );
-    //confirmedSalesTable->resizeColumnsToContents();
+    confirmedSalesTable->resizeColumnsToContents();
 }
 
 void ManagerPage::fillManagersConfirmedSalesTable() {
@@ -106,12 +107,14 @@ void ManagerPage::fillManagersConfirmedSalesTable() {
 				confirmedSalesTableModel->setItem( lastRow, 1, item );
 				item = new QStandardItem( QString::number( sale.getCost() ) );
 				confirmedSalesTableModel->setItem( lastRow, 2, item );
-				item = new QStandardItem( QString::number( sale.getProductCommission() ) + "%" );
+				item = new QStandardItem( QString::number( sale.getCost() * sale.getCount() ) );
 				confirmedSalesTableModel->setItem( lastRow, 3, item );
+				item = new QStandardItem( QString::number( sale.getProductCommission() ) + "%" );
+				confirmedSalesTableModel->setItem( lastRow, 4, item );
 
 				allCount += sale.getCount();
-				allCost += sale.getCost();
-				salary += sale.getCost() / 100 * sale.getProductCommission();
+				allCost += sale.getCost() * sale.getCount();
+				salary += sale.getCost() * sale.getCount() * sale.getProductCommission() / 100;
 				lastRow++;
 			}
 		}
@@ -121,9 +124,9 @@ void ManagerPage::fillManagersConfirmedSalesTable() {
 		item = new QStandardItem( QString::number( allCount ) );
 		confirmedSalesTableModel->setItem( lastRow, 1, item );
 		item = new QStandardItem( QString::number( allCost ) );
-		confirmedSalesTableModel->setItem( lastRow, 2, item );
-		item = new QStandardItem( QString::number( salary ) );
 		confirmedSalesTableModel->setItem( lastRow, 3, item );
+		item = new QStandardItem( QString::number( salary ) );
+		confirmedSalesTableModel->setItem( lastRow, 4, item );
 
 		currentSalaryOutput->setText( QString::number( salary ) );
 	}
@@ -133,13 +136,14 @@ void ManagerPage::clearManagersUnconfirmedSalesTable() {
 	unconfirmedSalesTableModel->clear();
 	QStringList horizontalHeader;
     horizontalHeader.append( c->toUnicode( "Название" ) );
-    horizontalHeader.append( c->toUnicode( "Количество" ) );
-	horizontalHeader.append( c->toUnicode( "Стоимость" ) );
-	horizontalHeader.append( c->toUnicode( "Процент комиссии" ) );
+    horizontalHeader.append( c->toUnicode( "Количество, шт." ) );
+	horizontalHeader.append( c->toUnicode( "Цена, руб." ) );
+	horizontalHeader.append( c->toUnicode( "Стоимость, руб." ) );
+	horizontalHeader.append( c->toUnicode( "Процент комиссии, %" ) );
 	horizontalHeader.append( c->toUnicode( "Действие" ) );
 	unconfirmedSalesTableModel->setHorizontalHeaderLabels( horizontalHeader );
 	unconfirmedSalesTable->setModel( unconfirmedSalesTableModel );
-    //unconfirmedSalesTable->resizeColumnsToContents();
+    unconfirmedSalesTable->resizeColumnsToContents();
 }
 
 void ManagerPage::fillManagersUnconfirmedSalesTable() {
@@ -153,8 +157,6 @@ void ManagerPage::fillManagersUnconfirmedSalesTable() {
 		for ( int idx = 0; idx < sales.size(); idx++ ) {
 			if ( sales[idx].isConfirmed() == false ) {
 				ActiveSale sale = sales[idx];
-				ProductDTO productResult = productFacade->findById( sale.getProductId() );
-				sale.setProduct( productResult.product );
 				QStandardItem *item;
 				item = new QStandardItem( sale.getProductName() );
 				unconfirmedSalesTableModel->setItem( lastRow, 0, item );
@@ -162,17 +164,19 @@ void ManagerPage::fillManagersUnconfirmedSalesTable() {
 				unconfirmedSalesTableModel->setItem( lastRow, 1, item );
 				item = new QStandardItem( QString::number( sale.getCost() ) );
 				unconfirmedSalesTableModel->setItem( lastRow, 2, item );
-				item = new QStandardItem( QString::number( sale.getProductCommission() ) + "%" );
+				item = new QStandardItem( QString::number( sale.getCost() * sale.getCount() ) );
 				unconfirmedSalesTableModel->setItem( lastRow, 3, item );
+				item = new QStandardItem( QString::number( sale.getProductCommission() ) + "%" );
+				unconfirmedSalesTableModel->setItem( lastRow, 4, item );
 
 				QPushButton* btn = new QPushButton(QString::fromWCharArray( L"Удалить"));
 				btn->setProperty("saleId", sale.getId() );
 				connect( btn, SIGNAL( clicked() ), this, SLOT( removeSale() ) );
-				this->unconfirmedSalesTable->setIndexWidget( unconfirmedSalesTableModel->index( lastRow, 4, QModelIndex() ), btn);
+				this->unconfirmedSalesTable->setIndexWidget( unconfirmedSalesTableModel->index( lastRow, 5, QModelIndex() ), btn);
 
 				allCount += sale.getCount();
-				allCost += sale.getCost();
-				salary += sale.getCost() / 100 * sale.getProductCommission();
+				allCost += sale.getCost() * sale.getCount();
+				salary += sale.getCost() * sale.getCount() * sale.getProductCommission() / 100;
 				lastRow++;
 			}
 		}
@@ -182,9 +186,9 @@ void ManagerPage::fillManagersUnconfirmedSalesTable() {
 		item = new QStandardItem( QString::number( allCount ) );
 		unconfirmedSalesTableModel->setItem( lastRow, 1, item );
 		item = new QStandardItem( QString::number( allCost ) );
-		unconfirmedSalesTableModel->setItem( lastRow, 2, item );
-		item = new QStandardItem( QString::number( salary ) );
 		unconfirmedSalesTableModel->setItem( lastRow, 3, item );
+		item = new QStandardItem( QString::number( salary ) );
+		unconfirmedSalesTableModel->setItem( lastRow, 4, item );
 	}
 }
 
@@ -247,7 +251,7 @@ void ManagerPage::clearManagersProductsTable() {
 	productsTableModel->setHorizontalHeaderLabels( horizontalHeader );
 	productTable->setModel( productsTableModel );
 	addSaleButton->setEnabled(false);
-    //productTable->resizeColumnsToContents();
+    productTable->resizeColumnsToContents();
 }
 
 void ManagerPage::fillManagersProductTable() {
