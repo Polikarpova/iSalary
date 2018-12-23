@@ -78,13 +78,17 @@ void ManagerPage::clearManagersConfirmedSalesTable() {
 	confirmedSalesTableModel->clear();
 	QStringList horizontalHeader;
     horizontalHeader.append( c->toUnicode( "Название" ) );
+	horizontalHeader.append( c->toUnicode( "Дата продажи" ) );
     horizontalHeader.append( c->toUnicode( "Количество, шт." ) );
 	horizontalHeader.append( c->toUnicode( "Цена, руб." ) );
 	horizontalHeader.append( c->toUnicode( "Стоимость, руб." ) );
 	horizontalHeader.append( c->toUnicode( "Процент комиссии, %" ) );
 	confirmedSalesTableModel->setHorizontalHeaderLabels( horizontalHeader );
 	confirmedSalesTable->setModel( confirmedSalesTableModel );
-    confirmedSalesTable->resizeColumnsToContents();
+	
+	for (int col = 0; col < 6; col++) {
+		confirmedSalesTable->horizontalHeader()->setSectionResizeMode(col, QHeaderView::ResizeToContents);
+	}
 }
 
 void ManagerPage::fillManagersConfirmedSalesTable() {
@@ -103,14 +107,16 @@ void ManagerPage::fillManagersConfirmedSalesTable() {
 				QStandardItem *item;
 				item = new QStandardItem( sale.getProductName() );
 				confirmedSalesTableModel->setItem( lastRow, 0, item );
-				item = new QStandardItem( QString::number( sale.getCount() ) );
+				item = new QStandardItem( sale.getSaleDate().toString(Qt::DateFormat::LocalDate) );
 				confirmedSalesTableModel->setItem( lastRow, 1, item );
-				item = new QStandardItem( QString::number( sale.getCost() ) );
+				item = new QStandardItem( QString::number( sale.getCount() ) );
 				confirmedSalesTableModel->setItem( lastRow, 2, item );
-				item = new QStandardItem( QString::number( sale.getCost() * sale.getCount() ) );
+				item = new QStandardItem( QString::number( sale.getCost() ) );
 				confirmedSalesTableModel->setItem( lastRow, 3, item );
-				item = new QStandardItem( QString::number( sale.getProductCommission() ) + "%" );
+				item = new QStandardItem( QString::number( sale.getCost() * sale.getCount() ) );
 				confirmedSalesTableModel->setItem( lastRow, 4, item );
+				item = new QStandardItem( QString::number( sale.getProductCommission() ) + "%" );
+				confirmedSalesTableModel->setItem( lastRow, 5, item );
 
 				allCount += sale.getCount();
 				allCost += sale.getCost() * sale.getCount();
@@ -122,11 +128,11 @@ void ManagerPage::fillManagersConfirmedSalesTable() {
 		item = new QStandardItem(  c->toUnicode( "Итого:" ) );
 		confirmedSalesTableModel->setItem( lastRow, 0, item );
 		item = new QStandardItem( QString::number( allCount ) );
-		confirmedSalesTableModel->setItem( lastRow, 1, item );
+		confirmedSalesTableModel->setItem( lastRow, 2, item );
 		item = new QStandardItem( QString::number( allCost ) );
-		confirmedSalesTableModel->setItem( lastRow, 3, item );
-		item = new QStandardItem( QString::number( salary ) );
 		confirmedSalesTableModel->setItem( lastRow, 4, item );
+		item = new QStandardItem( QString::number( salary ) );
+		confirmedSalesTableModel->setItem( lastRow, 5, item );
 
 		currentSalaryOutput->setText( QString::number( salary ) );
 	}
@@ -136,6 +142,7 @@ void ManagerPage::clearManagersUnconfirmedSalesTable() {
 	unconfirmedSalesTableModel->clear();
 	QStringList horizontalHeader;
     horizontalHeader.append( c->toUnicode( "Название" ) );
+	horizontalHeader.append( c->toUnicode( "Дата продажи" ) );
     horizontalHeader.append( c->toUnicode( "Количество, шт." ) );
 	horizontalHeader.append( c->toUnicode( "Цена, руб." ) );
 	horizontalHeader.append( c->toUnicode( "Стоимость, руб." ) );
@@ -143,7 +150,10 @@ void ManagerPage::clearManagersUnconfirmedSalesTable() {
 	horizontalHeader.append( c->toUnicode( "Действие" ) );
 	unconfirmedSalesTableModel->setHorizontalHeaderLabels( horizontalHeader );
 	unconfirmedSalesTable->setModel( unconfirmedSalesTableModel );
-    unconfirmedSalesTable->resizeColumnsToContents();
+    
+	for (int col = 0; col < 7; col++) {
+		unconfirmedSalesTable->horizontalHeader()->setSectionResizeMode(col, QHeaderView::ResizeToContents);
+	}
 }
 
 void ManagerPage::fillManagersUnconfirmedSalesTable() {
@@ -160,19 +170,21 @@ void ManagerPage::fillManagersUnconfirmedSalesTable() {
 				QStandardItem *item;
 				item = new QStandardItem( sale.getProductName() );
 				unconfirmedSalesTableModel->setItem( lastRow, 0, item );
-				item = new QStandardItem( QString::number( sale.getCount() ) );
+				item = new QStandardItem( sale.getConfirmDate().toString(Qt::DateFormat::LocalDate) );
 				unconfirmedSalesTableModel->setItem( lastRow, 1, item );
-				item = new QStandardItem( QString::number( sale.getCost() ) );
+				item = new QStandardItem( QString::number( sale.getCount() ) );
 				unconfirmedSalesTableModel->setItem( lastRow, 2, item );
-				item = new QStandardItem( QString::number( sale.getCost() * sale.getCount() ) );
+				item = new QStandardItem( QString::number( sale.getCost() ) );
 				unconfirmedSalesTableModel->setItem( lastRow, 3, item );
-				item = new QStandardItem( QString::number( sale.getProductCommission() ) + "%" );
+				item = new QStandardItem( QString::number( sale.getCost() * sale.getCount() ) );
 				unconfirmedSalesTableModel->setItem( lastRow, 4, item );
+				item = new QStandardItem( QString::number( sale.getProductCommission() ) + "%" );
+				unconfirmedSalesTableModel->setItem( lastRow, 5, item );
 
 				QPushButton* btn = new QPushButton(QString::fromWCharArray( L"Удалить"));
 				btn->setProperty("saleId", sale.getId() );
 				connect( btn, SIGNAL( clicked() ), this, SLOT( removeSale() ) );
-				this->unconfirmedSalesTable->setIndexWidget( unconfirmedSalesTableModel->index( lastRow, 5, QModelIndex() ), btn);
+				this->unconfirmedSalesTable->setIndexWidget( unconfirmedSalesTableModel->index( lastRow, 6, QModelIndex() ), btn);
 
 				allCount += sale.getCount();
 				allCost += sale.getCost() * sale.getCount();
@@ -184,11 +196,11 @@ void ManagerPage::fillManagersUnconfirmedSalesTable() {
 		item = new QStandardItem(  c->toUnicode( "Итого:" ) );
 		unconfirmedSalesTableModel->setItem( lastRow, 0, item );
 		item = new QStandardItem( QString::number( allCount ) );
-		unconfirmedSalesTableModel->setItem( lastRow, 1, item );
+		unconfirmedSalesTableModel->setItem( lastRow, 2, item );
 		item = new QStandardItem( QString::number( allCost ) );
-		unconfirmedSalesTableModel->setItem( lastRow, 3, item );
-		item = new QStandardItem( QString::number( salary ) );
 		unconfirmedSalesTableModel->setItem( lastRow, 4, item );
+		item = new QStandardItem( QString::number( salary ) );
+		unconfirmedSalesTableModel->setItem( lastRow, 5, item );
 	}
 }
 
@@ -240,6 +252,8 @@ void ManagerPage::fillSale( ActiveSale & sale ) {
 	sale.setProduct( result.product );
 	sale.setCost( priceSaleInput->value() );
 	sale.setCount( countSaleProductsInput->value() );
+	sale.setSaleDate( dateSaleInput->date() );
+	sale.setConfirmDate( QDate::currentDate() );
 }
 
 
@@ -251,7 +265,9 @@ void ManagerPage::clearManagersProductsTable() {
 	productsTableModel->setHorizontalHeaderLabels( horizontalHeader );
 	productTable->setModel( productsTableModel );
 	addSaleButton->setEnabled(false);
-    productTable->resizeColumnsToContents();
+    
+	productTable->horizontalHeader()->setSectionResizeMode(1, QHeaderView::ResizeToContents);
+	productTable->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
 }
 
 void ManagerPage::fillManagersProductTable() {
