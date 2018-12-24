@@ -90,9 +90,9 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
 	);
 
 	this->managerPage = managerPage;
-	//this->productPage->setWindow( this );
 	this->managerPage->setUI(
 		ui.currentSalary,
+		ui.possibleSalary,
 		ui.nameProductOutput,
 		ui.dateSale,
 		ui.priceSale,

@@ -22,6 +22,7 @@ public:
 	~ManagerPage(void);
 	void setUI(
 		QLineEdit *currentSalaryOutput,
+		QLineEdit *possibleSalaryOutput,
 		QLineEdit *productNameOutput,
 		QDateEdit *dateSaleInput,
 		QDoubleSpinBox *priceSaleInput,
@@ -44,6 +45,7 @@ private:
 	QWidget* widget;
 
 	QLineEdit *currentSalaryOutput;
+	QLineEdit *possibleSalaryOutput;
 	QLineEdit *productNameOutput;
 	QDateEdit *dateSaleInput;
 	QDoubleSpinBox *priceSaleInput;
