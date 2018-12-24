@@ -13,6 +13,7 @@ ManagerPage::~ManagerPage(void)
 
 void ManagerPage::setUI(
 	QLineEdit *currentSalaryOutput,
+	QLineEdit *possibleSalaryOutput,
 	QLineEdit *productNameOutput,
 	QDateEdit *dateSaleInput,
 	QDoubleSpinBox *priceSaleInput,
@@ -24,6 +25,7 @@ void ManagerPage::setUI(
 	QTableView *unconfirmedSalesTable
 ) {
 	this->currentSalaryOutput = currentSalaryOutput;
+	this->possibleSalaryOutput = possibleSalaryOutput;
 	this->productNameOutput = productNameOutput;
 	this->dateSaleInput = dateSaleInput;
 	this->priceSaleInput = priceSaleInput;
@@ -60,7 +62,7 @@ void ManagerPage::setUI(
 	this->dateSaleInput->setMaximumDate( QDate::currentDate() );
 
 	connect( this->productSearchInput, SIGNAL( textChanged( const QString & ) ), this, SLOT( searchManagersProductTable() ) );
-	connect( addSaleButton, SIGNAL( clicked() ), this, SLOT( addSale() ) );
+	connect( this->addSaleButton, SIGNAL( clicked() ), this, SLOT( addSale() ) );
 	connect( this->productTable->selectionModel(), SIGNAL( currentChanged ( const QModelIndex &, const QModelIndex & ) ), this, SLOT( showProduct() ) );
 }
 
@@ -82,7 +84,7 @@ void ManagerPage::clearManagersConfirmedSalesTable() {
     horizontalHeader.append( c->toUnicode( "Количество, шт." ) );
 	horizontalHeader.append( c->toUnicode( "Цена, руб." ) );
 	horizontalHeader.append( c->toUnicode( "Стоимость, руб." ) );
-	horizontalHeader.append( c->toUnicode( "Процент комиссии, %" ) );
+	horizontalHeader.append( c->toUnicode( "Прибыль с продажи, руб." ) );
 	confirmedSalesTableModel->setHorizontalHeaderLabels( horizontalHeader );
 	confirmedSalesTable->setModel( confirmedSalesTableModel );
 	
@@ -115,7 +117,7 @@ void ManagerPage::fillManagersConfirmedSalesTable() {
 				confirmedSalesTableModel->setItem( lastRow, 3, item );
 				item = new QStandardItem( QString::number( sale.getCost() * sale.getCount() ) );
 				confirmedSalesTableModel->setItem( lastRow, 4, item );
-				item = new QStandardItem( QString::number( sale.getProductCommission() ) + "%" );
+				item = new QStandardItem( QString::number( sale.getCost() * sale.getCount() * (sale.getProductCommission() / 100) ) );
 				confirmedSalesTableModel->setItem( lastRow, 5, item );
 
 				allCount += sale.getCount();
@@ -146,7 +148,7 @@ void ManagerPage::clearManagersUnconfirmedSalesTable() {
     horizontalHeader.append( c->toUnicode( "Количество, шт." ) );
 	horizontalHeader.append( c->toUnicode( "Цена, руб." ) );
 	horizontalHeader.append( c->toUnicode( "Стоимость, руб." ) );
-	horizontalHeader.append( c->toUnicode( "Процент комиссии, %" ) );
+	horizontalHeader.append( c->toUnicode( "Прибыль с продажи, руб." ) );
 	horizontalHeader.append( c->toUnicode( "Действие" ) );
 	unconfirmedSalesTableModel->setHorizontalHeaderLabels( horizontalHeader );
 	unconfirmedSalesTable->setModel( unconfirmedSalesTableModel );
@@ -178,7 +180,7 @@ void ManagerPage::fillManagersUnconfirmedSalesTable() {
 				unconfirmedSalesTableModel->setItem( lastRow, 3, item );
 				item = new QStandardItem( QString::number( sale.getCost() * sale.getCount() ) );
 				unconfirmedSalesTableModel->setItem( lastRow, 4, item );
-				item = new QStandardItem( QString::number( sale.getProductCommission() ) + "%" );
+				item = new QStandardItem( QString::number( sale.getCost() * sale.getCount() * (sale.getProductCommission() / 100) ) );
 				unconfirmedSalesTableModel->setItem( lastRow, 5, item );
 
 				QPushButton* btn = new QPushButton(QString::fromWCharArray( L"Удалить"));
@@ -201,6 +203,8 @@ void ManagerPage::fillManagersUnconfirmedSalesTable() {
 		unconfirmedSalesTableModel->setItem( lastRow, 4, item );
 		item = new QStandardItem( QString::number( salary ) );
 		unconfirmedSalesTableModel->setItem( lastRow, 5, item );
+
+		possibleSalaryOutput->setText( QString::number( salary ) );
 	}
 }
 
