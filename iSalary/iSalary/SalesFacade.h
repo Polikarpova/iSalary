@@ -14,8 +14,10 @@
 #include "ManagerDTO.h"
 #include "SaleDTO.h"
 
+#include "ManagerStatisticDTO.h"
+
 /**
-* Класс, предоставляющий доступ к функциям приложения, связанным с продажами
+* Класс, предоставляющий доступ к функциям приложения, связанным с продажами и менеджерами
 * @author Поликарпова
 */
 class SalesFacade {
@@ -68,6 +70,14 @@ public:
 	* @return список зарплат или пустой список
 	*/
 	QList<ManagerSalaryDTO> getManagersSalary( QDate dateFrom, QDate dateTo);
+
+	/**
+	* Возвращает список со статистикой о продажах всех менеджеров за определенный период
+	* @param dateFrom - начала периода
+	* @param dateTo - конец периода
+	* @return список со статистикой или пустой список
+	*/
+	QList<ManagerStatisticDTO> getManagersStatistic( QDate dateFrom, QDate dateTo);
 
 	/**
 	* Возвращает список со всеми РП

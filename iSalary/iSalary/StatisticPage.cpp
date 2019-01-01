@@ -11,6 +11,7 @@ void StatisticPage::refreshPage() {
 
 	this->updateStatisticTable();
 	this->updateStatisticSalesTable();
+	//календарь
 }
 
 void StatisticPage::setErrorHandler( ErrorMessageHandler* errorHandler) {
@@ -22,6 +23,10 @@ void StatisticPage::setUI( QTabWidget* tabWidget, QDateEdit* statisticStartPerio
 	this->tabWidget = tabWidget;
 	this->statisticStartPeriod = statisticStartPeriod;
 	this->statisticEndPeriod = statisticEndPeriod;
+
+	this->statisticEndPeriod->setDate( QDate::currentDate() );
+	this->statisticStartPeriod->setDate( QDate( this->statisticEndPeriod->date().year(), this->statisticEndPeriod->date().month(), 1)  );
+
 	this->statisticCalendar = statisticCalendar;
 
 	this->initStatisticTable(statisticTable);
@@ -49,7 +54,7 @@ void StatisticPage::initStatisticTable (QTableView* statisticTable) {
 	this->statisticTable->setSelectionMode( QAbstractItemView::SingleSelection);
 
 	//скрытие поля с id
-	//this->statisticTable->setColumnHidden( StatisticTableModel::COLUMN_ID, true);
+	this->statisticTable->setColumnHidden( StatisticTableModel::COLUMN_ID, true);
 
 	connect( this->statisticTable, &QTableView::clicked, this, &StatisticPage::showManagersStatistic);
 }
@@ -76,6 +81,26 @@ void StatisticPage::initStatisticSalesTable( QTableView* statisticSalesTable) {
 
 void StatisticPage::updateStatisticTable() {
 
+	QList<ManagerStatisticDTO> list;
+
+	try {
+		
+		list = this->salesFacade->getManagersStatistic( statisticStartPeriod->date(), statisticEndPeriod->date());
+	} catch ( QString* error) {
+	
+	}
+
+	//чистим Qhash
+	this->managerStatistic.clear();
+	//заполняем его новыми данными из бд
+	for ( auto i = list.begin(); i != list.end(); i++) {
+	
+		this->managerStatistic.insert( i->managerId, *i);
+	}
+
+	//инициализируем и заполняем модель
+	StatisticTableModel* model = static_cast<StatisticTableModel*>( this->statisticTable->model());
+	model->refreshData( list);
 }
 
 void StatisticPage::updateStatisticSalesTable() {
@@ -94,5 +119,5 @@ void StatisticPage::endDateChanged() {
 }
 
 void StatisticPage::showManagersStatistic() {
-
+	QMessageBox::information(0, "statistic", "show manager statistic");
 }
