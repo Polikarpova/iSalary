@@ -40,8 +40,23 @@ public:
     */ 
     int getById( int id);
 
+	/**
+	* Возвращает список всех активных продаж всех менеджеров
+	* @return список с активными продажами или пустой список
+	*/
 	QList<ActiveSaleDTO> getActiveSales();
+	
+	/**
+	* Возвращает список всех активных продаж определённого менеджера
+	* @param managerId - идентификатор менеджера
+	* @return список с активными продажами или пустой список
+	*/
 	QList<ActiveSaleDTO> getActiveSalesForManager( int managerId);
+	
+	/**
+	* Возвращает список со статистикой об активных продажах для каждого из менеджеров
+	* @return список со статистикой или пустой список
+	*/
 	QList<ManagerActiveSalesStatisticDTO> getManagerActiveSalesSatistic();
 
 	/**
@@ -53,7 +68,16 @@ public:
 	*/
 	QList<SaleInfoDTO> getSalesConfimedFromPeriod( int id, QDate from, QDate to);
 
+	/**
+	* Подтверждает определённую продажу
+	* @param id - идентификатор продажи
+	*/
 	void confirmSale( int id);
+	
+	/**
+	* Снимает подтверждение с определённой продажи
+	* @param id - идентификатор продажи
+	*/
 	void unconfirmSale( int id);
 
 protected:
