@@ -57,11 +57,10 @@ public:
 	QList<ActiveSaleDTO> getActiveSalesForManager( int managerId);
 
 	/**
-	* Возращает статистику продаж для страницы "Продажи" всех менеджеров за определенный день
-	* @param date - дата
+	* Возращает статистику продаж для страницы "Продажи" всех менеджеров
 	* @return список со статистикой на каждого менеджера
 	*/
-	QList<ManagerActiveSalesStatisticDTO> getActiveSalesStatistic( QDate date);
+	QList<ManagerActiveSalesStatisticDTO> getActiveSalesStatistic();
 
 	/**
 	* Возвращает список всех зарплат за определенный период

@@ -24,7 +24,7 @@ class StatisticPage : public QObject{
     Q_OBJECT
 public:
     StatisticPage( SalesFacade * salesFacade);
-    void setUI( QTabWidget* tabWidget, QDateEdit* statisticStartPeriod, QDateEdit* statisticEndPeriod, QTableView* statisticTable, QTableView* statisticSalesTable, QCalendarWidget* statisticCalendar);
+    void setUI( QTabWidget* tabWidget, QDateEdit* statisticMonth, QTableView* statisticTable, QTableView* statisticSalesTable, QCalendarWidget* statisticCalendar);
     ~StatisticPage( void);
 
 	void refreshPage();
@@ -33,8 +33,7 @@ public:
 
 protected slots:
 
-	void startDateChanged();
-	void endDateChanged();
+	void monthChanged();
 
 	void showManagersStatistic();
 
@@ -52,8 +51,7 @@ private:
     SalesFacade * salesFacade;
     
 	QTabWidget* tabWidget;
-	QDateEdit* statisticStartPeriod;
-	QDateEdit* statisticEndPeriod;
+	QDateEdit* statisticMonth;
 	QTableView* statisticTable;
 	QTableView* statisticSalesTable;
 	QCalendarWidget* statisticCalendar;

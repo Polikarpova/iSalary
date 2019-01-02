@@ -113,12 +113,7 @@ void StatisticTableModel::refreshData(const QList<ManagerStatisticDTO>& managers
 			row << manager.managerName;
 			row << manager.salesCount;
 			row << manager.income;
-
-			if ( manager.let) {
-				row << manager.let;
-			} else {
-				row << QString("");
-			}
+			row << manager.let;
 			row << manager.oet;
             
             this->table.append( row);

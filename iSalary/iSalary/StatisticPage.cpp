@@ -11,29 +11,23 @@ void StatisticPage::refreshPage() {
 
 	this->updateStatisticTable();
 	this->updateStatisticSalesTable();
-	//календарь
 }
 
 void StatisticPage::setErrorHandler( ErrorMessageHandler* errorHandler) {
     this->errorHandler = errorHandler;
 }
 
-void StatisticPage::setUI( QTabWidget* tabWidget, QDateEdit* statisticStartPeriod, QDateEdit* statisticEndPeriod, QTableView* statisticTable, QTableView* statisticSalesTable, QCalendarWidget* statisticCalendar ) {
+void StatisticPage::setUI( QTabWidget* tabWidget, QDateEdit* statisticMonth, QTableView* statisticTable, QTableView* statisticSalesTable, QCalendarWidget* statisticCalendar ) {
 
 	this->tabWidget = tabWidget;
-	this->statisticStartPeriod = statisticStartPeriod;
-	this->statisticEndPeriod = statisticEndPeriod;
-
-	this->statisticEndPeriod->setDate( QDate::currentDate() );
-	this->statisticStartPeriod->setDate( QDate( this->statisticEndPeriod->date().year(), this->statisticEndPeriod->date().month(), 1)  );
-
+	this->statisticMonth = statisticMonth;
 	this->statisticCalendar = statisticCalendar;
+
+	this->statisticMonth->setDate( QDate::currentDate() );
+	connect(this->statisticMonth, &QDateEdit::dateChanged, this, &StatisticPage::monthChanged);
 
 	this->initStatisticTable(statisticTable);
 	this->initStatisticSalesTable(statisticSalesTable);
-
-	connect(this->statisticStartPeriod, &QDateEdit::dateChanged, this, &StatisticPage::startDateChanged);
-	connect(this->statisticEndPeriod, &QDateEdit::dateChanged, this, &StatisticPage::endDateChanged);
 
 	this->refreshPage();
 }
@@ -84,8 +78,10 @@ void StatisticPage::updateStatisticTable() {
 	QList<ManagerStatisticDTO> list;
 
 	try {
-		
-		list = this->salesFacade->getManagersStatistic( statisticStartPeriod->date(), statisticEndPeriod->date());
+		QDate current( statisticMonth->date() );
+		QDate dateFrom( current.year(), current.month(), 1 );
+		QDate dateTo( current.year(), current.month(), current.daysInMonth() );
+		list = this->salesFacade->getManagersStatistic( dateFrom, dateTo);
 	} catch ( QString* error) {
 	
 	}
@@ -108,14 +104,10 @@ void StatisticPage::updateStatisticSalesTable() {
 }
 
 //===SLOTS===//
-void StatisticPage::startDateChanged() {
+void StatisticPage::monthChanged() {
 
-}
-
-void StatisticPage::endDateChanged() {
-
-	//проверка на то, чтобы дата не была раньше или равна дате, установленной в statisticStartPeriod
-	//в противном случае устанавливаем на дату statisticStartPeriod + 1 день
+	this->refreshPage();
+	this->statisticCalendar->setCurrentPage( this->statisticMonth->date().year(), this->statisticMonth->date().month() );
 }
 
 void StatisticPage::showManagersStatistic() {

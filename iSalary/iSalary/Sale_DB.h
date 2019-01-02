@@ -69,15 +69,6 @@ public:
 	QList<SaleInfoDTO> getSalesConfimedFromPeriod( int id, QDate from, QDate to);
 
 	/**
-	* Возвращает количество подтвержденных продаж, совершенных менеджером за заданный период
-	* @param id - идентификатор менеджера
-	* @param from - дата начала периода (включая её)
-	* @param to - дата окончания периода (включая её)
-	* @return количество подтвержденных продаж или 0
-	*/
-	int getConfirmedSalesCount( int managerId, QDate from, QDate to);
-
-	/**
 	* Подтверждает определённую продажу
 	* @param id - идентификатор продажи
 	*/
