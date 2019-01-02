@@ -76,6 +76,18 @@ QList<ActiveSaleDTO> SalesFacade::getActiveSales(){
 	return this->s->getActiveSales();
 }
 
+QList<ActiveSaleDTO> SalesFacade::getConfirmedSalesFromPeriod(  QList<int> managersIds, QDate dateFrom, QDate dateTo ) {
+
+	QList<ActiveSaleDTO> result;
+
+	for( auto i = managersIds.begin(); i != managersIds.end(); i++ ) {
+	
+		result.append( s->getConfirmedSales(*i, dateFrom, dateTo) );
+	}
+
+	return result;
+}
+
 QList<ActiveSaleDTO> SalesFacade::getActiveSalesForManager( int managerId){
 
 	return this->s->getActiveSalesForManager(managerId);
@@ -106,7 +118,7 @@ QList<ManagerSalaryDTO> SalesFacade::getManagersSalary( QDate dateFrom, QDate da
 			dateTo = QDate::currentDate();
 		}
 
-		QList<SaleInfoDTO> salesInfo = this->s->getSalesConfimedFromPeriod( manager.managerId, dateFrom, dateTo);
+		QList<SaleInfoDTO> salesInfo = this->s->getSalesInfoConfimedFromPeriod( manager.managerId, dateFrom, dateTo);
 	
 		//(Цикл)Посчитать для очередного юзера сумму прибыли и з/п (отдельно с комиссией) ManagerSalaryDTO
 		for( auto j = salesInfo.begin() ; j != salesInfo.end() ; j++) {
@@ -141,7 +153,7 @@ QList<ManagerStatisticDTO> SalesFacade::getManagersStatistic( QDate dateFrom, QD
 
 		QString s = dateFrom.toString("dd.MMMM.yyyy");
 		QString ss = dateTo.toString("dd.MMMM.yyyy");
-		QList<SaleInfoDTO> salesInfo = this->s->getSalesConfimedFromPeriod( manager.managerId, dateFrom, dateTo);
+		QList<SaleInfoDTO> salesInfo = this->s->getSalesInfoConfimedFromPeriod( manager.managerId, dateFrom, dateTo);
 	
 		//(Цикл)Посчитать для очередного юзера сумму прибыли и з/п (отдельно с комиссией) ManagerSalaryDTO
 		for( auto j = salesInfo.begin() ; j != salesInfo.end() ; j++) {
@@ -151,7 +163,7 @@ QList<ManagerStatisticDTO> SalesFacade::getManagersStatistic( QDate dateFrom, QD
 		}
 
 		//получить количество продаж за период
-		manager.salesCount = this->s->getSalesConfimedFromPeriod(manager.managerId, dateFrom, dateTo).count();
+		manager.salesCount = this->s->getSalesInfoConfimedFromPeriod(manager.managerId, dateFrom, dateTo).count();
 
 		//получить данные для ЛЭТ
 		int lastMonthIncome = 0;
@@ -159,7 +171,7 @@ QList<ManagerStatisticDTO> SalesFacade::getManagersStatistic( QDate dateFrom, QD
 		QDate from(dateFrom.addMonths(-1));
 		QDate to(from.year(), from.month(), from.daysInMonth());
 
-		salesInfo = this->s->getSalesConfimedFromPeriod( manager.managerId, from, to);
+		salesInfo = this->s->getSalesInfoConfimedFromPeriod( manager.managerId, from, to);
 	
 		//(Цикл)Посчитать для очередного юзера сумму прибыли и з/п (отдельно с комиссией) ManagerSalaryDTO
 		for( auto j = salesInfo.begin() ; j != salesInfo.end() ; j++) {

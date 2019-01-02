@@ -44,6 +44,8 @@ protected:
 
 	void updateStatisticTable();
 	void updateStatisticSalesTable();
+
+	void viewSelectedManagerStatisticSales(int id);
 	
 private:
 	ErrorMessageHandler* errorHandler;
@@ -58,4 +60,7 @@ private:
 
 	QHash<int, ManagerStatisticDTO> managerStatistic;
 	QHash<int, ActiveSaleDTO> confirmedSales;
+
+	void setEnable(bool flag);
+	int getSelectedManagerId();
 };

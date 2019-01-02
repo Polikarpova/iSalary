@@ -70,7 +70,7 @@ void StatisticPage::initStatisticSalesTable( QTableView* statisticSalesTable) {
 	this->statisticSalesTable->setSelectionMode( QAbstractItemView::SingleSelection);
 
 	//скрытие поля с id
-	//this->statisticTable->setColumnHidden( StatisticTableModel::COLUMN_ID, true);
+	this->statisticSalesTable->setColumnHidden( StatisticTableModel::COLUMN_ID, true);
 }
 
 void StatisticPage::updateStatisticTable() {
@@ -101,6 +101,62 @@ void StatisticPage::updateStatisticTable() {
 
 void StatisticPage::updateStatisticSalesTable() {
 
+	//id всех менеджеров
+	QList<int> ids;
+
+	for ( auto i = this->managerStatistic.begin(); i != this->managerStatistic.end(); i++) {
+	
+		ids.append(i.key());
+	}
+
+	QList<ActiveSaleDTO> list;
+
+	try {
+		QDate current( statisticMonth->date() );
+		QDate dateFrom( current.year(), current.month(), 1 );
+		QDate dateTo( current.year(), current.month(), current.daysInMonth() );
+		list = this->salesFacade->getConfirmedSalesFromPeriod( ids, dateFrom, dateTo);
+	} catch ( QString* error) {	}
+
+	//чистим Qhash
+	this->confirmedSales.clear();
+	//заполняем его новыми данными из бд
+	for ( auto i = list.begin(); i != list.end(); i++) {
+	
+		this->confirmedSales.insert( i->id, *i);
+	}
+
+	//инициализируем и заполняем модель
+	StatisticSalesTableModel* model = static_cast<StatisticSalesTableModel*>( this->statisticSalesTable->model());
+	model->refreshData( list);
+}
+
+void StatisticPage::viewSelectedManagerStatisticSales(int id) {
+
+	//id выбранного менеджера
+	QList<int> ids;
+	ids.append(id);
+
+	QList<ActiveSaleDTO> list;
+
+	try {
+		QDate current( statisticMonth->date() );
+		QDate dateFrom( current.year(), current.month(), 1 );
+		QDate dateTo( current.year(), current.month(), current.daysInMonth() );
+		list = this->salesFacade->getConfirmedSalesFromPeriod( ids, dateFrom, dateTo);
+	} catch ( QString* error) {	}
+
+	//чистим Qhash
+	this->confirmedSales.clear();
+	//заполняем его новыми данными из бд
+	for ( auto i = list.begin(); i != list.end(); i++) {
+	
+		this->confirmedSales.insert( i->id, *i);
+	}
+
+	//инициализируем и заполняем модель
+	StatisticSalesTableModel* model = static_cast<StatisticSalesTableModel*>( this->statisticSalesTable->model());
+	model->refreshData( list);
 }
 
 //===SLOTS===//
@@ -111,5 +167,24 @@ void StatisticPage::monthChanged() {
 }
 
 void StatisticPage::showManagersStatistic() {
-	QMessageBox::information(0, "statistic", "show manager statistic");
+	
+	this->setEnable(false);
+
+	int currentId = this->getSelectedManagerId();
+
+	this->viewSelectedManagerStatisticSales( currentId);
+
+	this->setEnable(true);
+}
+
+//===PRIVATE===//
+void StatisticPage::setEnable(bool flag) {
+
+	this->tabWidget->setEnabled(flag);
+}
+
+int StatisticPage::getSelectedManagerId() {
+
+	auto model = static_cast<StatisticTableModel*>( this->statisticTable->model());
+	return model->getRecordId( this->statisticTable->currentIndex().row());
 }
