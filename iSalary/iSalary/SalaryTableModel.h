@@ -26,6 +26,7 @@ public:
         COLUMN_FIO,
         COLUMN_INCOME,
         COLUMN_SALARY,
+		COLUMN_SALES,
         COLUMN_LAST /*Обозначает кол-во столбцов, на самом деле не существует*/
     };
 

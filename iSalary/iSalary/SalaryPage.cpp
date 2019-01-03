@@ -1,4 +1,6 @@
 #include "SalaryPage.h"
+#include <QFormLayout>
+#include <QScrollArea>
 
 SalaryPage::SalaryPage( SalesFacade * salesFacade, PersonnalAccountingFacade* personnalAccountingFacade){
     this->salesFacade = salesFacade;
@@ -217,10 +219,11 @@ void SalaryPage::showSelectedPeriod() {
 	}
 
 	//инициализируем и заполняем модели
-	SalaryTableModel* model = static_cast<SalaryTableModel*>( this->salaryTable->model());
+	SalaryTableModel* model = static_cast<SalaryTableModel*>( this->salaryTable->model() );
 	model->refreshData( list);
+	this->addActionButtonsToTable( model);
 
-	SalaryTotalTableModel* modelTotal = static_cast<SalaryTotalTableModel*>( this->salaryTotalTable->model());
+	SalaryTotalTableModel* modelTotal = static_cast<SalaryTotalTableModel*>( this->salaryTotalTable->model() );
 	modelTotal->refreshData( list);
 
 	this->setEnable(true);
@@ -244,4 +247,70 @@ void SalaryPage::showManagerSales() {
 	this->tabNav->openSalesPage( id);
 
 	this->setEnable(true);
+}
+
+void SalaryPage::viewSales() {
+
+	//получить продажи за определенный период
+	int currentPeriod = this->salaryAccountingPeriod->currentIndex();
+	QDate from = this->comboBoxMap[currentPeriod].dateFrom;
+	QDate to = this->comboBoxMap[currentPeriod].dateTo;
+
+	if ( this->comboBoxMap[currentPeriod].dateTo.isNull() ) {
+	
+		to = QDate::currentDate();
+	} 
+
+	QString s = from.toString();
+	QString ss = to.toString();
+
+	QList<int> managerId;
+	managerId.append( sender()->property("id").toInt() );
+
+	QList<ActiveSaleDTO> list;
+
+	try {
+	
+		list = this->salesFacade->getConfirmedSalesFromPeriod( managerId, from, to);
+	} catch( QString* error) {
+	
+		this->errorHandler->handleError( error);
+	}
+
+	//составить информационное сообщение
+	QString message = "";
+	
+	for( auto i = list.begin(); i != list.end(); i++ ) {
+	
+		QString str = QString::fromWCharArray( L"Товар: ") + toUnicode(i->product.name) + "\n\t" + 
+						QString::fromWCharArray( L"Дата продажи: ") + i->saleDate.toString("dd.MM.yyyy") + "\n\t" +
+						QString::fromWCharArray( L"Дата подтверждения: ") + i->confirmDate.toString("dd.MM.yyyy") + "\n\t" +
+						QString::fromWCharArray( L"Количество: ") + QString::number(i->count) + "\n\t" +
+						QString::fromWCharArray( L"Цена: ") + QString::number(i->price) + "\n\t" +
+						QString::fromWCharArray( L"Комиссия: ") + QString::number(i->product.commission) + "\n\n";
+		message += str;
+	}
+
+	if ( list.isEmpty() ) {
+	
+		message = QString::fromWCharArray( L"Нет подтвержденных продаж в этом месяце");
+	}
+
+	//Вывести информационное сообщение
+
+	QMessageBox::information(0, QString::fromWCharArray( L"Продажи"), message);
+}
+
+//===PRIVATE===//
+void SalaryPage::addActionButtonsToTable(SalaryTableModel* model) {
+
+	int rowCount = model->rowCount(QModelIndex());
+
+	for( int i = 0; i != rowCount; i++) {
+
+		QPushButton* btn = new QPushButton(QString::fromWCharArray( L"Продажи"));
+		btn->setProperty("id", model->getRecordId(i));
+		connect( btn, &QPushButton::clicked, this, &SalaryPage::viewSales);
+		this->salaryTable->setIndexWidget(model->index(i,SalaryTableModel::COLUMN_SALES), btn);
+	}
 }

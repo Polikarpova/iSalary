@@ -49,6 +49,8 @@ protected slots:
 	void showManagerInformation();
 	void showManagerSales();
 
+	void viewSales();
+
 protected:
 
 	/**
@@ -113,4 +115,5 @@ private:
 	QHash<int, ManagerSalaryDTO> salaryTotal;
 
 	void setEnable(bool flag);
+	void addActionButtonsToTable(SalaryTableModel* model);
 };
