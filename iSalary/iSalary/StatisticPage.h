@@ -63,4 +63,7 @@ private:
 
 	void setEnable(bool flag);
 	int getSelectedManagerId();
+
+	void paintCalendar();
+	void clearCalendar();
 };

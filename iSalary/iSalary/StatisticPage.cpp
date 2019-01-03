@@ -1,4 +1,5 @@
 #include "StatisticPage.h"
+#include <QTextCharFormat>
 
 StatisticPage::StatisticPage( SalesFacade * salesFacade){
     this->salesFacade = salesFacade;
@@ -11,6 +12,7 @@ void StatisticPage::refreshPage() {
 
 	this->updateStatisticTable();
 	this->updateStatisticSalesTable();
+	this->clearCalendar();
 }
 
 void StatisticPage::setErrorHandler( ErrorMessageHandler* errorHandler) {
@@ -162,8 +164,12 @@ void StatisticPage::viewSelectedManagerStatisticSales(int id) {
 //===SLOTS===//
 void StatisticPage::monthChanged() {
 
+	this->setEnable(false);
+
 	this->refreshPage();
 	this->statisticCalendar->setCurrentPage( this->statisticMonth->date().year(), this->statisticMonth->date().month() );
+
+	this->setEnable(true);
 }
 
 void StatisticPage::showManagersStatistic() {
@@ -171,8 +177,8 @@ void StatisticPage::showManagersStatistic() {
 	this->setEnable(false);
 
 	int currentId = this->getSelectedManagerId();
-
-	this->viewSelectedManagerStatisticSales( currentId);
+	this->viewSelectedManagerStatisticSales( currentId);	
+	this->paintCalendar();
 
 	this->setEnable(true);
 }
@@ -187,4 +193,50 @@ int StatisticPage::getSelectedManagerId() {
 
 	auto model = static_cast<StatisticTableModel*>( this->statisticTable->model());
 	return model->getRecordId( this->statisticTable->currentIndex().row());
+}
+
+void StatisticPage::paintCalendar() {
+
+	this->clearCalendar();
+
+	if ( !this->confirmedSales.empty() ) {
+	
+		//создать карту день-прибыль и общую прибыль за месяц
+		double allIncome = 0;
+		QMap<QDate, double> map;
+
+		for( auto i = this->confirmedSales.begin(); i != this->confirmedSales.end(); i++ ) {
+		
+			map[i->confirmDate] += i->price*i->count;
+			allIncome += i->price*i->count;
+		}
+
+		//цикл по дням, где окрашиваем
+		QBrush brush;
+	    QColor color;
+		for( auto i = map.begin(); i != map.end(); i++ ) {
+		
+			int index = 255 - ( 255 * i.value()/ allIncome);
+			color.setRgb(index, 255, index);
+			QTextCharFormat format = this->statisticCalendar->dateTextFormat( i.key() );
+			brush.setColor(color);
+			format.setBackground(brush);
+			this->statisticCalendar->setDateTextFormat( i.key(), format);
+		}
+	}
+}
+
+void StatisticPage::clearCalendar() {
+
+	QMap<QDate, QTextCharFormat> map = this->statisticCalendar->dateTextFormat();
+
+	for( auto day = map.begin(); day != map.end(); day++) {
+		
+		QTextCharFormat format( this->statisticCalendar->dateTextFormat( day.key()) );
+		
+		QColor color(255, 255, 255);
+		QBrush brush(color);
+		format.setBackground(brush);
+		this->statisticCalendar->setDateTextFormat( day.key(), format);
+	}
 }

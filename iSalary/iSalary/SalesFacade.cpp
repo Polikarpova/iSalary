@@ -166,7 +166,7 @@ QList<ManagerStatisticDTO> SalesFacade::getManagersStatistic( QDate dateFrom, QD
 		manager.salesCount = this->s->getSalesInfoConfimedFromPeriod(manager.managerId, dateFrom, dateTo).count();
 
 		//получить данные для ЛЭТ
-		int lastMonthIncome = 0;
+		double lastMonthIncome = 0;
 
 		QDate from(dateFrom.addMonths(-1));
 		QDate to(from.year(), from.month(), from.daysInMonth());
