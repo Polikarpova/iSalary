@@ -13,7 +13,13 @@ void SalaryPage::refreshPage() {
 	//обновление таблиц
 	this->updatePeriods();
 
-	//очищение виджетов(?)
+	//очищение виджетов
+	this->managerFIOLabel->clear(); 
+	this->salaryPasportSeries->clear(); 
+	this->salaryPasportNumber->clear();
+	this->salaryPasportSourse->clear();
+	this->salaryDateOfReceipt->clear();
+	this->salaryINN->clear();
 }
 
 void SalaryPage::setErrorHandler( ErrorMessageHandler* errorHandler) {
