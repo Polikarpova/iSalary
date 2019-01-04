@@ -14,6 +14,7 @@
 
 #include "ProductFacade.h"
 #include "SalesFacade.h"
+#include "ErrorMessageHandler.h"
 
 class ManagerPage : public QObject {
 	Q_OBJECT
@@ -21,6 +22,7 @@ public:
 	ManagerPage( ProductFacade *productFacade, SalesFacade *saleFacade );
 	~ManagerPage(void);
 	void setUI(
+		QWidget* tabWidget,
 		QLineEdit *currentSalaryOutput,
 		QLineEdit *possibleSalaryOutput,
 		QLineEdit *productNameOutput,
@@ -35,14 +37,15 @@ public:
 	);
 	void setCurrentManagerId( int id );
 	void refreshPage();
-	void setWindow( QWidget *widget );
+	void setErrorHandler( ErrorMessageHandler* errorHandler);
 
 private:
 	ProductFacade *productFacade;
 	SalesFacade *saleFacade;
 	QTextCodec *c;
 	int current_manager_id;
-	QWidget* widget;
+	QWidget* tabWidget;
+	ErrorMessageHandler* errorHandler;
 
 	QLineEdit *currentSalaryOutput;
 	QLineEdit *possibleSalaryOutput;
@@ -59,8 +62,6 @@ private:
 	QStandardItemModel *confirmedSalesTableModel;
 	QStandardItemModel *productsTableModel;
 
-	bool validator();
-
 	void fillManagersProductTable();
 	void clearManagersProductsTable();
 	void fillSale( ActiveSale & sale );
@@ -68,6 +69,8 @@ private:
 	void clearManagersUnconfirmedSalesTable();
 	void fillManagersConfirmedSalesTable();
 	void clearManagersConfirmedSalesTable();
+	void startBlockForRequest();
+    void endBlockForRequest();
 
 private slots:
 	void searchManagersProductTable();

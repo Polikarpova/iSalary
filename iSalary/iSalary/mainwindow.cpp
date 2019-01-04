@@ -89,9 +89,9 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
 	);
 	this->productPage->setErrorHandler( errorHandler);
 
-	// Добавить виджет для блокировки
 	this->managerPage = managerPage;
 	this->managerPage->setUI(
+		ui.boss_manager_stackedWidget,
 		ui.currentSalary,
 		ui.possibleSalary,
 		ui.nameProductOutput,
@@ -104,6 +104,7 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
 		ui.managerConfirmedSalesTable,
 		ui.managerUnconfirmedSalesTable
 	);
+	this->managerPage->setErrorHandler( errorHandler);
 
 	this->statisticPage = statisticPage;
 	this->statisticPage->setUI(

@@ -2,42 +2,26 @@
 <ui version="4.0">
  <class>MainWindowClass</class>
  <widget class="QMainWindow" name="MainWindowClass">
-  <property name="enabled">
-   <bool>true</bool>
-  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>869</width>
-    <height>693</height>
+    <width>814</width>
+    <height>619</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>iSalary</string>
-  </property>
-  <property name="windowIcon">
-   <iconset resource="mainwindow.qrc">
-    <normaloff>:/MainWindow/img/icons8-general-ledger-filled-30.png</normaloff>:/MainWindow/img/icons8-general-ledger-filled-30.png</iconset>
+   <string>MainWindow</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow {background-color: white}</string>
-  </property>
-  <property name="iconSize">
-   <size>
-    <width>30</width>
-    <height>30</height>
-   </size>
-  </property>
-  <property name="tabShape">
-   <enum>QTabWidget::Rounded</enum>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout_17">
     <item>
      <widget class="QStackedWidget" name="auth_program_stackedWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="enter">
        <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -48,13 +32,10 @@
             <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Fixed</enum>
-            </property>
             <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
-              <height>30</height>
+              <height>40</height>
              </size>
             </property>
            </spacer>
@@ -65,7 +46,7 @@
              <string notr="true"/>
             </property>
             <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:45pt;&quot;&gt;Аутентификация&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:24pt;&quot;&gt;Аутентификация&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>
@@ -102,9 +83,6 @@
             </item>
             <item>
              <layout class="QGridLayout" name="gridLayout_3">
-              <property name="sizeConstraint">
-               <enum>QLayout::SetDefaultConstraint</enum>
-              </property>
               <item row="3" column="0">
                <widget class="QLineEdit" name="passwordInput">
                 <property name="echoMode">
@@ -184,12 +162,12 @@
              <enum>Qt::Vertical</enum>
             </property>
             <property name="sizeType">
-             <enum>QSizePolicy::Fixed</enum>
+             <enum>QSizePolicy::Preferred</enum>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
-              <height>300</height>
+              <height>218</height>
              </size>
             </property>
            </spacer>
@@ -216,7 +194,7 @@
                <enum>QTabWidget::Rounded</enum>
               </property>
               <property name="currentIndex">
-               <number>3</number>
+               <number>1</number>
               </property>
               <property name="elideMode">
                <enum>Qt::ElideMiddle</enum>
@@ -1040,6 +1018,13 @@
                      </widget>
                     </item>
                     <item>
+                     <widget class="QLabel" name="label_45">
+                      <property name="text">
+                       <string>Дата</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
                      <spacer name="horizontalSpacer_7">
                       <property name="orientation">
                        <enum>Qt::Horizontal</enum>
@@ -1067,6 +1052,38 @@
                        </size>
                       </property>
                      </spacer>
+                    </item>
+                    <item>
+                     <widget class="QDateEdit" name="salesDateInput">
+                      <property name="enabled">
+                       <bool>true</bool>
+                      </property>
+                      <property name="wrapping">
+                       <bool>false</bool>
+                      </property>
+                      <property name="frame">
+                       <bool>true</bool>
+                      </property>
+                      <property name="buttonSymbols">
+                       <enum>QAbstractSpinBox::UpDownArrows</enum>
+                      </property>
+                      <property name="keyboardTracking">
+                       <bool>true</bool>
+                      </property>
+                      <property name="showGroupSeparator" stdset="0">
+                       <bool>false</bool>
+                      </property>
+                      <property name="minimumDate">
+                       <date>
+                        <year>1900</year>
+                        <month>9</month>
+                        <day>14</day>
+                       </date>
+                      </property>
+                      <property name="calendarPopup">
+                       <bool>true</bool>
+                      </property>
+                     </widget>
                     </item>
                    </layout>
                   </item>
@@ -1139,12 +1156,12 @@
                     <item>
                      <widget class="QLabel" name="label_51">
                       <property name="text">
-                       <string>За месяц:</string>
+                       <string>За период от:</string>
                       </property>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QDateEdit" name="statisticMonth">
+                     <widget class="QDateEdit" name="statisticStartPeriod">
                       <property name="enabled">
                        <bool>true</bool>
                       </property>
@@ -1170,26 +1187,65 @@
                         <day>14</day>
                        </date>
                       </property>
-                      <property name="displayFormat">
-                       <string>MMMM yyyy</string>
-                      </property>
                       <property name="calendarPopup">
                        <bool>true</bool>
                       </property>
                      </widget>
                     </item>
                     <item>
-                     <spacer name="horizontalSpacer_6">
+                     <spacer name="verticalSpacer_5">
                       <property name="orientation">
-                       <enum>Qt::Horizontal</enum>
+                       <enum>Qt::Vertical</enum>
+                      </property>
+                      <property name="sizeType">
+                       <enum>QSizePolicy::Minimum</enum>
                       </property>
                       <property name="sizeHint" stdset="0">
                        <size>
-                        <width>40</width>
-                        <height>20</height>
+                        <width>20</width>
+                        <height>25</height>
                        </size>
                       </property>
                      </spacer>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label_52">
+                      <property name="text">
+                       <string>По:</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QDateEdit" name="statisticEndPeriod">
+                      <property name="enabled">
+                       <bool>true</bool>
+                      </property>
+                      <property name="wrapping">
+                       <bool>false</bool>
+                      </property>
+                      <property name="frame">
+                       <bool>true</bool>
+                      </property>
+                      <property name="buttonSymbols">
+                       <enum>QAbstractSpinBox::UpDownArrows</enum>
+                      </property>
+                      <property name="keyboardTracking">
+                       <bool>true</bool>
+                      </property>
+                      <property name="showGroupSeparator" stdset="0">
+                       <bool>false</bool>
+                      </property>
+                      <property name="minimumDate">
+                       <date>
+                        <year>1900</year>
+                        <month>9</month>
+                        <day>14</day>
+                       </date>
+                      </property>
+                      <property name="calendarPopup">
+                       <bool>true</bool>
+                      </property>
+                     </widget>
                     </item>
                    </layout>
                   </item>
@@ -1244,20 +1300,14 @@
                     <property name="gridVisible">
                      <bool>true</bool>
                     </property>
-                    <property name="selectionMode">
-                     <enum>QCalendarWidget::NoSelection</enum>
-                    </property>
-                    <property name="horizontalHeaderFormat">
-                     <enum>QCalendarWidget::ShortDayNames</enum>
-                    </property>
                     <property name="verticalHeaderFormat">
                      <enum>QCalendarWidget::ISOWeekNumbers</enum>
                     </property>
                     <property name="navigationBarVisible">
-                     <bool>false</bool>
+                     <bool>true</bool>
                     </property>
                     <property name="dateEditEnabled">
-                     <bool>false</bool>
+                     <bool>true</bool>
                     </property>
                    </widget>
                   </item>
@@ -2018,7 +2068,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>869</width>
+     <width>814</width>
      <height>21</height>
     </rect>
    </property>
@@ -2072,10 +2122,12 @@
   <tabstop>saveProductButton</tabstop>
   <tabstop>productCancelAddButton</tabstop>
   <tabstop>productSubmitAddButton</tabstop>
+  <tabstop>salesDateInput</tabstop>
   <tabstop>managersSalesTable</tabstop>
   <tabstop>unconfirmedSalesTable</tabstop>
   <tabstop>confirmedSalesTable</tabstop>
-  <tabstop>statisticMonth</tabstop>
+  <tabstop>statisticStartPeriod</tabstop>
+  <tabstop>statisticEndPeriod</tabstop>
   <tabstop>statisticTable</tabstop>
   <tabstop>statisticSalesTable</tabstop>
   <tabstop>statisticCalendar</tabstop>

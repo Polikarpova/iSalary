@@ -12,6 +12,7 @@ ManagerPage::~ManagerPage(void)
 }
 
 void ManagerPage::setUI(
+	QWidget* tabWidget,
 	QLineEdit *currentSalaryOutput,
 	QLineEdit *possibleSalaryOutput,
 	QLineEdit *productNameOutput,
@@ -24,6 +25,7 @@ void ManagerPage::setUI(
 	QTableView *confirmedSalesTable,
 	QTableView *unconfirmedSalesTable
 ) {
+	this->tabWidget = tabWidget;
 	this->currentSalaryOutput = currentSalaryOutput;
 	this->possibleSalaryOutput = possibleSalaryOutput;
 	this->productNameOutput = productNameOutput;
@@ -41,7 +43,7 @@ void ManagerPage::setUI(
 	confirmedSalesTableModel = new QStandardItemModel;
 	productsTableModel = new QStandardItemModel;
 	
-	fillManagersProductTable();
+	refreshPage();
 
 	this->productTable->setEditTriggers(0);
 	this->productTable->setSelectionBehavior( QAbstractItemView::SelectRows);
@@ -70,11 +72,30 @@ void ManagerPage::setCurrentManagerId( int id ) {
 	this->current_manager_id = id;
 }
 
-void ManagerPage::refreshPage() {
-	fillManagersProductTable();
-	fillManagersConfirmedSalesTable();
-	fillManagersUnconfirmedSalesTable();
+void ManagerPage::setErrorHandler( ErrorMessageHandler* errorHandler) {
+    this->errorHandler = errorHandler;
 }
+
+void ManagerPage::startBlockForRequest(){
+    this->tabWidget->setEnabled( false );
+}
+
+void ManagerPage::endBlockForRequest(){
+    this->tabWidget->setEnabled( true );
+}
+
+void ManagerPage::refreshPage() {
+	this->startBlockForRequest();
+	try {
+		fillManagersProductTable();
+		fillManagersConfirmedSalesTable();
+		fillManagersUnconfirmedSalesTable();
+	} catch ( QString* error ) {
+        this->errorHandler->handleError( error );
+    }
+	this->endBlockForRequest();
+}
+
 
 void ManagerPage::clearManagersConfirmedSalesTable() {
 	confirmedSalesTableModel->clear();
@@ -209,41 +230,28 @@ void ManagerPage::fillManagersUnconfirmedSalesTable() {
 }
 
 void ManagerPage::removeSale() {
-	int currentId = sender()->property("saleId").toInt();
-	SaleDTO result = saleFacade->removeActiveSale( currentId );
-	fillManagersUnconfirmedSalesTable();
+	this->startBlockForRequest();
+	try {
+		int currentId = sender()->property("saleId").toInt();
+		SaleDTO result = saleFacade->removeActiveSale( currentId );
+		fillManagersUnconfirmedSalesTable();
+	} catch ( QString* error ) {
+        this->errorHandler->handleError( error );
+    }
+	this->endBlockForRequest();
 }
 
 void ManagerPage::addSale() {
-	if ( validator() == true ) {
+	this->startBlockForRequest();
+	try {
 		ActiveSale sale;
 		fillSale( sale );
 		SaleDTO result = saleFacade->addActiveSale( sale );
 		fillManagersUnconfirmedSalesTable();
-	}
-}
-
-bool ManagerPage::validator() {
-	bool isValidate = true;
-	QString emptyFieldNames = "";
-	if ( priceSaleInput->value() == 0 ) {
-		isValidate = false;
-		emptyFieldNames += QString::fromWCharArray( L"Стоимость" );
-	}
-	if ( countSaleProductsInput->value() == 0 ) {
-		isValidate = false;
-		if (emptyFieldNames != "") {
-			emptyFieldNames += ", ";
-		}
-		emptyFieldNames += QString::fromWCharArray( L"Количество" );
-	}
-	QString errorText = QString::fromWCharArray( L"Пустые поля: ");
-	errorText += emptyFieldNames;
-	if ( isValidate == false ) {
-		QMessageBox::warning( widget, QString::fromWCharArray( L"Ошибка" ), errorText );
-	}
-
-	return isValidate;
+	} catch ( QString* error ) {
+        this->errorHandler->handleError( error );
+    }
+	this->endBlockForRequest();
 }
 
 void ManagerPage::fillSale( ActiveSale & sale ) {
@@ -298,11 +306,14 @@ void ManagerPage::fillManagersProductTable() {
 }
 
 void ManagerPage::searchManagersProductTable() {
-	QString nameProduct = productSearchInput->text().toLower();
-	if ( nameProduct != "" ) {
-		clearManagersProductsTable();
-		ProductDTO result = productFacade->getAll();
-		if ( result.isSuccess == true ) {
+	this->startBlockForRequest();
+	try {
+		
+		QString nameProduct = productSearchInput->text().toLower();
+		if ( nameProduct != "" ) {
+			clearManagersProductsTable();
+			ProductDTO result = productFacade->getAll();
+			
 			if ( result.isEmpty == false ) {
 				QVector<Product>products = result.products;
 				int row = 0;
@@ -319,14 +330,15 @@ void ManagerPage::searchManagersProductTable() {
 				}
 
 			}
+		} else {
+			fillManagersProductTable();
 		}
 
-		if (result.isSuccess == false ) {
-			
-		}
-	} else {
-		fillManagersProductTable();
-	}
+	} catch ( QString* error ) {
+        this->errorHandler->handleError( error );
+    }
+	this->endBlockForRequest();
+	productSearchInput->setFocus();
 }
 
 void ManagerPage::showProduct() {
