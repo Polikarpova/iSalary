@@ -22,7 +22,7 @@ void Product_DB::createTable() {
 	this->execQuery( query);
 }
 
-bool Product_DB::create( Product product ) {
+void Product_DB::create( Product product ) {
 
     QSqlQuery query( *db );
 	query.prepare( QString( "INSERT INTO " + TABLE_NAME + " (`name`, `commission`) VALUES(:name, :commission)" ) );
@@ -30,10 +30,9 @@ bool Product_DB::create( Product product ) {
 	query.bindValue( ":commission",  product.getCommission() );
 
     this->execQuery( query);
-	return true;
 }
 
-bool Product_DB::update( Product product ) {
+void Product_DB::update( Product product ) {
 
     QSqlQuery query( *db );
 	query.prepare(QString( "UPDATE " + TABLE_NAME + " SET `name` = :name, `commission` = :commission, `isDeleted` = :isDeleted WHERE id = ") + QString::number( product.getId() ) );
@@ -42,17 +41,15 @@ bool Product_DB::update( Product product ) {
 	query.bindValue( ":isDeleted",  product.getIsDeleted() );
 
     this->execQuery( query);
-	return true;
 }
 
-bool Product_DB::remove( int id ) {
+void Product_DB::remove( int id ) {
 	//QSqlQuery query("DELETE FROM " + TABLE_NAME + " WHERE id = " + QString::number(id), _db);
 	QSqlQuery query( *db );
 	query.prepare(QString( "UPDATE " + TABLE_NAME + " SET `isDeleted` = :isDeleted WHERE id = ") + QString::number( id ) );
 	query.bindValue( ":isDeleted",  true );
 
 	this->execQuery( query);
-	return true;
 }
 
 Product Product_DB::read( const QSqlQuery * sqlQuery ){
