@@ -1,5 +1,5 @@
 #include "SalaryPage.h"
-#include <QFormLayout>
+#include <QBoxLayout>
 #include <QScrollArea>
 
 SalaryPage::SalaryPage( SalesFacade * salesFacade, PersonnalAccountingFacade* personnalAccountingFacade){
@@ -282,11 +282,11 @@ void SalaryPage::viewSales() {
 	
 	for( auto i = list.begin(); i != list.end(); i++ ) {
 	
-		QString str = QString::fromWCharArray( L"Товар: ") + toUnicode(i->product.name) + "\n\t" + 
-						QString::fromWCharArray( L"Дата продажи: ") + i->saleDate.toString("dd.MM.yyyy") + "\n\t" +
-						QString::fromWCharArray( L"Дата подтверждения: ") + i->confirmDate.toString("dd.MM.yyyy") + "\n\t" +
-						QString::fromWCharArray( L"Количество: ") + QString::number(i->count) + "\n\t" +
-						QString::fromWCharArray( L"Цена: ") + QString::number(i->price) + "\n\t" +
+		QString str = QString::fromWCharArray( L"Товар: ") + toUnicode(i->product.name) + "\n        " + 
+						QString::fromWCharArray( L"Дата продажи: ") + i->saleDate.toString("dd.MM.yyyy") + "\n        " +
+						QString::fromWCharArray( L"Дата подтверждения: ") + i->confirmDate.toString("dd.MM.yyyy") + "\n        " +
+						QString::fromWCharArray( L"Количество: ") + QString::number(i->count) + "\n        " +
+						QString::fromWCharArray( L"Цена: ") + QString::number(i->price) + "\n        " +
 						QString::fromWCharArray( L"Комиссия: ") + QString::number(i->product.commission) + "\n\n";
 		message += str;
 	}
@@ -297,8 +297,22 @@ void SalaryPage::viewSales() {
 	}
 
 	//Вывести информационное сообщение
+	QDialog* dlg = new QDialog(0); 
 
-	QMessageBox::information(0, QString::fromWCharArray( L"Продажи"), message);
+	QVBoxLayout* vl = new QVBoxLayout(0); 
+	dlg->setLayout(vl);
+
+	QLabel *lbl = new QLabel(message);
+	vl->addWidget(lbl);
+
+	QScrollArea* scroll = new QScrollArea(0);
+	scroll->setWidget(dlg);
+
+	scroll->setMaximumWidth(220);
+	scroll->setMinimumSize(220, 200);
+	scroll->setWindowTitle(QString::fromWCharArray( L"Продажи") );
+	scroll->show();
+	
 }
 
 //===PRIVATE===//
