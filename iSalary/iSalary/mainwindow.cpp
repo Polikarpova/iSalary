@@ -87,6 +87,7 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
 		ui.productCancelAddButton,
 		ui.productSubmitAddButton
 	);
+	this->productPage->setErrorHandler( errorHandler);
 
 	// Добавить виджет для блокировки
 	this->managerPage = managerPage;

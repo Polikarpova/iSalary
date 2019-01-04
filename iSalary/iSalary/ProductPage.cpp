@@ -40,15 +40,13 @@ void ProductPage::setUI(
 
 	c = QTextCodec::codecForLocale();
 	productsTableModel = new QStandardItemModel;
-	fillProducts();
+	refreshPage();
 	status = DEFAULT;
 
 	this->productTable->setEditTriggers(0);
 	this->productTable->setSelectionBehavior( QAbstractItemView::SelectRows);
 	this->productTable->setSelectionMode( QAbstractItemView::SingleSelection);
 	this->productTable->horizontalHeader()->setStretchLastSection(true);
-	
-	//setEnabledEditAndRemoveButtons( false );
 
 	connect( this->productTable->selectionModel(), SIGNAL( currentChanged ( const QModelIndex &, const QModelIndex & ) ), this, SLOT( showProduct() ) );
 	connect( this->productTable->selectionModel(), SIGNAL( currentChanged ( const QModelIndex &, const QModelIndex & ) ), this, SLOT( enableEditAndRemoveButtons( ) ) );
@@ -60,16 +58,32 @@ void ProductPage::setUI(
 	connect( this->saveProductButton, SIGNAL( clicked() ), this, SLOT( updateProduct() ) );
 	connect( this->deleteProductButton, SIGNAL( clicked() ), this, SLOT( removeProduct() ) );
 	connect( this->productSearchInput, SIGNAL( textChanged( const QString & ) ), this, SLOT( searchProduct() ) );
-	//connect( this->searchButton, SIGNAL( clicked() ), this, SLOT( searchProduct() ) );
+}
+
+void ProductPage::setErrorHandler( ErrorMessageHandler* errorHandler) {
+    this->errorHandler = errorHandler;
 }
 
 void ProductPage::setWindow( QWidget *widget) {
 	this->widget = widget;
 }
 
-void ProductPage::refreshPage() {
+void ProductPage::startBlockForRequest(){
+    this->tabWidget->setEnabled( false );
+}
 
-	this->fillProducts();
+void ProductPage::endBlockForRequest(){
+    this->tabWidget->setEnabled( true );
+}
+
+void ProductPage::refreshPage() {
+	this->startBlockForRequest();
+	try {
+		fillProducts();
+	} catch ( QString* error ) {
+        this->errorHandler->handleError( error );
+    }
+	this->endBlockForRequest();
 }
 
 void ProductPage::setEnabledWindow( bool enabled ) {
@@ -93,12 +107,6 @@ void ProductPage::setInputsEnabledPageProducts( bool isEnabled ) {
 }
 
 void ProductPage::enableEditAndRemoveButtons() {
-	/*bool enabled = false;
-	QModelIndexList indexes = productTable->selectedIndexes();
-	QString productName = productsTableModel->data( index ).toString();
-	if (productName != "") {
-		enabled = true;
-	}*/
 	setEnabledEditAndRemoveButtons( true );
 }
 
@@ -126,9 +134,10 @@ void ProductPage::directAddProduct() {
 		productButtonsStackedWidget->setCurrentIndex( 0 );
 		productSearchInput->setEnabled( true );
 		productTable->setEnabled( true );
-		fillProducts();
+		refreshPage();
 		addProductButton->setEnabled( true );
 		setInputsEnabledPageProducts( false );
+		setEnabledEditAndRemoveButtons( false );
 		status = DEFAULT;
 	}
 }
@@ -147,13 +156,15 @@ void ProductPage::selectProduct( Product product ) {
 }
 
 void ProductPage::addProduct() {
-	if ( validator() == true ) {
-		Product product;
-		fillProduct( product );
-		//setEnabledWindow( false );
-		ProductDTO result = productFacade->addProduct( product );
-		if ( result.isSuccess == true ) {
-			//setEnabledWindow( true );
+	this->startBlockForRequest();
+	try {
+
+		if ( validator() == true ) {
+			Product product;
+			fillProduct( product );
+			
+			ProductDTO result = productFacade->addProduct( product );
+				
 			if ( result.isEmpty == false ) {
 				fillProducts();
 				directAddProduct();
@@ -161,10 +172,12 @@ void ProductPage::addProduct() {
 			} else {
 				QMessageBox::warning(widget, QString::fromWCharArray( L"Ошибка"), QString::fromWCharArray( L"Товар с таким именем уже существует"));
 			}
-		} else {
-		
 		}
-	}
+
+	} catch ( QString* error ) {
+        this->errorHandler->handleError( error );
+    }
+	this->endBlockForRequest();
 }
 
 void ProductPage::directUpdateProduct() {
@@ -180,7 +193,7 @@ void ProductPage::directUpdateProduct() {
 		productButtonsStackedWidget->setCurrentIndex( 0 );
 		productSearchInput->setEnabled( true );
 		productTable->setEnabled( true );
-		fillProducts();
+		refreshPage();
 		addProductButton->setEnabled( true );
 		setInputsEnabledPageProducts( false );
 		status = DEFAULT;
@@ -188,73 +201,72 @@ void ProductPage::directUpdateProduct() {
 }
 
 void ProductPage::updateProduct() {
-	if ( validator() == true ) {
-		QString productName = productNameInput->text();
-		int id = productsTableModel->data( productsTableModel->index( productTable->currentIndex().row(), 2 ) ).toInt();
-		//setEnabledWindow( false );
-		ProductDTO result = productFacade->findByName( productName );
-		if ( result.isSuccess == true ) {
-			//setEnabledWindow( true );
+	this->startBlockForRequest();
+	try {
+
+		if ( validator() == true ) {
+			QString productName = productNameInput->text();
+			int id = productsTableModel->data( productsTableModel->index( productTable->currentIndex().row(), 2 ) ).toInt();
+			ProductDTO result = productFacade->findByName( productName );
+
 			if ( result.product.getId() == id || result.isEmpty == true ) {
 				productName = productsTableModel->data( productsTableModel->index( productTable->currentIndex().row(), 0 ) ).toString();
 				result = productFacade->findByName( productName );
 				Product product = result.product;
 				fillProduct( product );
 				result = productFacade->updateProduct( product );
-				if (result.isSuccess == true) {
-					fillProducts();
-					directUpdateProduct();
-					selectProduct( result.product );
-				}
+				
+				fillProducts();
+				directUpdateProduct();
+				selectProduct( result.product );
 			} else {
 				QMessageBox::warning(widget, QString::fromWCharArray( L"Ошибка"), QString::fromWCharArray( L"Товар с таким именем уже существует"));
 			}
+
 		}
-	
-		if ( result.isSuccess == false) {
-		
-		}
-	}
+
+	} catch ( QString* error ) {
+        this->errorHandler->handleError( error );
+    }
+	this->endBlockForRequest();
 }
 
 void ProductPage::removeProduct() {
-	bool isSelected = !productTable->selectionModel()->selectedIndexes().empty();
-	if ( isSelected ) {
-		int row = productTable->currentIndex().row();
-		QString productName = productsTableModel->data( productsTableModel->index( productTable->currentIndex().row(), 0 ) ).toString();
-		//setEnabledWindow( false );
-		ProductDTO result = productFacade->findByName( productName );
-		if ( result.isSuccess == true ) {
-			//setEnabledWindow( true );
+	this->startBlockForRequest();
+	try {
+
+		bool isSelected = !productTable->selectionModel()->selectedIndexes().empty();
+		if ( isSelected ) {
+			int row = productTable->currentIndex().row();
+			QString productName = productsTableModel->data( productsTableModel->index( productTable->currentIndex().row(), 0 ) ).toString();
+			ProductDTO result = productFacade->findByName( productName );
 			result = productFacade->removeProduct( result.product.getId() );
-			if ( result.isSuccess == true ) {
-				fillProducts();
-				clearInputsPageProducts();
-				//setEnabledEditAndRemoveButtons( false );
-			}
+			fillProducts();
+			clearInputsPageProducts();
 		}
-		
-		if ( result.isSuccess == false ) {
-		
-		}
-	}
+
+	} catch ( QString* error ) {
+        this->errorHandler->handleError( error );
+    }
+	this->endBlockForRequest();
+	setEnabledEditAndRemoveButtons( false );
 }
 
 void ProductPage::showProduct() {
-	QString productName = productsTableModel->data( productsTableModel->index( productTable->currentIndex().row(), 0 ) ).toString();
-	//setEnabledWindow( false );
-	ProductDTO result = productFacade->findByName( productName );
-	if ( result.isSuccess == true ) {
-		//setEnabledWindow( true );
+	this->startBlockForRequest();
+	try {
+
+		QString productName = productsTableModel->data( productsTableModel->index( productTable->currentIndex().row(), 0 ) ).toString();
+		ProductDTO result = productFacade->findByName( productName );
 		Product product = result.product;
 		productNameInput->setText( product.getName() );
 		productPercentInput->setValue( product.getCommission() );
-		productTable->setFocus();
-	}
 
-	if ( result.isSuccess == false ) {
-
-	}
+	} catch ( QString* error ) {
+        this->errorHandler->handleError( error );
+    }
+	this->endBlockForRequest();
+	productTable->setFocus();
 }
 
 bool ProductPage::validatorProductName( QString productName ) {
@@ -331,13 +343,14 @@ void ProductPage::fillProducts() {
 }
 
 void ProductPage::searchProduct() {
-	QString nameProduct = productSearchInput->text().toLower();
-	if ( nameProduct != "" ) {
-		clearTable();
-		//setEnabledWindow( false );
-		ProductDTO result = productFacade->getAll();
-		if ( result.isSuccess == true ) {
-			//setEnabledWindow( true );
+	this->startBlockForRequest();
+	try {
+
+		QString nameProduct = productSearchInput->text().toLower();
+		if ( nameProduct != "" ) {
+			clearTable();
+			ProductDTO result = productFacade->getAll();
+			
 			if ( result.isEmpty == false ) {
 				QVector<Product>products = result.products;
 				int row = 0;
@@ -353,14 +366,16 @@ void ProductPage::searchProduct() {
 					}
 				}
 			}
-		}
 
-		if (result.isSuccess == false ) {
-			
+		} else {
+			fillProducts();
 		}
-	} else {
-		fillProducts();
-	}
+		
+	} catch ( QString* error ) {
+        this->errorHandler->handleError( error );
+    }
+	this->endBlockForRequest();
+
 	setEnabledEditAndRemoveButtons( false );
 	productSearchInput->setFocus();
 }

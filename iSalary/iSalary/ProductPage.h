@@ -13,6 +13,7 @@
 #include <qregexp.h>
 
 #include "ProductFacade.h"
+#include "ErrorMessageHandler.h"
 
 class ProductPage : public QObject {
 	Q_OBJECT
@@ -36,8 +37,10 @@ public:
 	);
 	void refreshPage();
 	void setWindow( QWidget *widget );
+	void setErrorHandler( ErrorMessageHandler* errorHandler);
 
 private:
+	ErrorMessageHandler* errorHandler;
 	ProductFacade *productFacade;
 	QTextCodec* c;
 
@@ -71,6 +74,8 @@ private:
 	void clearTable();
 	void selectProduct( Product product );
 	void setEnabledWindow( bool enabled );
+	void startBlockForRequest();
+    void endBlockForRequest();
 
 private slots:
 	void enableEditAndRemoveButtons();
