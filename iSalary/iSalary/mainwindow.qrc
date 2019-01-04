@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="MainWindow">
     <file>img/searchIcon.png</file>
+    <file>img/icons8-general-ledger-filled-30.png</file>
   </qresource>
 </RCC>

@@ -121,7 +121,7 @@ int main(int argc, char *argv[])
 	);
 	
     try {
-        w.show();
+		w.showMaximized();
     } catch (...) {
         QMessageBox::critical(0,"Что-то пошло", "не так");
     } 

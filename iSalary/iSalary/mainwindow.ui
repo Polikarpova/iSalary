@@ -9,15 +9,25 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>814</width>
-    <height>621</height>
+    <width>869</width>
+    <height>693</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>iSalary</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="mainwindow.qrc">
+    <normaloff>:/MainWindow/img/icons8-general-ledger-filled-30.png</normaloff>:/MainWindow/img/icons8-general-ledger-filled-30.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow {background-color: white}</string>
+  </property>
+  <property name="iconSize">
+   <size>
+    <width>30</width>
+    <height>30</height>
+   </size>
   </property>
   <property name="tabShape">
    <enum>QTabWidget::Rounded</enum>
@@ -27,7 +37,7 @@
     <item>
      <widget class="QStackedWidget" name="auth_program_stackedWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="enter">
        <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -38,10 +48,13 @@
             <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
             <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
-              <height>40</height>
+              <height>30</height>
              </size>
             </property>
            </spacer>
@@ -52,7 +65,7 @@
              <string notr="true"/>
             </property>
             <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:24pt;&quot;&gt;Аутентификация&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:45pt;&quot;&gt;Аутентификация&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>
@@ -89,6 +102,9 @@
             </item>
             <item>
              <layout class="QGridLayout" name="gridLayout_3">
+              <property name="sizeConstraint">
+               <enum>QLayout::SetDefaultConstraint</enum>
+              </property>
               <item row="3" column="0">
                <widget class="QLineEdit" name="passwordInput">
                 <property name="echoMode">
@@ -168,12 +184,12 @@
              <enum>Qt::Vertical</enum>
             </property>
             <property name="sizeType">
-             <enum>QSizePolicy::Preferred</enum>
+             <enum>QSizePolicy::Fixed</enum>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
-              <height>218</height>
+              <height>300</height>
              </size>
             </property>
            </spacer>
@@ -2002,7 +2018,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>814</width>
+     <width>869</width>
      <height>21</height>
     </rect>
    </property>
