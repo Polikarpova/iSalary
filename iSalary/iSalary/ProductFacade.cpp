@@ -13,7 +13,7 @@ ProductDTO ProductFacade::addProduct( Product product ) {
 	bool isSuccess = true;
 	ProductDTO result;
     try { 
-	    if (product_DB->findByName( product.getName() ).getId() == 0) {
+	    if ( product_DB->findByName( product.getName() ).getId() == 0 ) {
             product_DB->create( product );
 		    result.product = product;
 		    result.isEmpty = false;
@@ -30,11 +30,11 @@ ProductDTO ProductFacade::addProduct( Product product ) {
 ProductDTO ProductFacade::updateProduct( Product product ) {
 	bool isSuccess = true;
 	ProductDTO result;
-	    try { 
+	try { 
         product_DB->update( product );
 	    result.product = product;
 	    result.isEmpty = false;
-    } catch ( QString* error) {
+    } catch ( QString* error ) {
         isSuccess = false;
     }
 	result.isSuccess = isSuccess;
@@ -60,7 +60,7 @@ ProductDTO ProductFacade::findByName( QString productName ) {
 	result.product = product;
 	result.isEmpty = false;
 	bool isSuccess = true;
-	if (product.getId() == 0)
+	if ( product.getId() == 0 )
 		result.isEmpty = true;
 	result.isSuccess = isSuccess;
 	return result;
@@ -72,7 +72,7 @@ ProductDTO ProductFacade::findById( int id ) {
 	result.product = product;
 	result.isEmpty = false;
 	bool isSuccess = true;
-	if (product.getId() == 0)
+	if ( product.getId() == 0 )
 		isSuccess = false;
 	result.isSuccess = isSuccess;
 	return result;
@@ -83,7 +83,7 @@ ProductDTO ProductFacade::getAll() {
 	ProductDTO result;
 	result.products = products;
 	result.isEmpty = false;
-	if (products.size() == 0)
+	if ( products.size() == 0 )
 		result.isEmpty = true;
 	bool isSuccess = true;
 	result.isSuccess = isSuccess;
