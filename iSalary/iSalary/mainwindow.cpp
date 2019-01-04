@@ -3,8 +3,6 @@
 
 MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesPage* salesPage, SalaryPage* salaryPage, ProductPage *productPage, ManagerPage *managerPage, StatisticPage *statisticPage, QWidget *parent ) : QMainWindow(parent) {
 	ui.setupUi(this);
-	
-	ui.label_45->hide();
 
     ui.auth_program_stackedWidget->setCurrentIndex( AUTH_WIDGET);
 
@@ -49,7 +47,7 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
     connect( ui.tabWidget, &QTabWidget::currentChanged, this, &MainWindow::refreshBossPage);
 
 	this->salesPage = salesPage;
-	this->salesPage->setUI(ui.tabWidget, ui.salesDateInput, ui.salesForAllButton, ui.managersSalesTable, ui.unconfirmedSalesTable, ui.confirmedSalesTable);
+	this->salesPage->setUI(ui.tabWidget, ui.salesForAllButton, ui.managersSalesTable, ui.unconfirmedSalesTable, ui.confirmedSalesTable);
 	this->salesPage->setErrorHandler( errorHandler);
 
 	this->salaryPage = salaryPage;
@@ -109,8 +107,7 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
 	this->statisticPage = statisticPage;
 	this->statisticPage->setUI(
 		ui.tabWidget,
-		ui.statisticStartPeriod,
-		ui.statisticEndPeriod,
+		ui.statisticMonth,
 		ui.statisticTable,
 		ui.statisticSalesTable,
 		ui.statisticCalendar
@@ -172,6 +169,7 @@ void MainWindow::refreshBossPage( int page){
         case PAGE_EMPLOYEES: this->employeesPage->refreshList(); break;
 		case PAGE_PRODUCTS: this->productPage->refreshPage(); break;
 		case PAGE_SALES: this->salesPage->refreshPage(); break;
+		case PAGE_STATISTIC: this->statisticPage->refreshPage(); break;
 		case PAGE_SALARY: this->salaryPage->refreshPage(); break;
         default:;
     }

@@ -2,12 +2,15 @@
 <ui version="4.0">
  <class>MainWindowClass</class>
  <widget class="QMainWindow" name="MainWindowClass">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>814</width>
-    <height>619</height>
+    <height>621</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,6 +18,9 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow {background-color: white}</string>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout_17">
@@ -194,7 +200,7 @@
                <enum>QTabWidget::Rounded</enum>
               </property>
               <property name="currentIndex">
-               <number>1</number>
+               <number>3</number>
               </property>
               <property name="elideMode">
                <enum>Qt::ElideMiddle</enum>
@@ -1018,13 +1024,6 @@
                      </widget>
                     </item>
                     <item>
-                     <widget class="QLabel" name="label_45">
-                      <property name="text">
-                       <string>Дата</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
                      <spacer name="horizontalSpacer_7">
                       <property name="orientation">
                        <enum>Qt::Horizontal</enum>
@@ -1052,38 +1051,6 @@
                        </size>
                       </property>
                      </spacer>
-                    </item>
-                    <item>
-                     <widget class="QDateEdit" name="salesDateInput">
-                      <property name="enabled">
-                       <bool>true</bool>
-                      </property>
-                      <property name="wrapping">
-                       <bool>false</bool>
-                      </property>
-                      <property name="frame">
-                       <bool>true</bool>
-                      </property>
-                      <property name="buttonSymbols">
-                       <enum>QAbstractSpinBox::UpDownArrows</enum>
-                      </property>
-                      <property name="keyboardTracking">
-                       <bool>true</bool>
-                      </property>
-                      <property name="showGroupSeparator" stdset="0">
-                       <bool>false</bool>
-                      </property>
-                      <property name="minimumDate">
-                       <date>
-                        <year>1900</year>
-                        <month>9</month>
-                        <day>14</day>
-                       </date>
-                      </property>
-                      <property name="calendarPopup">
-                       <bool>true</bool>
-                      </property>
-                     </widget>
                     </item>
                    </layout>
                   </item>
@@ -1156,12 +1123,12 @@
                     <item>
                      <widget class="QLabel" name="label_51">
                       <property name="text">
-                       <string>За период от:</string>
+                       <string>За месяц:</string>
                       </property>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QDateEdit" name="statisticStartPeriod">
+                     <widget class="QDateEdit" name="statisticMonth">
                       <property name="enabled">
                        <bool>true</bool>
                       </property>
@@ -1187,65 +1154,26 @@
                         <day>14</day>
                        </date>
                       </property>
+                      <property name="displayFormat">
+                       <string>MMMM yyyy</string>
+                      </property>
                       <property name="calendarPopup">
                        <bool>true</bool>
                       </property>
                      </widget>
                     </item>
                     <item>
-                     <spacer name="verticalSpacer_5">
+                     <spacer name="horizontalSpacer_6">
                       <property name="orientation">
-                       <enum>Qt::Vertical</enum>
-                      </property>
-                      <property name="sizeType">
-                       <enum>QSizePolicy::Minimum</enum>
+                       <enum>Qt::Horizontal</enum>
                       </property>
                       <property name="sizeHint" stdset="0">
                        <size>
-                        <width>20</width>
-                        <height>25</height>
+                        <width>40</width>
+                        <height>20</height>
                        </size>
                       </property>
                      </spacer>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="label_52">
-                      <property name="text">
-                       <string>По:</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QDateEdit" name="statisticEndPeriod">
-                      <property name="enabled">
-                       <bool>true</bool>
-                      </property>
-                      <property name="wrapping">
-                       <bool>false</bool>
-                      </property>
-                      <property name="frame">
-                       <bool>true</bool>
-                      </property>
-                      <property name="buttonSymbols">
-                       <enum>QAbstractSpinBox::UpDownArrows</enum>
-                      </property>
-                      <property name="keyboardTracking">
-                       <bool>true</bool>
-                      </property>
-                      <property name="showGroupSeparator" stdset="0">
-                       <bool>false</bool>
-                      </property>
-                      <property name="minimumDate">
-                       <date>
-                        <year>1900</year>
-                        <month>9</month>
-                        <day>14</day>
-                       </date>
-                      </property>
-                      <property name="calendarPopup">
-                       <bool>true</bool>
-                      </property>
-                     </widget>
                     </item>
                    </layout>
                   </item>
@@ -1300,14 +1228,20 @@
                     <property name="gridVisible">
                      <bool>true</bool>
                     </property>
+                    <property name="selectionMode">
+                     <enum>QCalendarWidget::NoSelection</enum>
+                    </property>
+                    <property name="horizontalHeaderFormat">
+                     <enum>QCalendarWidget::ShortDayNames</enum>
+                    </property>
                     <property name="verticalHeaderFormat">
                      <enum>QCalendarWidget::ISOWeekNumbers</enum>
                     </property>
                     <property name="navigationBarVisible">
-                     <bool>true</bool>
+                     <bool>false</bool>
                     </property>
                     <property name="dateEditEnabled">
-                     <bool>true</bool>
+                     <bool>false</bool>
                     </property>
                    </widget>
                   </item>
@@ -2122,12 +2056,10 @@
   <tabstop>saveProductButton</tabstop>
   <tabstop>productCancelAddButton</tabstop>
   <tabstop>productSubmitAddButton</tabstop>
-  <tabstop>salesDateInput</tabstop>
   <tabstop>managersSalesTable</tabstop>
   <tabstop>unconfirmedSalesTable</tabstop>
   <tabstop>confirmedSalesTable</tabstop>
-  <tabstop>statisticStartPeriod</tabstop>
-  <tabstop>statisticEndPeriod</tabstop>
+  <tabstop>statisticMonth</tabstop>
   <tabstop>statisticTable</tabstop>
   <tabstop>statisticSalesTable</tabstop>
   <tabstop>statisticCalendar</tabstop>

@@ -14,8 +14,10 @@
 #include "ManagerDTO.h"
 #include "SaleDTO.h"
 
+#include "ManagerStatisticDTO.h"
+
 /**
-* Класс, предоставляющий доступ к функциям приложения, связанным с продажами
+* Класс, предоставляющий доступ к функциям приложения, связанным с продажами и менеджерами
 * @author Поликарпова
 */
 class SalesFacade {
@@ -48,6 +50,15 @@ public:
 	QList<ActiveSaleDTO> getActiveSales();
 
 	/**
+	* Возращает продажи менеджеров, подтвержденные в заданный период
+	* @param managersIds - идентификаторы менеджеров
+	* @param dateFrom - начала периода
+	* @param dateTo - конец периода
+	* @return список продаж
+	*/
+	QList<ActiveSaleDTO> getConfirmedSalesFromPeriod( QList<int> managersIds, QDate dateFrom, QDate dateTo );
+
+	/**
 	* Возращает активные продажи (подтвержденные и неподтвержденные) определенного менеджера
 	* @param managerId - id менеджера
 	* @return список продаж менеджера с указанным id
@@ -55,11 +66,10 @@ public:
 	QList<ActiveSaleDTO> getActiveSalesForManager( int managerId);
 
 	/**
-	* Возращает статистику продаж для страницы "Продажи" всех менеджеров за определенный день
-	* @param date - дата
+	* Возращает статистику продаж для страницы "Продажи" всех менеджеров
 	* @return список со статистикой на каждого менеджера
 	*/
-	QList<ManagerActiveSalesStatisticDTO> getActiveSalesStatistic( QDate date);
+	QList<ManagerActiveSalesStatisticDTO> getActiveSalesStatistic();
 
 	/**
 	* Возвращает список всех зарплат за определенный период
@@ -68,6 +78,14 @@ public:
 	* @return список зарплат или пустой список
 	*/
 	QList<ManagerSalaryDTO> getManagersSalary( QDate dateFrom, QDate dateTo);
+
+	/**
+	* Возвращает список со статистикой о продажах всех менеджеров за определенный период
+	* @param dateFrom - начала периода
+	* @param dateTo - конец периода
+	* @return список со статистикой или пустой список
+	*/
+	QList<ManagerStatisticDTO> getManagersStatistic( QDate dateFrom, QDate dateTo);
 
 	/**
 	* Возвращает список со всеми РП

@@ -23,7 +23,7 @@ class SalesPage : public QObject{
     Q_OBJECT
 public:
     SalesPage( SalesFacade * salesFacade);
-    void setUI( QTabWidget* tabWidget, QDateEdit* salesDateInput, QPushButton* salesForAllButton, QTableView* managersSalesTable, QTableView* unconfirmedSalesTable, QTableView* confirmedSalesTable);
+    void setUI( QTabWidget* tabWidget, QPushButton* salesForAllButton, QTableView* managersSalesTable, QTableView* unconfirmedSalesTable, QTableView* confirmedSalesTable);
     ~SalesPage( void);
 
 	void refreshPage();
@@ -63,7 +63,6 @@ private:
     SalesFacade * salesFacade;
     
 	QTabWidget* tabWidget;
-	QDateEdit* salesDateInput;
 	QPushButton* salesForAllButton;
 	QTableView* managersSalesTable;
 	QTableView* unconfirmedSalesTable;

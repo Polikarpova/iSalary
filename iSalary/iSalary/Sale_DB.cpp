@@ -274,12 +274,11 @@ ActiveSaleDTO Sale_DB::readActiveSalesToDTO( const QSqlQuery& query) {
 	return result;
 }
 
-QList<SaleInfoDTO> Sale_DB::getSalesConfimedFromPeriod( int id, QDate from, QDate to) {
+QList<SaleInfoDTO> Sale_DB::getSalesInfoConfimedFromPeriod( int id, QDate from, QDate to) {
 
 	QList<SaleInfoDTO> result;
 
 	QString sql = "select sales.price, sales.count, sales.productCommission from sales, users where sales.manager_id = users.id AND sales.isConfirmed = 1 AND users.id = :id AND sales.confirmDate >= :dateFrom AND sales.confirmDate <= :dateTo;";
-	//sql.arg(QString(id)), from.toString(Qt::ISODate), to.toString(Qt::ISODate));
 	QSqlQuery query( *db);
 	query.prepare(sql);
 	query.bindValue(":id", id);
@@ -296,6 +295,27 @@ QList<SaleInfoDTO> Sale_DB::getSalesConfimedFromPeriod( int id, QDate from, QDat
 		el.price = query.value("price").value<double>();
 		
 		result.append(el);
+	}
+
+	return result;
+}
+
+QList<ActiveSaleDTO> Sale_DB::getConfirmedSales( int id, QDate from, QDate to) {
+
+	QList<ActiveSaleDTO> result;
+
+	QString sql = "select users.firstName, users.secondName, users.thirdName, sales.* from sales, users where sales.manager_id = users.id AND sales.isConfirmed = 1 AND users.id = :id AND sales.confirmDate >= :dateFrom AND sales.confirmDate <= :dateTo;";
+	QSqlQuery query( *db);
+	query.prepare(sql);
+	query.bindValue(":id", id);
+	query.bindValue(":dateFrom", from);
+	query.bindValue(":dateTo", to);
+
+	this->execQuery( query);
+
+	while( query.next() ) {
+		
+		result.append( this->readActiveSalesToDTO(query) );
 	}
 
 	return result;

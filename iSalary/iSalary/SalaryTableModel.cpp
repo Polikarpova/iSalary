@@ -35,9 +35,11 @@ QVariant SalaryTableModel::headerData( int section, Qt::Orientation orientation,
     case COLUMN_FIO:
 		return QString::fromWCharArray( L"ФИО" );
     case COLUMN_INCOME:
-        return QString::fromWCharArray( L"С продаж" );
+        return QString::fromWCharArray( L"С продаж, руб." );
 	case COLUMN_SALARY:
-        return QString::fromWCharArray( L"Зарплата" );
+        return QString::fromWCharArray( L"Зарплата, руб." );
+	case COLUMN_SALES:
+        return QString::fromWCharArray( L"Продажи" );
     }
  
     return QVariant();
@@ -111,6 +113,7 @@ void SalaryTableModel::refreshData(const QList<ManagerSalaryDTO>& data) {
 			row << el.managerName;
 			row << el.income;
 			row << el.salary;
+			row << "";
             
 			this->table.append( row);
         }

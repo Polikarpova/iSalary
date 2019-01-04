@@ -76,12 +76,24 @@ QList<ActiveSaleDTO> SalesFacade::getActiveSales(){
 	return this->s->getActiveSales();
 }
 
+QList<ActiveSaleDTO> SalesFacade::getConfirmedSalesFromPeriod(  QList<int> managersIds, QDate dateFrom, QDate dateTo ) {
+
+	QList<ActiveSaleDTO> result;
+
+	for( auto i = managersIds.begin(); i != managersIds.end(); i++ ) {
+	
+		result.append( s->getConfirmedSales(*i, dateFrom, dateTo) );
+	}
+
+	return result;
+}
+
 QList<ActiveSaleDTO> SalesFacade::getActiveSalesForManager( int managerId){
 
 	return this->s->getActiveSalesForManager(managerId);
 }
 
-QList<ManagerActiveSalesStatisticDTO> SalesFacade::getActiveSalesStatistic( QDate date){
+QList<ManagerActiveSalesStatisticDTO> SalesFacade::getActiveSalesStatistic(){
 
 	return this->s->getManagerActiveSalesSatistic();
 }
@@ -106,7 +118,7 @@ QList<ManagerSalaryDTO> SalesFacade::getManagersSalary( QDate dateFrom, QDate da
 			dateTo = QDate::currentDate();
 		}
 
-		QList<SaleInfoDTO> salesInfo = this->s->getSalesConfimedFromPeriod( manager.managerId, dateFrom, dateTo);
+		QList<SaleInfoDTO> salesInfo = this->s->getSalesInfoConfimedFromPeriod( manager.managerId, dateFrom, dateTo);
 	
 		//(Цикл)Посчитать для очередного юзера сумму прибыли и з/п (отдельно с комиссией) ManagerSalaryDTO
 		for( auto j = salesInfo.begin() ; j != salesInfo.end() ; j++) {
@@ -116,6 +128,68 @@ QList<ManagerSalaryDTO> SalesFacade::getManagersSalary( QDate dateFrom, QDate da
 		}
 
 		result.append(manager); //добавляем очередного менеджера в список
+	}
+
+	return result;
+}
+
+QList<ManagerStatisticDTO> SalesFacade::getManagersStatistic( QDate dateFrom, QDate dateTo) {
+
+	QList<ManagerStatisticDTO> result;
+
+	QList<QPair<int, QString> > managers = this->m->getAllIdAndName();
+
+	double allIncome = 0;
+
+	//(Цикл)от salesDB получить по каждому юзеру список всех его подтвержденных продаж в данный рассчетный период (цена, количество, комиссия за товар) SaleInfoDTO
+	for ( auto i = managers.begin(); i != managers.end() ; i++){
+
+		ManagerStatisticDTO manager;
+		manager.managerId = i->first;
+		manager.managerName = i->second;
+		manager.income = 0;
+		manager.let = 0;
+		manager.oet = 0;
+
+		QString s = dateFrom.toString("dd.MMMM.yyyy");
+		QString ss = dateTo.toString("dd.MMMM.yyyy");
+		QList<SaleInfoDTO> salesInfo = this->s->getSalesInfoConfimedFromPeriod( manager.managerId, dateFrom, dateTo);
+	
+		//(Цикл)Посчитать для очередного юзера сумму прибыли и з/п (отдельно с комиссией) ManagerSalaryDTO
+		for( auto j = salesInfo.begin() ; j != salesInfo.end() ; j++) {
+		
+			manager.income += j->price * j->count;
+			allIncome += manager.income;
+		}
+
+		//получить количество продаж за период
+		manager.salesCount = this->s->getSalesInfoConfimedFromPeriod(manager.managerId, dateFrom, dateTo).count();
+
+		//получить данные для ЛЭТ
+		double lastMonthIncome = 0;
+
+		QDate from(dateFrom.addMonths(-1));
+		QDate to(from.year(), from.month(), from.daysInMonth());
+
+		salesInfo = this->s->getSalesInfoConfimedFromPeriod( manager.managerId, from, to);
+	
+		//(Цикл)Посчитать для очередного юзера сумму прибыли и з/п (отдельно с комиссией) ManagerSalaryDTO
+		for( auto j = salesInfo.begin() ; j != salesInfo.end() ; j++) {
+		
+			lastMonthIncome += j->price * j->count;
+		}
+
+		//высчитать ЛЭТ
+		manager.let = lastMonthIncome ? manager.income/lastMonthIncome*100 : 0;
+
+		result.append(manager); //добавляем очередного менеджера в список
+	}
+
+	//когда вся прибыль на данный период посчитана, надо теперь посчитать ОЭТ
+	for ( auto i = result.begin(); i != result.end(); i ++ ) {
+	
+		//считаем ОЭТ
+		i->oet = allIncome ? i->income/allIncome*100 : 0;
 	}
 
 	return result;

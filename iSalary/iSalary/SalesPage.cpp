@@ -20,15 +20,11 @@ void SalesPage::setErrorHandler( ErrorMessageHandler* errorHandler) {
     this->errorHandler = errorHandler;
 }
 
-void SalesPage::setUI( QTabWidget* tabWidget, QDateEdit* salesDateInput, QPushButton* salesForAllButton, QTableView* managersSalesTable, QTableView* unconfirmedSalesTable, QTableView* confirmedSalesTable)
+void SalesPage::setUI( QTabWidget* tabWidget, QPushButton* salesForAllButton, QTableView* managersSalesTable, QTableView* unconfirmedSalesTable, QTableView* confirmedSalesTable)
 {
 	this->tabWidget = tabWidget;
-	this->salesDateInput = salesDateInput;
 	this->salesForAllButton = salesForAllButton;
 	connect(this->salesForAllButton, &QPushButton::clicked, this, &SalesPage::buttonForAll);
-	this->salesDateInput->setDate(QDate::currentDate());
-	connect(this->salesDateInput, &QDateEdit::dateChanged, this, &SalesPage::dateChanged);
-	this->salesDateInput->hide();
 
 	this->initManagersTable( managersSalesTable);
 	this->initUnconfirmedSalesTable( unconfirmedSalesTable);
@@ -105,7 +101,7 @@ void SalesPage::updateManagersTable() {
 
 	try {
 	
-		list = this->salesFacade->getActiveSalesStatistic( this->salesDateInput->date() );
+		list = this->salesFacade->getActiveSalesStatistic();
 	} catch( QString* error) {
 	
 		this->errorHandler->handleError( error);

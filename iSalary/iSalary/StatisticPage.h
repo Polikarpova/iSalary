@@ -24,7 +24,7 @@ class StatisticPage : public QObject{
     Q_OBJECT
 public:
     StatisticPage( SalesFacade * salesFacade);
-    void setUI( QTabWidget* tabWidget, QDateEdit* statisticStartPeriod, QDateEdit* statisticEndPeriod, QTableView* statisticTable, QTableView* statisticSalesTable, QCalendarWidget* statisticCalendar);
+    void setUI( QTabWidget* tabWidget, QDateEdit* statisticMonth, QTableView* statisticTable, QTableView* statisticSalesTable, QCalendarWidget* statisticCalendar);
     ~StatisticPage( void);
 
 	void refreshPage();
@@ -33,8 +33,7 @@ public:
 
 protected slots:
 
-	void startDateChanged();
-	void endDateChanged();
+	void monthChanged();
 
 	void showManagersStatistic();
 
@@ -45,6 +44,8 @@ protected:
 
 	void updateStatisticTable();
 	void updateStatisticSalesTable();
+
+	void viewSelectedManagerStatisticSales(int id);
 	
 private:
 	ErrorMessageHandler* errorHandler;
@@ -52,12 +53,17 @@ private:
     SalesFacade * salesFacade;
     
 	QTabWidget* tabWidget;
-	QDateEdit* statisticStartPeriod;
-	QDateEdit* statisticEndPeriod;
+	QDateEdit* statisticMonth;
 	QTableView* statisticTable;
 	QTableView* statisticSalesTable;
 	QCalendarWidget* statisticCalendar;
 
 	QHash<int, ManagerStatisticDTO> managerStatistic;
 	QHash<int, ActiveSaleDTO> confirmedSales;
+
+	void setEnable(bool flag);
+	int getSelectedManagerId();
+
+	void paintCalendar();
+	void clearCalendar();
 };
