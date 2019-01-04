@@ -20,6 +20,7 @@ public:
 	ProductPage( ProductFacade * productFacade );
 	~ProductPage(void);
 	void setUI( 
+		QWidget* tabWidget,
 		QLineEdit *productSearchInput, 
 		QTableView *productTable,
 		QLineEdit *productNameInput,
@@ -40,6 +41,7 @@ private:
 	ProductFacade *productFacade;
 	QTextCodec* c;
 
+	QWidget* tabWidget;
 	QWidget* widget;
 
 	QLineEdit *productSearchInput; 

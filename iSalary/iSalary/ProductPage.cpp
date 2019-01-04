@@ -10,6 +10,7 @@ ProductPage::~ProductPage() {
 }
 
 void ProductPage::setUI(
+	QWidget* tabWidget,
 	QLineEdit *productSearchInput, 
 	QTableView *productTable,
 	QLineEdit *productNameInput,
@@ -23,6 +24,7 @@ void ProductPage::setUI(
 	QPushButton *productCancelAddButton,
 	QPushButton *productSubmitAddButton
 ) {
+	this->tabWidget = tabWidget;
 	this->productSearchInput = productSearchInput;
 	this->productTable = productTable;
 	this->productNameInput = productNameInput;
@@ -45,7 +47,8 @@ void ProductPage::setUI(
 	this->productTable->setSelectionBehavior( QAbstractItemView::SelectRows);
 	this->productTable->setSelectionMode( QAbstractItemView::SingleSelection);
 	this->productTable->horizontalHeader()->setStretchLastSection(true);
-	setEnabledEditAndRemoveButtons( false );
+	
+	//setEnabledEditAndRemoveButtons( false );
 
 	connect( this->productTable->selectionModel(), SIGNAL( currentChanged ( const QModelIndex &, const QModelIndex & ) ), this, SLOT( showProduct() ) );
 	connect( this->productTable->selectionModel(), SIGNAL( currentChanged ( const QModelIndex &, const QModelIndex & ) ), this, SLOT( enableEditAndRemoveButtons( ) ) );
@@ -136,7 +139,7 @@ void ProductPage::selectProduct( Product product ) {
 		QString productName = productsTableModel->data( productsTableModel->index( i, 0 ) ).toString();
 		if ( productName == product.getName() ) {
 			QModelIndex index = productTable->model()->index( i, 0 ); 
-			//productTable->setFocus();
+			productTable->setFocus();
 			productTable->selectRow( i );
 		}
 	}
@@ -147,10 +150,10 @@ void ProductPage::addProduct() {
 	if ( validator() == true ) {
 		Product product;
 		fillProduct( product );
-		setEnabledWindow( false );
+		//setEnabledWindow( false );
 		ProductDTO result = productFacade->addProduct( product );
 		if ( result.isSuccess == true ) {
-			setEnabledWindow( true );
+			//setEnabledWindow( true );
 			if ( result.isEmpty == false ) {
 				fillProducts();
 				directAddProduct();
@@ -188,10 +191,10 @@ void ProductPage::updateProduct() {
 	if ( validator() == true ) {
 		QString productName = productNameInput->text();
 		int id = productsTableModel->data( productsTableModel->index( productTable->currentIndex().row(), 2 ) ).toInt();
-		setEnabledWindow( false );
+		//setEnabledWindow( false );
 		ProductDTO result = productFacade->findByName( productName );
 		if ( result.isSuccess == true ) {
-			setEnabledWindow( true );
+			//setEnabledWindow( true );
 			if ( result.product.getId() == id || result.isEmpty == true ) {
 				productName = productsTableModel->data( productsTableModel->index( productTable->currentIndex().row(), 0 ) ).toString();
 				result = productFacade->findByName( productName );
@@ -219,15 +222,15 @@ void ProductPage::removeProduct() {
 	if ( isSelected ) {
 		int row = productTable->currentIndex().row();
 		QString productName = productsTableModel->data( productsTableModel->index( productTable->currentIndex().row(), 0 ) ).toString();
-		setEnabledWindow( false );
+		//setEnabledWindow( false );
 		ProductDTO result = productFacade->findByName( productName );
 		if ( result.isSuccess == true ) {
-			setEnabledWindow( true );
+			//setEnabledWindow( true );
 			result = productFacade->removeProduct( result.product.getId() );
 			if ( result.isSuccess == true ) {
 				fillProducts();
 				clearInputsPageProducts();
-				setEnabledEditAndRemoveButtons( false );
+				//setEnabledEditAndRemoveButtons( false );
 			}
 		}
 		
@@ -239,10 +242,10 @@ void ProductPage::removeProduct() {
 
 void ProductPage::showProduct() {
 	QString productName = productsTableModel->data( productsTableModel->index( productTable->currentIndex().row(), 0 ) ).toString();
-	setEnabledWindow( false );
+	//setEnabledWindow( false );
 	ProductDTO result = productFacade->findByName( productName );
 	if ( result.isSuccess == true ) {
-		setEnabledWindow( true );
+		//setEnabledWindow( true );
 		Product product = result.product;
 		productNameInput->setText( product.getName() );
 		productPercentInput->setValue( product.getCommission() );
@@ -300,15 +303,16 @@ void ProductPage::clearTable() {
 	productsTableModel->setHorizontalHeaderLabels( horizontalHeader );
 	productTable->setModel( productsTableModel );
 	//setEnabledEditAndRemoveButtons( false );
-    //productTable->resizeColumnsToContents();
+    
+	for (int col = 0; col < 2; col++) {
+		productTable->horizontalHeader()->setSectionResizeMode(col, QHeaderView::ResizeToContents);
+	}
 }
 
 void ProductPage::fillProducts() {
-    clearTable();
-	setEnabledWindow( false );
+	clearTable();
 	ProductDTO result = productFacade->getAll();
 	if ( result.isSuccess == true ) {
-		setEnabledWindow( true );
 		QVector<Product>products = result.products;
 		for ( int idx = 0; idx < products.size(); idx++) {
 			Product product = products[idx];
@@ -322,18 +326,18 @@ void ProductPage::fillProducts() {
 		}
 		productTable->setColumnHidden( 2, true);
 	}
-	productTable->setFocus();
-	setEnabledEditAndRemoveButtons( false );
+	//productTable->setFocus();
+	//setEnabledEditAndRemoveButtons( false );
 }
 
 void ProductPage::searchProduct() {
 	QString nameProduct = productSearchInput->text().toLower();
 	if ( nameProduct != "" ) {
 		clearTable();
-		setEnabledWindow( false );
+		//setEnabledWindow( false );
 		ProductDTO result = productFacade->getAll();
 		if ( result.isSuccess == true ) {
-			setEnabledWindow( true );
+			//setEnabledWindow( true );
 			if ( result.isEmpty == false ) {
 				QVector<Product>products = result.products;
 				int row = 0;

@@ -75,6 +75,7 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
 	this->productPage = productPage;
 	this->productPage->setWindow( this );
 	this->productPage->setUI(
+		ui.tabWidget,
 		ui.productSearch, 
 		ui.productTable,
 		ui.productName,
@@ -89,6 +90,7 @@ MainWindow::MainWindow( AuthPage* authPage, EmployeesPage* employeesPage, SalesP
 		ui.productSubmitAddButton
 	);
 
+	// Добавить виджет для блокировки
 	this->managerPage = managerPage;
 	this->managerPage->setUI(
 		ui.currentSalary,
