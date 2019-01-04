@@ -193,7 +193,7 @@ void ProductPage::directUpdateProduct() {
 		productButtonsStackedWidget->setCurrentIndex( 0 );
 		productSearchInput->setEnabled( true );
 		productTable->setEnabled( true );
-		refreshPage();
+		productTable->setFocus();
 		addProductButton->setEnabled( true );
 		setInputsEnabledPageProducts( false );
 		status = DEFAULT;
