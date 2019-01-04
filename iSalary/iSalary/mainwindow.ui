@@ -181,7 +181,7 @@
         <item>
          <widget class="QStackedWidget" name="boss_manager_stackedWidget">
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="owner">
            <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -194,7 +194,7 @@
                <enum>QTabWidget::Rounded</enum>
               </property>
               <property name="currentIndex">
-               <number>0</number>
+               <number>1</number>
               </property>
               <property name="elideMode">
                <enum>Qt::ElideMiddle</enum>
@@ -929,6 +929,9 @@
                      <layout class="QHBoxLayout" name="horizontalLayout_15">
                       <item>
                        <widget class="QPushButton" name="deleteProductButton">
+                        <property name="enabled">
+                         <bool>false</bool>
+                        </property>
                         <property name="text">
                          <string>Удалить</string>
                         </property>
@@ -936,6 +939,9 @@
                       </item>
                       <item>
                        <widget class="QPushButton" name="editProductButton">
+                        <property name="enabled">
+                         <bool>false</bool>
+                        </property>
                         <property name="text">
                          <string>Изменить</string>
                         </property>
@@ -2139,9 +2145,17 @@
   <tabstop>salesButton</tabstop>
   <tabstop>dataButton</tabstop>
   <tabstop>currentSalary</tabstop>
+  <tabstop>possibleSalary</tabstop>
+  <tabstop>nameProductOutput</tabstop>
+  <tabstop>priceSale</tabstop>
+  <tabstop>dateSale</tabstop>
+  <tabstop>countSaleProducts</tabstop>
+  <tabstop>addSaleButton</tabstop>
   <tabstop>managerConfirmedSalesTable</tabstop>
   <tabstop>managerUnconfirmedSalesTable</tabstop>
+  <tabstop>managerProductSearch</tabstop>
   <tabstop>managerProductTable</tabstop>
+  <tabstop>salesForAllButton</tabstop>
   <tabstop>quitButton</tabstop>
  </tabstops>
  <resources>
