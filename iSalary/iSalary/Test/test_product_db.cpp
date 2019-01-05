@@ -77,7 +77,7 @@ void Test_Product_DB::getAll() {
 	for (int i = 0; i < res_products.size(); i++) {
 		QCOMPARE( res_products[i].getName(), products[i].getName() );
 		QCOMPARE( res_products[i].getCommission(), products[i].getCommission() );
-		removeProduct( products[i].getId() );
+		removeProduct( res_products[i].getId() );
 	}
 }
 
