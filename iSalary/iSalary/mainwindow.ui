@@ -21,7 +21,7 @@
     <item>
      <widget class="QStackedWidget" name="auth_program_stackedWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="enter">
        <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1024,13 +1024,6 @@
                      </widget>
                     </item>
                     <item>
-                     <widget class="QLabel" name="label_45">
-                      <property name="text">
-                       <string>Дата</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
                      <spacer name="horizontalSpacer_7">
                       <property name="orientation">
                        <enum>Qt::Horizontal</enum>
@@ -1058,6 +1051,13 @@
                        </size>
                       </property>
                      </spacer>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label_45">
+                      <property name="text">
+                       <string>Дата</string>
+                      </property>
+                     </widget>
                     </item>
                     <item>
                      <widget class="QDateEdit" name="salesDateInput">
