@@ -1,14 +1,19 @@
 #include "test_product_db.h"
 
-Test_Product_DB::Test_Product_DB( QSqlDatabase _sql ) {
+Test_Product_DB::Test_Product_DB( QSqlDatabase *_sql ) {
 	sql = _sql;
-	product_DB = new Product_DB( &_sql, "products" );
+	product_DB = new Product_DB( _sql, "products" );
 	product_DB->init();
 	c = QTextCodec::codecForName("CP1251");
 }
 
 Test_Product_DB::~Test_Product_DB() {
 
+}
+
+void Test_Product_DB::removeProduct( int id ) {
+	QSqlQuery query("DELETE FROM products WHERE id = " + QString::number( id ), *sql);
+	bool isOk = query.exec();
 }
 
 void Test_Product_DB::create() {
@@ -19,10 +24,9 @@ void Test_Product_DB::create() {
 	product.setCommission( 15.33 );
 	product_DB->create( product );
 	Product res_product = product_DB->findByName( productName );
-	product_DB->remove( res_product.getId() );
+	removeProduct( res_product.getId() );
 	QCOMPARE( res_product.getName(), product.getName() );
 	QCOMPARE( res_product.getCommission(), product.getCommission() );
-
 }
 
 void Test_Product_DB::update() {
@@ -37,10 +41,9 @@ void Test_Product_DB::update() {
 	product.setName( newProductName );
 	product_DB->update( product );
 	Product res_product = product_DB->findByName( newProductName );
-	product_DB->remove( res_product.getId() );
+	removeProduct( res_product.getId() );
 	QCOMPARE( res_product.getName(), product.getName() );
 	QCOMPARE( res_product.getCommission(), product.getCommission() );
-
 }
 
 void Test_Product_DB::remove() {
@@ -53,9 +56,8 @@ void Test_Product_DB::remove() {
 	Product res_product = product_DB->findByName( productName );
 	product_DB->remove( res_product.getId() );
 	res_product = product_DB->findByName( productName );
-	QCOMPARE( res_product.getName(), QString( "" ) );
-	QCOMPARE( res_product.getCommission(), 0.0 );
-
+	removeProduct( res_product.getId() );
+	QCOMPARE( res_product.getIsDeleted(), true );
 }
 
 void Test_Product_DB::getAll() {
@@ -75,7 +77,7 @@ void Test_Product_DB::getAll() {
 	for (int i = 0; i < res_products.size(); i++) {
 		QCOMPARE( res_products[i].getName(), products[i].getName() );
 		QCOMPARE( res_products[i].getCommission(), products[i].getCommission() );
-		product_DB->remove( res_products[i].getId() );
+		removeProduct( products[i].getId() );
 	}
-
 }
+
