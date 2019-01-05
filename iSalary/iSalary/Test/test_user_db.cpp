@@ -36,21 +36,21 @@ void Test_User_DB::insert() {
 	removeUser( exp_user.user.getId() );
 }
 
-//void Test_User_DB::update() {
-//	QString str = "a";
-//	UserType type = BOSS;
-//	UserInfo exp_user;
-//	exp_user.user.setLogin( str );
-//	exp_user.user.setPassword( str );
-//	exp_user.type = type;
-//	exp_user.user = user_DB->insert( exp_user.user, exp_user.type);
-//	QString new_login = "abc";
-//	exp_user.user.setLogin( new_login );
-//	user_DB->update( exp_user.user );
-//	UserInfo res_user = user_DB->findByLogin( new_login );
-//	compareUsers( res_user, exp_user );
-//	removeUser( exp_user.user.getId() );
-//}
+void Test_User_DB::update() {
+	QString str = "a";
+	UserType type = BOSS;
+	UserInfo exp_user;
+	exp_user.user.setLogin( str );
+	exp_user.user.setPassword( str );
+	exp_user.type = type;
+	exp_user.user = user_DB->insert( exp_user.user, exp_user.type);
+	QString new_login = "abc";
+	exp_user.user.setLogin( new_login );
+	user_DB->update( exp_user.user );
+	UserInfo res_user = user_DB->findByLoginPassword( new_login, str );
+	compareUsers( res_user, exp_user );
+	removeUser( exp_user.user.getId() );
+}
 
 void Test_User_DB::getById() {
 	QString str = "a";

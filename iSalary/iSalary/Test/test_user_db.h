@@ -25,7 +25,7 @@ private:
 
 private slots:
 	void insert();
-	//void update();
+	void update();
 	void getById();
 	void getByIds();
 	void findByLogin();
