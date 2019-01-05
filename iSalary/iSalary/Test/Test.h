@@ -3,12 +3,12 @@
 class Test
 {
 public:
-	Test( QSqlDatabase sql );
+	Test( QSqlDatabase *sql );
 	~Test(void);
 	void startTesting();
 
 private:
-	QSqlDatabase  db;
+	QSqlDatabase  *db;
 	void test_DB();
 	void test_GUI();
 };
