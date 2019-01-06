@@ -93,6 +93,18 @@
     <Filter Include="Source Files\Model\DomainModel\PersonnelAccountingModule\SalesModule">
       <UniqueIdentifier>{7bb601fc-1937-4b82-9506-d2937ab53234}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Test\Test_DB">
+      <UniqueIdentifier>{f21d9261-711d-482b-870b-d5aefb3fae66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Test\Test_GUI">
+      <UniqueIdentifier>{dd96a501-0bac-49fb-979b-1d51dc59ce57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Test\Test_DB">
+      <UniqueIdentifier>{c3dcac18-f5b8-4b5b-8ba5-07c9bbee056d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Test\Test_GUI">
+      <UniqueIdentifier>{79aee320-1123-4ab9-bba0-4d15988d7ced}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -284,12 +296,6 @@
     <ClCompile Include="Test\Test.cpp">
       <Filter>Source Files\Test</Filter>
     </ClCompile>
-    <ClCompile Include="Test\test_product_db.cpp">
-      <Filter>Source Files\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="Test\test_user_db.cpp">
-      <Filter>Source Files\Test</Filter>
-    </ClCompile>
     <ClCompile Include="Helpers.cpp">
       <Filter>Source Files\Helpers</Filter>
     </ClCompile>
@@ -350,6 +356,21 @@
     <ClCompile Include="GeneratedFiles\Debug\moc_ProductPage.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
+    <ClCompile Include="Test\test_product_db.cpp">
+      <Filter>Source Files\Test\Test_DB</Filter>
+    </ClCompile>
+    <ClCompile Include="Test\test_user_db.cpp">
+      <Filter>Source Files\Test\Test_DB</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_test_product_gui.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_test_product_gui.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="test_product_gui.cpp">
+      <Filter>Source Files\Test\Test_GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -391,12 +412,6 @@
     <CustomBuild Include="SalaryTotalTableModel.h">
       <Filter>Header Files\View</Filter>
     </CustomBuild>
-    <CustomBuild Include="Test\test_product_db.h">
-      <Filter>Header Files\Test</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Test\test_user_db.h">
-      <Filter>Header Files\Test</Filter>
-    </CustomBuild>
     <CustomBuild Include="ManagerPage.h">
       <Filter>Header Files\View</Filter>
     </CustomBuild>
@@ -414,6 +429,15 @@
     </CustomBuild>
     <CustomBuild Include="StatisticSalesTableModel.h">
       <Filter>Header Files\View</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Test\test_product_db.h">
+      <Filter>Header Files\Test\Test_DB</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Test\test_user_db.h">
+      <Filter>Header Files\Test\Test_DB</Filter>
+    </CustomBuild>
+    <CustomBuild Include="test_product_gui.h">
+      <Filter>Header Files\Test\Test_GUI</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

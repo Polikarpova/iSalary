@@ -1,10 +1,11 @@
 #include "Test.h"
 
 
-Test::Test( QSqlDatabase * sqlDB )
+Test::Test( QSqlDatabase * sqlDB, ProductPage *productPage )
 {
 	freopen("testing.log", "w", stdout);
 	db = sqlDB;
+	this->productPage = productPage;
 	/*db->setDatabaseName( "test");
     db->setUserName( "root");
     db->setPassword( "root");
@@ -30,5 +31,7 @@ void Test::test_DB() {
 }
 
 void Test::test_GUI() {
-
+	
+	Test_Product_GUI test_product_GUI( db, productPage );
+	QTest::qExec( &test_product_GUI );
 }
