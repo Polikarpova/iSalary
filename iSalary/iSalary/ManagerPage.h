@@ -15,9 +15,11 @@
 #include "ProductFacade.h"
 #include "SalesFacade.h"
 #include "ErrorMessageHandler.h"
+#include "test_manager_gui.h"
 
 class ManagerPage : public QObject {
 	Q_OBJECT
+	friend class Test_Manager_GUI;
 public:
 	ManagerPage( ProductFacade *productFacade, SalesFacade *saleFacade );
 	~ManagerPage(void);
