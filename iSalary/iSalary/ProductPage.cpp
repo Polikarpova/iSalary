@@ -84,6 +84,7 @@ void ProductPage::refreshPage() {
         this->errorHandler->handleError( error );
     }
 	this->endBlockForRequest();
+	setEnabledEditAndRemoveButtons( false );
 }
 
 void ProductPage::setEnabledWindow( bool enabled ) {

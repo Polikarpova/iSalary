@@ -15,8 +15,12 @@
 #include "ProductFacade.h"
 #include "ErrorMessageHandler.h"
 
+#include "test_product_gui.h"
+
 class ProductPage : public QObject {
 	Q_OBJECT
+	friend class Test_Product_GUI;
+
 public:
 	ProductPage( ProductFacade * productFacade );
 	~ProductPage(void);
