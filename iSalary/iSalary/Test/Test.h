@@ -2,7 +2,7 @@
 #include "test_user_db.h"
 
 #include "test_product_gui.h"
-
+#include "test_manager_gui.h"
 class Test
 {
 public:
@@ -12,8 +12,8 @@ public:
 		//EmployeesPage *employeesPage,
 		//SalesPage *salesPage,
 		//SalaryPage *salaryPage,
-		ProductPage *productPage
-		//ManagerPage *managerPage,
+		ProductPage *productPage,
+		ManagerPage *managerPage
 		//StatisticPage *statisticPage
 	);
 	~Test(void);
@@ -21,13 +21,13 @@ public:
 
 private:
 	QSqlDatabase  *db;
-	//AuthPage *authPage,
-	//EmployeesPage *employeesPage,
-	//SalesPage *salesPage,
-	//SalaryPage *salaryPage,
+	//AuthPage *authPage;
+	//EmployeesPage *employeesPage;
+	//SalesPage *salesPage;
+	//SalaryPage *salaryPage;
 	ProductPage *productPage;
-	//ManagerPage *managerPage,
-	//StatisticPage *statisticPage
+	ManagerPage *managerPage;
+	//StatisticPage *statisticPage;
 
 	void test_DB();
 	void test_GUI();

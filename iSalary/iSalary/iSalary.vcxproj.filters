@@ -371,6 +371,15 @@
     <ClCompile Include="test_product_gui.cpp">
       <Filter>Source Files\Test\Test_GUI</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_test_manager_gui.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_test_manager_gui.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="test_manager_gui.cpp">
+      <Filter>Source Files\Test\Test_GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -437,6 +446,9 @@
       <Filter>Header Files\Test\Test_DB</Filter>
     </CustomBuild>
     <CustomBuild Include="test_product_gui.h">
+      <Filter>Header Files\Test\Test_GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="test_manager_gui.h">
       <Filter>Header Files\Test\Test_GUI</Filter>
     </CustomBuild>
   </ItemGroup>
