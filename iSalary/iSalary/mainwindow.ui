@@ -1052,45 +1052,6 @@
                       </property>
                      </spacer>
                     </item>
-                    <item>
-                     <widget class="QLabel" name="label_45">
-                      <property name="text">
-                       <string>Дата</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QDateEdit" name="salesDateInput">
-                      <property name="enabled">
-                       <bool>true</bool>
-                      </property>
-                      <property name="wrapping">
-                       <bool>false</bool>
-                      </property>
-                      <property name="frame">
-                       <bool>true</bool>
-                      </property>
-                      <property name="buttonSymbols">
-                       <enum>QAbstractSpinBox::UpDownArrows</enum>
-                      </property>
-                      <property name="keyboardTracking">
-                       <bool>true</bool>
-                      </property>
-                      <property name="showGroupSeparator" stdset="0">
-                       <bool>false</bool>
-                      </property>
-                      <property name="minimumDate">
-                       <date>
-                        <year>1900</year>
-                        <month>9</month>
-                        <day>14</day>
-                       </date>
-                      </property>
-                      <property name="calendarPopup">
-                       <bool>true</bool>
-                      </property>
-                     </widget>
-                    </item>
                    </layout>
                   </item>
                   <item>
@@ -2108,7 +2069,6 @@
   <tabstop>saveProductButton</tabstop>
   <tabstop>productCancelAddButton</tabstop>
   <tabstop>productSubmitAddButton</tabstop>
-  <tabstop>salesDateInput</tabstop>
   <tabstop>managersSalesTable</tabstop>
   <tabstop>unconfirmedSalesTable</tabstop>
   <tabstop>confirmedSalesTable</tabstop>
