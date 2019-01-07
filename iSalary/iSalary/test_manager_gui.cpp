@@ -96,6 +96,48 @@ void Test_Manager_GUI::showProduct() {
 	removeProduct( productName );
 }
 
+void Test_Manager_GUI::searchProduct() {
+	
+	Product firstProduct, secondProduct;
+	firstProduct.setName( "AAA" );
+	firstProduct.setCommission( 1.9 );
+	secondProduct.setName( "ABC" );
+	secondProduct.setCommission( 33.5 );
+
+	createProduct( firstProduct.getName(), firstProduct.getCommission() );
+	createProduct( secondProduct.getName(), secondProduct.getCommission() );
+
+	managerPage->refreshPage();
+	managerPage->productSearchInput->setText( "A" );
+
+	QString firstProductName = findElemInProductTable( 0, 0 );
+	QString firstProductPercent = findElemInProductTable( 0, 1 );
+	QString secondProductName = findElemInProductTable( 1, 0 );
+	QString secondProductPercent = findElemInProductTable( 1, 1 );
+
+	QCOMPARE( firstProductName, firstProduct.getName() );
+	QCOMPARE( firstProductPercent, QString::number( firstProduct.getCommission() ) + "%" );
+	QCOMPARE( secondProductName, secondProduct.getName() );
+	QCOMPARE( secondProductPercent, QString::number( secondProduct.getCommission() ) + "%" );
+
+	managerPage->productSearchInput->setText( "AA" );
+
+	firstProductName = findElemInProductTable( 0, 0 );
+	firstProductPercent = findElemInProductTable( 0, 1 );
+	secondProductName = findElemInProductTable( 1, 0 );
+	secondProductPercent = findElemInProductTable( 1, 1 );
+
+	QCOMPARE( firstProductName, firstProduct.getName() );
+	QCOMPARE( firstProductPercent, QString::number( firstProduct.getCommission() ) + "%" );
+	QCOMPARE( secondProductName, QString( "" ) );
+	QCOMPARE( secondProductPercent, QString( "" ) );
+
+	managerPage->productSearchInput->clear();
+	removeProduct( firstProduct.getName() );
+	removeProduct( secondProduct.getName() );
+	managerPage->refreshPage();
+}
+
 void Test_Manager_GUI::addUnconfirmedSale() {
 
 	createProduct( "AAA", 3.5 );

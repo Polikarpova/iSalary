@@ -34,6 +34,7 @@ private:
 
 private slots:
 	void showProduct();
+	void searchProduct();
 
 	void addUnconfirmedSale();
 	void removeUnconfirmedSale();
