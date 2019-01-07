@@ -182,7 +182,7 @@ void EmployeesPage::showDetailsById( int managerId) {
 }
 
 void EmployeesPage::showDetails( const QModelIndex& index) {
-    this->showDetailsById( this->getSelectedManagerId());
+	this->showDetailsById( this->getSelectedManagerId());
 }
 
 

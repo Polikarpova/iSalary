@@ -1,12 +1,13 @@
 #include "Test.h"
 
 
-Test::Test( QSqlDatabase * sqlDB, ProductPage *productPage, ManagerPage *managerPage )
+Test::Test( QSqlDatabase * sqlDB, EmployeesPage *employeesPage, ProductPage *productPage, ManagerPage *managerPage )
 {
 	freopen("testing.log", "w", stdout);
 	db = sqlDB;
 	this->productPage = productPage;
 	this->managerPage = managerPage;
+	this->employeesPage = employeesPage;
 	/*db->setDatabaseName( "test");
     db->setUserName( "root");
     db->setPassword( "root");
@@ -33,6 +34,8 @@ void Test::test_DB() {
 
 void Test::test_GUI() {
 	
+	Test_Employees_GUI test_employees_GUI( db, employeesPage );
+	QTest::qExec( &test_employees_GUI );
 	Test_Product_GUI test_product_GUI( db, productPage );
 	QTest::qExec( &test_product_GUI );
 	Test_Manager_GUI test_manager_GUI( db, managerPage );

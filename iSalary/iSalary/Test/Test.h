@@ -3,13 +3,14 @@
 
 #include "test_product_gui.h"
 #include "test_manager_gui.h"
+#include "test_employees_gui.h"
 class Test
 {
 public:
 	Test( 
 		QSqlDatabase *sql,
 		//AuthPage *authPage,
-		//EmployeesPage *employeesPage,
+		EmployeesPage *employeesPage,
 		//SalesPage *salesPage,
 		//SalaryPage *salaryPage,
 		ProductPage *productPage,
@@ -22,7 +23,7 @@ public:
 private:
 	QSqlDatabase  *db;
 	//AuthPage *authPage;
-	//EmployeesPage *employeesPage;
+	EmployeesPage *employeesPage;
 	//SalesPage *salesPage;
 	//SalaryPage *salaryPage;
 	ProductPage *productPage;

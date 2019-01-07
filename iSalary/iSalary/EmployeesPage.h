@@ -26,8 +26,10 @@
 #include "EmployeesTableModel.h"
 #include "ErrorMessageHandler.h"
 
+#include "test_employees_gui.h"
 class EmployeesPage : public QObject {
-Q_OBJECT
+	Q_OBJECT
+	friend class Test_Employees_GUI;
 public:
     EmployeesPage(PersonnalAccountingFacade* pa);
     ~EmployeesPage(void);
