@@ -34,7 +34,6 @@ public:
 
 protected slots:
 
-	void dateChanged();
 	void buttonForAll();
 	void showManagersSales();
 	void confirmSale();

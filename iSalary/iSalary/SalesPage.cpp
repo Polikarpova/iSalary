@@ -365,13 +365,6 @@ void SalesPage::showManagerSales( int id) {
 }
 
 //===SLOTS===//
-void SalesPage::dateChanged() {
-
-	//показываются продажи сделанные в определенный день
-	//обновляем все таблицы в соответствии с датой
-	this->refreshPage();
-}
-
 void SalesPage::buttonForAll() {
 
 	//снять в таблицы выделение
@@ -400,9 +393,22 @@ void SalesPage::confirmSale() {
 
 	this->setEnable(false);
 
-	int currentId = sender()->property("saleId").toInt();
-	this->salesFacade->confirmSale(this->unconfirmedSales[currentId]);
-	this->refreshPage();
+	int saleId = sender()->property("saleId").toInt();
+	this->salesFacade->confirmSale(this->unconfirmedSales[saleId]);
+	
+	int currentId = getSelectedManagerSalesId();
+
+	if( currentId == -1) {
+	
+		this->refreshPage();
+	} else {
+
+		this->updateManagersTable();
+		this->showManagersSales();
+
+		QModelIndex index = static_cast<ManagersSalesTableModel*>(this->managersSalesTable->model())->getIndexByRecordId(currentId);
+		this->managersSalesTable->setCurrentIndex( index);
+	}
 
 	this->setEnable(true);
 }
@@ -411,9 +417,22 @@ void SalesPage::unconfirmSale() {
 
 	this->setEnable(false);
 
-	int currentId = sender()->property("saleId").toInt();
-	this->salesFacade->cancelConfirmSale(this->confirmedSales[currentId]);
-	this->refreshPage();
+	int saleId = sender()->property("saleId").toInt();
+	this->salesFacade->cancelConfirmSale(this->confirmedSales[saleId]);
+	
+	int currentId = getSelectedManagerSalesId();
+
+	if( currentId == -1) {
+	
+		this->refreshPage();
+	} else {
+
+		this->updateManagersTable();
+		this->showManagersSales();
+
+		QModelIndex index = static_cast<ManagersSalesTableModel*>(this->managersSalesTable->model())->getIndexByRecordId(currentId);
+		this->managersSalesTable->setCurrentIndex( index);
+	}
 
 	this->setEnable(true);
 }
