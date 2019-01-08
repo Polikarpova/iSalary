@@ -253,6 +253,7 @@ void EmployeesPage::cancel() {
     this->buttonStackedWidget->setCurrentIndex( Btns_Page::PAGE_BTNS_SHOW);
     this->dataHeader->setText(QString::fromWCharArray(L""));
     this->dataHeader->setStyleSheet( this->dataHeaderStyle);
+    this->enableInputs( false);
 }
 
 void EmployeesPage::enableInputs( bool isEnable) {
