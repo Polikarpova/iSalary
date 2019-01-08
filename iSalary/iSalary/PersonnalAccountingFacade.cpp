@@ -32,7 +32,7 @@ ManagerDTO PersonnalAccountingFacade::hireManager( const ManagerDTO& manager){
 void PersonnalAccountingFacade::updateManager( const ManagerDTO& manager){
     Manager m = this->fromDTO( manager);
     QString error;
-    if( this->managerValidator->isManagerValid( m, &error)) {
+    if( this->managerValidator->isManagerValid( m, &error, true)) {
         this->managerDB->update(m);
     } else {
         throw new QString( error);

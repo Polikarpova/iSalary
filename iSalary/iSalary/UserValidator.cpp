@@ -42,7 +42,13 @@ bool UserValidator::isUserValid( const User& user, QString* errorOutput, bool ch
         }
     }
 
-    bool isLoginValid = onlyLatin.indexIn( user.getLogin()) == 0 
+    bool isLoginValid = user.getLogin().size() > 0;
+    
+    if( !isLoginValid) {
+        error += QString::fromWCharArray( L"Слишком короткий логин\n");
+        isValid = false;
+    }
+    isLoginValid = onlyLatin.indexIn( user.getLogin()) == 0 
       && onlyLatin.matchedLength() == user.getLogin().size(); 
         
     if( !isLoginValid) { 

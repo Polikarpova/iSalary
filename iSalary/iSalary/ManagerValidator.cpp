@@ -5,9 +5,9 @@ ManagerValidator::ManagerValidator( IUserRepository* userRep, IManagerRepository
     this->managerRepository = managerRep;
 }
 
-bool ManagerValidator::isManagerValid( const Manager& manager, QString* errorOutput) {
+bool ManagerValidator::isManagerValid( const Manager& manager, QString* errorOutput, bool checkPassword) {
     QString error;
-    bool isValid = this->isUserValid( manager, &error);
+    bool isValid = this->isUserValid( manager, &error, checkPassword);
 
     QLinkedList<Manager> sameINNMangers = this->managerRepository->findByINN( manager.getINN()); 
     if( sameINNMangers.size() > 1) {
