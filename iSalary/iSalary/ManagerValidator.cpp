@@ -27,14 +27,16 @@ bool ManagerValidator::isManagerValid( const Manager& manager, QString* errorOut
         isValid = false;
     }
     
-
-    if( manager.getFirstName().size() < 1){
-        error += QString::fromWCharArray( L"»м€ должно содержать хот€ бы один символ\n");
+    
+    QRegExp anyLangChar(QString::fromWCharArray(L"[a-zA-Zа-€ј-я]"));
+    
+    if( anyLangChar.indexIn( manager.getFirstName()) < 0){
+        error += QString::fromWCharArray( L"»м€ должно с одержать хот€ бы одну букву\n");
         isValid = false;
     }
     
-    if( manager.getSecondName().size() < 1){
-        error += QString::fromWCharArray( L"‘амили€ должна содержать хот€ бы один символ\n");
+    if( anyLangChar.indexIn( manager.getSecondName()) < 0){
+        error += QString::fromWCharArray( L"‘амили€ должна содержать хот€ бы одну букву\n");
         isValid = false;
     }
 
@@ -83,7 +85,6 @@ bool ManagerValidator::isManagerValid( const Manager& manager, QString* errorOut
         isValid = false;
     }
     
-    QRegExp anyLangChar(QString::fromWCharArray(L"[a-zA-Zа-€ј-я]"));
     QRegExp ruLatDots(QString::fromWCharArray(L"[a-zA-Zа-€ј-я\,\.\- 0-9]*"));
 
     if( anyLangChar.indexIn( manager.getAddress()) < 0) {
