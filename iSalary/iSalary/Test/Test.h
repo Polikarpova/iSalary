@@ -4,6 +4,8 @@
 #include "test_product_gui.h"
 #include "test_manager_gui.h"
 #include "test_employees_gui.h"
+#include "test_sales_gui.h"
+
 class Test
 {
 public:
@@ -11,11 +13,11 @@ public:
 		QSqlDatabase *sql,
 		//AuthPage *authPage,
 		EmployeesPage *employeesPage,
-		//SalesPage *salesPage,
-		//SalaryPage *salaryPage,
 		ProductPage *productPage,
+		SalesPage *salesPage,
+		//StatisticPage *statisticPage,
+		//SalaryPage *salaryPage,
 		ManagerPage *managerPage
-		//StatisticPage *statisticPage
 	);
 	~Test(void);
 	void startTesting();
@@ -24,11 +26,11 @@ private:
 	QSqlDatabase  *db;
 	//AuthPage *authPage;
 	EmployeesPage *employeesPage;
-	//SalesPage *salesPage;
-	//SalaryPage *salaryPage;
 	ProductPage *productPage;
-	ManagerPage *managerPage;
+	SalesPage *salesPage;
 	//StatisticPage *statisticPage;
+	//SalaryPage *salaryPage;
+	ManagerPage *managerPage;
 
 	void test_DB();
 	void test_GUI();

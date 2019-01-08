@@ -19,8 +19,10 @@
 #include <qmodelindex>
 #include <qabstractitemview.h>
 
+#include "test_sales_gui.h"
 class SalesPage : public QObject{
     Q_OBJECT
+	friend class Test_Sales_GUI;
 public:
     SalesPage( SalesFacade * salesFacade);
     void setUI( QTabWidget* tabWidget, QPushButton* salesForAllButton, QTableView* managersSalesTable, QTableView* unconfirmedSalesTable, QTableView* confirmedSalesTable);
