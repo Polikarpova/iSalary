@@ -48,7 +48,7 @@ QString Test_Manager_GUI::findElemInConfirmedTable( int row, int col ){
 ActiveSale Test_Manager_GUI::createSale( Product product) {
 	ActiveSale sale;
 	sale.setConfirmDate( QDate::currentDate() );
-	sale.setSaleDate( QDate::currentDate() );
+	sale.setSaleDate( QDate( 2018, 12, 31) );
 	sale.setCost( 100 );
 	sale.setCount( 3 );
 	sale.setProduct( product );
