@@ -209,7 +209,7 @@ void EmployeesPage::saveEdit() {
     this->startBlockForRequest();
 
     try {
-        if( validateInputs()){
+        if( /*validateInputs()*/ true){
             ManagerDTO manager = this->readFromInputs();
             manager.id = this->getSelectedManagerId();
             manager.dateOfEmplyment = this->getSelectedManagerDateOfEmployment();
@@ -231,7 +231,7 @@ void EmployeesPage::saveAdd() {
     this->startBlockForRequest();
 
     try {
-        if( validateInputs()) {
+        if( /*validateInputs()*/ true) {
             ManagerDTO manager = this->readFromInputs();
     
             manager = this->personnalAccouting->hireManager( manager);
