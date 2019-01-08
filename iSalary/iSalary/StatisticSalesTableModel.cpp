@@ -116,7 +116,7 @@ void StatisticSalesTableModel::refreshData(const QList<ActiveSaleDTO>& sales) {
 			row << sale.saleDate;
 			row << sale.count;
 			row << sale.product.name;
-			row << sale.price;
+			row << sale.price*sale.count;
 			row << sale.product.commission;
             
             this->table.append( row);

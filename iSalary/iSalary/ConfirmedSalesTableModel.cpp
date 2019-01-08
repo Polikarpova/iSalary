@@ -43,9 +43,9 @@ QVariant ConfirmedSalesTableModel::headerData( int section, Qt::Orientation orie
 		case COLUMN_NAME:
 			return QString::fromWCharArray( L"Название" );
 		case COLUMN_COUNT:
-			return QString::fromWCharArray( L"Кол-во" );
+			return QString::fromWCharArray( L"Кол-во, шт." );
 		case COLUMN_PRICE:
-			return QString::fromWCharArray( L"Цена" );
+			return QString::fromWCharArray( L"Стоимость, руб." );
 		case COLUMN_COMMISION:
 			return QString::fromWCharArray( L"Продавцу, %" );
     }
@@ -124,7 +124,7 @@ void ConfirmedSalesTableModel::refreshData(const QList<ActiveSaleDTO>& sales) {
 			row << sale.saleDate;
 			row << sale.product.name;
 			row << sale.count;
-			row << sale.price;
+			row << sale.price*sale.count;
 			row << sale.product.commission;
             
 			this->table.append( row);
