@@ -193,7 +193,7 @@ void ManagerPage::fillManagersUnconfirmedSalesTable() {
 				QStandardItem *item;
 				item = new QStandardItem( sale.getProductName() );
 				unconfirmedSalesTableModel->setItem( lastRow, 0, item );
-				item = new QStandardItem( sale.getConfirmDate().toString(Qt::DateFormat::LocalDate) );
+				item = new QStandardItem( sale.getSaleDate().toString(Qt::DateFormat::LocalDate) );
 				unconfirmedSalesTableModel->setItem( lastRow, 1, item );
 				item = new QStandardItem( QString::number( sale.getCount() ) );
 				unconfirmedSalesTableModel->setItem( lastRow, 2, item );
