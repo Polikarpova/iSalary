@@ -4,8 +4,8 @@
 
 struct ManagerSalaryDTO {
 
-	int managerId;
-	QString managerName;
-	double income;
-	double salary;
+    int managerId;
+    QString managerName;
+    double income;
+    double salary;
 };

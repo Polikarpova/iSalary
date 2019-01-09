@@ -1,17 +1,16 @@
-#include <qlist.h>
 #include "AccoutingPeriod.h"
 #include "ActiveSale.h"
 #include "CloseAccoutingPeriod.h"
+#include <qlist.h>
 
-class OpenAccoutingPeriod: public AccoutingPeriod {
+class OpenAccoutingPeriod : public AccoutingPeriod {
 
-public:
+  public:
+    OpenAccoutingPeriod( void );
 
-	OpenAccoutingPeriod( void);
-	
-	void addSale( ActiveSale& sale);
+    void addSale( ActiveSale &sale );
 
-	QList<ActiveSale> getSales();
+    QList<ActiveSale> getSales();
 
-	CloseAccoutingPeriod close();
+    CloseAccoutingPeriod close();
 };

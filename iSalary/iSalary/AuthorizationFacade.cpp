@@ -1,14 +1,12 @@
 #include "AuthorizationFacade.h"
 
-AuthorizationFacade::AuthorizationFacade( AuthorizationModule* am) {
-    this->authModule = am;
-}
+AuthorizationFacade::AuthorizationFacade( AuthorizationModule *am ) { this->authModule = am; }
 
-SignInResultDTO AuthorizationFacade::signIn(const QString& login, const QString& password) {
-    SignInResult signInRes = authModule->signIn(login, password);
-    
+SignInResultDTO AuthorizationFacade::signIn( const QString &login, const QString &password ) {
+    SignInResult signInRes = authModule->signIn( login, password );
+
     SignInResultDTO signInResDTO;
-    
+
     signInResDTO.user.id = signInRes.user.getId();
     signInResDTO.user.login = signInRes.user.getLogin();
     signInResDTO.user.passwword = signInRes.user.getPassword();
@@ -19,11 +17,11 @@ SignInResultDTO AuthorizationFacade::signIn(const QString& login, const QString&
     return signInResDTO;
 }
 
-SignUpResultDTO AuthorizationFacade::signUp( const QString& login, const QString& password, UserType userType) {
-    SignUpResult signUpRes = authModule->signUp(login, password, userType);
-    
+SignUpResultDTO AuthorizationFacade::signUp( const QString &login, const QString &password, UserType userType ) {
+    SignUpResult signUpRes = authModule->signUp( login, password, userType );
+
     SignUpResultDTO signUpResDTO;
-    
+
     signUpResDTO.user.id = signUpRes.user.getId();
     signUpResDTO.user.login = signUpRes.user.getLogin();
     signUpResDTO.user.passwword = signUpRes.user.getPassword();
@@ -35,5 +33,4 @@ SignUpResultDTO AuthorizationFacade::signUp( const QString& login, const QString
     return signUpResDTO;
 }
 
-AuthorizationFacade::~AuthorizationFacade(void){
-}
+AuthorizationFacade::~AuthorizationFacade( void ) {}

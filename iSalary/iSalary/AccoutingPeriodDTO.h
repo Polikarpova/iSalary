@@ -4,8 +4,8 @@
 
 struct AccoutingPeriodDTO {
 
-	int id;
-	QDate dateFrom;
-	QDate dateTo;
-	int status; /* аналогичен перечислению AccoutingPeriodStatus */
+    int id;
+    QDate dateFrom;
+    QDate dateTo;
+    int status; /* аналогичен перечислению AccoutingPeriodStatus */
 };

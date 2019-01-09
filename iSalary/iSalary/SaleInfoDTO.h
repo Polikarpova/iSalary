@@ -2,7 +2,7 @@
 
 struct SaleInfoDTO {
 
-	double price;
-	int count;
-	double commission;
+    double price;
+    int count;
+    double commission;
 };

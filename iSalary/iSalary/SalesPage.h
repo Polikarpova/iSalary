@@ -2,85 +2,86 @@
 
 #include "Codec.h"
 #include <QDateEdit>
-#include <qpushbutton.h>
 #include <QTableView>
 #include <qobject.h>
+#include <qpushbutton.h>
 
 #include "ErrorMessageHandler.h"
 
-#include "SalesFacade.h"
 #include "ActiveSaleDTO.h"
 #include "ManagerActiveSalesStatisticDTO.h"
+#include "SalesFacade.h"
 
+#include "ConfirmedSalesTableModel.h"
 #include "ManagersSalesTableModel.h"
 #include "UnconfirmedSalesTableModel.h"
-#include "ConfirmedSalesTableModel.h"
+#include <qabstractitemview.h>
 #include <qheaderview.h>
 #include <qmodelindex>
-#include <qabstractitemview.h>
 
 #include "test_sales_gui.h"
-class SalesPage : public QObject{
+class SalesPage : public QObject {
     Q_OBJECT
-	friend class Test_Sales_GUI;
-public:
-    SalesPage( SalesFacade * salesFacade);
-    void setUI( QTabWidget* tabWidget, QPushButton* salesForAllButton, QTableView* managersSalesTable, QTableView* unconfirmedSalesTable, QTableView* confirmedSalesTable);
-    ~SalesPage( void);
+    friend class Test_Sales_GUI;
 
-	void refreshPage();
+  public:
+    SalesPage( SalesFacade *salesFacade );
+    void setUI( QTabWidget *tabWidget, QPushButton *salesForAllButton, QTableView *managersSalesTable, QTableView *unconfirmedSalesTable,
+                QTableView *confirmedSalesTable );
+    ~SalesPage( void );
 
-	void setErrorHandler( ErrorMessageHandler* errorHandler);
+    void refreshPage();
 
-	void showManagerSales(int id);
+    void setErrorHandler( ErrorMessageHandler *errorHandler );
 
-protected slots:
+    void showManagerSales( int id );
 
-	void buttonForAll();
-	void showManagersSales();
-	void confirmSale();
-	void unconfirmSale();
+  protected slots:
 
-protected:
+    void buttonForAll();
+    void showManagersSales();
+    void confirmSale();
+    void unconfirmSale();
 
-	void initManagersTable (QTableView* managersSalesTable);
-	void initUnconfirmedSalesTable( QTableView* unconfirmedSalesTable);
-	void initConfirmedSalesTable( QTableView* confirmedSalesTable);
-	
-	int getSelectedManagerSalesId();
-	int getSelectedUnconfirmedSalesId();
-	int getSelectedConfirmedSalesId();
+  protected:
+    void initManagersTable( QTableView *managersSalesTable );
+    void initUnconfirmedSalesTable( QTableView *unconfirmedSalesTable );
+    void initConfirmedSalesTable( QTableView *confirmedSalesTable );
 
-	/**
-    * Обновление таблицы со списком менежеров и инормацией об активных продажах
-    */
-	void updateManagersTable();
-	void updateUnconfirmedTable();
-	void updateConfirmedTable();
-	
-private:
-	ErrorMessageHandler* errorHandler;
+    int getSelectedManagerSalesId();
+    int getSelectedUnconfirmedSalesId();
+    int getSelectedConfirmedSalesId();
 
-    SalesFacade * salesFacade;
-    
-	QTabWidget* tabWidget;
-	QPushButton* salesForAllButton;
-	QTableView* managersSalesTable;
-	QTableView* unconfirmedSalesTable;
-	QTableView* confirmedSalesTable;
+    /**
+     * Обновление таблицы со списком менежеров и инормацией об активных продажах
+     */
+    void updateManagersTable();
+    void updateUnconfirmedTable();
+    void updateConfirmedTable();
 
-	QHash<int, ActiveSaleDTO> unconfirmedSales;
-	QHash<int, ActiveSaleDTO> confirmedSales;
-	QHash<int, ManagerActiveSalesStatisticDTO> managersSales;
+  private:
+    ErrorMessageHandler *errorHandler;
 
-	void addActionButtonsToUnconfirmedTable(UnconfirmedSalesTableModel* model);
-	void addActionButtonsToConfirmedTable(ConfirmedSalesTableModel* model);
+    SalesFacade *salesFacade;
 
-	void deleteConfirmSalesFromList( QList<ActiveSaleDTO>& list);
-	void deleteUnconfirmSalesFromList( QList<ActiveSaleDTO>& list);
+    QTabWidget *tabWidget;
+    QPushButton *salesForAllButton;
+    QTableView *managersSalesTable;
+    QTableView *unconfirmedSalesTable;
+    QTableView *confirmedSalesTable;
 
-	void viewSelectedManagerUnconfirmedSales(int id);
-	void viewSelectedManagerConfirmedSales(int id);
+    QHash<int, ActiveSaleDTO> unconfirmedSales;
+    QHash<int, ActiveSaleDTO> confirmedSales;
+    QHash<int, ManagerActiveSalesStatisticDTO> managersSales;
 
-	void setEnable(bool flag);
+    void addActionButtonsToUnconfirmedTable( UnconfirmedSalesTableModel *model );
+    void addActionButtonsToConfirmedTable( ConfirmedSalesTableModel *model );
+
+    void deleteConfirmSalesFromList( QList<ActiveSaleDTO> &list );
+    void deleteUnconfirmSalesFromList( QList<ActiveSaleDTO> &list );
+
+    void viewSelectedManagerUnconfirmedSales( int id );
+    void viewSelectedManagerConfirmedSales( int id );
+
+    void setEnable( bool flag );
 };

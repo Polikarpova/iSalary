@@ -1,76 +1,56 @@
 #pragma once
 
-#include <qobject.h>
-#include <qstring.h>
 #include <qhash.h>
 #include <qlist.h>
+#include <qobject.h>
+#include <qstring.h>
 
-#include <qlineedit.h>
 #include <qdatetimeedit.h>
-#include <qspinbox.h>
-#include <qradiobutton.h>
-#include <qpushbutton.h>
-#include <qstackedwidget.h>
 #include <qgroupbox.h>
 #include <qlabel.h>
+#include <qlineedit.h>
+#include <qpushbutton.h>
+#include <qradiobutton.h>
+#include <qspinbox.h>
+#include <qstackedwidget.h>
 
 #include <qtableview.h>
 
 #include <qstyle.h>s
 
+#include <qabstractitemview.h>
 #include <qheaderview.h>
 #include <qmodelindex>
-#include <qabstractitemview.h>
 
-#include "PersonnalAccountingFacade.h"
 #include "EmployeesTableModel.h"
 #include "ErrorMessageHandler.h"
+#include "PersonnalAccountingFacade.h"
 
 #include "test_employees_gui.h"
 class EmployeesPage : public QObject {
-	Q_OBJECT
-	friend class Test_Employees_GUI;
-public:
-    EmployeesPage(PersonnalAccountingFacade* pa);
-    ~EmployeesPage(void);
+    Q_OBJECT
+    friend class Test_Employees_GUI;
 
-    void setUI(
-      QWidget* tabWidget,
-      QTableView* managersTable,
-      QLineEdit* loginInput,
-      QLineEdit* passwordInput,
-      QLineEdit* firstNameInput,
-      QLineEdit* secondNameInput,
-      QLineEdit* thirdNameInput,
-      QDateTimeEdit* birthdayInput,
-      QSpinBox* passportSerialInput,
-      QSpinBox* passportNumberInput,
-      QGroupBox* sexChecKGroup,
-      QRadioButton* maleInput,
-      QRadioButton* femaleInput,
-      QLineEdit* passportSourceInput,
-      QDateTimeEdit* passportIssueDate,
-      QLineEdit* addressInput,
-      QLineEdit* INNInput,
-      QStackedWidget* buttonStackedWidget,
-      QPushButton* editBtn,
-      QPushButton* addBtn,
-      QPushButton* confirmUpdateBtn,
-      QPushButton* cancelUpdateBtn,
-      QPushButton* confirmAddBtn,
-      QPushButton* cancelAddBtn,
-      QLabel* dataHeader
-    );
+  public:
+    EmployeesPage( PersonnalAccountingFacade *pa );
+    ~EmployeesPage( void );
 
-    void setErrorHandler( ErrorMessageHandler* errorHandler);
+    void setUI( QWidget *tabWidget, QTableView *managersTable, QLineEdit *loginInput, QLineEdit *passwordInput, QLineEdit *firstNameInput,
+                QLineEdit *secondNameInput, QLineEdit *thirdNameInput, QDateTimeEdit *birthdayInput, QSpinBox *passportSerialInput,
+                QSpinBox *passportNumberInput, QGroupBox *sexChecKGroup, QRadioButton *maleInput, QRadioButton *femaleInput, QLineEdit *passportSourceInput,
+                QDateTimeEdit *passportIssueDate, QLineEdit *addressInput, QLineEdit *INNInput, QStackedWidget *buttonStackedWidget, QPushButton *editBtn,
+                QPushButton *addBtn, QPushButton *confirmUpdateBtn, QPushButton *cancelUpdateBtn, QPushButton *confirmAddBtn, QPushButton *cancelAddBtn,
+                QLabel *dataHeader );
+
+    void setErrorHandler( ErrorMessageHandler *errorHandler );
 
     void refreshList();
 
-	void showDetailsById( int managerId);
+    void showDetailsById( int managerId );
 
-protected slots:
+  protected slots:
 
-    void showDetails( const QModelIndex& index);
+    void showDetails( const QModelIndex &index );
 
     void startEdit();
 
@@ -81,11 +61,9 @@ protected slots:
     void saveAdd();
 
     void cancel();
-    
 
-protected:    
-    
-    void enableInputs( bool isEnable);
+  protected:
+    void enableInputs( bool isEnable );
 
     void clearInputs();
 
@@ -94,19 +72,19 @@ protected:
     QDate getSelectedManagerDateOfEmployment();
 
     ManagerDTO readFromInputs();
-    
+
     bool validateInputs();
 
-    QHash<QWidget*, QString> widgetDefaultStyles;
+    QHash<QWidget *, QString> widgetDefaultStyles;
 
     void fillInputDefaultStyles();
 
-    void inputError( QWidget* edit);
-    
-    void clearError( QWidget* edit);
+    void inputError( QWidget *edit );
+
+    void clearError( QWidget *edit );
 
     void clearErrors();
-    
+
     enum Btns_Page {
         PAGE_BTNS_SHOW,
         PAGE_BTNS_EDIT,
@@ -118,48 +96,47 @@ protected:
 
     QString dataHeaderStyle;
 
-private:
-    PersonnalAccountingFacade* personnalAccouting;
+  private:
+    PersonnalAccountingFacade *personnalAccouting;
 
     QHash<int, ManagerDTO> managers;
 
-    ErrorMessageHandler* errorHandler;
+    ErrorMessageHandler *errorHandler;
 
-    QWidget* tabWidget;
+    QWidget *tabWidget;
 
-    QTableView* managersTable;
+    QTableView *managersTable;
 
-    QLineEdit* loginInput;
-    QLineEdit* passwordInput;
+    QLineEdit *loginInput;
+    QLineEdit *passwordInput;
 
-    QLineEdit* firstNameInput;
-    QLineEdit* secondNameInput;
-    QLineEdit* thirdNameInput;
+    QLineEdit *firstNameInput;
+    QLineEdit *secondNameInput;
+    QLineEdit *thirdNameInput;
 
-    QDateTimeEdit* birthdayInput;
+    QDateTimeEdit *birthdayInput;
 
-    QSpinBox* passportSerialInput;
-    QSpinBox* passportNumberInput;
+    QSpinBox *passportSerialInput;
+    QSpinBox *passportNumberInput;
 
-    QGroupBox* sexCheckGroup;
-    QRadioButton* maleInput;
-    QRadioButton* femaleInput;
+    QGroupBox *sexCheckGroup;
+    QRadioButton *maleInput;
+    QRadioButton *femaleInput;
 
-    QLineEdit* passportSourceInput;
+    QLineEdit *passportSourceInput;
 
-    QDateTimeEdit* passportIssueDate;
+    QDateTimeEdit *passportIssueDate;
 
-    QLineEdit* addressInput;
-    QLineEdit* INNInput;
+    QLineEdit *addressInput;
+    QLineEdit *INNInput;
 
-    QStackedWidget* buttonStackedWidget;
-    QPushButton* editBtn;
-    QPushButton* addBtn;
-    QPushButton* confirmUpdateBtn;
-    QPushButton* cancelUpdateBtn;
-    QPushButton* confirmAddBtn;
-    QPushButton* cancelAddBtn;
+    QStackedWidget *buttonStackedWidget;
+    QPushButton *editBtn;
+    QPushButton *addBtn;
+    QPushButton *confirmUpdateBtn;
+    QPushButton *cancelUpdateBtn;
+    QPushButton *confirmAddBtn;
+    QPushButton *cancelAddBtn;
 
-    QLabel* dataHeader;
+    QLabel *dataHeader;
 };
-

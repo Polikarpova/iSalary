@@ -1,20 +1,17 @@
 #pragma once
 
-#include "uservalidator.h"
 #include "IManagerRepository.h"
-
+#include "uservalidator.h"
 
 class ManagerValidator : protected UserValidator {
-public:
+  public:
+    ManagerValidator( IUserRepository *, IManagerRepository * );
+    ~ManagerValidator( void );
 
-    ManagerValidator( IUserRepository*, IManagerRepository*);
-    ~ManagerValidator(void);
+    bool isManagerValid( const Manager &manager, QString *errorOutput, bool checkPassword = false );
 
-    bool isManagerValid( const Manager& manager, QString* errorOutput, bool checkPassword = false);
+    bool isLoginExist( const QString &login );
 
-    bool isLoginExist( const QString& login);
-
-protected:
-    IManagerRepository* managerRepository;
+  protected:
+    IManagerRepository *managerRepository;
 };
-
