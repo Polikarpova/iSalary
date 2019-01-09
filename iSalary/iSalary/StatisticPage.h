@@ -20,11 +20,13 @@
 #include <qmodelindex>
 #include <qabstractitemview.h>
 
+#include "test_statistic_gui.h"
 /**
 * Класс, описывающий логику страницы "Статистика"
 */
 class StatisticPage : public QObject{
     Q_OBJECT
+	friend class Test_Statistic_GUI;
 public:
 
     StatisticPage( SalesFacade * salesFacade);
