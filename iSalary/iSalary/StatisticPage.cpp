@@ -207,7 +207,7 @@ void StatisticPage::paintCalendar() {
 
 		for( auto i = this->confirmedSales.begin(); i != this->confirmedSales.end(); i++ ) {
 		
-			map[i->confirmDate] += i->price*i->count;
+			map[i->saleDate] += i->price*i->count;
 			allIncome += i->price*i->count;
 		}
 
@@ -234,9 +234,7 @@ void StatisticPage::clearCalendar() {
 		
 		QTextCharFormat format( this->statisticCalendar->dateTextFormat( day.key()) );
 		
-		QColor color(255, 255, 255);
-		QBrush brush(color);
-		format.setBackground(brush);
+		format.setBackground(Qt::white);
 		this->statisticCalendar->setDateTextFormat( day.key(), format);
 	}
 }
