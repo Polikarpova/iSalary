@@ -5,6 +5,9 @@
 
 #include "ActiveSaleDTO.h"
 
+/**
+* “аблица с неподтвержденными продажами
+*/
 class UnconfirmedSalesTableModel : public QAbstractTableModel {
     Q_OBJECT
 public:

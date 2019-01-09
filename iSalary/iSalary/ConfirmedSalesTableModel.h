@@ -5,6 +5,9 @@
 
 #include "ActiveSaleDTO.h"
 
+/**
+* “аблица с подтвержденными продажами
+*/
 class ConfirmedSalesTableModel : public QAbstractTableModel {
     Q_OBJECT
 public:

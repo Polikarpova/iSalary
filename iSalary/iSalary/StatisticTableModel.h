@@ -5,6 +5,9 @@
 
 #include "ManagerStatisticDTO.h"
 
+/**
+* Таблица со статистикой менеджеров
+*/
 class StatisticTableModel : public QAbstractTableModel {
     Q_OBJECT
 public:

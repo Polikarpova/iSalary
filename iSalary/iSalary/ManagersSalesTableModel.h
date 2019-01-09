@@ -5,6 +5,9 @@
 
 #include "ManagerActiveSalesStatisticDTO.h"
 
+/**
+* Таблица с данными о продажах менеджеров
+*/
 class ManagersSalesTableModel : public QAbstractTableModel {
     Q_OBJECT
 public:

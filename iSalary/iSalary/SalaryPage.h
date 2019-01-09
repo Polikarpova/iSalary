@@ -27,19 +27,34 @@
 #include "ManagerDTO.h"
 #include "TabNavigator.h"
 
-class SalaryPage : public QObject{
+/**
+* Класс, описывающий логику страницы "Зарплата"
+*/
+class SalaryPage : public QObject {
     Q_OBJECT
 public:
+
     SalaryPage( SalesFacade * salesFacade, PersonnalAccountingFacade* personnalAccountingFacade);
-    void setUI( QTabWidget* tabWidget, QComboBox* salaryAccountingPeriod, QTableView* salaryTable, QTableView* salaryTotalTable, QLabel* managerFIOLabel, QSpinBox* salaryPasportSeries,
+    
+	/**
+	* Функция уставновки элементов ui, находящихся на странице, для непосредственного доступа к ним внутри класса SalaryPage
+	*/
+	void setUI( QTabWidget* tabWidget, QComboBox* salaryAccountingPeriod, QTableView* salaryTable, QTableView* salaryTotalTable, QLabel* managerFIOLabel, QSpinBox* salaryPasportSeries,
 				QSpinBox* salaryPasportNumber, QLineEdit* salaryPasportSourse, QDateEdit* salaryDateOfReceipt, QRadioButton* salaryMaleRButton, QRadioButton* salaryFemaleRButton,
 				QLineEdit* salaryINN, QPushButton* closeAccountingPeriod, QPushButton* salesButton, QPushButton* dataButton);
-    ~SalaryPage( void);
+    
+	~SalaryPage( void);
 
+	/**
+	* Функция обновления страницы
+	*/
 	void refreshPage();
 
 	void setErrorHandler( ErrorMessageHandler* errorHandler);
 
+	/**
+	* Установка навигатора, для переключения на другие страницы
+	*/
 	void setTabNavigator(TabNavigator* tabNavigator);
 
 protected slots:
@@ -48,7 +63,6 @@ protected slots:
 	void showSelectedPeriod();
 	void showManagerInformation();
 	void showManagerSales();
-
 	void viewSales();
 
 protected:
@@ -115,5 +129,9 @@ private:
 	QHash<int, ManagerSalaryDTO> salaryTotal;
 
 	void setEnable(bool flag);
+	
+	/**
+	* Добавление в таблицу кнопки, при нажатии на которую показываются продажи, повлиявшие на зарплату
+	*/
 	void addActionButtonsToTable(SalaryTableModel* model);
 };

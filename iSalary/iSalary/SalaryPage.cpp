@@ -293,7 +293,7 @@ void SalaryPage::viewSales() {
 
 	if ( list.isEmpty() ) {
 	
-		message = QString::fromWCharArray( L"Нет подтвержденных продаж в этом месяце");
+		message = QString::fromWCharArray( L"Нет подтвержденных продаж\nв этом месяце");
 	}
 
 	//Вывести информационное сообщение

@@ -20,13 +20,25 @@
 #include <qmodelindex>
 #include <qabstractitemview.h>
 
+/**
+* Класс, описывающий логику страницы "Статистика"
+*/
 class StatisticPage : public QObject{
     Q_OBJECT
 public:
-    StatisticPage( SalesFacade * salesFacade);
-    void setUI( QTabWidget* tabWidget, QDateEdit* statisticMonth, QTableView* statisticTable, QTableView* statisticSalesTable, QCalendarWidget* statisticCalendar);
-    ~StatisticPage( void);
 
+    StatisticPage( SalesFacade * salesFacade);
+    
+	/**
+	* Функция уставновки элементов ui, находящихся на странице, для непосредственного доступа к ним внутри класса StatisticPage
+	*/
+	void setUI( QTabWidget* tabWidget, QDateEdit* statisticMonth, QTableView* statisticTable, QTableView* statisticSalesTable, QCalendarWidget* statisticCalendar);
+    
+	~StatisticPage( void);
+
+	/**
+	* Функция обновления страницы
+	*/
 	void refreshPage();
 
 	void setErrorHandler( ErrorMessageHandler* errorHandler);
@@ -34,7 +46,6 @@ public:
 protected slots:
 
 	void monthChanged();
-
 	void showManagersStatistic();
 
 protected:

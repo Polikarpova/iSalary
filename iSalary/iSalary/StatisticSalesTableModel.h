@@ -5,6 +5,9 @@
 
 #include "ActiveSaleDTO.h"
 
+/**
+* Таблица с потвержденными продажами, влияющими на данные статистики
+*/
 class StatisticSalesTableModel : public QAbstractTableModel {
     Q_OBJECT
 public:

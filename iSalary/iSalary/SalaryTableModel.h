@@ -5,6 +5,9 @@
 
 #include "ManagerSalaryDTO.h"
 
+/**
+* Таблица с данными о прибыли и заработной плате по каждому менеджеру
+*/
 class SalaryTableModel : public QAbstractTableModel {
     Q_OBJECT
 public:

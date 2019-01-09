@@ -4,6 +4,9 @@
 #include <qdatetime.h>
 #include <qstring.h>
 
+/**
+* —труктура, описывающа€ активную продажу
+*/
 struct ActiveSaleDTO {
 	
 	int id;
