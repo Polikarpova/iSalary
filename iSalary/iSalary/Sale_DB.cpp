@@ -321,6 +321,26 @@ QList<ActiveSaleDTO> Sale_DB::getConfirmedSales( int id, QDate from, QDate to) {
 	return result;
 }
 
+QList<ActiveSaleDTO> Sale_DB::getConfirmedSalesSoldFromPeriod( int id, QDate from, QDate to) {
+
+	QList<ActiveSaleDTO> result;
+
+	QString sql = "select users.firstName, users.secondName, users.thirdName, sales.* from sales, users where sales.manager_id = users.id AND sales.isConfirmed = 1 AND users.id = :id AND sales.saleDate >= :dateFrom AND sales.saleDate <= :dateTo;";
+	QSqlQuery query( *db);
+	query.prepare(sql);
+	query.bindValue(":id", id);
+	query.bindValue(":dateFrom", from);
+	query.bindValue(":dateTo", to);
+
+	this->execQuery( query);
+
+	while( query.next() ) {
+		
+		result.append( this->readActiveSalesToDTO(query) );
+	}
+
+	return result;
+}
 
 void Sale_DB::confirmSale( int id) {
 

@@ -69,13 +69,22 @@ public:
 	QList<SaleInfoDTO> getSalesInfoConfimedFromPeriod( int id, QDate from, QDate to);
 
 	/**
-	* Возвращает продажу, которые были подтверждены в определенный период времени
+	* Возвращает продажи, которые были подтверждены в определенный период времени
 	* @param id - идентификатор менеджера
 	* @param from - дата начала периода (включая её)
 	* @param to - дата окончания периода (включая её)
 	* @return список с продажами или пустой список, если ничего не найдено
 	*/
 	QList<ActiveSaleDTO> getConfirmedSales( int id, QDate from, QDate to);
+
+	/**
+	* Возвращает подтвержденные продажи, которые были проданы в определенный период времени
+	* @param id - идентификатор менеджера
+	* @param from - дата начала периода (включая её)
+	* @param to - дата окончания периода (включая её)
+	* @return список с продажами или пустой список, если ничего не найдено
+	*/
+	QList<ActiveSaleDTO> getConfirmedSalesSoldFromPeriod( int id, QDate from, QDate to);
 
 	/**
 	* Подтверждает определённую продажу

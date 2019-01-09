@@ -88,6 +88,18 @@ QList<ActiveSaleDTO> SalesFacade::getConfirmedSalesFromPeriod(  QList<int> manag
 	return result;
 }
 
+QList<ActiveSaleDTO> SalesFacade::getConfirmedSalesSoldFromPeriod(  QList<int> managersIds, QDate dateFrom, QDate dateTo ) {
+
+	QList<ActiveSaleDTO> result;
+
+	for( auto i = managersIds.begin(); i != managersIds.end(); i++ ) {
+	
+		result.append( s->getConfirmedSalesSoldFromPeriod(*i, dateFrom, dateTo) );
+	}
+
+	return result;
+}
+
 QList<ActiveSaleDTO> SalesFacade::getActiveSalesForManager( int managerId){
 
 	return this->s->getActiveSalesForManager(managerId);

@@ -117,7 +117,7 @@ void StatisticPage::updateStatisticSalesTable() {
 		QDate current( statisticMonth->date() );
 		QDate dateFrom( current.year(), current.month(), 1 );
 		QDate dateTo( current.year(), current.month(), current.daysInMonth() );
-		list = this->salesFacade->getConfirmedSalesFromPeriod( ids, dateFrom, dateTo);
+		list = this->salesFacade->getConfirmedSalesSoldFromPeriod( ids, dateFrom, dateTo);
 	} catch ( QString* error) {	}
 
 	//чистим Qhash
@@ -145,7 +145,7 @@ void StatisticPage::viewSelectedManagerStatisticSales(int id) {
 		QDate current( statisticMonth->date() );
 		QDate dateFrom( current.year(), current.month(), 1 );
 		QDate dateTo( current.year(), current.month(), current.daysInMonth() );
-		list = this->salesFacade->getConfirmedSalesFromPeriod( ids, dateFrom, dateTo);
+		list = this->salesFacade->getConfirmedSalesSoldFromPeriod( ids, dateFrom, dateTo);
 	} catch ( QString* error) {	}
 
 	//чистим Qhash
