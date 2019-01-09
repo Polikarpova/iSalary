@@ -3,9 +3,7 @@
 #include <qsqlquery.h>
 #include <qstring.h>
 
-class ISqlTable
-{
-public:
+class ISqlTable {
+  public:
     virtual void createTable() = 0;
 };
-

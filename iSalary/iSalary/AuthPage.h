@@ -1,38 +1,37 @@
 #pragma once
 
-#include <qlineedit.h>
-#include <qpushbutton.h>
 #include <qlabel.h>
+#include <qlineedit.h>
 #include <qobject.h>
+#include <qpushbutton.h>
 
 #include "AuthorizationFacade.h"
-#include "SignResultDTO.h"
 #include "Codec.h"
+#include "SignResultDTO.h"
 
-class AuthPage : public QObject{
+class AuthPage : public QObject {
     Q_OBJECT
-public:
-    AuthPage( AuthorizationFacade * authFacade);
-    void setUI( QLineEdit* loginInput, QLineEdit* passwordInput, QPushButton* signInBtn, QLabel* errorOutput);
-    ~AuthPage( void);
+  public:
+    AuthPage( AuthorizationFacade *authFacade );
+    void setUI( QLineEdit *loginInput, QLineEdit *passwordInput, QPushButton *signInBtn, QLabel *errorOutput );
+    ~AuthPage( void );
 
-	int currentUserId();
-signals:
-    void userLoggedIn( const UserDTO& user, UserType userType);
+    int currentUserId();
+  signals:
+    void userLoggedIn( const UserDTO &user, UserType userType );
 
-private slots:
+  private slots:
     void userTryLogIn();
 
-private:
-    AuthorizationFacade * authFacade;
-    
-    QLineEdit* loginInput;
-    QLineEdit* passwordInput; 
-    QPushButton* signInBtn;
-    QLabel* errorOutput;
+  private:
+    AuthorizationFacade *authFacade;
 
-	SignInResultDTO currentUser;
+    QLineEdit *loginInput;
+    QLineEdit *passwordInput;
+    QPushButton *signInBtn;
+    QLabel *errorOutput;
 
-    void showLogInError( const QString& error);
+    SignInResultDTO currentUser;
+
+    void showLogInError( const QString &error );
 };
-

@@ -1,17 +1,15 @@
-#include "ClosedSale.h"
 #include "AccoutingPeriod.h"
+#include "ClosedSale.h"
 #include <qdatetime.h>
 #include <qlist.h>
 
 class CloseAccoutingPeriod : public AccoutingPeriod {
 
-public:
+  public:
+    CloseAccoutingPeriod( void );
 
-	CloseAccoutingPeriod( void);
+    QList<ClosedSale> getSales();
 
-	QList<ClosedSale> getSales();
-
-private:
-
-	QDateTime dateTo;	/**< дата закрытия */
+  private:
+    QDateTime dateTo; /**< дата закрытия */
 };

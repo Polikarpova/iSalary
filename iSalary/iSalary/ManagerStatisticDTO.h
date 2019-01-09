@@ -4,10 +4,10 @@
 
 struct ManagerStatisticDTO {
 
-	int managerId;
-	QString managerName;
-	int salesCount;
-	double income;
-	double let;
-	double oet;
+    int managerId;
+    QString managerName;
+    int salesCount;
+    double income;
+    double let;
+    double oet;
 };

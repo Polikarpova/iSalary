@@ -2,7 +2,6 @@
 
 class Salary {
 
-public:
-
-	Salary();
+  public:
+    Salary();
 };

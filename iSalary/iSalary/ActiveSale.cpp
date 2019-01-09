@@ -1,50 +1,23 @@
 #include "ActiveSale.h"
 
+ActiveSale::ActiveSale( void ) { isConfirm = false; }
 
-ActiveSale::ActiveSale(void)
-{
-	isConfirm = false;
-}
+ActiveSale::~ActiveSale( void ) {}
 
+void ActiveSale::confirm() { isConfirm = true; }
 
-ActiveSale::~ActiveSale(void)
-{
-}
+void ActiveSale::cancelConfirm() { isConfirm = false; }
 
-void ActiveSale::confirm() {
-	isConfirm = true;
-}
+bool ActiveSale::isConfirmed() { return isConfirm; }
 
-void ActiveSale::cancelConfirm() {
-	isConfirm = false;
-}
+QString ActiveSale::getProductName() { return product.getName(); }
 
-bool ActiveSale::isConfirmed() {
-	return isConfirm;
-}
+double ActiveSale::getProductCommission() { return product.getCommission(); }
 
-QString ActiveSale::getProductName() {
-	return product.getName();
-}
+void ActiveSale::setProduct( Product _product ) { product = _product; }
 
-double ActiveSale::getProductCommission() {
-	return product.getCommission();
-}
+Product ActiveSale::getProduct() { return product; }
 
-void ActiveSale::setProduct( Product _product ) {
-	product = _product;
-}
+void ActiveSale::setConfirmDate( const QDate &date ) { this->confirmDate = date; }
 
-Product ActiveSale::getProduct() {
-	return product;
-}
-
-void ActiveSale::setConfirmDate( const QDate& date) {
-
-	this->confirmDate = date;
-}
-
-QDate ActiveSale::getConfirmDate() {
-
-	return this->confirmDate;
-}
+QDate ActiveSale::getConfirmDate() { return this->confirmDate; }

@@ -1,137 +1,136 @@
 #pragma once
 
-#include <qobject.h>
 #include "Codec.h"
+#include <QDateEdit>
 #include <QTableView>
 #include <qcombobox.h>
 #include <qlabel.h>
-#include <qspinbox.h>
 #include <qlineedit.h>
-#include <QDateEdit>
-#include <qradiobutton.h>
+#include <qobject.h>
 #include <qpushbutton.h>
+#include <qradiobutton.h>
+#include <qspinbox.h>
 
 #include "ErrorMessageHandler.h"
 
-#include "SalesFacade.h"
-#include "PersonnalAccountingFacade.h"
 #include "ActiveSaleDTO.h"
 #include "ManagerActiveSalesStatisticDTO.h"
+#include "PersonnalAccountingFacade.h"
+#include "SalesFacade.h"
 
 #include "SalaryTableModel.h"
 #include "SalaryTotalTableModel.h"
+#include <qabstractitemview.h>
 #include <qheaderview.h>
 #include <qmodelindex>
-#include <qabstractitemview.h>
 
 #include "ManagerDTO.h"
 #include "TabNavigator.h"
 
 /**
-* Класс, описывающий логику страницы "Зарплата"
-*/
+ * Класс, описывающий логику страницы "Зарплата"
+ */
 class SalaryPage : public QObject {
     Q_OBJECT
-public:
+  public:
+    SalaryPage( SalesFacade *salesFacade, PersonnalAccountingFacade *personnalAccountingFacade );
 
-    SalaryPage( SalesFacade * salesFacade, PersonnalAccountingFacade* personnalAccountingFacade);
-    
-	/**
-	* Функция уставновки элементов ui, находящихся на странице, для непосредственного доступа к ним внутри класса SalaryPage
-	*/
-	void setUI( QTabWidget* tabWidget, QComboBox* salaryAccountingPeriod, QTableView* salaryTable, QTableView* salaryTotalTable, QLabel* managerFIOLabel, QSpinBox* salaryPasportSeries,
-				QSpinBox* salaryPasportNumber, QLineEdit* salaryPasportSourse, QDateEdit* salaryDateOfReceipt, QRadioButton* salaryMaleRButton, QRadioButton* salaryFemaleRButton,
-				QLineEdit* salaryINN, QPushButton* closeAccountingPeriod, QPushButton* salesButton, QPushButton* dataButton);
-    
-	~SalaryPage( void);
+    /**
+     * Функция уставновки элементов ui, находящихся на странице, для непосредственного доступа к ним внутри класса SalaryPage
+     */
+    void setUI( QTabWidget *tabWidget, QComboBox *salaryAccountingPeriod, QTableView *salaryTable, QTableView *salaryTotalTable, QLabel *managerFIOLabel,
+                QSpinBox *salaryPasportSeries, QSpinBox *salaryPasportNumber, QLineEdit *salaryPasportSourse, QDateEdit *salaryDateOfReceipt,
+                QRadioButton *salaryMaleRButton, QRadioButton *salaryFemaleRButton, QLineEdit *salaryINN, QPushButton *closeAccountingPeriod,
+                QPushButton *salesButton, QPushButton *dataButton );
 
-	/**
-	* Функция обновления страницы
-	*/
-	void refreshPage();
+    ~SalaryPage( void );
 
-	void setErrorHandler( ErrorMessageHandler* errorHandler);
+    /**
+     * Функция обновления страницы
+     */
+    void refreshPage();
 
-	/**
-	* Установка навигатора, для переключения на другие страницы
-	*/
-	void setTabNavigator(TabNavigator* tabNavigator);
+    void setErrorHandler( ErrorMessageHandler *errorHandler );
 
-protected slots:
+    /**
+     * Установка навигатора, для переключения на другие страницы
+     */
+    void setTabNavigator( TabNavigator *tabNavigator );
 
-	void showManager();
-	void showSelectedPeriod();
-	void showManagerInformation();
-	void showManagerSales();
-	void viewSales();
+  protected slots:
 
-protected:
+    void showManager();
+    void showSelectedPeriod();
+    void showManagerInformation();
+    void showManagerSales();
+    void viewSales();
 
-	/**
-	* Инициализация выпадающего списка всеми периодами
-	*/
-	void initComboBox();
+  protected:
+    /**
+     * Инициализация выпадающего списка всеми периодами
+     */
+    void initComboBox();
 
-	/**
-	* Инициализация формы с данными менеджера
-	*/
-	void initManagerForm();
+    /**
+     * Инициализация формы с данными менеджера
+     */
+    void initManagerForm();
 
-	/**
-	* Инициализация таблички со списоком менеджеров и зарплат
-	*/
-	void initSalaryTable ( QTableView* salaryTable);
-	
-	/**
-	* Инициализация таблички с итогом
-	*/
-	void initSalaryTotalTable( QTableView* salaryTotalTable);
-	
-	/**
-	* Возвращает id менеджера, выбранно в таблице со списком менеджеров и их зарплат
-	* @return идентификатор менеджера
-	*/
-	int getSelectedManagerId();
+    /**
+     * Инициализация таблички со списоком менеджеров и зарплат
+     */
+    void initSalaryTable( QTableView *salaryTable );
 
-	/**
-	* Обновляет список расчетных периодов
-	*/
-	void updatePeriods();
-	
-private:
-	ErrorMessageHandler* errorHandler;
+    /**
+     * Инициализация таблички с итогом
+     */
+    void initSalaryTotalTable( QTableView *salaryTotalTable );
 
-    SalesFacade* salesFacade;
-    PersonnalAccountingFacade* personnalAccountingFacade;
-	
-	TabNavigator* tabNav;
+    /**
+     * Возвращает id менеджера, выбранно в таблице со списком менеджеров и их зарплат
+     * @return идентификатор менеджера
+     */
+    int getSelectedManagerId();
 
-	QTabWidget* tabWidget;
-	QComboBox* salaryAccountingPeriod;
-	QTableView* salaryTable;
-	QTableView* salaryTotalTable;
-	
-	QLabel* managerFIOLabel;
-	QSpinBox* salaryPasportSeries;
-	QSpinBox* salaryPasportNumber;
-	QLineEdit* salaryPasportSourse;
-	QDateEdit* salaryDateOfReceipt;
-	QRadioButton* salaryMaleRButton;
-	QRadioButton* salaryFemaleRButton;
-	QLineEdit* salaryINN;
+    /**
+     * Обновляет список расчетных периодов
+     */
+    void updatePeriods();
 
-	QPushButton* closeAccountingPeriod;
-	QPushButton* salesButton;
-	QPushButton* dataButton;
+  private:
+    ErrorMessageHandler *errorHandler;
 
-	QMap<int, AccoutingPeriodDTO> comboBoxMap;
-	QHash<int, ManagerSalaryDTO> salary;
-	QHash<int, ManagerSalaryDTO> salaryTotal;
+    SalesFacade *salesFacade;
+    PersonnalAccountingFacade *personnalAccountingFacade;
 
-	void setEnable(bool flag);
-	
-	/**
-	* Добавление в таблицу кнопки, при нажатии на которую показываются продажи, повлиявшие на зарплату
-	*/
-	void addActionButtonsToTable(SalaryTableModel* model);
+    TabNavigator *tabNav;
+
+    QTabWidget *tabWidget;
+    QComboBox *salaryAccountingPeriod;
+    QTableView *salaryTable;
+    QTableView *salaryTotalTable;
+
+    QLabel *managerFIOLabel;
+    QSpinBox *salaryPasportSeries;
+    QSpinBox *salaryPasportNumber;
+    QLineEdit *salaryPasportSourse;
+    QDateEdit *salaryDateOfReceipt;
+    QRadioButton *salaryMaleRButton;
+    QRadioButton *salaryFemaleRButton;
+    QLineEdit *salaryINN;
+
+    QPushButton *closeAccountingPeriod;
+    QPushButton *salesButton;
+    QPushButton *dataButton;
+
+    QMap<int, AccoutingPeriodDTO> comboBoxMap;
+    QHash<int, ManagerSalaryDTO> salary;
+    QHash<int, ManagerSalaryDTO> salaryTotal;
+
+    void setEnable( bool flag );
+
+    /**
+     * Добавление в таблицу кнопки, при нажатии на которую показываются продажи, повлиявшие на зарплату
+     */
+    void addActionButtonsToTable( SalaryTableModel *model );
 };

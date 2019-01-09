@@ -1,47 +1,45 @@
 #pragma once
 
-#include "Salary.h"
 #include "Manager.h"
+#include "Salary.h"
 
 /**
-* Пречисление статусов РП
-* @author Курносов
-*/
+ * Пречисление статусов РП
+ * @author Курносов
+ */
 enum AccoutingPeriodStatus {
-    OPEN = 1,      /**< РП открыт */
-    CLOSE = 0      /**< РП закрыт */
+    OPEN = 1, /**< РП открыт */
+    CLOSE = 0 /**< РП закрыт */
 };
 
 /**
-* Абстрактный класс описывающий основное поведение сущности "Расчетный период"
-* @author Поликарпова
-*/
+ * Абстрактный класс описывающий основное поведение сущности "Расчетный период"
+ * @author Поликарпова
+ */
 class AccoutingPeriod {
 
-public:
+  public:
+    /**
+     * Конструктор.
+     */
+    AccoutingPeriod( void );
 
-	/**
-    * Конструктор.
-    */
-    AccoutingPeriod( void);
+    /**
+     * Деструктор
+     */
+    virtual ~AccoutingPeriod() = 0 {};
 
-	/**
-	* Деструктор
-	*/
-	virtual ~AccoutingPeriod() = 0 {};
+    /**
+     * Считает зарплату для одного менеджера
+     * @param m - менеджер, для которого считается зарплата
+     * @return - объект с информацией о зарплате в за определённый расчетный период
+     */
+    Salary calcSalary( Manager &m );
 
-	/**
-	* Считает зарплату для одного менеджера
-	* @param m - менеджер, для которого считается зарплата
-	* @return - объект с информацией о зарплате в за определённый расчетный период
-	*/
-    Salary calcSalary( Manager& m);
+    void setId( int id );
+    void setDateFrom( QDate dateFrom );
 
-	void setId( int id);
-	void setDateFrom( QDate dateFrom);
-
-private:
-
-	int id;	/**< id расчетного периода */
-	QDate dateFrom;	/**< дата открытия */
+  private:
+    int id;         /**< id расчетного периода */
+    QDate dateFrom; /**< дата открытия */
 };
