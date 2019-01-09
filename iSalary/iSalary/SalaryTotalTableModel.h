@@ -6,7 +6,7 @@
 #include "ManagerSalaryDTO.h"
 
 /**
-* Таблица с итоговыми данными о зарплате
+* РўР°Р±Р»РёС†Р° СЃ РёС‚РѕРіРѕРІС‹РјРё РґР°РЅРЅС‹РјРё Рѕ Р·Р°СЂРїР»Р°С‚Рµ
 */
 class SalaryTotalTableModel : public QAbstractTableModel {
     Q_OBJECT
@@ -29,7 +29,7 @@ public:
         COLUMN_EMPTY,
         COLUMN_ALL_INCOME,
         COLUMN_ALL_SALARY,
-        COLUMN_LAST /*Обозначает кол-во столбцов, на самом деле не существует*/
+        COLUMN_LAST /*РћР±РѕР·РЅР°С‡Р°РµС‚ РєРѕР»-РІРѕ СЃС‚РѕР»Р±С†РѕРІ, РЅР° СЃР°РјРѕРј РґРµР»Рµ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚*/
     };
 
 private:

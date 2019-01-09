@@ -6,7 +6,7 @@
 #include "ManagerStatisticDTO.h"
 
 /**
-* Таблица со статистикой менеджеров
+* РўР°Р±Р»РёС†Р° СЃРѕ СЃС‚Р°С‚РёСЃС‚РёРєРѕР№ РјРµРЅРµРґР¶РµСЂРѕРІ
 */
 class StatisticTableModel : public QAbstractTableModel {
     Q_OBJECT
@@ -31,7 +31,7 @@ public:
         COLUMN_INCOME,
 		COLUMN_LET,
 		COLUMN_OET,
-        COLUMN_LAST /*Обозначает кол-во столбцов, на самом деле не существует*/
+        COLUMN_LAST /*РћР±РѕР·РЅР°С‡Р°РµС‚ РєРѕР»-РІРѕ СЃС‚РѕР»Р±С†РѕРІ, РЅР° СЃР°РјРѕРј РґРµР»Рµ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚*/
     };
 
 private:

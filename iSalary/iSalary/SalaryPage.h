@@ -28,7 +28,7 @@
 #include "TabNavigator.h"
 
 /**
-* Класс, описывающий логику страницы "Зарплата"
+* РљР»Р°СЃСЃ, РѕРїРёСЃС‹РІР°СЋС‰РёР№ Р»РѕРіРёРєСѓ СЃС‚СЂР°РЅРёС†С‹ "Р—Р°СЂРїР»Р°С‚Р°"
 */
 class SalaryPage : public QObject {
     Q_OBJECT
@@ -37,7 +37,7 @@ public:
     SalaryPage( SalesFacade * salesFacade, PersonnalAccountingFacade* personnalAccountingFacade);
     
 	/**
-	* Функция уставновки элементов ui, находящихся на странице, для непосредственного доступа к ним внутри класса SalaryPage
+	* Р¤СѓРЅРєС†РёСЏ СѓСЃС‚Р°РІРЅРѕРІРєРё СЌР»РµРјРµРЅС‚РѕРІ ui, РЅР°С…РѕРґСЏС‰РёС…СЃСЏ РЅР° СЃС‚СЂР°РЅРёС†Рµ, РґР»СЏ РЅРµРїРѕСЃСЂРµРґСЃС‚РІРµРЅРЅРѕРіРѕ РґРѕСЃС‚СѓРїР° Рє РЅРёРј РІРЅСѓС‚СЂРё РєР»Р°СЃСЃР° SalaryPage
 	*/
 	void setUI( QTabWidget* tabWidget, QComboBox* salaryAccountingPeriod, QTableView* salaryTable, QTableView* salaryTotalTable, QLabel* managerFIOLabel, QSpinBox* salaryPasportSeries,
 				QSpinBox* salaryPasportNumber, QLineEdit* salaryPasportSourse, QDateEdit* salaryDateOfReceipt, QRadioButton* salaryMaleRButton, QRadioButton* salaryFemaleRButton,
@@ -46,14 +46,14 @@ public:
 	~SalaryPage( void);
 
 	/**
-	* Функция обновления страницы
+	* Р¤СѓРЅРєС†РёСЏ РѕР±РЅРѕРІР»РµРЅРёСЏ СЃС‚СЂР°РЅРёС†С‹
 	*/
 	void refreshPage();
 
 	void setErrorHandler( ErrorMessageHandler* errorHandler);
 
 	/**
-	* Установка навигатора, для переключения на другие страницы
+	* РЈСЃС‚Р°РЅРѕРІРєР° РЅР°РІРёРіР°С‚РѕСЂР°, РґР»СЏ РїРµСЂРµРєР»СЋС‡РµРЅРёСЏ РЅР° РґСЂСѓРіРёРµ СЃС‚СЂР°РЅРёС†С‹
 	*/
 	void setTabNavigator(TabNavigator* tabNavigator);
 
@@ -68,33 +68,33 @@ protected slots:
 protected:
 
 	/**
-	* Инициализация выпадающего списка всеми периодами
+	* РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РІС‹РїР°РґР°СЋС‰РµРіРѕ СЃРїРёСЃРєР° РІСЃРµРјРё РїРµСЂРёРѕРґР°РјРё
 	*/
 	void initComboBox();
 
 	/**
-	* Инициализация формы с данными менеджера
+	* РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ С„РѕСЂРјС‹ СЃ РґР°РЅРЅС‹РјРё РјРµРЅРµРґР¶РµСЂР°
 	*/
 	void initManagerForm();
 
 	/**
-	* Инициализация таблички со списоком менеджеров и зарплат
+	* РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ С‚Р°Р±Р»РёС‡РєРё СЃРѕ СЃРїРёСЃРѕРєРѕРј РјРµРЅРµРґР¶РµСЂРѕРІ Рё Р·Р°СЂРїР»Р°С‚
 	*/
 	void initSalaryTable ( QTableView* salaryTable);
 	
 	/**
-	* Инициализация таблички с итогом
+	* РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ С‚Р°Р±Р»РёС‡РєРё СЃ РёС‚РѕРіРѕРј
 	*/
 	void initSalaryTotalTable( QTableView* salaryTotalTable);
 	
 	/**
-	* Возвращает id менеджера, выбранно в таблице со списком менеджеров и их зарплат
-	* @return идентификатор менеджера
+	* Р’РѕР·РІСЂР°С‰Р°РµС‚ id РјРµРЅРµРґР¶РµСЂР°, РІС‹Р±СЂР°РЅРЅРѕ РІ С‚Р°Р±Р»РёС†Рµ СЃРѕ СЃРїРёСЃРєРѕРј РјРµРЅРµРґР¶РµСЂРѕРІ Рё РёС… Р·Р°СЂРїР»Р°С‚
+	* @return РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РјРµРЅРµРґР¶РµСЂР°
 	*/
 	int getSelectedManagerId();
 
 	/**
-	* Обновляет список расчетных периодов
+	* РћР±РЅРѕРІР»СЏРµС‚ СЃРїРёСЃРѕРє СЂР°СЃС‡РµС‚РЅС‹С… РїРµСЂРёРѕРґРѕРІ
 	*/
 	void updatePeriods();
 	
@@ -131,7 +131,7 @@ private:
 	void setEnable(bool flag);
 	
 	/**
-	* Добавление в таблицу кнопки, при нажатии на которую показываются продажи, повлиявшие на зарплату
+	* Р”РѕР±Р°РІР»РµРЅРёРµ РІ С‚Р°Р±Р»РёС†Сѓ РєРЅРѕРїРєРё, РїСЂРё РЅР°Р¶Р°С‚РёРё РЅР° РєРѕС‚РѕСЂСѓСЋ РїРѕРєР°Р·С‹РІР°СЋС‚СЃСЏ РїСЂРѕРґР°Р¶Рё, РїРѕРІР»РёСЏРІС€РёРµ РЅР° Р·Р°СЂРїР»Р°С‚Сѓ
 	*/
 	void addActionButtonsToTable(SalaryTableModel* model);
 };

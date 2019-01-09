@@ -6,7 +6,7 @@
 #include "ActiveSaleDTO.h"
 
 /**
-* Таблица с неподтвержденными продажами
+* РўР°Р±Р»РёС†Р° СЃ РЅРµРїРѕРґС‚РІРµСЂР¶РґРµРЅРЅС‹РјРё РїСЂРѕРґР°Р¶Р°РјРё
 */
 class UnconfirmedSalesTableModel : public QAbstractTableModel {
     Q_OBJECT
@@ -33,7 +33,7 @@ public:
         COLUMN_COUNT,
         COLUMN_PRICE,
         COLUMN_COMMISION,
-        COLUMN_LAST /*Обозначает кол-во столбцов, на самом деле не существует*/
+        COLUMN_LAST /*РћР±РѕР·РЅР°С‡Р°РµС‚ РєРѕР»-РІРѕ СЃС‚РѕР»Р±С†РѕРІ, РЅР° СЃР°РјРѕРј РґРµР»Рµ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚*/
     };
 
 private:

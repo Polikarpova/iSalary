@@ -21,7 +21,7 @@
 #include <qabstractitemview.h>
 
 /**
-* Класс, описывающий логику страницы "Статистика"
+* РљР»Р°СЃСЃ, РѕРїРёСЃС‹РІР°СЋС‰РёР№ Р»РѕРіРёРєСѓ СЃС‚СЂР°РЅРёС†С‹ "РЎС‚Р°С‚РёСЃС‚РёРєР°"
 */
 class StatisticPage : public QObject{
     Q_OBJECT
@@ -30,14 +30,14 @@ public:
     StatisticPage( SalesFacade * salesFacade);
     
 	/**
-	* Функция уставновки элементов ui, находящихся на странице, для непосредственного доступа к ним внутри класса StatisticPage
+	* Р¤СѓРЅРєС†РёСЏ СѓСЃС‚Р°РІРЅРѕРІРєРё СЌР»РµРјРµРЅС‚РѕРІ ui, РЅР°С…РѕРґСЏС‰РёС…СЃСЏ РЅР° СЃС‚СЂР°РЅРёС†Рµ, РґР»СЏ РЅРµРїРѕСЃСЂРµРґСЃС‚РІРµРЅРЅРѕРіРѕ РґРѕСЃС‚СѓРїР° Рє РЅРёРј РІРЅСѓС‚СЂРё РєР»Р°СЃСЃР° StatisticPage
 	*/
 	void setUI( QTabWidget* tabWidget, QDateEdit* statisticMonth, QTableView* statisticTable, QTableView* statisticSalesTable, QCalendarWidget* statisticCalendar);
     
 	~StatisticPage( void);
 
 	/**
-	* Функция обновления страницы
+	* Р¤СѓРЅРєС†РёСЏ РѕР±РЅРѕРІР»РµРЅРёСЏ СЃС‚СЂР°РЅРёС†С‹
 	*/
 	void refreshPage();
 

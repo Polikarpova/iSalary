@@ -6,7 +6,7 @@
 #include "ManagerActiveSalesStatisticDTO.h"
 
 /**
-* Таблица с данными о продажах менеджеров
+* РўР°Р±Р»РёС†Р° СЃ РґР°РЅРЅС‹РјРё Рѕ РїСЂРѕРґР°Р¶Р°С… РјРµРЅРµРґР¶РµСЂРѕРІ
 */
 class ManagersSalesTableModel : public QAbstractTableModel {
     Q_OBJECT
@@ -29,7 +29,7 @@ public:
         COLUMN_FIO,
         COLUMN_CONFIRM_COUNT,
         COLUMN_UNCONFIRM_COUNT,
-        COLUMN_LAST /*Обозначает кол-во столбцов, на самом деле не существует*/
+        COLUMN_LAST /*РћР±РѕР·РЅР°С‡Р°РµС‚ РєРѕР»-РІРѕ СЃС‚РѕР»Р±С†РѕРІ, РЅР° СЃР°РјРѕРј РґРµР»Рµ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚*/
     };
 
 private:
