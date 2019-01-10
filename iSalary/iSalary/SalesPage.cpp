@@ -101,10 +101,6 @@ void SalesPage::updateManagersTable() {
         this->errorHandler->handleError( error );
     }
 
-    //если это были изменены данные (1), то необходимо получить текущую строчку
-    //узнаем текущую строчку
-    int currentId = this->getSelectedManagerSalesId();
-
     //чистим Qhash
     this->managersSales.clear();
     //заполн€ем его новыми данными из бд
@@ -116,16 +112,6 @@ void SalesPage::updateManagersTable() {
     //инициализируем и заполн€ем модель
     ManagersSalesTableModel *model = static_cast<ManagersSalesTableModel *>( this->managersSalesTable->model() );
     model->refreshData( list );
-
-    //если это (1) пытаемс€ установить его текущим
-    if ( currentId != -1 ) {
-
-        QModelIndex index = model->getIndexByRecordId( currentId );
-        if ( index.isValid() ) {
-
-            this->managersSalesTable->setCurrentIndex( index );
-        }
-    }
 }
 
 void SalesPage::updateUnconfirmedTable() {
@@ -360,7 +346,6 @@ void SalesPage::buttonForAll() {
     //сн€ть в таблицы выделение
     this->setEnable( false );
 
-    this->managersSalesTable->clearSelection();
     this->refreshPage();
 
     this->setEnable( true );
