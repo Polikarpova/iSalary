@@ -14,10 +14,13 @@ void StatisticPage::refreshPage() {
 
 void StatisticPage::setErrorHandler( ErrorMessageHandler *errorHandler ) { this->errorHandler = errorHandler; }
 
-void StatisticPage::setUI( QTabWidget *tabWidget, QDateEdit *statisticMonth, QTableView *statisticTable, QTableView *statisticSalesTable,
-                           QCalendarWidget *statisticCalendar ) {
+void StatisticPage::setUI( QTabWidget *tabWidget, QPushButton *statisticForAllButton, QDateEdit *statisticMonth, QTableView *statisticTable,
+                           QTableView *statisticSalesTable, QCalendarWidget *statisticCalendar ) {
 
     this->tabWidget = tabWidget;
+    this->statisticForAllButton = statisticForAllButton;
+    connect( this->statisticForAllButton, &QPushButton::clicked, this, &StatisticPage::showForAll );
+
     this->statisticMonth = statisticMonth;
     this->statisticCalendar = statisticCalendar;
 
@@ -176,6 +179,15 @@ void StatisticPage::showManagersStatistic() {
     int currentId = this->getSelectedManagerId();
     this->viewSelectedManagerStatisticSales( currentId );
     this->paintCalendar();
+
+    this->setEnable( true );
+}
+
+void StatisticPage::showForAll() {
+
+    this->setEnable( false );
+
+    this->refreshPage();
 
     this->setEnable( true );
 }

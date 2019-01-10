@@ -49,7 +49,7 @@ MainWindow::MainWindow( AuthPage *authPage, EmployeesPage *employeesPage, SalesP
     this->managerPage->setErrorHandler( errorHandler );
 
     this->statisticPage = statisticPage;
-    this->statisticPage->setUI( ui.tabWidget, ui.statisticMonth, ui.statisticTable, ui.statisticSalesTable, ui.statisticCalendar );
+    this->statisticPage->setUI( ui.tabWidget, ui.statisticForAllButton, ui.statisticMonth, ui.statisticTable, ui.statisticSalesTable, ui.statisticCalendar );
 
     TabNavigator *tabNavigator = new TabNavigator( ui.tabWidget );
     tabNavigator->setEmployeesPage( this->employeesPage );

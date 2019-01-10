@@ -2,6 +2,7 @@
 
 #include "Codec.h"
 #include <QDateEdit>
+#include <QPushButton>
 #include <QTableView>
 #include <qcalendarwidget.h>
 #include <qobject.h>
@@ -34,8 +35,8 @@ class StatisticPage : public QObject {
     /**
      * Функция уставновки элементов ui, находящихся на странице, для непосредственного доступа к ним внутри класса StatisticPage
      */
-    void setUI( QTabWidget *tabWidget, QDateEdit *statisticMonth, QTableView *statisticTable, QTableView *statisticSalesTable,
-                QCalendarWidget *statisticCalendar );
+    void setUI( QTabWidget *tabWidget, QPushButton *statisticForAllButton, QDateEdit *statisticMonth, QTableView *statisticTable,
+                QTableView *statisticSalesTable, QCalendarWidget *statisticCalendar );
 
     ~StatisticPage( void );
 
@@ -50,6 +51,7 @@ class StatisticPage : public QObject {
 
     void monthChanged();
     void showManagersStatistic();
+    void showForAll();
 
   protected:
     void initStatisticTable( QTableView *statisticTable );
@@ -66,6 +68,7 @@ class StatisticPage : public QObject {
     SalesFacade *salesFacade;
 
     QTabWidget *tabWidget;
+    QPushButton *statisticForAllButton;
     QDateEdit *statisticMonth;
     QTableView *statisticTable;
     QTableView *statisticSalesTable;
