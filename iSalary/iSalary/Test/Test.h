@@ -6,6 +6,10 @@
 #include "test_employees_gui.h"
 #include "test_sales_gui.h"
 #include "test_statistic_gui.h"
+
+#include <iostream>
+#include "stdio.h"
+using namespace std;
 class Test
 {
 public:
