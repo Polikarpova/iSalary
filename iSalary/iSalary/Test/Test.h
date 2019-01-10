@@ -6,6 +6,7 @@
 #include "test_employees_gui.h"
 #include "test_sales_gui.h"
 #include "test_statistic_gui.h"
+#include "test_salary_gui.h"
 
 #include <iostream>
 #include "stdio.h"
@@ -20,7 +21,7 @@ public:
 		ProductPage *productPage,
 		SalesPage *salesPage,
 		StatisticPage *statisticPage,
-		//SalaryPage *salaryPage,
+		SalaryPage *salaryPage,
 		ManagerPage *managerPage
 	);
 	~Test(void);
@@ -33,7 +34,7 @@ private:
 	ProductPage *productPage;
 	SalesPage *salesPage;
 	StatisticPage *statisticPage;
-	//SalaryPage *salaryPage;
+	SalaryPage *salaryPage;
 	ManagerPage *managerPage;
 
 	void test_DB();

@@ -7,6 +7,7 @@ Test::Test(
 	ProductPage *productPage,
 	SalesPage *salesPage,
 	StatisticPage *statisticPage,
+	SalaryPage *salaryPage,
 	ManagerPage *managerPage )
 {
 	
@@ -16,6 +17,7 @@ Test::Test(
 	this->productPage = productPage;
 	this->salesPage = salesPage;
 	this->statisticPage = statisticPage;
+	this->salaryPage = salaryPage;
 	this->managerPage = managerPage;
 	/*db->setDatabaseName( "test");
     db->setUserName( "root");
@@ -48,19 +50,34 @@ void Test::test_DB() {
 void Test::test_GUI() {
 	
 	cout<<"Testing GUI"<<endl;
+
 	Test_Employees_GUI test_employees_GUI( db, employeesPage );
 	QTest::qExec( &test_employees_GUI );
+
 	cout<<endl;
+
 	Test_Product_GUI test_product_GUI( db, productPage );
 	QTest::qExec( &test_product_GUI );
+
 	cout<<endl;
+
 	Test_Manager_GUI test_manager_GUI( db, managerPage );
 	QTest::qExec( &test_manager_GUI );
+
 	cout<<endl;
+
 	Test_Sales_GUI test_sales_GUI( db, salesPage );
 	QTest::qExec( &test_sales_GUI );
+
 	cout<<endl;
+
 	Test_Statistic_GUI test_statistic_GUI( db, statisticPage );
 	QTest::qExec( &test_statistic_GUI );
+
+	cout<<endl;
+
+	Test_Salary_GUI test_salary_GUI( db, salaryPage, employeesPage, salesPage );
+	QTest::qExec( &test_salary_GUI );
+
 	cout<<endl;
 }

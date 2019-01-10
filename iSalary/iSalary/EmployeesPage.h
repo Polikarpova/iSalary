@@ -27,10 +27,11 @@
 #include "PersonnalAccountingFacade.h"
 
 #include "test_employees_gui.h"
+#include "test_salary_gui.h"
 class EmployeesPage : public QObject {
     Q_OBJECT
     friend class Test_Employees_GUI;
-
+	friend class Test_Salary_GUI;
   public:
     EmployeesPage( PersonnalAccountingFacade *pa );
     ~EmployeesPage( void );

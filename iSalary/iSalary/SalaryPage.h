@@ -27,11 +27,14 @@
 #include "ManagerDTO.h"
 #include "TabNavigator.h"
 
+#include "test_salary_gui.h"
+
 /**
  * Класс, описывающий логику страницы "Зарплата"
  */
 class SalaryPage : public QObject {
     Q_OBJECT
+	friend class Test_Salary_GUI;
   public:
     SalaryPage( SalesFacade *salesFacade, PersonnalAccountingFacade *personnalAccountingFacade );
 
