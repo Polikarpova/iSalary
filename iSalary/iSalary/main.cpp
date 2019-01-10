@@ -57,8 +57,7 @@ int main(int argc, char *argv[])
     sqlDB.setHostName( settings.databaseIP);
     sqlDB.setPort( settings.databasePort.toInt());
     
-	//Test test = Test(sqlDB);
-	//test.startTesting();
+	
 
     sqlDB.setUserName( settings.databaseUser);
     sqlDB.setPassword( settings.databasePassword);
@@ -120,6 +119,9 @@ int main(int argc, char *argv[])
 		&statisticPage
 	);
 	
+	// Test test = Test( &sqlDB,  &employeesPage, &productPage, &salesPage, &statisticPage, &managerPage);
+	// test.startTesting();
+
     try {
 		w.showMaximized();
     } catch (...) {

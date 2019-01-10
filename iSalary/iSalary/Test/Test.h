@@ -5,7 +5,7 @@
 #include "test_manager_gui.h"
 #include "test_employees_gui.h"
 #include "test_sales_gui.h"
-
+#include "test_statistic_gui.h"
 class Test
 {
 public:
@@ -15,7 +15,7 @@ public:
 		EmployeesPage *employeesPage,
 		ProductPage *productPage,
 		SalesPage *salesPage,
-		//StatisticPage *statisticPage,
+		StatisticPage *statisticPage,
 		//SalaryPage *salaryPage,
 		ManagerPage *managerPage
 	);
@@ -28,7 +28,7 @@ private:
 	EmployeesPage *employeesPage;
 	ProductPage *productPage;
 	SalesPage *salesPage;
-	//StatisticPage *statisticPage;
+	StatisticPage *statisticPage;
 	//SalaryPage *salaryPage;
 	ManagerPage *managerPage;
 

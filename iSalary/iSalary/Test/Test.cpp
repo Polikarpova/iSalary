@@ -6,6 +6,7 @@ Test::Test(
 	EmployeesPage *employeesPage, 
 	ProductPage *productPage,
 	SalesPage *salesPage,
+	StatisticPage *statisticPage,
 	ManagerPage *managerPage )
 {
 	
@@ -14,6 +15,7 @@ Test::Test(
 	this->employeesPage = employeesPage;
 	this->productPage = productPage;
 	this->salesPage = salesPage;
+	this->statisticPage = statisticPage;
 	this->managerPage = managerPage;
 	/*db->setDatabaseName( "test");
     db->setUserName( "root");
@@ -54,4 +56,6 @@ void Test::test_GUI() {
 	Test_Sales_GUI test_sales_GUI( db, salesPage );
 	QTest::qExec( &test_sales_GUI );
 	
+	Test_Statistic_GUI test_statistic_GUI( db, statisticPage );
+	QTest::qExec( &test_statistic_GUI );
 }
