@@ -3,16 +3,14 @@
 
 #include <QObject>
 
-class Test_Auth_GUI : public QObject
-{
-	Q_OBJECT
+class Test_Auth_GUI : public QObject {
+    Q_OBJECT
 
-public:
-	Test_Auth_GUI(QObject *parent);
-	~Test_Auth_GUI();
+  public:
+    Test_Auth_GUI( QObject *parent );
+    ~Test_Auth_GUI();
 
-private:
-	
+  private:
 };
 
 #endif // TEST_AUTH_GUI_H

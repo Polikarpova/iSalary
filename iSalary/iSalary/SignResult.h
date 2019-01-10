@@ -3,20 +3,19 @@
 #include "UserInfo.h"
 
 /**
-* Структура, описывающая результат попытки авторизации
-* @author Курносов
-*/
+ * Структура, описывающая результат попытки авторизации
+ * @author Курносов
+ */
 struct SignInResult : public UserInfo {
-public:
+  public:
     bool success; /**< Успешность попытки */
 };
 
-
 /**
-* Структура, описывающая результат попытки регистрации
-* @author Курносов
-*/
+ * Структура, описывающая результат попытки регистрации
+ * @author Курносов
+ */
 struct SignUpResult : public SignInResult {
-public:
+  public:
     QString failReason; /**< Причина неудачи попытки */
 };

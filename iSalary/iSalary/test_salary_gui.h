@@ -3,16 +3,14 @@
 
 #include <QObject>
 
-class Test_Salary_GUI : public QObject
-{
-	Q_OBJECT
+class Test_Salary_GUI : public QObject {
+    Q_OBJECT
 
-public:
-	Test_Salary_GUI(QObject *parent);
-	~Test_Salary_GUI();
+  public:
+    Test_Salary_GUI( QObject *parent );
+    ~Test_Salary_GUI();
 
-private:
-	
+  private:
 };
 
 #endif // TEST_SALARY_GUI_H

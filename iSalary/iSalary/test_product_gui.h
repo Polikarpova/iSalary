@@ -1,45 +1,44 @@
 #ifndef TEST_PRODUCT_GUI_H
 #define TEST_PRODUCT_GUI_H
 
-#include <QObject>
-#include <qtest.h>
-#include "QTextCodec"
 #include "ProductPage.h"
-#include <QSqlDatabase>
 #include "Product_DB.h"
+#include "QTextCodec"
+#include <QObject>
+#include <QSqlDatabase>
+#include <qtest.h>
 
-class Test_Product_GUI : public QObject
-{
-	Q_OBJECT
-	friend class ProductPage;
+class Test_Product_GUI : public QObject {
+    Q_OBJECT
+    friend class ProductPage;
 
-public:
-	Test_Product_GUI( QSqlDatabase *sql, ProductPage *productPage );
-	~Test_Product_GUI();
+  public:
+    Test_Product_GUI( QSqlDatabase *sql, ProductPage *productPage );
+    ~Test_Product_GUI();
 
-private:
-	ProductPage *productPage;
-	Product_DB * product_DB;
-	QSqlDatabase *sql;
+  private:
+    ProductPage *productPage;
+    Product_DB *product_DB;
+    QSqlDatabase *sql;
 
-	void removeProduct( QString productName );
-	Product createProduct( QString productName, double productCommission );
-	QString findElemInTable( int row, int col );
-	void directAddProduct();
-	void directUpdateProduct();
-	
-private slots:
-	void addProduct();
-	void cancelAddProduct();
+    void removeProduct( QString productName );
+    Product createProduct( QString productName, double productCommission );
+    QString findElemInTable( int row, int col );
+    void directAddProduct();
+    void directUpdateProduct();
 
-	void showProduct();
+  private slots:
+    void addProduct();
+    void cancelAddProduct();
 
-	void deleteProduct();
+    void showProduct();
 
-	void updateProduct();
-	void cancelUpdateProduct();
+    void deleteProduct();
 
-	void searchProduct();
+    void updateProduct();
+    void cancelUpdateProduct();
+
+    void searchProduct();
 };
 
 #endif // TEST_PRODUCT_GUI_H

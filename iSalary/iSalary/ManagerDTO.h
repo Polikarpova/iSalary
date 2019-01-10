@@ -1,10 +1,10 @@
 #pragma once
+#include "Manager.h"
 #include "UserDTO.h"
 #include "qdatetime.h"
-#include "Manager.h"
 
 struct ManagerDTO : public UserDTO {
-public:
+  public:
     QString firstName;
     QString secondName;
     QString thirdName;

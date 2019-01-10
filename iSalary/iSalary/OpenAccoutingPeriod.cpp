@@ -1,5 +1,3 @@
 #include "OpenAccoutingPeriod.h"
 
-OpenAccoutingPeriod::OpenAccoutingPeriod( void) {
-
-}
+OpenAccoutingPeriod::OpenAccoutingPeriod( void ) {}
