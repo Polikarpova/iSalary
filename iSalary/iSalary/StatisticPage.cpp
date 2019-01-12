@@ -23,7 +23,8 @@ void StatisticPage::setUI( QTabWidget *tabWidget, QPushButton *statisticForAllBu
 
     this->statisticMonth = statisticMonth;
     this->statisticCalendar = statisticCalendar;
-
+	this->statisticCalendar->setSelectedDate( this->statisticCalendar->minimumDate() );
+	this->statisticCalendar->setCurrentPage( QDate::currentDate().year(), QDate::currentDate().month());
     this->statisticMonth->setDate( QDate::currentDate() );
     connect( this->statisticMonth, &QDateEdit::dateChanged, this, &StatisticPage::monthChanged );
 
