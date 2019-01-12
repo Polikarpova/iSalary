@@ -7,6 +7,7 @@
 #include "test_sales_gui.h"
 #include "test_statistic_gui.h"
 #include "test_salary_gui.h"
+#include "test_auth_gui.h"
 
 #include <iostream>
 #include "stdio.h"
@@ -16,7 +17,7 @@ class Test
 public:
 	Test( 
 		QSqlDatabase *sql,
-		//AuthPage *authPage,
+		AuthPage *authPage,
 		EmployeesPage *employeesPage,
 		ProductPage *productPage,
 		SalesPage *salesPage,
@@ -29,7 +30,7 @@ public:
 
 private:
 	QSqlDatabase  *db;
-	//AuthPage *authPage;
+	AuthPage *authPage;
 	EmployeesPage *employeesPage;
 	ProductPage *productPage;
 	SalesPage *salesPage;

@@ -2,7 +2,8 @@
 
 
 Test::Test( 
-	QSqlDatabase * sqlDB, 
+	QSqlDatabase * sqlDB,
+	AuthPage *authPage,
 	EmployeesPage *employeesPage, 
 	ProductPage *productPage,
 	SalesPage *salesPage,
@@ -13,6 +14,7 @@ Test::Test(
 	
 	freopen("testing.log", "w", stdout);
 	db = sqlDB;
+	this->authPage = authPage;
 	this->employeesPage = employeesPage;
 	this->productPage = productPage;
 	this->salesPage = salesPage;
@@ -78,6 +80,11 @@ void Test::test_GUI() {
 
 	Test_Salary_GUI test_salary_GUI( db, salaryPage, employeesPage, salesPage );
 	QTest::qExec( &test_salary_GUI );
+
+	cout<<endl;
+
+	Test_Auth_GUI test_auth_GUI( db, authPage, managerPage );
+	QTest::qExec( &test_auth_GUI );
 
 	cout<<endl;
 }

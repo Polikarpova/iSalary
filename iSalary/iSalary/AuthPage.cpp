@@ -5,12 +5,15 @@ AuthPage::AuthPage( AuthorizationFacade *authFacade ) {
     this->currentUser.success = false;
 }
 
-void AuthPage::setUI( QLineEdit *loginInput, QLineEdit *passwordInput, QPushButton *signInBtn, QLabel *errorOutput ) {
+void AuthPage::setUI( QLineEdit *loginInput, QLineEdit *passwordInput, QPushButton *signInBtn, QLabel *errorOutput, QStackedWidget *auth_program_stackedWidget,
+                      QStackedWidget *boss_manager_stackedWidget ) {
     this->loginInput = loginInput;
     this->passwordInput = passwordInput;
     this->signInBtn = signInBtn;
     this->errorOutput = errorOutput;
     this->errorOutput->setText( "" );
+    this->auth_program_stackedWidget = auth_program_stackedWidget;
+    this->boss_manager_stackedWidget = boss_manager_stackedWidget;
 
     connect( this->signInBtn, &QPushButton::clicked, this, &AuthPage::userTryLogIn );
     connect( this->passwordInput, &QLineEdit::returnPressed, this, &AuthPage::userTryLogIn );

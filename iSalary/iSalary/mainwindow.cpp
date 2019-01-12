@@ -13,7 +13,7 @@ MainWindow::MainWindow( AuthPage *authPage, EmployeesPage *employeesPage, SalesP
     this->errorHandler = new ErrorMessageHandler( this );
 
     this->authPage = authPage;
-    this->authPage->setUI( ui.loginInput, ui.passwordInput, ui.enterButton, ui.errorLabel );
+    this->authPage->setUI( ui.loginInput, ui.passwordInput, ui.enterButton, ui.errorLabel, ui.auth_program_stackedWidget, ui.boss_manager_stackedWidget );
     connect( this->authPage, &AuthPage::userLoggedIn, this, &MainWindow::enterProgram );
     connect( ui.quitButton, &QPushButton::clicked, this, &MainWindow::exit );
 
