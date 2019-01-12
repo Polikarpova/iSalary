@@ -57,6 +57,13 @@ ActiveSale Test_Statistic_GUI::createSale( Product product, QDate saleDate, int 
     return sale;
 }
 
+ActiveSale Test_Statistic_GUI::createConfirmedSale( Product product, QDate saleDate, int manager_id ) {
+	
+	ActiveSale sale = createSale( product, saleDate, manager_id );
+	sale_DB->confirmSale( sale.getId() );
+	return sale;
+}
+
 void Test_Statistic_GUI::compareRowInStatisticTable( Manager manager, int row ) {
 
     QString exp_FIO = manager.getSecondName() + " " + manager.getFirstName() + " " + manager.getThirdName();
@@ -175,6 +182,44 @@ void Test_Statistic_GUI::managerStatisticIsEmpty( Manager manager, int row ) {
     QCOMPARE( LET, 0.0 );
 }
 
+void Test_Statistic_GUI::checkCalendar( Manager manager ) { 
+	
+	QVector<ActiveSale>sales = sale_DB->getActiveAll( manager.getId() );
+	QMap<int, double>costInDays;
+	double allCost = 0;
+	QDate dateInWidget = statisticPage->statisticMonth->date();
+
+	for ( int sale_num = 0; sale_num < sales.size(); sale_num++ ) {
+		
+		if ( sales[ sale_num ].getSaleDate() >= dateInWidget ) {
+			
+			ActiveSale sale = sales[ sale_num ];
+			double cost = sale.getCost() * sale.getCount();
+			costInDays[ sale.getSaleDate().day() ] += cost;
+			allCost += cost;
+		}
+	}
+
+	for ( int day = 1; day <= dateInWidget.daysInMonth(); day++ ) {
+		
+		QDate date = QDate( dateInWidget.year(), dateInWidget.month(), day );
+		QColor color = statisticPage->statisticCalendar->dateTextFormat( date ).background().color();
+		QColor exp_color;
+		int index = 255 - ( 255 * costInDays[ day ] / allCost);
+		if ( index != 255 )
+			exp_color = QColor( index, 255, index );
+		else
+			exp_color = QColor( 0, 0, 0 );
+
+		int red = color.red();
+		int green = color.green();
+		int blue = color.blue();
+		
+		QCOMPARE( color.red(), exp_color.red() );
+		QCOMPARE( color.green(), exp_color.green() );
+		QCOMPARE( color.blue(), exp_color.blue() );
+	}
+}
 
 
 void Test_Statistic_GUI::showCountManagerSales() {
@@ -251,7 +296,41 @@ void Test_Statistic_GUI::showSales() {
 }
 
 void Test_Statistic_GUI::showCalendar() {
-	//QTextCharFormat x = statisticPage->statisticCalendar->dateTextFormat( QDate(2019, 01, 01) ).background().brush().color();
+	
+	statisticPage->statisticMonth->setDate( QDate( 2019, 01, 01 ) );
+
+	User user;
+    user = user_DB->insert( user, UserType::MANAGER );
+    int manager_id = user.getId();
+
+    QString firstName = "Ivan";
+    QString secondName = "Ivanov";
+    QString thirdName = "Ivanovich";
+    QString first_exp_FIO = secondName + " " + firstName + " " + thirdName;
+
+    Manager manager;
+    manager.setId( manager_id );
+    manager.setFirstName( firstName );
+    manager.setSecondName( secondName );
+    manager.setThirdName( thirdName );
+
+    manager_DB->update( manager );
+
+    Product first_product = createProduct( "ABC", 15.3 );
+    Product second_product = createProduct( "AAA", 35 );
+
+    createConfirmedSale( first_product, QDate( 2019, 01, 01 ), manager_id );
+	createConfirmedSale( second_product, QDate( 2019, 01, 05 ), manager_id );
+	createConfirmedSale( second_product, QDate( 2019, 01, 01 ), manager_id );
+
+	statisticPage->refreshPage();
+
+	statisticPage->statisticTable->setFocus();
+    QModelIndex newIndex = statisticPage->statisticTable->model()->index( 0, 1 );
+    statisticPage->statisticTable->setCurrentIndex( newIndex );
+    statisticPage->statisticTable->clicked( newIndex );
+
+	checkCalendar( manager );
 }
 
 void Test_Statistic_GUI::showSalesInPreviousMonths() {
