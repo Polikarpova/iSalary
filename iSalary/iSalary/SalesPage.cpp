@@ -379,10 +379,11 @@ void SalesPage::confirmSale() {
     } else {
 
         this->updateManagersTable();
-        this->showManagersSales();
 
         QModelIndex index = static_cast<ManagersSalesTableModel *>( this->managersSalesTable->model() )->getIndexByRecordId( currentId );
         this->managersSalesTable->setCurrentIndex( index );
+
+        this->showManagersSales();
     }
 
     this->setEnable( true );
@@ -403,10 +404,11 @@ void SalesPage::unconfirmSale() {
     } else {
 
         this->updateManagersTable();
-        this->showManagersSales();
 
         QModelIndex index = static_cast<ManagersSalesTableModel *>( this->managersSalesTable->model() )->getIndexByRecordId( currentId );
         this->managersSalesTable->setCurrentIndex( index );
+
+        this->showManagersSales();
     }
 
     this->setEnable( true );
