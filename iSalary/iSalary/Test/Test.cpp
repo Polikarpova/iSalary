@@ -55,6 +55,11 @@ void Test::test_DB() {
 	QTest::qExec( &test_manager_DB );
 
 	cout<<endl;
+
+	Test_Sale_DB test_sale_DB( db );
+	QTest::qExec( &test_sale_DB );
+
+	cout<<endl;
 }
 
 void Test::test_GUI() {
