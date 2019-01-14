@@ -43,9 +43,17 @@ void Test::test_DB() {
 	
 	Test_Product_DB test_product_DB( db );
 	QTest::qExec( &test_product_DB );
+	
 	cout<<endl;
+	
 	Test_User_DB test_user_DB( db );
 	QTest::qExec( &test_user_DB );
+	
+	cout<<endl;
+
+	Test_Manager_DB test_manager_DB( db );
+	QTest::qExec( &test_manager_DB );
+
 	cout<<endl;
 }
 

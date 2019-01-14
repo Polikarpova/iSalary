@@ -1,5 +1,6 @@
 #include "test_product_db.h"
 #include "test_user_db.h"
+#include "test_manager_db.h"
 
 #include "test_product_gui.h"
 #include "test_manager_gui.h"
