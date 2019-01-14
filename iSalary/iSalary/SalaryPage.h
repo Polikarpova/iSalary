@@ -10,6 +10,7 @@
 #include <qpushbutton.h>
 #include <qradiobutton.h>
 #include <qspinbox.h>
+#include <qscrollarea.h>
 
 #include "ErrorMessageHandler.h"
 
@@ -34,7 +35,8 @@
  */
 class SalaryPage : public QObject {
     Q_OBJECT
-	friend class Test_Salary_GUI;
+    friend class Test_Salary_GUI;
+
   public:
     SalaryPage( SalesFacade *salesFacade, PersonnalAccountingFacade *personnalAccountingFacade );
 
@@ -105,6 +107,8 @@ class SalaryPage : public QObject {
 
     SalesFacade *salesFacade;
     PersonnalAccountingFacade *personnalAccountingFacade;
+
+	QMap<int, QPair<QScrollArea*, QLabel*>> salesWindows;
 
     TabNavigator *tabNav;
 
