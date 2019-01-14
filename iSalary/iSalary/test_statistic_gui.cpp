@@ -58,47 +58,46 @@ ActiveSale Test_Statistic_GUI::createSale( Product product, QDate saleDate, int 
 }
 
 ActiveSale Test_Statistic_GUI::createConfirmedSale( Product product, QDate saleDate, int manager_id ) {
-	
-	ActiveSale sale = createSale( product, saleDate, manager_id );
-	sale_DB->confirmSale( sale.getId() );
-	return sale;
+
+    ActiveSale sale = createSale( product, saleDate, manager_id );
+    sale_DB->confirmSale( sale.getId() );
+    return sale;
 }
 
 void Test_Statistic_GUI::compareRowInStatisticTable( Manager manager, int row ) {
 
     QString exp_FIO = manager.getSecondName() + " " + manager.getFirstName() + " " + manager.getThirdName();
-    
-	double currentSalary = 0;
+
+    double currentSalary = 0;
     double allSalary = 0;
     double previousSalary = 0;
     double exp_allCost = 0;
     int exp_countSales = 0;
 
-	QList<Manager> managers = manager_DB->getAll();
+    QList<Manager> managers = manager_DB->getAll();
 
-	for ( int manager_num = 0; manager_num < managers.size(); manager_num++ ) {
+    for ( int manager_num = 0; manager_num < managers.size(); manager_num++ ) {
 
-		QVector<ActiveSale> sales = sale_DB->getActiveAll( managers[ manager_num ].getId() );
-		for ( int i = 0; i < sales.size(); i++ ) {
-			
-			int salary = sales[i].getCount() * sales[i].getCost();
-			
-			if ( sales[i].getSaleDate() >= statisticPage->statisticMonth->date() ) {
-				
-				if ( managers[ manager_num ].getId() == manager.getId() ) {
-					
-					currentSalary += salary;
-					exp_countSales++;
-					exp_allCost += sales[i].getCount() * sales[i].getCost();
-				}
-				allSalary += salary;
-			} else if ( sales[i].getSaleDate() >= statisticPage->statisticMonth->date().addMonths( -1 ) && 
-						managers[ manager_num ].getId() == manager.getId() ) {
-				
-				previousSalary += salary;
-			}
-		}
-	}
+        QVector<ActiveSale> sales = sale_DB->getActiveAll( managers[manager_num].getId() );
+        for ( int i = 0; i < sales.size(); i++ ) {
+
+            int salary = sales[i].getCount() * sales[i].getCost();
+
+            if ( sales[i].getSaleDate() >= statisticPage->statisticMonth->date() ) {
+
+                if ( managers[manager_num].getId() == manager.getId() ) {
+
+                    currentSalary += salary;
+                    exp_countSales++;
+                    exp_allCost += sales[i].getCount() * sales[i].getCost();
+                }
+                allSalary += salary;
+            } else if ( sales[i].getSaleDate() >= statisticPage->statisticMonth->date().addMonths( -1 ) && managers[manager_num].getId() == manager.getId() ) {
+
+                previousSalary += salary;
+            }
+        }
+    }
 
     double exp_LET = 0, exp_OET = 0;
     if ( previousSalary > 0 ) {
@@ -182,45 +181,44 @@ void Test_Statistic_GUI::managerStatisticIsEmpty( Manager manager, int row ) {
     QCOMPARE( LET, 0.0 );
 }
 
-void Test_Statistic_GUI::checkCalendar( Manager manager ) { 
-	
-	QVector<ActiveSale>sales = sale_DB->getActiveAll( manager.getId() );
-	QMap<int, double>costInDays;
-	double allCost = 0;
-	QDate dateInWidget = statisticPage->statisticMonth->date();
+void Test_Statistic_GUI::checkCalendar( Manager manager ) {
 
-	for ( int sale_num = 0; sale_num < sales.size(); sale_num++ ) {
-		
-		if ( sales[ sale_num ].getSaleDate() >= dateInWidget ) {
-			
-			ActiveSale sale = sales[ sale_num ];
-			double cost = sale.getCost() * sale.getCount();
-			costInDays[ sale.getSaleDate().day() ] += cost;
-			allCost += cost;
-		}
-	}
+    QVector<ActiveSale> sales = sale_DB->getActiveAll( manager.getId() );
+    QMap<int, double> costInDays;
+    double allCost = 0;
+    QDate dateInWidget = statisticPage->statisticMonth->date();
 
-	for ( int day = 1; day <= dateInWidget.daysInMonth(); day++ ) {
-		
-		QDate date = QDate( dateInWidget.year(), dateInWidget.month(), day );
-		QColor color = statisticPage->statisticCalendar->dateTextFormat( date ).background().color();
-		QColor exp_color;
-		int index = 255 - ( 255 * costInDays[ day ] / allCost);
-		if ( index != 255 )
-			exp_color = QColor( index, 255, index );
-		else
-			exp_color = QColor( 0, 0, 0 );
+    for ( int sale_num = 0; sale_num < sales.size(); sale_num++ ) {
 
-		int red = color.red();
-		int green = color.green();
-		int blue = color.blue();
-		
-		QCOMPARE( color.red(), exp_color.red() );
-		QCOMPARE( color.green(), exp_color.green() );
-		QCOMPARE( color.blue(), exp_color.blue() );
-	}
+        if ( sales[sale_num].getSaleDate() >= dateInWidget ) {
+
+            ActiveSale sale = sales[sale_num];
+            double cost = sale.getCost() * sale.getCount();
+            costInDays[sale.getSaleDate().day()] += cost;
+            allCost += cost;
+        }
+    }
+
+    for ( int day = 1; day <= dateInWidget.daysInMonth(); day++ ) {
+
+        QDate date = QDate( dateInWidget.year(), dateInWidget.month(), day );
+        QColor color = statisticPage->statisticCalendar->dateTextFormat( date ).background().color();
+        QColor exp_color;
+        int index = 255 - ( 255 * costInDays[day] / allCost );
+        if ( index != 255 )
+            exp_color = QColor( index, 255, index );
+        else
+            exp_color = QColor( 0, 0, 0 );
+
+        int red = color.red();
+        int green = color.green();
+        int blue = color.blue();
+
+        QCOMPARE( color.red(), exp_color.red() );
+        QCOMPARE( color.green(), exp_color.green() );
+        QCOMPARE( color.blue(), exp_color.blue() );
+    }
 }
-
 
 void Test_Statistic_GUI::showCountManagerSales() {
 
@@ -296,10 +294,10 @@ void Test_Statistic_GUI::showSales() {
 }
 
 void Test_Statistic_GUI::showCalendar() {
-	
-	statisticPage->statisticMonth->setDate( QDate( 2019, 01, 01 ) );
 
-	User user;
+    statisticPage->statisticMonth->setDate( QDate( 2019, 01, 01 ) );
+
+    User user;
     user = user_DB->insert( user, UserType::MANAGER );
     int manager_id = user.getId();
 
@@ -320,17 +318,17 @@ void Test_Statistic_GUI::showCalendar() {
     Product second_product = createProduct( "AAA", 35 );
 
     createConfirmedSale( first_product, QDate( 2019, 01, 01 ), manager_id );
-	createConfirmedSale( second_product, QDate( 2019, 01, 05 ), manager_id );
-	createConfirmedSale( second_product, QDate( 2019, 01, 01 ), manager_id );
+    createConfirmedSale( second_product, QDate( 2019, 01, 05 ), manager_id );
+    createConfirmedSale( second_product, QDate( 2019, 01, 01 ), manager_id );
 
-	statisticPage->refreshPage();
+    statisticPage->refreshPage();
 
-	statisticPage->statisticTable->setFocus();
+    statisticPage->statisticTable->setFocus();
     QModelIndex newIndex = statisticPage->statisticTable->model()->index( 0, 1 );
     statisticPage->statisticTable->setCurrentIndex( newIndex );
     statisticPage->statisticTable->clicked( newIndex );
 
-	checkCalendar( manager );
+    checkCalendar( manager );
 }
 
 void Test_Statistic_GUI::showSalesInPreviousMonths() {
@@ -367,10 +365,10 @@ void Test_Statistic_GUI::showSalesInPreviousMonths() {
 }
 
 void Test_Statistic_GUI::showAllManagersSales() {
-	
-	statisticPage->statisticMonth->setDate( QDate( 2019, 01, 01 ) );
 
-	User first_user;
+    statisticPage->statisticMonth->setDate( QDate( 2019, 01, 01 ) );
+
+    User first_user;
     first_user = user_DB->insert( first_user, UserType::MANAGER );
     int first_manager_id = first_user.getId();
 
@@ -409,44 +407,44 @@ void Test_Statistic_GUI::showAllManagersSales() {
     manager_DB->update( manager );
 
     ActiveSale second_sale = createSale( second_product, QDate( 2019, 01, 01 ), second_manager_id );
-	sale_DB->confirmSale( second_sale.getId() );
+    sale_DB->confirmSale( second_sale.getId() );
 
     statisticPage->refreshPage();
 
-	statisticPage->statisticTable->setFocus();
+    statisticPage->statisticTable->setFocus();
     QModelIndex newIndex = statisticPage->statisticTable->model()->index( 0, 1 );
     statisticPage->statisticTable->setCurrentIndex( newIndex );
     statisticPage->statisticTable->clicked( newIndex );
 
-	compareRowInStatisticSalesTable( first_sale, 0 );
+    compareRowInStatisticSalesTable( first_sale, 0 );
 
-	statisticPage->statisticTable->setFocus();
+    statisticPage->statisticTable->setFocus();
     newIndex = statisticPage->statisticTable->model()->index( 1, 1 );
     statisticPage->statisticTable->setCurrentIndex( newIndex );
     statisticPage->statisticTable->clicked( newIndex );
 
-	compareRowInStatisticSalesTable( second_sale, 0 );
+    compareRowInStatisticSalesTable( second_sale, 0 );
 }
 
 void Test_Statistic_GUI::cleanup() {
-	
-	QList<Manager> managers = manager_DB->getAll();
-	for ( int manager_num = 0; manager_num < managers.size(); manager_num++ ) {
-		
-		int manager_id = managers[ manager_num ].getId();
-		QVector<ActiveSale> sales = sale_DB->getActiveAll( manager_id );
-		for ( int sale_num = 0; sale_num < sales.size(); sale_num++ ) {
-			
-			sale_DB->remove( sales[ sale_num ].getId() );
-		}
-		removeEmployee( manager_id );
-	}
-	
-	QVector<Product> products = product_DB->getAll();
+
+    QList<Manager> managers = manager_DB->getAll();
+    for ( int manager_num = 0; manager_num < managers.size(); manager_num++ ) {
+
+        int manager_id = managers[manager_num].getId();
+        QVector<ActiveSale> sales = sale_DB->getActiveAll( manager_id );
+        for ( int sale_num = 0; sale_num < sales.size(); sale_num++ ) {
+
+            sale_DB->remove( sales[sale_num].getId() );
+        }
+        removeEmployee( manager_id );
+    }
+
+    QVector<Product> products = product_DB->getAll();
     for ( int product_num = 0; product_num < products.size(); product_num++ ) {
-		
-		removeProduct( products[ product_num ].getName() );
-	}
+
+        removeProduct( products[product_num].getName() );
+    }
 
     statisticPage->refreshPage();
 }

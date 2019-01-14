@@ -2,8 +2,8 @@
 #define TEST_AUTH_GUI_H
 
 #include "AuthPage.h"
-#include "ManagerPage.h"
 #include "ManagerDB.h"
+#include "ManagerPage.h"
 #include "Product_DB.h"
 #include "QTextCodec"
 #include "Sale_DB.h"
@@ -15,14 +15,15 @@
 class Test_Auth_GUI : public QObject {
     Q_OBJECT
     friend class AuthPage;
-	friend class ManagerPage;
+    friend class ManagerPage;
+
   public:
     Test_Auth_GUI( QSqlDatabase *sql, AuthPage *authPage, ManagerPage *managerPage );
     ~Test_Auth_GUI();
 
   private:
     AuthPage *authPage;
-	ManagerPage *managerPage;
+    ManagerPage *managerPage;
     Product_DB *product_DB;
     UserDB *user_DB;
     ManagerDB *manager_DB;
@@ -30,18 +31,18 @@ class Test_Auth_GUI : public QObject {
     QSqlDatabase *sql;
     QTextCodec *c;
 
-	void removeProduct( QString productName );
-	Product createProduct( QString productName, double productCommission );
-	QString findElemInUnconfirmedTable( int row, int col );
+    void removeProduct( QString productName );
+    Product createProduct( QString productName, double productCommission );
+    QString findElemInUnconfirmedTable( int row, int col );
     QString findElemInConfirmedTable( int row, int col );
-	void unconfirmedTableIsEmpty();
+    void unconfirmedTableIsEmpty();
     void confirmedTableIsEmpty();
-	ActiveSale createSale( Product product, QDate saleDate, int manaher_id );
+    ActiveSale createSale( Product product, QDate saleDate, int manaher_id );
     ActiveSale createConfirmedSale( Product product, QDate saleDate, int manager_id );
-	void removeEmployee( int id );
-	void compareManagerSales( Manager manager );
-	void compareRowInUnconfirmedTable( ActiveSale sale, int row );
-	void compareRowInConfirmedTable( ActiveSale sale, int row );
+    void removeEmployee( int id );
+    void compareManagerSales( Manager manager );
+    void compareRowInUnconfirmedTable( ActiveSale sale, int row );
+    void compareRowInConfirmedTable( ActiveSale sale, int row );
 
   private slots:
     void managerAuth();

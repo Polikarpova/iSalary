@@ -3,7 +3,7 @@
 Test_Auth_GUI::Test_Auth_GUI( QSqlDatabase *sql, AuthPage *authPage, ManagerPage *managerPage ) {
 
     this->authPage = authPage;
-	this->managerPage = managerPage;
+    this->managerPage = managerPage;
     this->sql = sql;
     user_DB = new UserDB( sql );
     manager_DB = new ManagerDB( sql, user_DB );
@@ -32,7 +32,7 @@ Product Test_Auth_GUI::createProduct( QString productName, double productCommiss
     product.setName( productName );
     product.setCommission( productCommission );
     product_DB->create( product );
-	product = product_DB->getAll().last();
+    product = product_DB->getAll().last();
     return product;
 }
 
@@ -119,7 +119,7 @@ void Test_Auth_GUI::unconfirmedTableIsEmpty() {
 
 void Test_Auth_GUI::confirmedTableIsEmpty() {
 
-	QString productName = findElemInConfirmedTable( 0, 0 );
+    QString productName = findElemInConfirmedTable( 0, 0 );
     QString saleDate = findElemInConfirmedTable( 0, 1 );
     QString saleCount = findElemInConfirmedTable( 0, 2 );
     QString salePrice = findElemInConfirmedTable( 0, 3 );
@@ -153,8 +153,6 @@ void Test_Auth_GUI::compareManagerSales( Manager manager ) {
     }
 }
 
-
-
 void Test_Auth_GUI::bossAuth() {
 
     authPage->loginInput->setText( "boss" );
@@ -168,42 +166,42 @@ void Test_Auth_GUI::bossAuth() {
 void Test_Auth_GUI::managerAuth() {
 
     User user;
-	user = user_DB->insert( user, UserType::MANAGER );
-	int manager_id = user.getId();
+    user = user_DB->insert( user, UserType::MANAGER );
+    int manager_id = user.getId();
 
-	QString firstName = "Ivan";
-	QString secondName = "Ivanov";
-	QString thirdName = "Ivanovich";
+    QString firstName = "Ivan";
+    QString secondName = "Ivanov";
+    QString thirdName = "Ivanovich";
 
-	Manager manager;
-	manager.setId( manager_id );
-	manager.setFirstName( firstName );
-	manager.setSecondName( secondName );
-	manager.setThirdName( thirdName );
-	manager.setLogin( "ivan" );
-	manager.setPassword( "ivan" );
-	manager_DB->update( manager );
+    Manager manager;
+    manager.setId( manager_id );
+    manager.setFirstName( firstName );
+    manager.setSecondName( secondName );
+    manager.setThirdName( thirdName );
+    manager.setLogin( "ivan" );
+    manager.setPassword( "ivan" );
+    manager_DB->update( manager );
 
-	Product product = createProduct( "ABC", 13.5 );
+    Product product = createProduct( "ABC", 13.5 );
 
-	createSale( product, QDate( 2019, 01, 01 ), manager_id );
-	createConfirmedSale( product, QDate( 2019, 01, 02 ), manager_id );
+    createSale( product, QDate( 2019, 01, 01 ), manager_id );
+    createConfirmedSale( product, QDate( 2019, 01, 02 ), manager_id );
 
     authPage->loginInput->setText( manager.getLogin() );
     authPage->passwordInput->setText( manager.getPassword() );
     authPage->signInBtn->click();
 
-	QCOMPARE( authPage->auth_program_stackedWidget->currentIndex(), 1 );
+    QCOMPARE( authPage->auth_program_stackedWidget->currentIndex(), 1 );
     QCOMPARE( authPage->boss_manager_stackedWidget->currentIndex(), 1 );
 
-	managerPage->refreshPage();
+    managerPage->refreshPage();
 
-	compareManagerSales( manager );
+    compareManagerSales( manager );
 }
 
 void Test_Auth_GUI::cleanup() {
 
-	QList<Manager> managers = manager_DB->getAll();
+    QList<Manager> managers = manager_DB->getAll();
     for ( int manager_num = 0; manager_num < managers.size(); manager_num++ ) {
 
         int manager_id = managers[manager_num].getId();

@@ -4,11 +4,11 @@
 #include "EmployeesPage.h"
 #include "Product_DB.h"
 #include "QTextCodec"
-#include <qlayout.h>
 #include "SalaryPage.h"
 #include "SalesPage.h"
 #include <QObject>
 #include <QSqlDatabase>
+#include <qlayout.h>
 #include <qtest.h>
 
 class Test_Salary_GUI : public QObject {
@@ -39,7 +39,7 @@ class Test_Salary_GUI : public QObject {
     QString findElemInUnconfirmedTable( int row, int col );
     QString findElemInConfirmedTable( int row, int col );
     ActiveSale createSale( Product product, QDate saleDate, int manaher_id );
-	ActiveSale createConfirmedSale( Product product, QDate saleDate, int manager_id );
+    ActiveSale createConfirmedSale( Product product, QDate saleDate, int manager_id );
     void removeEmployee( int id );
     void compareRowInSalaryTable( Manager manager, QDate date, int row );
     // void compareRowInSalaryTotalTable( ActiveSale sale, int row );

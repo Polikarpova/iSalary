@@ -33,7 +33,7 @@ Product Test_Salary_GUI::createProduct( QString productName, double productCommi
     product.setName( productName );
     product.setCommission( productCommission );
     product_DB->create( product );
-	product = product_DB->getAll().last();
+    product = product_DB->getAll().last();
     return product;
 }
 
@@ -214,42 +214,43 @@ void Test_Salary_GUI::compareManagerInfoInEmployeesPage( Manager manager ) {
 }
 
 void Test_Salary_GUI::compareManagerSales( Manager manager ) {
-	
-	QScrollArea *scroll = salaryPage->salesWindows[ manager.getId() ].first;
-	int id = salaryPage->salesWindows.begin().key();
-	bool windowIsOpen = scroll->isVisible();
-	QCOMPARE( windowIsOpen, true );
 
-	/*QWidget *w = scroll->widget();
-	QDialog *dialog = qobject_cast<QDialog *>( w );
-	QLayout *layout = dialog->layout();
-	QVBoxLayout *VBlayout = qobject_cast<QVBoxLayout *>( layout );
-	w = VBlayout->widget();
-	QLabel *label = qobject_cast<QLabel *>( w );*/
-	/*QLabel *label = scroll->widget()->layout()->widget()->findChild<QLabel*>("lbl");
-	QString text = label->text();*/
+    QScrollArea *scroll = salaryPage->salesWindows[manager.getId()].first;
+    int id = salaryPage->salesWindows.begin().key();
+    bool windowIsOpen = scroll->isVisible();
+    QCOMPARE( windowIsOpen, true );
 
-	QString message = salaryPage->salesWindows[ manager.getId() ].second->text();
+    /*QWidget *w = scroll->widget();
+    QDialog *dialog = qobject_cast<QDialog *>( w );
+    QLayout *layout = dialog->layout();
+    QVBoxLayout *VBlayout = qobject_cast<QVBoxLayout *>( layout );
+    w = VBlayout->widget();
+    QLabel *label = qobject_cast<QLabel *>( w );*/
+    /*QLabel *label = scroll->widget()->layout()->widget()->findChild<QLabel*>("lbl");
+    QString text = label->text();*/
+
+    QString message = salaryPage->salesWindows[manager.getId()].second->text();
     QString exp_message = "";
 
-	QVector<ActiveSale> sales = sale_DB->getActiveAll( manager.getId() );
+    QVector<ActiveSale> sales = sale_DB->getActiveAll( manager.getId() );
     int cntConfirmedSales = 0;
     for ( int sales_num = 0; sales_num < sales.size(); sales_num++ ) {
-		
-		ActiveSale sale = sales[sales_num];
+
+        ActiveSale sale = sales[sales_num];
         if ( sale.isConfirmed() == true ) {
 
-			QString str = QString::fromWCharArray( L"Товар: " ) + toUnicode( sale.getProductName() ) + "\n        " + QString::fromWCharArray( L"Дата продажи: " ) +
-                      sale.getSaleDate().toString( "dd.MM.yyyy" ) + "\n        " + QString::fromWCharArray( L"Дата подтверждения: " ) +
-                      sale.getConfirmDate().toString( "dd.MM.yyyy" ) + "\n        " + QString::fromWCharArray( L"Количество: " ) + QString::number( sale.getCount() ) +
-                      "\n        " + QString::fromWCharArray( L"Цена: " ) + QString::number( sale.getCost() ) + "\n        " +
-                      QString::fromWCharArray( L"Комиссия: " ) + QString::number( sale.getProductCommission() ) + "\n\n";
-			exp_message += str;
-			cntConfirmedSales++;
+            QString str = QString::fromWCharArray( L"Товар: " ) + toUnicode( sale.getProductName() ) + "\n        " +
+                          QString::fromWCharArray( L"Дата продажи: " ) + sale.getSaleDate().toString( "dd.MM.yyyy" ) + "\n        " +
+                          QString::fromWCharArray( L"Дата подтверждения: " ) + sale.getConfirmDate().toString( "dd.MM.yyyy" ) + "\n        " +
+                          QString::fromWCharArray( L"Количество: " ) + QString::number( sale.getCount() ) + "\n        " +
+                          QString::fromWCharArray( L"Цена: " ) + QString::number( sale.getCost() ) + "\n        " + QString::fromWCharArray( L"Комиссия: " ) +
+                          QString::number( sale.getProductCommission() ) + "\n\n";
+            exp_message += str;
+            cntConfirmedSales++;
         }
     }
-	QCOMPARE( message, exp_message );
-	scroll->close();
+    QCOMPARE( message, exp_message );
+    scroll->close();
 }
 
 void Test_Salary_GUI::compareManagerSalesInSalesPage( Manager manager ) {
@@ -270,8 +271,6 @@ void Test_Salary_GUI::compareManagerSalesInSalesPage( Manager manager ) {
         }
     }
 }
-
-
 
 void Test_Salary_GUI::showManagersSalary() {
 
@@ -308,7 +307,7 @@ void Test_Salary_GUI::showManagersSalaryInPreviousMonths() {}
 
 void Test_Salary_GUI::showManagerSales() {
 
-	User user;
+    User user;
     user = user_DB->insert( user, UserType::MANAGER );
     int manager_id = user.getId();
 
@@ -331,7 +330,7 @@ void Test_Salary_GUI::showManagerSales() {
 
     salaryPage->refreshPage();
 
-	QWidget *w = salaryPage->salaryTable->indexWidget( salaryPage->salaryTable->model()->index( 0, 4 ) );
+    QWidget *w = salaryPage->salaryTable->indexWidget( salaryPage->salaryTable->model()->index( 0, 4 ) );
 
     QPushButton *btn = qobject_cast<QPushButton *>( w );
     btn->click();

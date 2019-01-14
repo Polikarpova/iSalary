@@ -6,8 +6,8 @@
 #include "StatisticPage.h"
 #include <QObject>
 #include <QSqlDatabase>
-#include <qtest.h>
 #include <QTextCharFormat>
+#include <qtest.h>
 
 class Test_Statistic_GUI : public QObject {
     Q_OBJECT
@@ -31,13 +31,13 @@ class Test_Statistic_GUI : public QObject {
     QString findElemInStatisticTable( int row, int col );
     QString findElemInStatisticSalesTable( int row, int col );
     ActiveSale createSale( Product product, QDate saleDate, int manaher_id );
-	ActiveSale createConfirmedSale( Product product, QDate saleDate, int manager_id );
+    ActiveSale createConfirmedSale( Product product, QDate saleDate, int manager_id );
     void removeEmployee( int id );
     void compareRowInStatisticTable( Manager manager, int row );
     void compareRowInStatisticSalesTable( ActiveSale sale, int row );
     void rowInStatisticSalesTableIsEmpty( int row );
     void managerStatisticIsEmpty( Manager manager, int row );
-	void checkCalendar( Manager manager );
+    void checkCalendar( Manager manager );
 
   private slots:
     void showCountManagerSales();
@@ -45,8 +45,8 @@ class Test_Statistic_GUI : public QObject {
     void showCalendar();
     void showSalesInPreviousMonths();
     void showAllManagersSales();
-	//void init();
-	void cleanup();
+    // void init();
+    void cleanup();
 };
 
 #endif // TEST_STATISTIC_GUI_H

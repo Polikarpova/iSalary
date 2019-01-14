@@ -9,8 +9,8 @@
 #include <qobject.h>
 #include <qpushbutton.h>
 #include <qradiobutton.h>
-#include <qspinbox.h>
 #include <qscrollarea.h>
+#include <qspinbox.h>
 
 #include "ErrorMessageHandler.h"
 
@@ -108,7 +108,7 @@ class SalaryPage : public QObject {
     SalesFacade *salesFacade;
     PersonnalAccountingFacade *personnalAccountingFacade;
 
-	QMap<int, QPair<QScrollArea*, QLabel*>> salesWindows;
+    QMap<int, QPair<QScrollArea *, QLabel *>> salesWindows;
 
     TabNavigator *tabNav;
 

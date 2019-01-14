@@ -289,9 +289,9 @@ void SalaryPage::viewSales() {
     }
 
     //Вывести информационное сообщение
-	QLabel *lbl = new QLabel( message );
-	QVBoxLayout *vl = new QVBoxLayout( 0 );
-	vl->addWidget( lbl );
+    QLabel *lbl = new QLabel( message );
+    QVBoxLayout *vl = new QVBoxLayout( 0 );
+    vl->addWidget( lbl );
     QDialog *dlg = new QDialog( 0 );
     dlg->setLayout( vl );
     QScrollArea *scroll = new QScrollArea( 0 );
@@ -301,8 +301,8 @@ void SalaryPage::viewSales() {
     scroll->setMinimumSize( 220, 200 );
     scroll->setWindowTitle( QString::fromWCharArray( L"Продажи" ) );
     scroll->show();
-	salesWindows[ managerId.last() ].first = scroll;
-	salesWindows[ managerId.last() ].second = lbl;
+    salesWindows[managerId.last()].first = scroll;
+    salesWindows[managerId.last()].second = lbl;
 }
 
 //===PRIVATE===//
