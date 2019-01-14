@@ -107,9 +107,12 @@ int main( int argc, char *argv[] ) {
     StatisticPage statisticPage( &salesFacade );
 
     MainWindow w( &authPage, &employeesPage, &salesPage, &salaryPage, &productPage, &managerPage, &statisticPage );
-
-    // Test test = Test( &sqlDB,  &employeesPage, &productPage, &salesPage, &statisticPage, &managerPage);
-	// test.startTesting();
+	
+	if ( settings.databaseName == "test" ) {
+		
+		Test test = Test( &sqlDB, &authPage, &employeesPage, &productPage, &salesPage, &statisticPage, &salaryPage, &managerPage );
+		test.startTesting();
+	}
 
     try {
         w.showMaximized();
